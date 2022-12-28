@@ -1,7 +1,7 @@
 import React, {useEffect, useState, memo, useCallback, useRef, useMemo} from 'react'
 import videojs from 'video.js'
 import ModalVideo from './ModalVideo'
-import Video from '../VideoPlayer'
+import Video from '../video-player'
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {setModalStatus} from '../../features/intro/introSlice'

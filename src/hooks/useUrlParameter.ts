@@ -1,4 +1,4 @@
-const useUrlParameter = (url: string, parameter: string) => {
+const useUrlParameter = (parameter: string, url = window.location.href) => {
   const stringArray: any = url?.split('/')
   const index = stringArray.findIndex((item: string) => item === parameter)
 

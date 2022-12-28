@@ -3,9 +3,7 @@ import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {Container, Figure, ContentWrapper, Header} from './styles'
 
-import useIntersectionObserverProgressiveImg from '../../hooks/useIntersectionObserverProgressiveImg'
 import useRect from '../../hooks/useRect'
-import useSticky from '../../hooks/useSticky'
 import {ContentProps, MainProps} from '../../types'
 import TopInfo from "./TopInfo";
 
@@ -21,8 +19,6 @@ interface IProps {
 const TopArea: React.FC<IProps> = ({data}) => {
   const {content, status} = useAppSelector<ContentProps>((state: RootState) => state.intro)
   // const {title, contentExt, langCode} = content
-
-  const {isSticky, element} = useSticky()
 
   const {size, root, changeSize} = useRect<HTMLDivElement>([])
 
