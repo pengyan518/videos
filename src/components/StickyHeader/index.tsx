@@ -2,7 +2,6 @@ import React, {useEffect, useRef} from 'react'
 // import {useAppDispatch, useAppSelector} from '../../app/hooks'
 // import {RootState} from '../../app/store'
 import {StickyHeaderBox} from './styles'
-import config from '../../config'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 
 import StickyHeaderInfo from './StickyHeaderInfo'
