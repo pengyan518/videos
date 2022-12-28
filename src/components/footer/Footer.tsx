@@ -1,6 +1,6 @@
 import React from 'react'
 import {MainProps} from '../../types'
-import ArrowRight from '../Icons/ArrowRight'
+import ArrowRight from '../icons/ArrowRight'
 
 export type FooterProps = {
   data: MainProps

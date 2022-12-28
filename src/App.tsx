@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import Intro from './features/intro/Intro'
 import {useAppSelector} from './app/hooks'
 import {RootState} from './app/store'
-import ModalVideo from './components/ModalVideo'
+import ModalVideo from './components/modal-video'
 
 // const twentyFourHoursInMs = 1000 * 60 * 60 * 24
 const queryClient = new QueryClient({

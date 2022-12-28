@@ -3,12 +3,12 @@ import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import ShenYunText from '../../assets/svg/shenyun-zhuanshu.svg'
 import {Figure, Label} from './styles'
-import Play from '../Icons/Play'
+import Play from '../icons/Play'
 import {setModalStatus} from '../../features/intro/introSlice'
 import useIntersectionObserverProgressiveImg from '../../hooks/useIntersectionObserverProgressiveImg'
 import bg from '../../assets/images/wisy-video.jpg'
 import bgsm from '../../assets/images/wisy-video_sm.jpg'
-import FancyImageHover from '../FancyImageHover'
+import FancyImageHover from '../fancy-image-hover'
 // export type VideoProps = {}
 
 interface ContentProps {
