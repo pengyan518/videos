@@ -5,37 +5,17 @@ interface ImageProps {
 }
 
 export interface MainProps {
-  info: {
-    title: string
-    ext: {
-      imageIdData: ImageProps[]
-      miscData: {
-        featured_video_description: string
-        syzp_videos: string
-      }
-      position: string
-      topBannerQuote: string
-      bornPlace: string
-      companyDebut: string
-      biographyShort: string
-      biography: string
-      photoRelatedData: any[]
-      smallGalleryData: any[]
-      contentArea: string
-      videoRelated: string
-      RepertoireHighlights: string
-      contentRelatedData: any[]
-      chineseName: string
-    }
+  category: {
+    itemsFeatured: any[]
+    itemsLatest: any[]
+    itemsShenyunIntroduction: any[]
+    itemsShenyunTrailers: any[]
+    itemsArtists: any[]
+    itemsReviews: any[]
+    itemsSyso: any[]
   }
   translation: any
   langCode: string
-  categoryDisplay: string
-  categoryUrl: string
-  contentNext: {
-    title: string
-    url: string
-  }
 }
 
 export type ItemProps = {

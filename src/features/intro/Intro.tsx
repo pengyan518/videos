@@ -10,25 +10,13 @@ import Loading from '../../components/Loading'
 import usePosts from '../../hooks/usePosts'
 import config from '../../config'
 import useUrlParameter from '../../hooks/useUrlParameter'
-import MetaArea from '../../components/MetaArea'
-import Quote from '../../components/Quote/Quote'
-import Repertoirehighlights from '../../components/RepertoireHighlights/RepertoireHighlights'
-import Interviewvideo from '../../components/InterviewVideo/InterviewVideo'
-import RelatedContents from '../../components/RelatedContents/RelatedContents'
-import BottomContents from '../../components/BottomContents/BottomContents'
-import Footer from '../../components/Footer/Footer'
-import SmallGallery from "../../components/SmallGallery/SmallGallery";
 
 function Intro() {
   const {content, status, showSticky} = useAppSelector((state: RootState) => state.intro)
   const dispatch = useAppDispatch()
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const eid = process.env.NODE_ENV === 'development' ? config.eid : useUrlParameter(window.location.pathname, 'e')
-  const url = `${config.artistAPI}${eid}`
-
-  // const url = city
-  //   ? `//${config.crossdomain}${city}${config.getCityApi}`
-  //   : `//${config.crossdomain}${group}${config.cityGroupInfoListAction}`
+  // const eid = process.env.NODE_ENV === 'development' ? config.eid : useUrlParameter(window.location.pathname, 'e')
+  const url = config.videosAPI
 
   const queryKey = 'profile'
   const {status: fetchStatus, data, error, isFetching} = usePosts(url, [queryKey])
@@ -41,16 +29,6 @@ function Intro() {
     }
   }, [data, dispatch, fetchStatus, status])
 
-  useEffect(() => {
-    window.addEventListener(
-      'contextmenu',
-      function (e) {
-        // do something here...
-        e.preventDefault()
-      },
-      false
-    )
-  }, [])
 
   if (!content)
     return (
@@ -77,22 +55,6 @@ function Intro() {
                 <div className="bg-gradient-to-b from-[#efe4db] to-[#fefefe]">
                   <div className={`overflow-x-hidden ${containerClass} mx-auto`}>
                     <TopArea data={data} />
-                    <MetaArea data={data} />
-                    <Quote data={data} />
-                    <SmallGallery data={data} />
-                    <Repertoirehighlights data={data} />
-                    <Interviewvideo data={data} />
-                    <RelatedContents data={data} />
-                  </div>
-                </div>
-                <div className="bg-[#efe4db] px-4">
-                  <div className={`overflow-x-hidden ${containerClass} mx-auto`}>
-                    <BottomContents data={data} />
-                  </div>
-                </div>
-                <div className="bg-white px-4">
-                  <div className={`overflow-x-hidden ${containerClass} mx-auto`}>
-                    <Footer data={data} />
                   </div>
                 </div>
               </>

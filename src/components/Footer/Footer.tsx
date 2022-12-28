@@ -8,7 +8,6 @@ export type FooterProps = {
 
 export default function Footer({data}: FooterProps) {
   const {
-    contentNext: {title, url},
     translation,
   } = data
 
@@ -20,15 +19,6 @@ export default function Footer({data}: FooterProps) {
             <ArrowRight />
           </div>
           <div className="pl-4">{translation['Return to the Artists']}</div>
-        </a>
-        <a href={url} className="flex items-center">
-          <div className="pr-4 text-end">
-            <div>{translation['Next Artist']}</div>
-            <div>{title}</div>
-          </div>
-          <div className="w-4 md:w-12">
-            <ArrowRight />
-          </div>
         </a>
       </footer>
     </div>

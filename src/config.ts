@@ -9,6 +9,7 @@ export const prefix = process.env.NODE_ENV === 'development' ? `//${subDomain}.s
 export default Object.freeze({
   wisyAPI: `${prefix}/api-home/what-is-shen-yun`,
   artistAPI: `${prefix}/artists/view/api/e/`,
+  videosAPI: `${prefix}/videos/api`,
   loginLangCode,
   cnLang: ['zh-tw', 'zh-cn'],
   xlmns: 'http://www.w3.org/2000/svg',
@@ -21,17 +22,7 @@ export default Object.freeze({
   crossdomainDev: `www.sydev.info/`,
   crossdomain: `www.shenyun.com/`,
   promoLanguage: ['en-us'],
-  // eid: 'W_4hYb1yT14', // a wang
-  // eid: 'XfrMcQct-Bg', // Tiffany Lin
-  // eid: 'qM1qEGNf4Yk', // Melody Qin
-  // eid: '1RC0PMqP5dE', // Carol Huang
-  // eid: 'hBFlGVpHELU', // Piotr Huang
-  // eid: 'XTRMqjEVHyM', // zhou xiao
-  // eid: 'LeyEh28lcFo', // Kenji Kobayashi
   eid: 'lyFl9FseCf0', // Angela Xiao
-  // eid: 'pmayvBKAikU',
-  // eid: '8PDL6kcecNM', // Milen Nachev
-  // eid: '1zP37y90TjQ', // Rachael Yu Ming Bastick
   breakpoint: {
     mobile: 767,
     desk: 768,
