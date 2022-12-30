@@ -22,6 +22,8 @@ export default function Featured({data}: FeaturedProps) {
           </div>
         ))}
       </div>
+
+      <Link to="/videos/about-shen-yun/play/9OgDq1KgAEs">play 9OgDq1KgAEs</Link>
     </div>
   )
 }

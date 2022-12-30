@@ -8,7 +8,7 @@ import {RootState} from '../app/store'
 
 import {MainProps} from '../types'
 import Category from '../features/category/Category'
-import useUrlParameter from "../hooks/useUrlParameter";
+import useUrlParameter from '../hooks/useUrlParameter'
 
 interface IProps {
   data: MainProps
@@ -19,19 +19,20 @@ function MyRoutes({data}: IProps) {
   const {content, showSticky} = useAppSelector((state: RootState) => state.intro)
   const dispatch = useAppDispatch()
 
-    useUrlParameter('play')
-
   // const [searchParams, setSearchParams] = useSearchParams()
+  const section = useUrlParameter('videos')
   const eid = useUrlParameter('play')
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const eid = process.env.NODE_ENV === 'development' ? config.eid : useUrlParameter(window.location.pathname, 'e')
+  console.debug(`section: ${section}`)
+  console.debug(`eid: ${eid}`)
 
   return (
     <Routes>
       <Route path="/videos" element={<Intro data={data} />} />
-      <Route path="/videos/about-shen-yun" element={<Category data={data} title="About Shen Yun" />} />
-      <Route path="/videos/artists" element={<Category data={data} title="The Artists" />} />
-      {eid && <Route path={`/videos/about-shen-yun/play/${eid}`} element={<Category data={data} title={eid} />} />}
+      <Route path="/videos/:section" element={<Category data={data} title="About Shen Yun" />} />
+      {/* <Route path={`/videos/${section}/play/${eid}`} element={<Category data={data} title={eid} section={section} />} /> */}
+      <Route path="/videos/:section/play/:eid" element={<Category data={data} />} />
     </Routes>
   )
 }
