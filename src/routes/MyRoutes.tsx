@@ -32,8 +32,13 @@ function MyRoutes({data}: IProps) {
     <Routes>
       <Route path="/videos">
         <Route index={true} element={<Intro data={data} />} />
-        <Route index={false} path=":section" element={<Category data={data} title="About Shen Yun" />} />
-        <Route index={false} path=":section/play/:eid" element={<Play data={data} />} />
+        {/* <Route index={false} path=":section" element={<Category data={data} title="About Shen Yun" />} /> */}
+        {/* <Route index={false} path=":section/play/:eid" element={<Play data={data} />} /> */}
+
+        <Route path=":section">
+          <Route index={true} element={<Category data={data} title="About Shen Yun" />} />
+          <Route index={false} path="play/:eid" element={<Play data={data} />} />
+        </Route>
       </Route>
 
       {/* <Route path="/videos" element={<Intro data={data} />}> */}
@@ -41,9 +46,6 @@ function MyRoutes({data}: IProps) {
       {/*   </Route> */}
       {/*  <Route path=":section/play/:id" element={<Play data={data} />} /> */}
       {/* </Route> */}
-
-      {/* <Route path="videos/:section" element={<Category data={data} title="About Shen Yun" />} /> */}
-      {/* <Route path="videos/:section/play/:eid" element={<Play data={data} />} /> */}
       <Route path="*" element={<Intro data={data} />} />
     </Routes>
   )

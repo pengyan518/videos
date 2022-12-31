@@ -1,8 +1,8 @@
 import React from 'react'
-import {Link, useMatch} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 import {MainProps} from '../../types'
-import useUrlParameter from '../../hooks/useUrlParameter'
+// import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
   data: MainProps
@@ -11,11 +11,10 @@ export type CategoryProps = {
 }
 
 export default function Category({data, title}: CategoryProps) {
-  const match = useMatch(window.location.pathname)
-  console.debug(match)
+  const {section, eid} = useParams()
 
-  const section = useUrlParameter('videos')
-  const eid = useUrlParameter('play')
+  // const section = useUrlParameter('videos')
+  // const eid = useUrlParameter('play')
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const eid = process.env.NODE_ENV === 'development' ? config.eid : useUrlParameter(window.location.pathname, 'e')
   console.debug(data)
@@ -24,7 +23,11 @@ export default function Category({data, title}: CategoryProps) {
     <div className="category">
       {title && title}
       <br />
-      {section && <>{eid} {section}</>}
+      {section && (
+        <>
+          {eid} {section}
+        </>
+      )}
       <br />
       <Link to="/videos">Back</Link>
     </div>
