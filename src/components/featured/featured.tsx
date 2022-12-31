@@ -9,20 +9,21 @@ export type FeaturedProps = {
 
 export default function Featured({data}: FeaturedProps) {
   const {
-    category: {itemsFeatured},
+    category: {itemsFeatured, itemsShenyunIntroduction, itemsReviews},
   } = data
   return (
     <div className="featured">
       <div className="grid grid-cols-4">
-        {itemsFeatured.map(item => (
+        {itemsReviews.map(item => (
           <div key={item.id}>
-            <Link to={`/videos/featured/play/${item.eid}`}>
+            <Link to={`featured/play/${item.eid}`}>
               <img src={item.imageForVideo.medium} alt="" />
             </Link>
           </div>
         ))}
       </div>
 
+      <Link to="featured">sub</Link>
     </div>
   )
 }
