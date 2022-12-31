@@ -16,14 +16,13 @@ export default function Featured({data}: FeaturedProps) {
       <div className="grid grid-cols-4">
         {itemsFeatured.map(item => (
           <div key={item.id}>
-            <Link to="/videos/about-shen-yun">
+            <Link to={`/videos/featured/play/${item.eid}`}>
               <img src={item.imageForVideo.medium} alt="" />
             </Link>
           </div>
         ))}
       </div>
 
-      <Link to="/videos/about-shen-yun/play/9OgDq1KgAEs">play 9OgDq1KgAEs</Link>
     </div>
   )
 }

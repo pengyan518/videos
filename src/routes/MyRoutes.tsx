@@ -9,6 +9,7 @@ import {RootState} from '../app/store'
 import {MainProps} from '../types'
 import Category from '../features/category/Category'
 import useUrlParameter from '../hooks/useUrlParameter'
+import Play from "../components/play/Play";
 
 interface IProps {
   data: MainProps
@@ -32,7 +33,7 @@ function MyRoutes({data}: IProps) {
       <Route path="/videos" element={<Intro data={data} />} />
       <Route path="/videos/:section" element={<Category data={data} title="About Shen Yun" />} />
       {/* <Route path={`/videos/${section}/play/${eid}`} element={<Category data={data} title={eid} section={section} />} /> */}
-      <Route path="/videos/:section/play/:eid" element={<Category data={data} />} />
+      <Route path="/videos/:section/play/:eid" element={<Play data={data} />} />
     </Routes>
   )
 }
