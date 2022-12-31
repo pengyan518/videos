@@ -30,13 +30,21 @@ function MyRoutes({data}: IProps) {
 
   return (
     <Routes>
-      <Route path="videos" element={<Intro data={data} />}>
-        {/* <Route path=":section" element={<Category data={data} title="About Shen Yun" />}> */}
-        {/*  <Route path=":section/play/:id" element={<Play data={data} />} /> */}
-        {/* </Route> */}
+      <Route path="/videos">
+        <Route index={true} element={<Intro data={data} />} />
+        <Route index={false} path=":section" element={<Category data={data} title="About Shen Yun" />} />
+        <Route index={false} path=":section/play/:eid" element={<Play data={data} />} />
       </Route>
-      <Route path="videos/:section" element={<Category data={data} title="About Shen Yun" />} />
-      <Route path="videos/:section/play/:eid" element={<Play data={data} />} />
+
+      {/* <Route path="/videos" element={<Intro data={data} />}> */}
+      {/*   <Route path=":section" element={<Category data={data} title="About Shen Yun" />}> */}
+      {/*   </Route> */}
+      {/*  <Route path=":section/play/:id" element={<Play data={data} />} /> */}
+      {/* </Route> */}
+
+      {/* <Route path="videos/:section" element={<Category data={data} title="About Shen Yun" />} /> */}
+      {/* <Route path="videos/:section/play/:eid" element={<Play data={data} />} /> */}
+      <Route path="*" element={<Intro data={data} />} />
     </Routes>
   )
 }
