@@ -11,6 +11,10 @@ export interface MainProps {
     itemsShenyunIntroduction: any[]
     itemsShenyunTrailers: any[]
     itemsArtists: any[]
+    itemsPersecution: any[]
+    itemsStartsOfShenyun: any[]
+    itemsMorefromArtists: any[]
+    itemsEditorsPick: any[]
     itemsReviews: any[]
     itemsSyso: any[]
   }

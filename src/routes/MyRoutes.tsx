@@ -41,11 +41,6 @@ function MyRoutes({data}: IProps) {
         </Route>
       </Route>
 
-      {/* <Route path="/videos" element={<Intro data={data} />}> */}
-      {/*   <Route path=":section" element={<Category data={data} title="About Shen Yun" />}> */}
-      {/*   </Route> */}
-      {/*  <Route path=":section/play/:id" element={<Play data={data} />} /> */}
-      {/* </Route> */}
       <Route path="*" element={<Intro data={data} />} />
     </Routes>
   )
