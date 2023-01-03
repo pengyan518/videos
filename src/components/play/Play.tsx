@@ -24,10 +24,11 @@ export default function Play({data}: PlayProps) {
 
   const items = Object.values(category).flat().filter(item=>item!==null)
   const index = items.findIndex(item => item.eid === eid)
+  const item = items[index]
 
   return (
     <div className="play">
-      <Player item={items[index]} />
+      <Player item={item} />
       <Link to="/videos">Back</Link>
     </div>
   )

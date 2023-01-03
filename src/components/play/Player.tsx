@@ -16,6 +16,7 @@ export default function Player({item}: PlayProps) {
     videoLink,
     embeddedVideoYT,
     embeddedVideoVimeo,
+    onDemandLink,
     eid,
     imageForVideo: {medium},
   } = item
