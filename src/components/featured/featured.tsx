@@ -14,8 +14,8 @@ export default function Featured({data}: FeaturedProps) {
   } = data
   return (
     <div className="featured">
-      <HeroCard items={itemsShenyunTrailers} title="Trailers" sectionName="reviews" />
-      <HeroCard items={itemsReviews} title="From the Audience" sectionName="reviews" />
+      <HeroCard items={itemsShenyunTrailers} title="Trailers" sectionName="about-she-yun" sectionTitle="About Shen Yun" />
+      <HeroCard items={itemsReviews} title="From the Audience" sectionName="reviews" sectionTitle="Reviews" />
     </div>
   )
 }

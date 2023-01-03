@@ -7,6 +7,7 @@ import TopArea from '../../components/top-area'
 import {RootState} from '../../app/store'
 import Featured from '../../components/featured/featured'
 import {MainProps} from '../../types'
+import EditorsPick from "../../components/editors-pick/EditorsPick";
 
 interface IProps {
   data: MainProps
@@ -23,6 +24,7 @@ function Intro({data}: IProps) {
       <div className="overflow-x-hidden" lang={content.langCode}>
         <div>
           <TopArea data={data} />
+          <EditorsPick data={data} />
           <Featured data={data} />
         </div>
       </div>

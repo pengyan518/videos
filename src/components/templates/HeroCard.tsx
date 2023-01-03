@@ -6,15 +6,16 @@ import Section from './Section'
 
 export type FeaturedProps = {
   items: any[]
+  sectionTitle?: string
   title: string
   sectionName: string
 }
 
-export default function HeroCard({items, title, sectionName}: FeaturedProps) {
+export default function HeroCard({items, sectionTitle, title, sectionName}: FeaturedProps) {
   const [hero, thumb_1, thumb_2, thumb_3] = items
   const thumbs = [thumb_1, thumb_2, thumb_3]
   return (
-    <Section>
+    <Section title={sectionTitle}>
       <Link to={`${sectionName}`}>{title}</Link>
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 col-span-2">
@@ -29,11 +30,17 @@ export default function HeroCard({items, title, sectionName}: FeaturedProps) {
           const {descriptionLong, title: itemTitle} = item
           return (
             <div className="row-span-1" key={item.id}>
-              <Link to={`${sectionName}/play/${item.eid}`}>
-                <img src={item.imageForVideo.medium} alt="" />
-              </Link>
-              <div>{itemTitle}</div>
-              <div dangerouslySetInnerHTML={{__html: descriptionLong}} />
+              <div className="grid grid-cols-2 gap-4">
+                <figure>
+                  <Link to={`${sectionName}/play/${item.eid}`}>
+                    <img src={item.imageForVideo.medium} alt="" />
+                  </Link>
+                </figure>
+                <div>
+                  <div>{itemTitle}</div>
+                  <div dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                </div>
+              </div>
             </div>
           )
         })}

@@ -19,7 +19,7 @@ const TopInfo: React.FC<IProps> = ({data}) => {
   // @ts-ignore
   return (
     <div className="flex md:flex-row items-center md:justify-center relative md:px-4">
-      text
+      Shen Yun—Who We Are  |  "Shen Yun"—for Chinese, the words evoke a sense of wonder, magic, and the divine. To audiences who have seen it, they recall the experience of a lifetime....
     </div>
   )
 }
