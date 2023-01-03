@@ -22,7 +22,7 @@ export default function Play({data}: PlayProps) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const eid = process.env.NODE_ENV === 'development' ? config.eid : useUrlParameter(window.location.pathname, 'e')
 
-  const items = Object.values(category).flat()
+  const items = Object.values(category).flat().filter(item=>item!==null)
   const index = items.findIndex(item => item.eid === eid)
 
   return (
