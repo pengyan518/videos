@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import Section from './Section'
+import ThumbItem from "./ThumbItem";
 
 export type FeaturedProps = {
   items: any[]
@@ -19,9 +20,7 @@ export default function HeroCard({items, sectionTitle, title, sectionName}: Feat
       <Link to={`${sectionName}`}>{title}</Link>
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 col-span-2">
-          <Link to={`${sectionName}/play/${hero.eid}`}>
-            <img src={hero.imageForVideo.medium} alt="" />
-          </Link>
+          <ThumbItem item={hero} sectionName={sectionName} />
           <div>{hero.title}</div>
           <div dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
         </div>
@@ -31,11 +30,7 @@ export default function HeroCard({items, sectionTitle, title, sectionName}: Feat
           return (
             <div className="row-span-1" key={item.id}>
               <div className="grid grid-cols-2 gap-4">
-                <figure>
-                  <Link to={`${sectionName}/play/${item.eid}`}>
-                    <img src={item.imageForVideo.medium} alt="" />
-                  </Link>
-                </figure>
+                <ThumbItem item={item} sectionName={sectionName} />
                 <div>
                   <div>{itemTitle}</div>
                   <div dangerouslySetInnerHTML={{__html: descriptionLong}} />

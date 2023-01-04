@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {MainProps} from '../../types'
 import HeroCard from '../templates/HeroCard'
 import Section from '../templates/Section'
+import ThumbItem from '../templates/ThumbItem'
 
 export type FeaturedProps = {
   data: MainProps
@@ -21,11 +22,7 @@ export default function EditorsPick({data}: FeaturedProps) {
           const {descriptionLong, title: itemTitle} = item
           return (
             <div className="row-span-1" key={item.id}>
-              <figure>
-                <Link to={`editors-pick/play/${item.eid}`}>
-                  <img src={item.imageForVideo.medium} alt="" />
-                </Link>
-              </figure>
+              <ThumbItem item={item} sectionName="editors-pick" />
             </div>
           )
         })}
