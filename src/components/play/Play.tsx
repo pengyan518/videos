@@ -4,6 +4,7 @@ import {Link, useParams} from 'react-router-dom'
 import {MainProps} from '../../types'
 import useUrlParameter from '../../hooks/useUrlParameter'
 import Player from "./Player";
+import config from "../../config";
 
 
 export type PlayProps = {
@@ -29,7 +30,7 @@ export default function Play({data}: PlayProps) {
   return (
     <div className="play">
       <Player item={item} />
-      <Link to="/videos">Back</Link>
+      <Link to={`/${config.controller}`}>Back</Link>
     </div>
   )
 }

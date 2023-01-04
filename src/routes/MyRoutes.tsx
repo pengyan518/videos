@@ -10,6 +10,7 @@ import {MainProps} from '../types'
 import Category from '../features/category/Category'
 import useUrlParameter from '../hooks/useUrlParameter'
 import Play from '../components/play/Play'
+import config from "../config";
 
 interface IProps {
   data: MainProps
@@ -30,7 +31,7 @@ function MyRoutes({data}: IProps) {
 
   return (
     <Routes>
-      <Route path="/videos">
+      <Route path={`/${config.controller}`}>
         <Route index={true} element={<Intro data={data} />} />
         {/* <Route index={false} path=":section" element={<Category data={data} title="About Shen Yun" />} /> */}
         {/* <Route index={false} path=":section/play/:eid" element={<Play data={data} />} /> */}

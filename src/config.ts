@@ -6,23 +6,18 @@ export const crossdomain = `.shenyun.com`
 const subDomain = loginLangCode === 'en-us' ? 'www' : loginLangCode
 export const prefix = process.env.NODE_ENV === 'development' ? `//${subDomain}.sydev.org` : ``
 // export const prefix: string = process.env.NODE_ENV === 'development' ? `//${subDomain}.shenyun.org` : ``
+export const controller = `videos2`
 export default Object.freeze({
   wisyAPI: `${prefix}/api-home/what-is-shen-yun`,
   artistAPI: `${prefix}/artists/view/api/e/`,
-  videosAPI: `${prefix}/videos/api`,
+  videosAPI: `${prefix}/${controller}/api`,
   loginLangCode,
   cnLang: ['zh-tw', 'zh-cn'],
   xlmns: 'http://www.w3.org/2000/svg',
-  article: `${prefix}/content/article-api/e/`,
-  city: `/city-info-frame/ajax/1/sc/1/`,
-  getCityApi: `/get-city-api`,
-  cityListAction: `/city-list`,
-  cityGroupInfoListAction: `/city-group-info-list`,
-  getEventInfoAction: `${prefix}/api-home/get-event-info`,
   crossdomainDev: `www.sydev.info/`,
   crossdomain: `www.shenyun.com/`,
   promoLanguage: ['en-us'],
-  eid: 'lyFl9FseCf0', // Angela Xiao
+  controller, // Angela Xiao
   breakpoint: {
     mobile: 767,
     desk: 768,
