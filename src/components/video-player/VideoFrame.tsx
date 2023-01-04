@@ -12,7 +12,7 @@ const VideoFrame = ({videoSrc, poster}: VideoFrameProps) => {
 
   const videoJsOptions = useMemo(
     () => ({
-      autoplay: false,
+      autoplay: true,
       controls: true,
       responsive: true,
       fluid: true,
