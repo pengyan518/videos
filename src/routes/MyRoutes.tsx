@@ -37,7 +37,7 @@ function MyRoutes({data}: IProps) {
         {/* <Route index={false} path=":section/play/:eid" element={<Play data={data} />} /> */}
 
         <Route path=":section">
-          <Route index={true} element={<Category data={data} title="About Shen Yun" />} />
+          <Route index={true} element={<Category data={data} />} />
           <Route index={false} path="play/:eid" element={<Play data={data} />} />
         </Route>
       </Route>

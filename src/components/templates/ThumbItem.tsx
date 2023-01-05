@@ -8,8 +8,9 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
-import Typography from '@mui/material/Typography'
+import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import BootstrapDialogTitle from '../BootstrapDialogTitle/BootstrapDialogTitle'
+import config from "../../config";
 
 export type ItemProps = {
   item: {
@@ -58,16 +59,20 @@ export default function ThumbItem({item, sectionName}: ItemProps) {
             <DialogContent>
               <div className="open-sans-c text-2xl mb-8 mx-auto w-3/4 text-center">Watch this video on demand at Shen Yun Creations</div>
               <a
-                onClick={handleClose}
+                href={onDemandLink}
+                target="_blank"
                 className="cursor-pointer block w-full text-white bg-[#634699] hover:bg-[#2a0c63] hover:no-underline focus:ring-4 focus:outline-none font-medium rounded-[4px] text-base px-8 md:px-12 py-8 text-center dark:bg-[#634699] dark:hover:bg-[#2a0c63]"
                 rel="noreferrer">
-                <div className={`open-sans-c text-white text-[1.8rem]`}>Access exclusive content</div>
+                <div className={``}>
+                  <span className="open-sans-c text-white text-[1.8rem] mr-2">Access exclusive content</span>
+                  <OpenInNewIcon className="mt-[-8px]" />
+                </div>
               </a>
             </DialogContent>
           </BootstrapDialog>
         </>
       ) : (
-        <Link to={`${sectionName}/play/${eid}`}>
+        <Link to={`/${config.controller}/${sectionName}/play/${eid}`}>
           <img src={medium} alt="" />
         </Link>
       )}
