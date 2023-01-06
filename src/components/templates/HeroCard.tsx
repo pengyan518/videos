@@ -9,31 +9,31 @@ import {RootState} from '../../app/store'
 import {setCurrentCategory} from "../../features/category/categorySlice";
 
 export type FeaturedProps = {
-  items: any[]
+  // items: any[]
   sectionTitle?: string
-  title: string
   sectionName: string
+  keyName: string
 }
 
-export default function HeroCard({items, sectionTitle, title, sectionName}: FeaturedProps) {
-  const {content, status, showSticky} = useAppSelector((state: RootState) => state.intro)
+export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedProps) {
+  const {content: {category, translation}, status} = useAppSelector((state: RootState) => state.intro)
   const dispatch = useAppDispatch()
-  if (!items.length) return null
+  if (!category[keyName].length) return null
 
-  const [hero, thumb_1, thumb_2, thumb_3] = items
+  const [hero, thumb_1, thumb_2, thumb_3] = category[keyName]
   const thumbs = [thumb_1, thumb_2, thumb_3]
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate()
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const handleClick = useCallback(() => {
-    dispatch(setCurrentCategory(items))
+    dispatch(setCurrentCategory([keyName]))
     navigate(`${sectionName}`)
-  }, [dispatch, items, navigate, sectionName])
+  }, [dispatch, keyName, navigate, sectionName])
 
   return (
     <Section title={sectionTitle}>
-      <a className="cursor-pointer" onClick={handleClick}>{title}</a>
+      <a className="cursor-pointer" onClick={handleClick}>{translation[keyName]}</a>
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 col-span-2">
           <figure className="relative">

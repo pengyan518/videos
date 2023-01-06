@@ -15,8 +15,7 @@ import TopArea from './components/top-area'
 import MyRoutes from "./routes/MyRoutes";
 
 function Main() {
-  const {modalIsOpened} = useAppSelector((state: RootState) => state.intro)
-  const {content, showSticky} = useAppSelector((state: RootState) => state.intro)
+  const {content} = useAppSelector((state: RootState) => state.intro)
   const dispatch = useAppDispatch()
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const eid = process.env.NODE_ENV === 'development' ? config.eid : useUrlParameter(window.location.pathname, 'e')

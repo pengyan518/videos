@@ -56,4 +56,10 @@ export default Object.freeze({
       mute: 0,
     },
   },
+  sectionMap: {
+    'about-shen-yun': ['itemsShenyunTrailers'],
+    'artists': ['itemsPersecution', 'itemsStartsOfShenyun', 'itemsMorefromArtists'],
+    'reviews': ['itemsReviews'],
+    'music': ['itemsSyso'],
+  }
 })
