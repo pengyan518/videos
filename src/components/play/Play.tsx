@@ -7,6 +7,7 @@ import Player from './Player'
 import config from '../../config'
 import Section from '../templates/Section'
 import ThumbItem from '../templates/ThumbItem'
+import RelatedContent from "../related-content/RelatedContent";
 
 export type PlayProps = {
   data: MainProps
@@ -55,18 +56,8 @@ export default function Play({data}: PlayProps) {
       <Section>
         <h2>{itemObject.current.content.title}</h2>
         <div>{itemObject.current.content.description}</div>
-
-        <div className="grid grid-cols-4 gap-4">
-          {/* @ts-ignore */}
-          {category[itemObject.current.key].map(item => {
-            return (
-              <div key={item.eid}>
-                {/* @ts-ignore */}
-                <ThumbItem item={item} sectionName={section} />
-              </div>
-            )
-          })}
-        </div>
+        {/* @ts-ignore */}
+        <RelatedContent data={category[itemObject.current.key]} />
 
         <Link to={`/${config.controller}`}>Back</Link>
       </Section>
