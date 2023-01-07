@@ -42,7 +42,11 @@ const VideoFrame = ({videoSrc, poster}: VideoFrameProps) => {
 
   // @ts-ignore
 
-  return <Video options={videoJsOptions} onReady={handlePlayerReady} />
+  return (
+    <React.Fragment key={videoSrc}>
+      <Video options={videoJsOptions} onReady={handlePlayerReady} />
+    </React.Fragment>
+  )
 }
 
 export default VideoFrame

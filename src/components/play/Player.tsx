@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import {Link} from 'react-router-dom'
 import Vimeo from '@u-wave/react-vimeo'
 
@@ -11,7 +11,7 @@ export type PlayProps = {
   item: any
 }
 
-export default function Player({item}: PlayProps) {
+function Player({item}: PlayProps, ref: React.Ref<any> | null) {
   const {
     videoLink,
     embeddedVideoYT,
@@ -21,16 +21,10 @@ export default function Player({item}: PlayProps) {
     imageForVideo: {medium},
   } = item
 
-  const videoStyle = {
-    width: '100%',
-    height: '100%',
-  }
-
+  //
   return (
-    <div className="">
-      <div>{eid}</div>
-      <div>{videoLink}</div>
-      <div>{embeddedVideoYT}</div>
+      // @ts-ignore
+    <div className="" ref={ref}>
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
         <div className="w-full">
@@ -44,3 +38,7 @@ export default function Player({item}: PlayProps) {
     </div>
   )
 }
+
+const MyPlayer = forwardRef(Player)
+
+export default MyPlayer
