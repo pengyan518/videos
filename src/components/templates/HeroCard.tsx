@@ -7,6 +7,7 @@ import ThumbItem from './ThumbItem'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {setCurrentCategory} from "../../features/category/categorySlice";
+import dashed from "../../utils/dashed";
 
 export type FeaturedProps = {
   // items: any[]

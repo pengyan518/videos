@@ -8,6 +8,7 @@ import {RootState} from '../../app/store'
 import ThumbItem from '../../components/templates/ThumbItem'
 import Section from '../../components/templates/Section'
 import {setCurrentCategory} from './categorySlice'
+import dashed from "../../utils/dashed";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -30,18 +31,20 @@ export default function Category({data}: CategoryProps) {
   // if (!currentCategory) return <>loading...</>
   if (!category) return null
 
-  // useEffect(() => {
-  //   if (!currentCategory) {
-  //    myCurrentSection.current =
-  //   }
-  // }, [])
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (currentCategory) {
+     const element = document.getElementById(currentCategory[0])
+     element && element.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"})
+    }
+  }, [currentCategory])
 
   // @ts-ignore
-  const categoryViews = config.sectionMap[section].map((item: string | number) => {
+  const categoryViews = config.sectionMap[section].map((item: string) => {
     return (
       <>
-        <div>{translation[item]}</div>
-        <div className="grid grid-cols-4 gap-2">
+        <div id={item}>{translation[item]}</div>
+        <div className="grid grid-cols-4 gap-2" key={item}>
           {
             // @ts-ignore
             category[item].map(element => {
