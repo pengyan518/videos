@@ -57,7 +57,7 @@ export default function Play({data}: PlayProps) {
         <h2>{itemObject.current.content.title}</h2>
         <div>{itemObject.current.content.description}</div>
         {/* @ts-ignore */}
-        <RelatedContent data={category[itemObject.current.key]} />
+        <RelatedContent data={category[itemObject.current.key]} section={section} />
 
         <Link to={`/${config.controller}`}>Back</Link>
       </Section>

@@ -40,9 +40,9 @@ function useEmblaCarousel(
       )
       setEmbla(newEmbla)
       return () => newEmbla.destroy()
-    } else {
-      setEmbla(undefined)
     }
+      setEmbla(undefined)
+
   }, [viewport, setEmbla])
 
   useEffect(() => {

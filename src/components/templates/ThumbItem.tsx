@@ -48,7 +48,7 @@ export default function ThumbItem({item, sectionName}: ItemProps) {
     imageForVideo: {medium},
   } = item
   return (
-    <figure>
+    <figure className="w-full">
       {onDemandLink ? (
         <>
           <div onClick={handleClickOpen} className="cursor-pointer">
