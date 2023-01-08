@@ -3,28 +3,35 @@ import videojs from 'video.js'
 import Video from './VideoJs'
 
 interface VideoFrameProps {
-  poster: string
+  poster?: string
   videoSrc: string
+  options?: any
 }
 
-const VideoFrame = ({videoSrc, poster}: VideoFrameProps) => {
+const VideoFrame = ({videoSrc, poster, options = {}}: VideoFrameProps) => {
   const playerRef = useRef(null)
 
   const videoJsOptions = useMemo(
     () => ({
-      autoplay: true,
-      controls: true,
-      responsive: true,
-      fluid: true,
-      poster,
-      sources: [
-        {
-          src: videoSrc,
-          type: 'video/mp4',
-        },
-      ],
+      ...{
+        autoplay: true,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        poster,
+        // controlBar: {
+        //   pictureInPictureToggle: false,
+        // },
+        sources: [
+          {
+            src: videoSrc,
+            type: 'video/mp4',
+          },
+        ],
+      },
+      ...options,
     }),
-    [poster, videoSrc]
+    [options, poster, videoSrc]
   )
   const handlePlayerReady = (player: {on: (arg0: string, arg1: {(): void; (): void}) => void} | null) => {
     // @ts-ignore

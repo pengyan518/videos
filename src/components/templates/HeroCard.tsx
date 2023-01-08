@@ -40,7 +40,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
       <a className="cursor-pointer" onClick={handleClick}>
         {translation[keyName]}
       </a>
-      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-4">
         <div className="w-full">
           <figure className="relative">
             <ThumbItem item={hero} sectionName={sectionName} />
@@ -61,7 +61,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                     <ThumbItem item={item} sectionName={sectionName} />
                     <div>
                       <div>{itemTitle}</div>
-                      <div dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                      <div className="line-clamp-3" dangerouslySetInnerHTML={{__html: descriptionLong}} />
                     </div>
                   </div>
                 </div>
