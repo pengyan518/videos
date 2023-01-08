@@ -46,7 +46,7 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
             {/* @ts-ignore */}
             {data.map(item => {
               return (
-                <div key={item.eid} className="flex-[0_0_25%]">
+                <div key={item.eid} className="flex-[0_0_24%]">
                   {/* @ts-ignore */}
                   <ThumbItem item={item} sectionName={section} />
                 </div>

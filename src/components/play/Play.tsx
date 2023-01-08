@@ -53,7 +53,7 @@ export default function Play({data}: PlayProps) {
   return (
     <div className="play">
       <Player item={itemObject.current.content} ref={player} />
-      <Section>
+      <Section width="w-[91%]">
         <h2>{itemObject.current.content.title}</h2>
         <div>{itemObject.current.content.description}</div>
         {/* @ts-ignore */}

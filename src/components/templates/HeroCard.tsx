@@ -6,8 +6,8 @@ import Section from './Section'
 import ThumbItem from './ThumbItem'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
-import {setCurrentCategory} from "../../features/category/categorySlice";
-import dashed from "../../utils/dashed";
+import {setCurrentCategory} from '../../features/category/categorySlice'
+import dashed from '../../utils/dashed'
 
 export type FeaturedProps = {
   // items: any[]
@@ -17,7 +17,10 @@ export type FeaturedProps = {
 }
 
 export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedProps) {
-  const {content: {category, translation}, status} = useAppSelector((state: RootState) => state.intro)
+  const {
+    content: {category, translation},
+    status,
+  } = useAppSelector((state: RootState) => state.intro)
   const dispatch = useAppDispatch()
   if (!category[keyName].length) return null
 
@@ -34,9 +37,11 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
 
   return (
     <Section title={sectionTitle}>
-      <a className="cursor-pointer" onClick={handleClick}>{translation[keyName]}</a>
-      <div className="grid grid-rows-3 grid-flow-col gap-4">
-        <div className="row-span-3 col-span-2">
+      <a className="cursor-pointer" onClick={handleClick}>
+        {translation[keyName]}
+      </a>
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
+        <div className="w-full">
           <figure className="relative">
             <ThumbItem item={hero} sectionName={sectionName} />
             <div className="flex divide-x divide-white gap-4 text-white absolute bottom-0">
@@ -45,23 +50,24 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
             </div>
           </figure>
         </div>
-
-        {thumbs
-          .filter(item => !!item)
-          .map(item => {
-            const {descriptionLong, title: itemTitle} = item
-            return (
-              <div className="row-span-1" key={item.id}>
-                <div className="grid grid-cols-2 gap-4">
-                  <ThumbItem item={item} sectionName={sectionName} />
-                  <div>
-                    <div>{itemTitle}</div>
-                    <div dangerouslySetInnerHTML={{__html: descriptionLong}} />
+        <div className="grid grid-rows-3 gap-4">
+          {thumbs
+            .filter(item => !!item)
+            .map(item => {
+              const {descriptionLong, title: itemTitle} = item
+              return (
+                <div className="" key={item.id}>
+                  <div className="grid grid-cols-[1.5fr_1fr] gap-4">
+                    <ThumbItem item={item} sectionName={sectionName} />
+                    <div>
+                      <div>{itemTitle}</div>
+                      <div dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+        </div>
       </div>
     </Section>
   )

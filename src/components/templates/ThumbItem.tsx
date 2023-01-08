@@ -48,11 +48,11 @@ export default function ThumbItem({item, sectionName}: ItemProps) {
     imageForVideo: {medium},
   } = item
   return (
-    <figure className="w-full">
+    <figure className="aspect-w-16 aspect-h-9">
       {onDemandLink ? (
         <>
           <div onClick={handleClickOpen} className="cursor-pointer">
-            <img src={medium} alt="" />
+            <img src={medium} alt="" className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
           </div>
           <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
             <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} margin={2} />
@@ -73,7 +73,7 @@ export default function ThumbItem({item, sectionName}: ItemProps) {
         </>
       ) : (
         <Link to={`/${config.controller}/${sectionName}/play/${eid}`}>
-          <img src={medium} alt="" />
+          <img src={medium} alt="" className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
         </Link>
       )}
     </figure>

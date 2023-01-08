@@ -67,7 +67,7 @@ export default function Category({data}: CategoryProps) {
   })
 
   return (
-    <div className="category">
+    <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
       <Section>
         <div className="">{categoryViews}</div>
         <Link to={`/${config.controller}`}>Back</Link>

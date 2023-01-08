@@ -111,8 +111,6 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  width: 4rem;
-  height: 4rem;
 }
 .embla__button--prev {
   left: 1.6rem;
@@ -123,7 +121,4 @@
 .embla__button:disabled {
   opacity: 0.3;
 }
-.embla__button__svg {
-  width: 65%;
-  height: 65%;
-}
+
