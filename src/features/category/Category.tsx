@@ -8,7 +8,8 @@ import {RootState} from '../../app/store'
 import ThumbItem from '../../components/templates/ThumbItem'
 import Section from '../../components/templates/Section'
 import {setCurrentCategory} from './categorySlice'
-import dashed from "../../utils/dashed";
+import dashed from '../../utils/dashed'
+import TopArea from '../../components/top-area'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -34,8 +35,8 @@ export default function Category({data}: CategoryProps) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (currentCategory) {
-     const element = document.getElementById(currentCategory[0])
-     element && element.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"})
+      const element = document.getElementById(currentCategory[0])
+      element && element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
     }
   }, [currentCategory])
 
@@ -67,11 +68,14 @@ export default function Category({data}: CategoryProps) {
   })
 
   return (
-    <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
-      <Section>
-        <div className="">{categoryViews}</div>
-        <Link to={`/${config.controller}`}>Back</Link>
-      </Section>
+    <div className="overflow-x-hidden">
+      <TopArea data={data} />
+      <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
+        <Section>
+          <div className="">{categoryViews}</div>
+          <Link to={`/${config.controller}`}>Back</Link>
+        </Section>
+      </div>
     </div>
   )
 }
