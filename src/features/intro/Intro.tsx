@@ -9,6 +9,8 @@ import Featured from '../../components/featured/featured'
 import {MainProps} from '../../types'
 import EditorsPick from "../../components/editors-pick/EditorsPick";
 import Section from "../../components/templates/Section";
+import CreationsBanner from "../../components/CreationsBanner/CreationsBanner";
+import Footer from "../../components/footer/Footer";
 
 interface IProps {
   data: MainProps
@@ -24,10 +26,12 @@ function Intro({data}: IProps) {
     <>
       <div className="overflow-x-hidden" lang={content.langCode}>
         <TopArea data={data} />
+        <CreationsBanner />
         <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
           <EditorsPick data={data} />
           <Featured data={data} />
         </div>
+        <Footer data={data} />
       </div>
     </>
   )
