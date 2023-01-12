@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  min-width: 300px;
   transition: transform 0.2s;
   //transform: translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1));
   transform: translate(0, calc(var(--y, 0) * 1%));

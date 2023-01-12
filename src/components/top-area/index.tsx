@@ -1,37 +1,42 @@
 import React, {useEffect, useCallback, useState, ChangeEvent, useRef} from 'react'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {Container, Figure, ContentWrapper, Header} from './styles'
-
+import Button from '../Button/Button'
 import useRect from '../../hooks/useRect'
 import {ContentProps, MainProps} from '../../types'
-import TopInfo from "./TopInfo";
+import TopInfo from '../templates/TopInfo'
 
 interface IProps {
-  data: MainProps
+  data?: MainProps
 }
 
-// interface ContentProps {
-//   content?: any
-//   status?: string
-// }
-
-const TopArea: React.FC<IProps> = ({data}) => {
-  const {content, status} = useAppSelector<ContentProps>((state: RootState) => state.intro)
-  // const {title, contentExt, langCode} = content
-
-  const {size, root, changeSize} = useRect<HTMLDivElement>([])
-
-
+const TopArea: React.FC<IProps> = () => {
+  const {
+    content: {translation},
+  } = useAppSelector((state: RootState) => state.intro)
 
   return (
-    <>
-      <div className="">
-        <Container className="w-full px-4 md:px-0 grid md:grid-cols-[1.4fr_1fr] mt-16 md:mt-0" dataMinHeight={size.height}>
-          <TopInfo data={data} />
-        </Container>
-      </div>
-    </>
+    <div className="">
+      <Container className="w-full md:px-0 grid md:grid-cols-[1.4fr_1fr]">
+        <TopInfo videoLink="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
+            <div className="divide-x">
+              <span className="pr-2">{translation['Shen Yun—Who We Are']}</span>
+              <span className="pl-2">{translation.video_index_shenyun_intro_text}</span>
+            </div>
+            <div className="flex justify-center">
+              {/* @ts-ignore */}
+              <Button as="a" href="https://www.shenyuncreations.com/" filled>
+                <ArrowRightIcon sx={{fontSize: 40}} />
+                {translation['Watch the Full Video']}
+              </Button>
+            </div>
+          </div>
+        </TopInfo>
+      </Container>
+    </div>
   )
 }
 

@@ -24,11 +24,11 @@ function Intro({data}: IProps) {
 
   return (
     <>
-      <div className="overflow-x-hidden" lang={content.langCode}>
-        <TopArea data={data} />
+      <div className="overflow-x-hidden">
+        <TopArea />
         <CreationsBanner />
+        <EditorsPick data={data} />
         <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
-          <EditorsPick data={data} />
           <Featured data={data} />
         </div>
         <Footer data={data} />

@@ -11,44 +11,7 @@ interface ContainerProps {
   dataMinHeight: number
 }
 // eslint-disable-next-line import/prefer-default-export
-export const Container = styled.div<ContainerProps>`
-  // width: 100%;
-  // min-height: ${({dataMinHeight}) => `${dataMinHeight * 1.4}px`};
-  // position: relative;
-  // @media (min-width: 500px) and (max-width: 639px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 1.65}px`};
-  // }
-  // @media (min-width: 640px) and (max-width: 820px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 1.8}px`};
-  // }
-  // @media (min-width: 821px) and (max-width: 1024px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 1.9}px`};
-  // }
-  // @media (min-width: 1025px) and (max-width: 1280px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 1.9}px`};
-  // }
-  // @media (min-width: 1281px) and (max-width: 1536px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 2.05}px`};
-  // }
-  // @media (min-width: 1537px) and (max-width: 1599px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 2.1}px`};
-  // }
-  // @media (min-width: 1600px) and (max-width: 1999px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 2.3}px`};
-  // }
-  // @media (min-width: 2000px) {
-  //   min-height: ${({dataMinHeight}) => `${dataMinHeight * 1.1}px`};
-  // }
-  // &::before {
-  //   padding-bottom: 120%;
-  //
-  //   @media (min-width: 768px) and (max-width: 1500px) {
-  //     padding-bottom: 90%;
-  //   }
-  //   @media (min-width: 1501px) {
-  //     padding-bottom: 95%;
-  //   }
-  // }
+export const Container = styled.div`
 `
 export const ContentWrapper = styled.div``
 

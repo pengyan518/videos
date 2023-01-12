@@ -56,10 +56,27 @@ export default Object.freeze({
       mute: 0,
     },
   },
-  sectionMap: {
-    'about-shen-yun': ['itemsShenyunTrailers'],
-    'artists': ['itemsPersecution', 'itemsStartsOfShenyun', 'itemsMorefromArtists'],
-    'reviews': ['itemsReviews'],
-    'music': ['itemsSyso'],
-  }
 })
+
+export const sectionMap: {[index: string]: any} = {
+  'about-shen-yun': {
+    title: 'About Shen Yun',
+    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    content: ['itemsShenyunTrailers'],
+  },
+  artists: {
+    title: 'The Artists',
+    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    content: ['itemsPersecution', 'itemsStartsOfShenyun', 'itemsMorefromArtists'],
+  },
+  reviews: {
+    title: 'Reviews',
+    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    content: ['itemsReviews'],
+  },
+  music: {
+    title: 'Music',
+    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    content: ['itemsSyso'],
+  },
+}

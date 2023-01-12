@@ -19,11 +19,11 @@ export default function CreationsBanner() {
 
   return (
     <div className="CreationsBanner">
-      <Wrapper>
+      <Wrapper className="my-4">
         <a
           target="_blank"
           href="https://www.shenyuncreations.com/"
-          className="aspect-w-16 aspect-h-6 mb-8 md:mb-0 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] block">
+          className="aspect-w-16 aspect-h-12 md:aspect-w-16 md:aspect-h-6 mb-8 md:mb-0 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] block">
           <Figure
             ref={ref}
             dataLowSrc={bg_sm}

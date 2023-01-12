@@ -5,20 +5,21 @@ type ISectionProps = {
   description?: string
   yPadding?: string
   width?: string
+  className?: string
   children: ReactNode
 }
 
-const Section = (props: ISectionProps) => {
+const Section = ({width, title, description, yPadding, className, children}: ISectionProps) => {
   return (
-    <div className={`${props.width ? props.width : 'w-full'} mx-auto px-3 ${props.yPadding ? props.yPadding : 'py-16'}`}>
-      {(props.title || props.description) && (
+    <div className={`${width || 'w-full'} mx-auto px-3 ${yPadding || 'py-14'} ${className}`}>
+      {(title || description) && (
         <div className="mb-12 text-center">
-          {props.title && <h2 className="text-4xl text-gray-900 font-bold">{props.title}</h2>}
-          {props.description && <div className="mt-4 text-xl md:px-20">{props.description}</div>}
+          {title && <h2 className="text-4xl text-gray-900 font-bold">{title}</h2>}
+          {description && <div className="mt-4 text-xl md:px-20">{description}</div>}
         </div>
       )}
 
-      {props.children}
+      {children}
     </div>
   )
 }

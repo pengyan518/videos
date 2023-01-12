@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import HeroCard from '../templates/HeroCard'
+import {sectionMap} from '../../config'
 
 export type FeaturedProps = {
   data: MainProps
@@ -10,16 +11,34 @@ export type FeaturedProps = {
 
 export default function Featured({data}: FeaturedProps) {
   const {
-    category: {itemsFeatured, itemsShenyunIntroduction, itemsShenyunTrailers, itemsReviews, itemsEditorsPick, itemsSyso, itemsStartsOfShenyun, itemsPersecution, itemsMorefromArtists},
+    category: {
+      itemsFeatured,
+      itemsShenyunIntroduction,
+      itemsShenyunTrailers,
+      itemsReviews,
+      itemsEditorsPick,
+      itemsSyso,
+      itemsStartsOfShenyun,
+      itemsPersecution,
+      itemsMorefromArtists,
+    },
   } = data
   return (
     <div className="featured">
-      <HeroCard keyName="itemsShenyunTrailers" sectionName="about-shen-yun" sectionTitle="About Shen Yun" />
-      <HeroCard keyName="itemsStartsOfShenyun" sectionName="artists" sectionTitle="The Artists" />
-      <HeroCard keyName="itemsPersecution" sectionName="artists" />
-      <HeroCard keyName="itemsMorefromArtists" sectionName="artists" />
-      <HeroCard keyName="itemsReviews" sectionName="reviews" sectionTitle="Reviews" />
-      <HeroCard keyName="itemsSyso" sectionName="music" sectionTitle="Music" />
+      {Object.entries(sectionMap).map(section => {
+        const [sectionUrl, sectionContent] = section
+        return (
+          <div key={sectionUrl}>
+            <div className="mt-16 mb-6 text-center">
+              <h2 className="text-4xl text-[#524941] OpenSans__font">{sectionContent.title}</h2>
+            </div>
+
+            {sectionContent.content.map((item: React.Key | null | undefined) => (
+              <HeroCard key={item} keyName={item} sectionName={sectionUrl} />
+            ))}
+          </div>
+        )
+      })}
     </div>
   )
 }

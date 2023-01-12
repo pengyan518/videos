@@ -13,7 +13,7 @@ export type FeaturedProps = {
   // items: any[]
   sectionTitle?: string
   sectionName: string
-  keyName: string
+  keyName: any
 }
 
 export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedProps) {
@@ -40,7 +40,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
       <a className="cursor-pointer" onClick={handleClick}>
         {translation[keyName]}
       </a>
-      <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
         <div className="w-full">
           <figure className="relative">
             <ThumbItem item={hero} sectionName={sectionName} />
@@ -50,14 +50,14 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
             </div>
           </figure>
         </div>
-        <div className="grid grid-rows-3 gap-4">
+        <div className="grid grid-rows-3 gap-3">
           {thumbs
             .filter(item => !!item)
             .map(item => {
               const {descriptionLong, title: itemTitle} = item
               return (
                 <div className="" key={item.id}>
-                  <div className="grid grid-cols-[1.5fr_1fr] gap-4">
+                  <div className="grid grid-cols-[1fr_1fr] gap-8">
                     <ThumbItem item={item} sectionName={sectionName} />
                     <div>
                       <div>{itemTitle}</div>

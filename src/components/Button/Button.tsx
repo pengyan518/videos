@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
 import './button.scss'
 
 export type ButtonProps = {
   as?: any
-  children?: any
-  filled?: any
-  secondary?: any
+  children?: ReactNode
+  filled?: boolean
+  secondary?: boolean
 }
 
 const Button = ({as, children, filled, secondary, ...rest}: ButtonProps) => {
