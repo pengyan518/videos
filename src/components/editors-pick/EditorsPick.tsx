@@ -12,24 +12,25 @@ export type FeaturedProps = {
 }
 
 export default function EditorsPick({data}: FeaturedProps) {
-
   const {
     translation,
     category: {itemsFeatured, itemsShenyunIntroduction, itemsShenyunTrailers, itemsReviews, itemsEditorsPick},
   } = data
   return (
-    <Section className="bg-[#524941] overflow-x-scroll" width="md:w-full">
-      <Wrapper className="w-[900px]">
+    <Section className="bg-[#524941]" width="md:w-full">
+      <Wrapper className="">
         <div className="uppercase text-white py-4">{translation['Editors pick']}</div>
-        <div className="flex md:grid md:grid-cols-3 gap-4">
-          {itemsEditorsPick.map(item => {
-            const {descriptionLong, title: itemTitle} = item
-            return (
-              <div className="w-96 md:w-auto" key={item.id}>
-                <ThumbItem item={item} sectionName="editors-pick" />
-              </div>
-            )
-          })}
+        <div className="overflow-x-scroll">
+          <div className="flex md:grid md:grid-cols-3 gap-4 w-[900px] md:w-full">
+            {itemsEditorsPick.map(item => {
+              const {descriptionLong, title: itemTitle} = item
+              return (
+                <div className="w-96 md:w-auto" key={item.id}>
+                  <ThumbItem item={item} sectionName="editors-pick" />
+                </div>
+              )
+            })}
+          </div>
         </div>
       </Wrapper>
     </Section>

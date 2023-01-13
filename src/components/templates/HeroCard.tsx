@@ -37,15 +37,15 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
 
   return (
     <Section title={sectionTitle}>
-      <a className="cursor-pointer" onClick={handleClick}>
+      <a className="cursor-pointer uppercase py-4 block" onClick={handleClick}>
         {translation[keyName]}
       </a>
       <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
         <div className="w-full">
           <figure className="relative">
             <ThumbItem item={hero} sectionName={sectionName} />
-            <div className="flex divide-x divide-white gap-4 text-white absolute bottom-0">
-              <div>{hero.title}</div>
+            <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
+              <div className="font-bold">{hero.title}</div>
               <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
             </div>
           </figure>
@@ -57,11 +57,11 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               const {descriptionLong, title: itemTitle} = item
               return (
                 <div className="" key={item.id}>
-                  <div className="grid grid-cols-[1fr_1fr] gap-8">
+                  <div className="grid grid-cols-[1fr_1fr] gap-3 md:gap-8">
                     <ThumbItem item={item} sectionName={sectionName} />
                     <div>
-                      <div>{itemTitle}</div>
-                      <div className="line-clamp-3" dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                      <div className="text-sm font-bold pb-2">{itemTitle}</div>
+                      <div className="line-clamp-3 text-sm" dangerouslySetInnerHTML={{__html: descriptionLong}} />
                     </div>
                   </div>
                 </div>
