@@ -14,7 +14,7 @@ interface ContainerProps {
 export const ContentWrapper = styled.div``
 
 export const Header = styled.div<LangProps>`
-   br {
+  br {
     display: none;
     @media (min-width: ${({langCode}) => `${config.cnLang.includes(langCode) ? '1600' : '1400'}`}px) {
       display: block;
@@ -39,4 +39,9 @@ export const Figure = styled.div<FigureProps>`
   &.progressive--is-loaded {
     background-image: ${({dataSrc}) => `url(${dataSrc})`};
   }
+  // @media (max-width: 767px) {
+  //   &.progressive--is-loaded {
+  //     background-image: ${({dataSrc}) => `url(${dataSrc})`};
+  //   }
+  // }
 `

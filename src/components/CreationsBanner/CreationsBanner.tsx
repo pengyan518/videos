@@ -1,6 +1,8 @@
 import React from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import bg from '../../assets/images/zuopin_banner.jpg'
+import bgMobile from '../../assets/images/SYZP_mobile_en.jpg'
 import bg_sm from '../../assets/images/zuopin_banner_lower.jpg'
 import {Figure} from './styles'
 import useIntersectionObserverProgressiveImg from '../../hooks/useIntersectionObserverProgressiveImg'
@@ -15,7 +17,8 @@ export default function CreationsBanner() {
   const {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
-  const {src, ref, blur, isVisible} = useIntersectionObserverProgressiveImg(bg_sm, bg)
+  const matches = useMediaQuery('(min-width:768px)')
+  const {src, ref, blur, isVisible} = useIntersectionObserverProgressiveImg(bg_sm, matches?bg:bgMobile)
 
   return (
     <div className="CreationsBanner">
@@ -23,15 +26,15 @@ export default function CreationsBanner() {
         <a
           target="_blank"
           href="https://www.shenyuncreations.com/"
-          className="aspect-w-16 aspect-h-12 md:aspect-w-16 md:aspect-h-6 mb-8 md:mb-0 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] block">
+          className="aspect-w-8 aspect-h-11 md:aspect-w-16 md:aspect-h-6 mb-8 md:mb-0 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] block">
           <Figure
             ref={ref}
             dataLowSrc={bg_sm}
             dataSrc={src}
-            className={`grid grid-cols-2 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] bg-center bg-cover ${
+            className={`grid items-end md:grid-cols-2 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] bg-center bg-cover ${
               isVisible && !blur ? 'progressive--is-loaded' : 'progressive--not-loaded'
             }`}>
-            <div>
+            <div className="pb-8 md:pb-0">
               <div className="text-center text-white mt-[44%]" dangerouslySetInnerHTML={{__html: translation.creationInfo}} />
               <div className="text-center text-white flex items-center justify-center">
                 <span className="mr-2">{translation.Explore}</span>

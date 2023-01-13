@@ -20,7 +20,7 @@ export default function ThumbItemWithCaption({item, sectionName}: ItemProps) {
         <>
           <ThumbView item={myItem} />
           <div className="pt-4">
-            <div className="font-bold">{myItem.title}</div>
+            <div className="font-bold text-sm pb-2">{myItem.title}</div>
             <div className="line-clamp-4 text-sm" dangerouslySetInnerHTML={{__html: myItem.descriptionLong}} />
           </div>
         </>

@@ -12,7 +12,7 @@ const TopInfo: React.FC<IProps> = ({videoLink, children}) => {
   return (
     <div className="">
       <VideoBackground src={videoLink}>
-        <Wrapper className="flex justify-end p-2">{children}</Wrapper>
+        <Wrapper className="flex p-2">{children}</Wrapper>
       </VideoBackground>
     </div>
   )

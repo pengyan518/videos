@@ -48,7 +48,7 @@ export default function Category({data}: CategoryProps) {
     return (
       <>
         {/* @ts-ignore */}
-        {category[item].length > 0 && <div id={item}>{translation[item]}</div>}
+        {category[item].length > 0 && <div id={item} className="text-[#524941] uppercase py-4 block">{translation[item]}</div>}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2" key={item}>
           {
@@ -71,7 +71,7 @@ export default function Category({data}: CategoryProps) {
   return (
     <div className="overflow-x-hidden">
       <TopInfo videoLink={sectionMap[section].banner}>
-        <div>{sectionMap[section].title}</div>
+         <h2 className="text-4xl">{sectionMap[section].title}</h2>
       </TopInfo>
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
         <Section>

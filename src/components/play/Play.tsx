@@ -50,7 +50,7 @@ export default function Play({data}: PlayProps) {
   })
 
   return (
-    <div className="play">
+    <div className="play pb-48">
       <Player item={itemObject.current.content} ref={player} />
       <Section width="w-[91%]">
         <div className="px-8 pb-16">
