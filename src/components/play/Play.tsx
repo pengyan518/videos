@@ -6,7 +6,7 @@ import useUrlParameter from '../../hooks/useUrlParameter'
 import Player from './Player'
 import config from '../../config'
 import Section from '../templates/Section'
-import ThumbItem from '../templates/ThumbItem'
+import ThumbItem from '../Thumb/ThumbItem'
 import RelatedContent from "../related-content/RelatedContent";
 
 export type PlayProps = {

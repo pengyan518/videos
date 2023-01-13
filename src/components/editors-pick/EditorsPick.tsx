@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {MainProps} from '../../types'
 import HeroCard from '../templates/HeroCard'
 import Section from '../templates/Section'
-import ThumbItem from '../templates/ThumbItem'
+import ThumbItem from '../Thumb/ThumbItem'
 import Wrapper from '../templates/Wrapper'
 
 export type FeaturedProps = {

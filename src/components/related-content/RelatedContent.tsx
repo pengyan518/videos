@@ -1,7 +1,7 @@
 import React, {ReactNode, useCallback, useEffect, useState} from 'react'
 import useEmblaCarousel, {EmblaOptionsType} from '../carousel'
 import {DotButton, PrevButton, NextButton} from './EmblaCarouselArrowsDotsButtons'
-import ThumbItem from '../templates/ThumbItem'
+import ThumbItem from '../Thumb/ThumbItem'
 
 export type RelatedContentProps = {
   data: any[]

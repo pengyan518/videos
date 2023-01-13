@@ -3,11 +3,13 @@ import {Link, useNavigate} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import Section from './Section'
-import ThumbItem from './ThumbItem'
+import ThumbItem from '../Thumb/ThumbItem'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {setCurrentCategory} from '../../features/category/categorySlice'
 import dashed from '../../utils/dashed'
+import ThumbWrapper from '../Thumb/ThumbWrapper'
+import ThumbView from '../Thumb/ThumbView'
 
 export type FeaturedProps = {
   // items: any[]
@@ -43,11 +45,17 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
       <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
         <div className="w-full">
           <figure className="relative">
-            <ThumbItem item={hero} sectionName={sectionName} />
-            <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
-              <div className="font-bold">{hero.title}</div>
-              <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
-            </div>
+            <ThumbWrapper item={hero} sectionName={sectionName} className="">
+              {(myItem: any) => (
+                <>
+                  <ThumbView item={myItem} />
+                  <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
+                    <div className="font-bold">{hero.title}</div>
+                    <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                  </div>
+                </>
+              )}
+            </ThumbWrapper>
           </figure>
         </div>
         <div className="grid grid-rows-3 gap-3">
@@ -56,14 +64,18 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
             .map(item => {
               const {descriptionLong, title: itemTitle} = item
               return (
-                <div className="" key={item.id}>
-                  <div className="grid grid-cols-[1fr_1fr] gap-3 md:gap-8">
-                    <ThumbItem item={item} sectionName={sectionName} />
-                    <div>
-                      <div className="text-sm font-bold pb-2">{itemTitle}</div>
-                      <div className="line-clamp-3 text-sm" dangerouslySetInnerHTML={{__html: descriptionLong}} />
-                    </div>
-                  </div>
+                <div key={item.id}>
+                  <ThumbWrapper item={item} sectionName={sectionName} className="grid grid-cols-[1fr_1fr] gap-3 md:gap-8">
+                    {(myItem: any) => (
+                      <>
+                        <ThumbView item={myItem} />
+                        <div>
+                          <div className="text-sm font-bold pb-2">{itemTitle}</div>
+                          <div className="line-clamp-3 text-sm" dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                        </div>
+                      </>
+                    )}
+                  </ThumbWrapper>
                 </div>
               )
             })}
