@@ -7,7 +7,7 @@ import Player from './Player'
 import config from '../../config'
 import Section from '../templates/Section'
 import ThumbItem from '../Thumb/ThumbItem'
-import RelatedContent from "../related-content/RelatedContent";
+import RelatedContent from '../related-content/RelatedContent'
 
 export type PlayProps = {
   data: MainProps
@@ -47,19 +47,20 @@ export default function Play({data}: PlayProps) {
   useEffect(() => {
     // @ts-ignore
     player.current && player.current.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
-
   })
 
   return (
     <div className="play">
       <Player item={itemObject.current.content} ref={player} />
       <Section width="w-[91%]">
-        <h2>{itemObject.current.content.title}</h2>
-        <div>{itemObject.current.content.description}</div>
+        <div className="px-8 pb-16">
+          <h2 className="text-2xl font-bold pb-4">{itemObject.current.content.title}</h2>
+          <div className="pb-4">{itemObject.current.content.description}</div>
+        </div>
         {/* @ts-ignore */}
         <RelatedContent data={category[itemObject.current.key]} section={section} />
 
-        <Link to={`/${config.controller}`}>Back</Link>
+        {/* <Link to={`/${config.controller}`}>Back</Link> */}
       </Section>
     </div>
   )

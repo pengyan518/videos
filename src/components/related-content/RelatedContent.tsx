@@ -2,6 +2,7 @@ import React, {ReactNode, useCallback, useEffect, useState} from 'react'
 import useEmblaCarousel, {EmblaOptionsType} from '../carousel'
 import {DotButton, PrevButton, NextButton} from './EmblaCarouselArrowsDotsButtons'
 import ThumbItem from '../Thumb/ThumbItem'
+import ThumbItemWithCaption from "../Thumb/ThumbItemWithCaption";
 
 export type RelatedContentProps = {
   data: any[]
@@ -46,9 +47,9 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
             {/* @ts-ignore */}
             {data.map(item => {
               return (
-                <div key={item.eid} className="flex-[0_0_24%]">
+                <div key={item.eid} className="flex-[0_0_48%] md:flex-[0_0_24%]">
                   {/* @ts-ignore */}
-                  <ThumbItem item={item} sectionName={section} />
+                  <ThumbItemWithCaption item={item} sectionName={section} />
                 </div>
               )
             })}

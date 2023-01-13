@@ -11,6 +11,7 @@ import {setCurrentCategory} from './categorySlice'
 import dashed from '../../utils/dashed'
 import TopArea from '../../components/top-area'
 import TopInfo from '../../components/templates/TopInfo'
+import ThumbItemWithCaption from "../../components/Thumb/ThumbItemWithCaption";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -46,7 +47,9 @@ export default function Category({data}: CategoryProps) {
   const categoryViews = sectionMap[section].content.map((item: string) => {
     return (
       <>
-        <div id={item}>{translation[item]}</div>
+        {/* @ts-ignore */}
+        {category[item].length > 0 && <div id={item}>{translation[item]}</div>}
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2" key={item}>
           {
             // @ts-ignore
@@ -55,11 +58,7 @@ export default function Category({data}: CategoryProps) {
               return (
                 <div key={eid}>
                   {/* @ts-ignore */}
-                  <ThumbItem item={element} sectionName={section} />
-                  <div>
-                    <div className="font-bold">{title}</div>
-                    <div className="line-clamp-4" dangerouslySetInnerHTML={{__html: descriptionLong}} />
-                  </div>
+                  <ThumbItemWithCaption item={element} sectionName={section} />
                 </div>
               )
             })

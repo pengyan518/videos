@@ -28,7 +28,7 @@ function Intro({data}: IProps) {
         <TopArea />
         <CreationsBanner />
         <EditorsPick data={data} />
-        <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
+        <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto pb-16">
           <Featured data={data} />
         </div>
         <Footer data={data} />
