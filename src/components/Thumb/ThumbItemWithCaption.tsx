@@ -15,7 +15,7 @@ export type ItemProps = {
 
 export default function ThumbItemWithCaption({item, sectionName}: ItemProps) {
   return (
-    <ThumbWrapper item={item} sectionName={sectionName} className="block pb-6">
+    <ThumbWrapper item={item} sectionName={sectionName} className="block">
       {(myItem: any) => (
         <>
           <ThumbView item={myItem} />

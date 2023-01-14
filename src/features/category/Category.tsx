@@ -56,7 +56,7 @@ export default function Category({data}: CategoryProps) {
             category[item].map(element => {
               const {eid, descriptionLong, title} = element
               return (
-                <div key={eid}>
+                <div key={eid} className="pb-4">
                   {/* @ts-ignore */}
                   <ThumbItemWithCaption item={element} sectionName={section} />
                 </div>

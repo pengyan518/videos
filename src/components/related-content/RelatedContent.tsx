@@ -4,13 +4,20 @@ import useEmblaCarousel, {EmblaOptionsType} from '../carousel'
 import {DotButton, PrevButton, NextButton} from './EmblaCarouselArrowsDotsButtons'
 import ThumbItem from '../Thumb/ThumbItem'
 import ThumbItemWithCaption from '../Thumb/ThumbItemWithCaption'
+import {useAppSelector} from '../../app/hooks'
+import {RootState} from '../../app/store'
 
 export type RelatedContentProps = {
   data: any[]
   section: string
+  categoryName: string
 }
 
-export default function RelatedContent({data, section}: RelatedContentProps) {
+export default function RelatedContent({data, section, categoryName}: RelatedContentProps) {
+  const {
+    content: {translation},
+  } = useAppSelector((state: RootState) => state.intro)
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: 'start',
@@ -42,14 +49,15 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
   }, [emblaApi, setScrollSnaps, onSelect])
 
   return (
-    <div className="related-content relative md:px-8">
+    <div className="related-content relative md:px-6">
       <div className="">
+        <div className={'text-[#524941] uppercase py-4 block'}>{translation[categoryName]}</div>
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4">
             {/* @ts-ignore */}
             {data.map(item => {
               return (
-                <div key={item.eid} className="flex-[0_0_40%] md:flex-[0_0_24%]">
+                <div key={item.eid} className="flex-[0_0_40%] md:flex-[0_0_24%] last:pr-4">
                   {/* @ts-ignore */}
                   <ThumbItemWithCaption item={item} sectionName={section} />
                 </div>

@@ -11,7 +11,7 @@ type ISectionProps = {
 
 const Section = ({width, title, description, yPadding, className, children}: ISectionProps) => {
   return (
-    <div className={`${width || 'w-full'} mx-auto px-3 ${yPadding || 'py-14'} ${className || ''}`}>
+    <div className={`${width || 'w-full'} mx-auto px-3 ${yPadding || 'py-14'} ${className ?? ''}`}>
       {(title || description) && (
         <div className="mb-12 text-center">
           {title && <h2 className="text-4xl text-gray-900 font-bold">{title}</h2>}
