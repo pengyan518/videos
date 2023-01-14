@@ -8,6 +8,7 @@ import config from '../../config'
 import Section from '../templates/Section'
 import ThumbItem from '../Thumb/ThumbItem'
 import RelatedContent from '../related-content/RelatedContent'
+import ShareButton from '../ShareButton/ShareButton'
 
 export type PlayProps = {
   data: MainProps
@@ -44,6 +45,7 @@ export default function Play({data}: PlayProps) {
     }
   }
 
+
   useEffect(() => {
     // @ts-ignore
     player.current && player.current.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
@@ -52,9 +54,12 @@ export default function Play({data}: PlayProps) {
   return (
     <div className="play pb-48">
       <Player item={itemObject.current.content} ref={player} />
-      <Section width="w-[91%]">
-        <div className="px-8 pb-16">
-          <h2 className="text-2xl font-bold pb-4">{itemObject.current.content.title}</h2>
+      <Section width="w-full md:w-[91%]">
+        <div className="md:px-8 pb-16">
+          <div className="md:flex md:justify-between pb-4">
+            <h2 className="text-2xl font-bold pb-4">{itemObject.current.content.title}</h2>
+            <ShareButton />
+          </div>
           <div className="pb-4">{itemObject.current.content.description}</div>
         </div>
         {/* @ts-ignore */}

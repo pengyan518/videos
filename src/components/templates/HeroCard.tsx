@@ -49,7 +49,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               {(myItem: any) => (
                 <>
                   <ThumbView item={myItem} />
-                  <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
+                  <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[8rem] md:h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
                     <div className="font-bold">{hero.title}</div>
                     <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
                   </div>

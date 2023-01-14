@@ -1,8 +1,9 @@
 import React, {ReactNode, useCallback, useEffect, useState} from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import useEmblaCarousel, {EmblaOptionsType} from '../carousel'
 import {DotButton, PrevButton, NextButton} from './EmblaCarouselArrowsDotsButtons'
 import ThumbItem from '../Thumb/ThumbItem'
-import ThumbItemWithCaption from "../Thumb/ThumbItemWithCaption";
+import ThumbItemWithCaption from '../Thumb/ThumbItemWithCaption'
 
 export type RelatedContentProps = {
   data: any[]
@@ -13,12 +14,13 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: 'start',
-    slidesToScroll: "auto",
+    slidesToScroll: 'auto',
   })
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+  const matches = useMediaQuery('(min-width:768px)')
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
@@ -40,14 +42,14 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
   }, [emblaApi, setScrollSnaps, onSelect])
 
   return (
-    <div className="related-content relative px-8">
+    <div className="related-content relative md:px-8">
       <div className="">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4">
             {/* @ts-ignore */}
             {data.map(item => {
               return (
-                <div key={item.eid} className="flex-[0_0_48%] md:flex-[0_0_24%]">
+                <div key={item.eid} className="flex-[0_0_40%] md:flex-[0_0_24%]">
                   {/* @ts-ignore */}
                   <ThumbItemWithCaption item={item} sectionName={section} />
                 </div>
@@ -55,9 +57,12 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
             })}
           </div>
         </div>
-
-        <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-        <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+        {matches && (
+          <>
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+          </>
+        )}
       </div>
     </div>
   )

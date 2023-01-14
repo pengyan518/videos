@@ -31,11 +31,12 @@ export default function CreationsBanner() {
             ref={ref}
             dataLowSrc={bg_sm}
             dataSrc={src}
-            className={`grid items-end md:grid-cols-2 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] bg-center bg-cover ${
+            className={`grid items-end md:grid-cols-[1.4fr_1fr] shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] bg-center bg-cover ${
               isVisible && !blur ? 'progressive--is-loaded' : 'progressive--not-loaded'
             }`}>
-            <div className="pb-8 md:pb-0">
-              <div className="text-center text-white mt-[44%]" dangerouslySetInnerHTML={{__html: translation.creationInfo}} />
+            <div className="pb-16 md:pb-20">
+              <div className="text-center text-white" dangerouslySetInnerHTML={{__html: translation['Shen Yun’s Video Platform']}} />
+              <div className="text-center text-white mt-2" dangerouslySetInnerHTML={{__html: translation.creationInfo}} />
               <div className="text-center text-white flex items-center justify-center">
                 <span className="mr-2">{translation.Explore}</span>
                 <div className="w-8 mt-1">
