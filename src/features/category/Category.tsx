@@ -11,6 +11,7 @@ import {setCurrentCategory} from './categorySlice'
 import dashed from '../../utils/dashed'
 import TopArea from '../../components/top-area'
 import TopInfo from '../../components/templates/TopInfo'
+import home_bg from '../../assets/images/home_bg.jpg'
 import ThumbItemWithCaption from "../../components/Thumb/ThumbItemWithCaption";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
@@ -70,7 +71,7 @@ export default function Category({data}: CategoryProps) {
 
   return (
     <div className="overflow-x-hidden">
-      <TopInfo videoLink={sectionMap[section].banner}>
+      <TopInfo poster={sectionMap[section].poster}>
          <h2 className="text-4xl">{sectionMap[section].title}</h2>
       </TopInfo>
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">

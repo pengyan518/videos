@@ -1,3 +1,5 @@
+import posterBg from './assets/images/home_bg.jpg'
+
 const loginLangCode = 'en-us'
 // const loginLangCode = 'ko'
 export const crossdomainDev = `.sydev.info`
@@ -62,21 +64,25 @@ export const sectionMap: {[index: string]: any} = {
   'about-shen-yun': {
     title: 'About Shen Yun',
     banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    poster: posterBg,
     content: ['itemsShenyunTrailers'],
   },
   artists: {
     title: 'The Artists',
     banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    poster: posterBg,
     content: ['itemsPersecution', 'itemsStartsOfShenyun', 'itemsMorefromArtists'],
   },
   reviews: {
     title: 'Reviews',
     banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    poster: posterBg,
     content: ['itemsReviews'],
   },
   music: {
     title: 'Music',
     banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    poster: posterBg,
     content: ['itemsSyso'],
   },
 }

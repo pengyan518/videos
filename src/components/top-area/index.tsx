@@ -4,7 +4,7 @@ import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {Container, Figure, ContentWrapper, Header} from './styles'
 import Button from '../Button/Button'
-import useRect from '../../hooks/useRect'
+import home_bg from '../../assets/images/home_bg.jpg'
 import {ContentProps, MainProps} from '../../types'
 import TopInfo from '../templates/TopInfo'
 
@@ -20,7 +20,8 @@ const TopArea: React.FC<IProps> = () => {
   return (
     <div className="">
       <Container className="w-full md:px-0 grid md:grid-cols-[1.4fr_1fr]">
-        <TopInfo videoLink="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">
+        {/* http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 */}
+        <TopInfo videoLink="" poster={home_bg}>
           <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
             <div className="divide-x">
               <span className="pr-2 font-bold">{translation['Shen Yun—Who We Are']}</span>
