@@ -1,31 +1,30 @@
-const style = (element, prop) => (typeof getComputedStyle !== 'undefined'
-    ? getComputedStyle(element, null).getPropertyValue(prop)
-    : element.style.getPropertyValue(prop));
+const style = (element, prop) =>
+  typeof getComputedStyle !== 'undefined' ? getComputedStyle(element, null).getPropertyValue(prop) : element.style.getPropertyValue(prop)
 
-const overflow = element => style(element, 'overflow') + style(element, 'overflow-y') + style(element, 'overflow-x');
+const overflow = element => style(element, 'overflow') + style(element, 'overflow-y') + style(element, 'overflow-x')
 
 export default element => {
-    if (!(element instanceof HTMLElement)) {
-        return window;
+  if (!(element instanceof HTMLElement)) {
+    return window
+  }
+
+  let parent = element
+
+  while (parent) {
+    if (parent === document.body || parent === document.documentElement) {
+      break
     }
 
-    let parent = element;
-
-    while (parent) {
-        if (parent === document.body || parent === document.documentElement) {
-            break;
-        }
-
-        if (!parent.parentNode) {
-            break;
-        }
-
-        if (/(scroll|auto)/.test(overflow(parent))) {
-            return parent;
-        }
-
-        parent = parent.parentNode;
+    if (!parent.parentNode) {
+      break
     }
 
-    return window;
-};
+    if (/(scroll|auto)/.test(overflow(parent))) {
+      return parent
+    }
+
+    parent = parent.parentNode
+  }
+
+  return window
+}
