@@ -49,24 +49,36 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
     setOpen(false)
   }
 
+    const style = {
+    // position: 'absolute' as const,
+    // bgcolor: 'background.paper',
+    // boxShadow: 24,
+      width: 1200
+    // width: matches ? 425 : '100%',
+    // m: margin,
+    // p: matches ? 2 : 0,
+  }
+
   return (
-    <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+    <BootstrapDialog maxWidth="lg" onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} margin={2} />
       <DialogContent>
         <VideoFrame poster={medium} videoSrc={videoLink} />
+        <div className="grid grid-cols-[1.5fr_1fr] gap-6 mt-6">
         <div className="open-sans-c text-2xl mb-8 mx-auto w-3/4 text-center">
           {translation['Watch this video on demand at Shen Yun Creations']}
         </div>
         <a
           href={onDemandLink}
           target="_blank"
-          className="cursor-pointer block w-full text-white bg-[#634699] hover:bg-[#2a0c63] hover:no-underline focus:ring-4 focus:outline-none font-medium rounded-[4px] text-base px-8 md:px-12 py-8 text-center dark:bg-[#634699] dark:hover:bg-[#2a0c63]"
+          className="cursor-pointer block text-white bg-[#634699] hover:bg-[#2a0c63] hover:no-underline focus:ring-4 focus:outline-none font-medium rounded-[4px] text-base px-8 md:px-12 py-8 text-center dark:bg-[#634699] dark:hover:bg-[#2a0c63]"
           rel="noreferrer">
           <div className={``}>
             <span className="open-sans-c text-white text-[1.8rem] mr-2">{translation['Access exclusive content']}</span>
             <OpenInNewIcon className="mt-[-8px]" />
           </div>
         </a>
+        </div>
       </DialogContent>
     </BootstrapDialog>
   )
