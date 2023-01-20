@@ -1,15 +1,10 @@
 import React, {useState} from 'react'
 import LazyLoad from '../LazyLoad/LazyLoad'
-import Lazy from "../LazyLoad/Lazy";
+import Lazy from '../LazyLoad/Lazy'
+import {VideoItemProps} from '../../types'
 
 export type ItemProps = {
-  item: {
-    eid: string
-    onDemandLink: string
-    imageForVideo: {
-      medium: string
-    }
-  }
+  item: VideoItemProps
 }
 
 export default function ThumbView({item}: ItemProps) {

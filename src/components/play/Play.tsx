@@ -48,7 +48,7 @@ export default function Play({data}: PlayProps) {
 
   useEffect(() => {
     // @ts-ignore
-    player.current && player.current.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+    player.current && player.current.scrollIntoView({block: 'start', inline: 'nearest'})
   })
 
   return (

@@ -1,15 +1,10 @@
 import React, {useState} from 'react'
 import ThumbWrapper from './ThumbWrapper'
 import ThumbView from './ThumbView'
+import {VideoItemProps} from "../../types";
 
 export type ItemProps = {
-  item: {
-    eid: string
-    onDemandLink: string
-    imageForVideo: {
-      medium: string
-    }
-  }
+  item: VideoItemProps
   sectionName: string
 }
 
@@ -19,9 +14,9 @@ export default function ThumbItemWithCaption({item, sectionName}: ItemProps) {
       {(myItem: any) => (
         <>
           <ThumbView item={myItem} />
-          <div className="pt-4">
-            <div className="font-bold text-sm pb-2">{myItem.title}</div>
-            <div className="line-clamp-4 text-sm" dangerouslySetInnerHTML={{__html: myItem.descriptionLong}} />
+          <div className="pt-4 pr-4">
+            <div className="text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{myItem.title}</div>
+            <div className="text-sm line-clamp-4" dangerouslySetInnerHTML={{__html: myItem.descriptionLong}} />
           </div>
         </>
       )}

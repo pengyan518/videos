@@ -16,6 +16,7 @@ export default function EditorsPick({data}: FeaturedProps) {
     translation,
     category: {itemsFeatured, itemsShenyunIntroduction, itemsShenyunTrailers, itemsReviews, itemsEditorsPick},
   } = data
+  if (itemsEditorsPick.length === 0) return null
   return (
     <Section className="bg-[#524941]" width="md:w-full">
       <Wrapper className="">

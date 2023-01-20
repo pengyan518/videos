@@ -42,7 +42,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
       <a className="cursor-pointer uppercase py-4 block" onClick={handleClick}>
         {translation[keyName]}
       </a>
-      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.53fr_1fr] gap-6">
         <div className="w-full">
           <figure className="relative">
             <ThumbWrapper item={hero} sectionName={sectionName} className="">
@@ -65,13 +65,13 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               const {descriptionLong, title: itemTitle} = item
               return (
                 <div key={item.id}>
-                  <ThumbWrapper item={item} sectionName={sectionName} className="grid grid-cols-[1fr_1fr] gap-3 md:gap-8">
+                  <ThumbWrapper item={item} sectionName={sectionName} className="grid grid-cols-[1fr_1fr] gap-3 md:gap-4">
                     {(myItem: any) => (
                       <>
                         <ThumbView item={myItem} />
                         <div>
-                          <div className="text-sm font-bold pb-2">{itemTitle}</div>
-                          <div className="line-clamp-3 text-sm" dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                          <div className="text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{itemTitle}</div>
+                          <div className="line-clamp-3 text-[1rem] leading-[1.3]" dangerouslySetInnerHTML={{__html: descriptionLong}} />
                         </div>
                       </>
                     )}

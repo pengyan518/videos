@@ -6,6 +6,7 @@ export type ItemProps = {
   item: {
     eid: string
     onDemandLink: string
+    videoLink: string
     imageForVideo: {
       medium: string
     }

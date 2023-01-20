@@ -1,6 +1,6 @@
 interface ImageProps {
-  small: string;
-  thumb: string;
+  small: string
+  thumb: string
   original: string
 }
 
@@ -22,19 +22,13 @@ export interface MainProps {
   langCode: string
 }
 
-export type ItemProps = {
-  isVisible?: boolean
-  style?: object
-  item: {
-    id: string
-    ext: {
-      imageIdData: any[]
-      introductionShort: string
-    }
-    title: string
-    url: string
+export type VideoItemProps = {
+  eid: string
+  onDemandLink: string
+  videoLink: string
+  imageForVideo: {
+    medium: string
   }
-  translation: any
 }
 
 export interface ContentProps {
