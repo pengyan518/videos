@@ -60,16 +60,10 @@ h6,
 .h6 {
   line-height: inherit;
 }
-.MuiBox-root {
-  width: 70vw;
-  max-width: 1000px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.MuiBox-root:focus-visible {
-  outline: none;
-}
+
+//.MuiBox-root:focus-visible {
+//  outline: none;
+//}
 
 .Garamond__font {
   font-family: 'EB Garamond', serif;
@@ -105,10 +99,11 @@ h6,
 }
 /* 767 px */
 @media only screen and (max-width: 47.9375em) {
-  .MuiBox-root {
-    width: 100%;
-    top: 0;
-    transform: translate(-50%, 0);
+  .onDemandPopup__root {
+    .MuiPaper-root {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 }
 .timelineAnchor {
@@ -130,10 +125,10 @@ h6,
 }
 .MuiTypography-root {
   font-family: var(--font-open-sans-condensed) !important;
-  color: var(--brown-color) !important;
+  //color: var(--brown-color) !important;
 }
 .responsive-br {
-    br {
+  br {
     display: none;
     @media (min-width: 768px) {
       display: block;
