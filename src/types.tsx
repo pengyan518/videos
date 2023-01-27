@@ -28,6 +28,7 @@ export type VideoItemProps = {
   videoLink: string
   imageForVideo: {
     medium: string
+    original: string
   }
 }
 

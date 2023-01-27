@@ -39,7 +39,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
 
   return (
     <Section title={sectionTitle}>
-      <a className="cursor-pointer uppercase py-4 block" onClick={handleClick}>
+      <a className="cursor-pointer uppercase py-4 block hover:no-underline" onClick={handleClick}>
         {translation[keyName]}
       </a>
       <div className="grid grid-cols-1 lg:grid-cols-[1.53fr_1fr] gap-6">
@@ -48,7 +48,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
             <ThumbWrapper item={hero} sectionName={sectionName} className="">
               {(myItem: any) => (
                 <>
-                  <ThumbView item={myItem} />
+                  <ThumbView item={myItem} showLargeThumb />
                   <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[8rem] md:h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
                     <div className="font-bold">{hero.title}</div>
                     <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
@@ -65,10 +65,10 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               const {descriptionLong, title: itemTitle} = item
               return (
                 <div key={item.id}>
-                  <ThumbWrapper item={item} sectionName={sectionName} className="grid grid-cols-[1fr_1fr] gap-3 md:gap-4">
+                  <ThumbWrapper item={item} sectionName={sectionName} className="grid grid-cols-[1fr_1fr] gap-3 md:gap-4 hover:no-underline">
                     {(myItem: any) => (
                       <>
-                        <ThumbView item={myItem} />
+                        <ThumbView item={myItem} showIcon />
                         <div>
                           <div className="text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{itemTitle}</div>
                           <div className="line-clamp-3 text-[1rem] leading-[1.3]" dangerouslySetInnerHTML={{__html: descriptionLong}} />
