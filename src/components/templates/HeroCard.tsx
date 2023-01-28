@@ -1,13 +1,11 @@
 import React, {useCallback} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
-import {MainProps} from '../../types'
 import Section from './Section'
-import ThumbItem from '../Thumb/ThumbItem'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {setCurrentCategory} from '../../features/category/categorySlice'
-import dashed from '../../utils/dashed'
+import useHover from '../../hooks/useHover'
 import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
 
