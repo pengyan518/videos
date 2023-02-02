@@ -1,4 +1,7 @@
 import posterBg from './assets/images/home_bg.jpg'
+import artistPosterBg from './assets/images/Artists-video-header.jpg'
+import musicPosterBg from './assets/images/Music-video-header.jpg'
+import reviewsPosterBg from './assets/images/Reviews-video-header.jpg'
 
 const loginLangCode = 'en-us'
 // const loginLangCode = 'ko'
@@ -13,6 +16,7 @@ export default Object.freeze({
   wisyAPI: `${prefix}/api-home/what-is-shen-yun`,
   artistAPI: `${prefix}/artists/view/api/e/`,
   videosAPI: `${prefix}/${controller}/api`,
+  oneVideo: `${prefix}/${controller}/fetch-one-video/eid/`,
   loginLangCode,
   cnLang: ['zh-tw', 'zh-cn'],
   xlmns: 'http://www.w3.org/2000/svg',
@@ -63,26 +67,26 @@ export default Object.freeze({
 export const sectionMap: {[index: string]: any} = {
   'about-shen-yun': {
     title: 'About Shen Yun',
-    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    banner: 'https://media2.shenyun.com/assets/shenyun/media/SY_Intro_2021_EN_1200x310.mp4',
     poster: posterBg,
     content: ['itemsShenyunTrailers'],
   },
   artists: {
     title: 'The Artists',
-    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    poster: posterBg,
+    banner: '',
+    poster: artistPosterBg,
     content: ['itemsPersecution', 'itemsStartsOfShenyun', 'itemsMorefromArtists'],
   },
   reviews: {
     title: 'Reviews',
-    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    poster: posterBg,
+    banner: '',
+    poster: reviewsPosterBg,
     content: ['itemsReviews'],
   },
   music: {
     title: 'Music',
-    banner: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    poster: posterBg,
+    banner: '',
+    poster: musicPosterBg,
     content: ['itemsSyso'],
   },
 }

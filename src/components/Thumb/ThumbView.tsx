@@ -37,7 +37,7 @@ export default function ThumbView({item, showIcon, showLargeThumb}: ItemProps) {
     <div className="relative" ref={hoverRef}>
       <div className="aspect-w-16 aspect-h-9">
         <Lazy>
-          <img src={showLargeThumb?item.imageForVideo.original:item.imageForVideo.medium} alt="" className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
+          <img src={showLargeThumb?item.imageForVideo?.original:item.imageForVideo?.medium} alt="" className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
         </Lazy>
       </div>
       <div

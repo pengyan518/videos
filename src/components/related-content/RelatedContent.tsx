@@ -48,6 +48,8 @@ export default function RelatedContent({data, section, categoryName}: RelatedCon
     emblaApi.on('reInit', onSelect)
   }, [emblaApi, setScrollSnaps, onSelect])
 
+  if(!data) return null
+
   return (
     <div className="related-content relative md:px-6">
       <div className="">

@@ -23,7 +23,7 @@ function Main() {
 
   const queryKey = 'profile'
   const {status, data, error, isFetching} = usePosts(url, [queryKey])
-  const containerClass = useMemo(() => `xl:w-10/12 2xl:w-[91%]`, [])
+  // const containerClass = useMemo(() => `xl:w-10/12 2xl:w-[91%]`, [])
 
   useEffect(() => {
     if (status !== 'loading' && status !== 'error') {

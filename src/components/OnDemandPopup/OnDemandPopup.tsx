@@ -41,7 +41,7 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
   const {
     onDemandLink,
     videoLink,
-    imageForVideo: {medium},
+    imageForVideo,
   } = item
 
   const matches = useMediaQuery('(min-width:768px)')
@@ -68,7 +68,7 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} margin={2} />
       <DialogContent sx={style}>
         <div className="xl:px-20 py-8">
-          <VideoFrame poster={medium} videoSrc={videoLink} />
+          <VideoFrame poster={imageForVideo?.medium} videoSrc={videoLink} />
           <div className="grid md:grid-cols-[1.5fr_1fr] px-4 md:px-0 gap-4 xl:gap-24 mt-6">
             <div
               className="open-sans-c text-center md:text-left text-[1.25rem] xl:text-[2.25rem] leading-snug"

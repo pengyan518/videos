@@ -17,9 +17,7 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
     videoLink,
     embeddedVideoYT,
     embeddedVideoVimeo,
-    onDemandLink,
-    eid,
-    imageForVideo: {medium},
+    imageForVideo,
   } = item
 
   //
@@ -35,7 +33,7 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
         ) : embeddedVideoYT !== '' ? (
           <YoutubeEmbed embedId={embeddedVideoYT} />
         ) : (
-          <VideoFrame poster={medium} videoSrc={videoLink} />
+          <VideoFrame poster={imageForVideo?.medium ?? ''} videoSrc={videoLink} />
         )}
       </Wrapper>
     </div>

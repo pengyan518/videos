@@ -5,13 +5,8 @@ import {MainProps} from '../../types'
 import config, {sectionMap} from '../../config'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
-import ThumbItem from '../../components/Thumb/ThumbItem'
 import Section from '../../components/templates/Section'
-import {setCurrentCategory} from './categorySlice'
-import dashed from '../../utils/dashed'
-import TopArea from '../../components/top-area'
 import TopInfo from '../../components/templates/TopInfo'
-import home_bg from '../../assets/images/home_bg.jpg'
 import ThumbItemWithCaption from "../../components/Thumb/ThumbItemWithCaption";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
