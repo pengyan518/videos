@@ -56,7 +56,7 @@ const NoEid = ({eid, section, category}: PlayProps, ref: React.Ref<any> | undefi
   return (
     <div>
       {/* eslint-disable-next-line no-nested-ternary */}
-      {status === 'loading' || !keyName ? (
+      {status === 'loading' ? (
         <div className="play pb-48">
           <Wrapper className="md:px-8">
             <div className="w-full aspect-w-16 aspect-h-9">
@@ -68,10 +68,9 @@ const NoEid = ({eid, section, category}: PlayProps, ref: React.Ref<any> | undefi
         <span>Error: {error.message}</span>
       ) : (
         <>
-          {data && keyName && (
+          {data && (
             <PlayTemplate item={data} ref={ref}>
-              {/* @ts-ignore */}
-              <RelatedContent data={category[keyName]} section={section} categoryName={keyName} />
+              { keyName && <RelatedContent data={category[keyName]} section={section} categoryName={keyName} />}
             </PlayTemplate>
           )}
         </>
