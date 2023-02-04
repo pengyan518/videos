@@ -53,15 +53,15 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               {(myItem: any) => (
                 <>
                   <ThumbView item={myItem} showLargeThumb />
-                  <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] py-4 px-4 items-end  text-white`}>
+                  <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:p-4 items-end  text-white`}>
                     <Gradient
                       className={`absolute w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] ${
-                        isHover ? 'opacity-100' : 'opacity-60'
+                        isHover ? 'opacity-100' : 'opacity-75 '
                       }`}
                     />
-                    <div className="flex divide-x divide-white gap-4 text-sm text-white relative z-10">
-                      <div className="font-bold">{hero.title}</div>
-                      <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                    <div className="flex items-center divide-x divide-white gap-4 text-sm text-white relative z-10">
+                      <div className="font-bold whitespace-nowrap">{hero.title}</div>
+                      <div className="pl-4 hidden md:block" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
                     </div>
                   </div>
                 </>

@@ -12,7 +12,14 @@ export default function VideoBackground({src, poster, children}: VideoBackground
     <div className="video-background relative w-screen">
       <div className="relative">
         {src ? (
-          <video poster={poster} className="relative top-0 left-0 w-full object-cover z-0" autoPlay loop muted disablePictureInPicture playsInline>
+          <video
+            poster={poster}
+            className="relative top-0 left-0 w-full object-cover z-0 h-[500px]"
+            autoPlay
+            loop
+            muted
+            disablePictureInPicture
+            playsInline>
             <source src={src} type="video/mp4" />
           </video>
         ) : (
@@ -20,6 +27,7 @@ export default function VideoBackground({src, poster, children}: VideoBackground
             <img src={poster} alt="" className="top-0 left-0 w-full object-cover z-10" />
           </div>
         )}
+
         <div className="absolute top-0 left-0 w-full h-full bg-white/[.06] z-10" />
         <div className="w-screen h-[15rem] bottom-0 absolute pb-4 grid items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white z-10">
           {children}
