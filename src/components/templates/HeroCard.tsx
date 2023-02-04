@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useRef} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
 import Section from './Section'
@@ -8,6 +8,7 @@ import {setCurrentCategory} from '../../features/category/categorySlice'
 import useHover from '../../hooks/useHover'
 import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
+import {Gradient} from './styles'
 
 export type FeaturedProps = {
   // items: any[]
@@ -28,6 +29,11 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
   const thumbs = [thumb_1, thumb_2, thumb_3]
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const hoverRef = useRef<HTMLDivElement>(null)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const isHover = useHover(hoverRef)
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate()
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const handleClick = useCallback(() => {
@@ -42,14 +48,21 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
       </a>
       <div className="grid grid-cols-1 lg:grid-cols-[1.53fr_1fr] gap-6">
         <div className="w-full">
-          <figure className="relative">
-            <ThumbWrapper item={hero} sectionName={sectionName} className="">
+          <figure className="relative" ref={hoverRef}>
+            <ThumbWrapper item={hero} sectionName={sectionName}>
               {(myItem: any) => (
                 <>
                   <ThumbView item={myItem} showLargeThumb />
-                  <div className="w-full flex divide-x divide-white gap-4 text-sm text-white absolute bottom-0 h-[8rem] md:h-[15rem] py-4 px-4 items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] text-white">
-                    <div className="font-bold">{hero.title}</div>
-                    <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                  <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] py-4 px-4 items-end  text-white`}>
+                    <Gradient
+                      className={`absolute w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] ${
+                        isHover ? 'opacity-100' : 'opacity-60'
+                      }`}
+                    />
+                    <div className="flex divide-x divide-white gap-4 text-sm text-white relative z-10">
+                      <div className="font-bold">{hero.title}</div>
+                      <div className="pl-4" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                    </div>
                   </div>
                 </>
               )}
@@ -63,7 +76,10 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               const {descriptionLong, title: itemTitle} = item
               return (
                 <div key={item.id}>
-                  <ThumbWrapper item={item} sectionName={sectionName} className="grid grid-cols-[1fr_1fr] gap-3 md:gap-4 hover:no-underline">
+                  <ThumbWrapper
+                    item={item}
+                    sectionName={sectionName}
+                    className="grid grid-cols-[1fr_1fr] gap-3 md:gap-4 hover:no-underline">
                     {(myItem: any) => (
                       <>
                         <ThumbView item={myItem} showIcon />
