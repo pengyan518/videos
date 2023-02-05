@@ -141,3 +141,9 @@ h6,
     align-items: center;
   }
 }
+a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
