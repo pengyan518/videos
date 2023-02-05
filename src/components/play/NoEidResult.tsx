@@ -13,6 +13,7 @@ import ShareButton from '../ShareButton/ShareButton'
 import PlayTemplate from './PlayTemplate'
 import usePosts from '../../hooks/usePosts'
 import Wrapper from '../templates/Wrapper'
+import TopBreadcrumbs from '../TopBreadcrumbs'
 
 export type PlayProps = {
   eid: any
@@ -60,7 +61,7 @@ const NoEid = ({eid, section, category}: PlayProps, ref: React.Ref<any> | undefi
         <div className="play pb-48">
           <Wrapper className="md:px-8">
             <div className="w-full aspect-w-16 aspect-h-9">
-            <Skeleton variant="rectangular" width={'100%'} height={800} />
+              <Skeleton variant="rectangular" width={'100%'} height={800} />
             </div>
           </Wrapper>
         </div>
@@ -69,9 +70,12 @@ const NoEid = ({eid, section, category}: PlayProps, ref: React.Ref<any> | undefi
       ) : (
         <>
           {data && (
-            <PlayTemplate item={data} ref={ref}>
-              { keyName && <RelatedContent data={category[keyName]} section={section} categoryName={keyName} />}
-            </PlayTemplate>
+            <>
+              <TopBreadcrumbs showCurrent={data.title} />
+              <PlayTemplate item={data} ref={ref}>
+                {keyName && <RelatedContent data={category[keyName]} section={section} categoryName={keyName} />}
+              </PlayTemplate>
+            </>
           )}
         </>
       )}

@@ -8,6 +8,7 @@ import {RootState} from '../../app/store'
 import Section from '../../components/templates/Section'
 import TopInfo from '../../components/templates/TopInfo'
 import ThumbItemWithCaption from "../../components/Thumb/ThumbItemWithCaption";
+import TopBreadcrumbs from "../../components/TopBreadcrumbs";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -66,6 +67,7 @@ export default function Category({data}: CategoryProps) {
 
   return (
     <div className="overflow-x-hidden">
+      <TopBreadcrumbs />
       <TopInfo poster={sectionMap[section].poster}>
          <h2 className="text-4xl">{sectionMap[section].title}</h2>
       </TopInfo>

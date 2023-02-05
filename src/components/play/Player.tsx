@@ -13,18 +13,12 @@ export type PlayProps = {
 }
 
 function Player({item}: PlayProps, ref: React.Ref<any> | null) {
-  const {
-    videoLink,
-    embeddedVideoYT,
-    embeddedVideoVimeo,
-    imageForVideo,
-  } = item
+  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo} = item
 
   //
   return (
-    // @ts-ignore
-    <div className="bg-black" ref={ref}>
-      <Wrapper className="md:px-8">
+    <Wrapper className="md:px-8">
+      <div className="" ref={ref}>
         {/* eslint-disable-next-line no-nested-ternary */}
         {embeddedVideoVimeo !== '' ? (
           <div className="w-full">
@@ -35,8 +29,8 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
         ) : (
           <VideoFrame poster={imageForVideo?.medium ?? ''} videoSrc={videoLink} />
         )}
-      </Wrapper>
-    </div>
+      </div>
+    </Wrapper>
   )
 }
 

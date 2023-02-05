@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import {purple} from '@mui/material/colors'
 import ShareArea from './ShareArea'
+import {useAppSelector} from '../../app/hooks'
+import {RootState} from '../../app/store'
 
 const theme = createTheme({
   palette: {
@@ -20,6 +22,9 @@ const theme = createTheme({
 })
 
 export default function ShareButton() {
+  const {
+    content: {translation},
+  } = useAppSelector((state: RootState) => state.intro)
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,7 +53,7 @@ export default function ShareButton() {
     <div>
       <ThemeProvider theme={theme}>
         <Button aria-describedby={id} variant="contained" onClick={handleClick} sx={style} color="secondary">
-          Share
+          {translation.Share}
         </Button>
       </ThemeProvider>
       <Popover
