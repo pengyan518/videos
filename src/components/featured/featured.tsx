@@ -24,7 +24,7 @@ export default function Featured({data}: FeaturedProps) {
     },
   } = data
   return (
-    <div className="featured">
+    <div className="featured innerPaddingAlignHeader">
       {Object.entries(sectionMap).map(section => {
         const [sectionUrl, sectionContent] = section
         return (

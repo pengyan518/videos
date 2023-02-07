@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback, useState, ChangeEvent, useRef} from 'react'
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {RootState} from '../../app/store'
@@ -8,8 +8,7 @@ import Button from '../Button/Button'
 import home_bg from '../../assets/images/home_bg.jpg'
 import {ContentProps, MainProps} from '../../types'
 import TopInfo from '../templates/TopInfo'
-import config, {sectionMap} from "../../config";
-
+import config, {sectionMap} from '../../config'
 
 interface IProps {
   data?: MainProps
@@ -22,15 +21,15 @@ const TopArea: React.FC<IProps> = () => {
 
   const navigate = useNavigate()
 
-  const handleTaget = ()=>{
+  const handleTaget = () => {
     navigate('about-shen-yun/play/1HWQkr7XsZU')
   }
 
   return (
-    <div className="">
-      <Container className="w-full md:px-0 grid md:grid-cols-[1.4fr_1fr]">
-        {/* http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 */}
-        <TopInfo videoLink={sectionMap['about-shen-yun'].banner} poster={home_bg}>
+    <Container className="w-full md:px-0 grid">
+      {/* http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 */}
+      <TopInfo videoLink={sectionMap['about-shen-yun'].banner} poster={home_bg}>
+        <div className="innerPaddingAlignHeader">
           <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
             <div className="divide-x">
               <span className="pr-2 font-bold">{translation['Shen Yun—Who We Are']}</span>
@@ -44,9 +43,9 @@ const TopArea: React.FC<IProps> = () => {
               </Button>
             </div>
           </div>
-        </TopInfo>
-      </Container>
-    </div>
+        </div>
+      </TopInfo>
+    </Container>
   )
 }
 

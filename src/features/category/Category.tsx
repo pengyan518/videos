@@ -7,8 +7,9 @@ import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import Section from '../../components/templates/Section'
 import TopInfo from '../../components/templates/TopInfo'
-import ThumbItemWithCaption from "../../components/Thumb/ThumbItemWithCaption";
-import TopBreadcrumbs from "../../components/TopBreadcrumbs";
+import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
+import TopBreadcrumbs from '../../components/TopBreadcrumbs'
+import Footer from '../../components/footer/Footer'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -45,7 +46,11 @@ export default function Category({data}: CategoryProps) {
     return (
       <>
         {/* @ts-ignore */}
-        {category[item].length > 0 && <div id={item} className="text-[#524941] uppercase py-4 block">{translation[item]}</div>}
+        {category[item].length > 0 && (
+          <div id={item} className="text-[#524941] uppercase py-4 block">
+            {translation[item]}
+          </div>
+        )}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2" key={item}>
           {
@@ -69,14 +74,17 @@ export default function Category({data}: CategoryProps) {
     <div className="overflow-x-hidden">
       <TopBreadcrumbs />
       <TopInfo poster={sectionMap[section].poster}>
-         <h2 className="text-4xl">{sectionMap[section].title}</h2>
+        <div className="innerPaddingAlignHeader">
+          <h2 className="text-4xl">{sectionMap[section].title}</h2>
+        </div>
       </TopInfo>
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
-        <Section>
-          <div className="">{categoryViews}</div>
+        <Section xPadding="px-0">
+          <div className="innerPaddingAlignHeader">{categoryViews}</div>
           {/* <Link to={`/${config.controller}`}>Back</Link> */}
         </Section>
       </div>
+      <Footer data={data} />
     </div>
   )
 }

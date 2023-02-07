@@ -2,6 +2,7 @@
   --font-georgia: Georgia, 'Times New Roman', Times, serif;
   --font-open-sans-condensed: open-sans-condensed, sans-serif;
   --brown-color: #887665;
+  --page-margin: 112px;
 }
 html,
 body {
@@ -139,11 +140,17 @@ h6,
   a {
     display: flex;
     align-items: center;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
   }
 }
-a {
-  &:hover,
-  &:focus {
-    text-decoration: none;
+.innerPaddingAlignHeader {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 1600px) {
+    padding-left: var(--page-margin);
+    padding-right: var(--page-margin);
   }
 }

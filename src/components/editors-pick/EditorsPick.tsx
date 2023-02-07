@@ -18,8 +18,8 @@ export default function EditorsPick({data}: FeaturedProps) {
   } = data
   if (itemsEditorsPick.length === 0) return null
   return (
-    <Section className="bg-[#524941]" width="md:w-full">
-      <Wrapper className="">
+    <Section className="bg-[#524941]" width="md:w-full" xPadding="px-0">
+      <Wrapper className="innerPaddingAlignHeader">
         <div className="uppercase text-white py-4">{translation['Editors pick']}</div>
         <div className="overflow-x-scroll">
           <div className="flex md:grid md:grid-cols-3 gap-4 w-[900px] md:w-full">

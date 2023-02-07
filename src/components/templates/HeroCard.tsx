@@ -42,7 +42,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
   }, [dispatch, keyName, navigate, sectionName])
 
   return (
-    <Section title={sectionTitle}>
+    <Section title={sectionTitle} xPadding="px-0">
       <a className="cursor-pointer uppercase py-4 block hover:no-underline" onClick={handleClick}>
         {translation[keyName]}
       </a>
@@ -53,7 +53,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
               {(myItem: any) => (
                 <>
                   <ThumbView item={myItem} showLargeThumb />
-                  <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:p-4 items-end  text-white`}>
+                  <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:p-4 items-end text-white`}>
                     <Gradient
                       className={`absolute w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] ${
                         isHover ? 'opacity-100' : 'opacity-75 '
@@ -61,7 +61,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                     />
                     <div className="flex items-center divide-x divide-white gap-4 text-sm text-white relative z-10">
                       <div className="font-bold whitespace-nowrap">{hero.title}</div>
-                      <div className="pl-4 hidden md:block" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                      <div className="pl-4 display-none md:block" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
                     </div>
                   </div>
                 </>

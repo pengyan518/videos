@@ -51,9 +51,9 @@ export default function RelatedContent({data, section, categoryName}: RelatedCon
   if(!data) return null
 
   return (
-    <div className="related-content relative md:px-6">
+    <div className="related-content relative md:px-6 md:mx-[-1.5rem]">
       <div className="">
-        <div className={'text-[#524941] uppercase py-4 block'}>{translation[categoryName]}</div>
+        <div className={'text-[#524941] py-4 block'}>{translation.Playlist}</div>
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4">
             {/* @ts-ignore */}

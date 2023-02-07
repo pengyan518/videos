@@ -2,11 +2,10 @@ import React, {forwardRef} from 'react'
 import {Link} from 'react-router-dom'
 import Vimeo from '@u-wave/react-vimeo'
 
-import {MainProps} from '../../types'
-import useUrlParameter from '../../hooks/useUrlParameter'
 import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import Wrapper from '../templates/Wrapper'
+import {PlayerWrapper} from "./styles";
 
 export type PlayProps = {
   item: any
@@ -17,7 +16,7 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
 
   //
   return (
-    <Wrapper className="md:px-8">
+    <div className="">
       <div className="" ref={ref}>
         {/* eslint-disable-next-line no-nested-ternary */}
         {embeddedVideoVimeo !== '' ? (
@@ -30,7 +29,7 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
           <VideoFrame poster={imageForVideo?.medium ?? ''} videoSrc={videoLink} />
         )}
       </div>
-    </Wrapper>
+    </div>
   )
 }
 
