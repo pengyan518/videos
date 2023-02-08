@@ -30,7 +30,7 @@ export default function Featured({data}: FeaturedProps) {
         return (
           <div key={sectionUrl}>
             <div className="mt-16 mb-6 text-center">
-              <h2 className="text-4xl text-[#524941] OpenSans__font">{sectionContent.title}</h2>
+              <h2 className="text-2xl md:text-4xl text-[#524941] OpenSans__font">{sectionContent.title}</h2>
             </div>
 
             {sectionContent.content.map((item: React.Key | null | undefined) => (

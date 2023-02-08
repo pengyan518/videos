@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {forwardRef} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Typography from '@mui/material/Typography'
@@ -12,8 +13,6 @@ import {RootState} from '../../app/store'
 import config, {controller, sectionMap} from '../../config'
 import Wrapper from '../templates/Wrapper'
 import Triangle from '../icons/Triangle'
-import {BreadcrumbWrapper} from './styles'
-import {forwardRef} from 'react'
 
 function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   event.preventDefault()
@@ -27,6 +26,15 @@ const BreadcrumbsDiv = ({showCurrent}: BreadCrumbsProps, ref: any) => {
   const {section, eid} = useParams()
   const {content, status} = useAppSelector<ContentProps>((state: RootState) => state.intro)
   const {translation} = content
+
+  // const matches = useMediaQuery('(min-width:768px)')
+  //
+  // const style = {
+  //   // position: 'absolute' as const,
+  //   // bgcolor: 'background.paper',
+  //   // boxShadow: 24,
+  //   // width: matches ? 425 : '100%',
+  // }
 
   // @ts-ignore
   const breadcrumbs = [

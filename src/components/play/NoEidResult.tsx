@@ -71,8 +71,8 @@ const NoEid = ({eid, section, category}: PlayProps, ref: React.Ref<any> | undefi
         <>
           {data && (
             <>
-              <TopBreadcrumbs showCurrent={data.title} />
-              <PlayTemplate item={data} ref={ref}>
+              <TopBreadcrumbs showCurrent={data.title} ref={ref} />
+              <PlayTemplate item={data}>
                 {keyName && <RelatedContent data={category[keyName]} section={section} categoryName={keyName} />}
               </PlayTemplate>
             </>

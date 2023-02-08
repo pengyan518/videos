@@ -136,21 +136,33 @@ h6,
     }
   }
 }
-.MuiBreadcrumbs-li {
-  a {
-    display: flex;
-    align-items: center;
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
-  }
-}
+
 .innerPaddingAlignHeader {
   padding-left: 1rem;
   padding-right: 1rem;
   @media (min-width: 1600px) {
     padding-left: var(--page-margin);
     padding-right: var(--page-margin);
+  }
+  .MuiBreadcrumbs-ol {
+    flex-wrap: nowrap;
+    .MuiBreadcrumbs-li {
+      a {
+        display: flex;
+        align-items: center;
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+      p {
+        @media (max-width: 767px) {
+          width: 95px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
   }
 }

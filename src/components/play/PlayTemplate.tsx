@@ -16,7 +16,7 @@ export type PlayProps = {
 
 const PlayPageTemplate = ({item, children}: PlayProps, ref: React.Ref<any> | undefined) => {
   return (
-    <Wrapper className="pb-48">
+    <Wrapper className="pb-10 md:pb-48">
       <div className="innerPaddingAlignHeader">
         <Player item={item} ref={ref} />
         <Section width="w-full" xPadding="px-0" yPadding="pb-7 pt-6 md:pt-16">

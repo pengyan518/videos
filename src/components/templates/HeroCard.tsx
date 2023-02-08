@@ -55,8 +55,8 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                   <ThumbView item={myItem} showLargeThumb />
                   <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:p-4 items-end text-white`}>
                     <Gradient
-                      className={`absolute w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.8)] ${
-                        isHover ? 'opacity-100' : 'opacity-75 '
+                      className={`absolute w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] ${
+                        isHover ? 'opacity-100' : 'opacity-90'
                       }`}
                     />
                     <div className="flex items-center divide-x divide-white gap-4 text-sm text-white relative z-10">
@@ -84,8 +84,8 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                       <>
                         <ThumbView item={myItem} showIcon />
                         <div>
-                          <div className="text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{itemTitle}</div>
-                          <div className="line-clamp-3 text-[1rem] leading-[1.3]" dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                          <div className="text-[0.8rem] md:text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{itemTitle}</div>
+                          <div className="text-[0.8rem] line-clamp-3 md:text-[1rem] leading-[1.3]" dangerouslySetInnerHTML={{__html: descriptionLong}} />
                         </div>
                       </>
                     )}
