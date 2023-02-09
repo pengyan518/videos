@@ -14,7 +14,7 @@ export default function VideoBackground({src, poster, children}: VideoBackground
         {src ? (
           <video
             poster={poster}
-            className="relative top-0 left-0 w-full object-cover z-0 h-[500px]"
+            className="relative top-0 left-0 w-full object-cover z-0 h-[500px] md:h-auto"
             autoPlay
             loop
             muted

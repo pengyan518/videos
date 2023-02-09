@@ -31,9 +31,9 @@ const TopArea: React.FC<IProps> = () => {
       <TopInfo videoLink={sectionMap['about-shen-yun'].banner} poster={home_bg}>
         <div className="innerPaddingAlignHeader">
           <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
-            <div className="divide-x">
-              <span className="pr-2 font-bold">{translation['Shen Yun—Who We Are']}</span>
-              <span className="pl-2">{translation.video_index_shenyun_intro_text}</span>
+            <div className="divide-x text-[1rem] md:text-[1.2rem]">
+              <span className="pr-4 font-bold">{translation['Shen Yun—Who We Are']}</span>
+              <span className="pl-4">{translation.video_index_shenyun_intro_text}</span>
             </div>
             <div className="flex justify-center">
               {/* @ts-ignore */}

@@ -42,7 +42,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
   }, [dispatch, keyName, navigate, sectionName])
 
   return (
-    <Section title={sectionTitle} xPadding="px-0">
+    <Section title={sectionTitle} xPadding="px-0" yPadding="pt-5 pb-10 md:pt-8 md:pb-[4.5rem]">
       <a className="cursor-pointer uppercase py-4 block hover:no-underline" onClick={handleClick}>
         {translation[keyName]}
       </a>

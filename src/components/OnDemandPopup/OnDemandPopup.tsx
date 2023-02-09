@@ -8,6 +8,7 @@ import BootstrapDialogTitle from '../BootstrapDialogTitle/BootstrapDialogTitle'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import VideoFrame from '../video-player/VideoFrame'
+import isValidHttpUrl from "../../utils/isValidHttpUrl";
 
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
@@ -45,6 +46,8 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
   } = item
 
   const matches = useMediaQuery('(min-width:768px)')
+  const videoUrl = isValidHttpUrl(videoLink)
+  // const testVideoLink = videoUrl || null
 
   // const handleClickOpen = () => {
   //   setOpen(true)
@@ -64,14 +67,14 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
   }
 
   return (
-    <BootstrapDialog className="onDemandPopup__root" maxWidth="lg" onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+    <BootstrapDialog className="onDemandPopup__root" maxWidth={videoUrl?'lg':'sm'} onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} margin={2} />
       <DialogContent sx={style}>
-        <div className="xl:px-20 py-8">
-          <VideoFrame poster={imageForVideo?.medium} videoSrc={videoLink} />
-          <div className="grid md:grid-cols-[1.5fr_1fr] px-4 md:px-0 gap-4 xl:gap-24 mt-6">
+        <div className={`${videoUrl?'xl:px-20 py-8':'px-4 xl:px-16 pb-8 pt-0'}`}>
+          {videoUrl && <VideoFrame poster={imageForVideo?.medium} videoSrc={videoLink} />}
+          <div className={`grid ${videoUrl?'md:grid-cols-[1.5fr_1fr] xl:gap-24':'xl:gap-8'} px-4 md:px-0 gap-4 mt-6`}>
             <div
-              className="open-sans-c text-center md:text-left text-[1.25rem] xl:text-[2.25rem] leading-snug"
+              className={`open-sans-c text-center leading-snug ${videoUrl?'text-[1.25rem] xl:text-[2.25rem] md:text-left':'text-[1.5rem] xl:text-[1.8rem]'}`}
               dangerouslySetInnerHTML={{__html: translation.watch_this_video_on_demand}}
             />
             <a

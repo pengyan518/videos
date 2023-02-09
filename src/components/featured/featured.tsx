@@ -29,7 +29,7 @@ export default function Featured({data}: FeaturedProps) {
         const [sectionUrl, sectionContent] = section
         return (
           <div key={sectionUrl}>
-            <div className="mt-16 mb-6 text-center">
+            <div className="mt-0 mb-0 text-center">
               <h2 className="text-2xl md:text-4xl text-[#524941] OpenSans__font">{sectionContent.title}</h2>
             </div>
 
