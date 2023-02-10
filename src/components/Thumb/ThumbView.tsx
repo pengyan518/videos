@@ -5,6 +5,7 @@ import {requestTimeout} from '../../utils/RAFTimeout'
 import {VideoItemProps} from '../../types'
 import useHover from '../../hooks/useHover'
 import Play from '../icons/Play'
+import {ImgWrapper} from "./styles";
 
 export type ItemProps = {
   item: VideoItemProps
@@ -35,11 +36,11 @@ export default function ThumbView({item, showIcon, showLargeThumb}: ItemProps) {
 
   return (
     <div className="relative" ref={hoverRef}>
-      <div className="aspect-w-16 aspect-h-9">
+      <ImgWrapper className="aspect-w-16 aspect-h-9 overflow-hidden rounded-xl">
         <Lazy>
           <img src={showLargeThumb?item.imageForVideo?.original:item.imageForVideo?.medium} alt="" className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
         </Lazy>
-      </div>
+      </ImgWrapper>
       <div
         ref={ref}
         className="absolute text-white w-12 h-12 top-1/2 left-1/2 opacity-0 translate-x-[-50%] translate-y-[-50%] animate__animated">

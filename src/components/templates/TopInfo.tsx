@@ -3,17 +3,21 @@ import VideoBackground from '../video-background/VideoBackground'
 import Wrapper from './Wrapper'
 
 interface IProps {
-  children: ReactNode
+  childrenDiv: ReactNode
   videoLink?: string
   poster?: string
+  breadcrumb?: ReactNode
 }
 
-const TopInfo: React.FC<IProps> = ({videoLink, poster, children}) => {
+const TopInfo: React.FC<IProps> = ({videoLink, poster, breadcrumb, childrenDiv}) => {
   return (
     <div className="">
-      <VideoBackground poster={poster} src={videoLink}>
-        <Wrapper className="flex p-2">{children}</Wrapper>
-      </VideoBackground>
+      <VideoBackground
+        poster={poster}
+        src={videoLink}
+        breadcrumb={breadcrumb}
+        childrenContent={<Wrapper className="p-2">{childrenDiv}</Wrapper>}
+      />
     </div>
   )
 }

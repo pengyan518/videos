@@ -10,6 +10,7 @@ import TopInfo from '../../components/templates/TopInfo'
 import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
 import TopBreadcrumbs from '../../components/TopBreadcrumbs'
 import Footer from '../../components/footer/Footer'
+import Wrapper from "../../components/templates/Wrapper";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -70,14 +71,20 @@ export default function Category({data}: CategoryProps) {
     )
   })
 
+  const Inner = () => (
+    <div className="innerPaddingAlignHeader">
+      <h2 className="text-4xl">{sectionMap[section].title}</h2>
+    </div>
+  )
+  const BreadcrumbsWrapper = () => (
+    <div className="z-[11]">
+      <TopBreadcrumbs textColor="white" />
+    </div>
+  )
+  // @ts-ignore
   return (
     <div className="overflow-x-hidden">
-      <TopBreadcrumbs />
-      <TopInfo poster={sectionMap[section].poster}>
-        <div className="innerPaddingAlignHeader">
-          <h2 className="text-4xl">{sectionMap[section].title}</h2>
-        </div>
-      </TopInfo>
+      <TopInfo poster={sectionMap[section].poster} childrenDiv={<Inner />} breadcrumb={<BreadcrumbsWrapper />} />
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
         <Section xPadding="px-0">
           <div className="innerPaddingAlignHeader">{categoryViews}</div>

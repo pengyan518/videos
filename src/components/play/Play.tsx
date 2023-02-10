@@ -11,8 +11,9 @@ import RelatedContent from '../related-content/RelatedContent'
 import ShareButton from '../ShareButton/ShareButton'
 import PlayTemplate from './PlayTemplate'
 import NoEidResult from './NoEidResult'
-import TopBreadcrumbs from "../TopBreadcrumbs";
-import Footer from "../footer/Footer";
+import TopBreadcrumbs from '../TopBreadcrumbs'
+import Footer from '../footer/Footer'
+import Wrapper from '../templates/Wrapper'
 
 export type PlayProps = {
   data: MainProps
@@ -59,7 +60,7 @@ export default function Play({data}: PlayProps) {
   return (
     <>
       <TopBreadcrumbs showCurrent={itemObject.current.content.title} ref={player} />
-      <PlayTemplate item={itemObject.current.content} >
+      <PlayTemplate item={itemObject.current.content}>
         {/* @ts-ignore */}
         <RelatedContent data={category[itemObject.current.key]} section={section} categoryName={itemObject.current.key} />
       </PlayTemplate>

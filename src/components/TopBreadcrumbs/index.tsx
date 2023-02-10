@@ -11,8 +11,9 @@ import {useAppSelector} from '../../app/hooks'
 import {ContentProps} from '../../types'
 import {RootState} from '../../app/store'
 import config, {controller, sectionMap} from '../../config'
-import Wrapper from '../templates/Wrapper'
+
 import Triangle from '../icons/Triangle'
+import Wrapper from '../templates/Wrapper'
 
 function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   event.preventDefault()
@@ -20,21 +21,17 @@ function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
 
 interface BreadCrumbsProps {
   showCurrent?: boolean | string
+  textColor?: string
 }
 
-const BreadcrumbsDiv = ({showCurrent}: BreadCrumbsProps, ref: any) => {
+const BreadcrumbsDiv = ({showCurrent, textColor}: BreadCrumbsProps, ref: any) => {
   const {section, eid} = useParams()
   const {content, status} = useAppSelector<ContentProps>((state: RootState) => state.intro)
   const {translation} = content
 
-  // const matches = useMediaQuery('(min-width:768px)')
-  //
-  // const style = {
-  //   // position: 'absolute' as const,
-  //   // bgcolor: 'background.paper',
-  //   // boxShadow: 24,
-  //   // width: matches ? 425 : '100%',
-  // }
+  const style = {
+    color: textColor || '#877564',
+  }
 
   // @ts-ignore
   const breadcrumbs = [
@@ -57,11 +54,11 @@ const BreadcrumbsDiv = ({showCurrent}: BreadCrumbsProps, ref: any) => {
   return (
     <Wrapper className="py-8" ref={ref}>
       <div className="innerPaddingAlignHeader">
-        <Stack spacing={2} className="open-sans-c uppercase text-[#877564] text-xs md:text-base">
-          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+        <Stack spacing={2} className={`open-sans-c uppercase text-xs md:text-base`}>
+          <Breadcrumbs sx={style} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
             {breadcrumbs}
             {showCurrent && (
-              <Typography key="3" color="text.primary">
+              <Typography key="3" sx={style}>
                 {showCurrent}
               </Typography>
             )}

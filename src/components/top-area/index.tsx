@@ -25,26 +25,28 @@ const TopArea: React.FC<IProps> = () => {
     navigate('about-shen-yun/play/1HWQkr7XsZU')
   }
 
+  const Inner = () => (
+    <div className="innerPaddingAlignHeader">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
+        <div className="divide-x text-[1rem] md:text-[1.2rem]">
+          <span className="pr-4 font-bold">{translation['Shen Yun—Who We Are']}</span>
+          <span className="pl-4">{translation.video_index_shenyun_intro_text}</span>
+        </div>
+        <div className="flex justify-center">
+          {/* @ts-ignore */}
+          <Button as="a" onClick={handleTaget} filled>
+            <ArrowRightIcon sx={{fontSize: 40}} />
+            {translation['Watch the Full Video']}
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <Container className="w-full md:px-0 grid">
       {/* http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 */}
-      <TopInfo videoLink={sectionMap['about-shen-yun'].banner} poster={home_bg}>
-        <div className="innerPaddingAlignHeader">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
-            <div className="divide-x text-[1rem] md:text-[1.2rem]">
-              <span className="pr-4 font-bold">{translation['Shen Yun—Who We Are']}</span>
-              <span className="pl-4">{translation.video_index_shenyun_intro_text}</span>
-            </div>
-            <div className="flex justify-center">
-              {/* @ts-ignore */}
-              <Button as="a" onClick={handleTaget} filled>
-                <ArrowRightIcon sx={{fontSize: 40}} />
-                {translation['Watch the Full Video']}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </TopInfo>
+      <TopInfo videoLink={sectionMap['about-shen-yun'].banner} poster={home_bg} childrenDiv={<Inner />} />
     </Container>
   )
 }
