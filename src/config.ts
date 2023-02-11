@@ -67,7 +67,7 @@ export default Object.freeze({
 export const sectionMap: {[index: string]: any} = {
   'about-shen-yun': {
     title: 'About Shen Yun',
-    banner: 'https://media2.shenyun.com/assets/shenyun/media/SYintro_clips_1920x493_2.mp4',
+    banner: 'https://media2.shenyun.com/assets/shenyun/media/SYintro_clips_1920x493_2.1.mp4',
     poster: posterBg,
     content: ['itemsShenyunTrailers'],
   },

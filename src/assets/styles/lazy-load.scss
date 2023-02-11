@@ -2,7 +2,7 @@
 
 .LazyLoad {
   opacity: 0;
-  transition: all 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .is-visible {

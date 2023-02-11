@@ -36,7 +36,7 @@ const BreadcrumbsDiv = ({showCurrent, textColor}: BreadCrumbsProps, ref: any) =>
   // @ts-ignore
   const breadcrumbs = [
     <Link key="1" to={`/${controller}/`}>
-      <span className="inline-flex items-center justify-center w-full pr-[0.45rem] md:pl-3 md:pr-5 py-1 text-lg text-white bg-[#b7a58b] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-2 md:mr-6 capitalize">
+      <span className="inline-flex items-center justify-center w-full pr-[0.45rem] md:pl-3 md:pr-5 py-1 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-2 md:mr-6 capitalize">
         <div className="w-8 h-8">
           {/* @ts-ignore */}
           <Triangle className="" />
@@ -52,7 +52,7 @@ const BreadcrumbsDiv = ({showCurrent, textColor}: BreadCrumbsProps, ref: any) =>
   ]
 
   return (
-    <Wrapper className="py-8" ref={ref}>
+    <Wrapper className="py-4 md:py-8" ref={ref}>
       <div className="innerPaddingAlignHeader">
         <Stack spacing={2} className={`open-sans-c uppercase text-xs md:text-base`}>
           <Breadcrumbs sx={style} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
