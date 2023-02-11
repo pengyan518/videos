@@ -8,7 +8,7 @@ import {setCurrentCategory} from '../../features/category/categorySlice'
 import useHover from '../../hooks/useHover'
 import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
-import {Gradient} from './styles'
+import {Gradient, HeroDescription} from './styles'
 
 export type FeaturedProps = {
   // items: any[]
@@ -59,9 +59,9 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                         isHover ? 'opacity-100' : 'opacity-90'
                       }`}
                     />
-                    <div className="flex items-center divide-x divide-white gap-4 text-sm text-white relative z-10">
-                      <div className="font-bold whitespace-nowrap">{hero.title}</div>
-                      <div className="pl-4 display-none md:block" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                    <div className="flex items-center divide-x text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10">
+                      <div className="font-bold md:whitespace-nowrap">{hero.title}</div>
+                      <HeroDescription className="pl-4 line-clamp-1" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
                     </div>
                   </div>
                 </>

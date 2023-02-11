@@ -18,7 +18,13 @@ export const Gradient = styled.div`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 450ms;
 `
-
+export const HeroDescription = styled.div`
+  display: none;
+  @media (min-width:768px) {
+    display: -webkit-box;
+  }
+  
+`
 // export const Header = styled.div<LangProps>`
 //    br {
 //     display: none;
