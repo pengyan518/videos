@@ -15,6 +15,10 @@ export const Container = styled.div`
 `
 export const ContentWrapper = styled.div``
 
+export const HeaderText = styled.div`
+  text-shadow: 0 0 5px rgba(0,0,0,90%);
+`
+
 export const Header = styled.div<LangProps>`
    br {
     display: none;

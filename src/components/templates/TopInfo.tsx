@@ -5,16 +5,18 @@ import Wrapper from './Wrapper'
 interface IProps {
   childrenDiv: ReactNode
   videoLink?: string
+  videoLinkMobile?: string
   poster?: string
   breadcrumb?: ReactNode
 }
 
-const TopInfo: React.FC<IProps> = ({videoLink, poster, breadcrumb, childrenDiv}) => {
+const TopInfo: React.FC<IProps> = ({videoLink, videoLinkMobile, poster, breadcrumb, childrenDiv}) => {
   return (
     <div className="">
       <VideoBackground
         poster={poster}
         src={videoLink}
+        srcMobile={videoLinkMobile}
         breadcrumb={breadcrumb}
         childrenContent={<Wrapper className="p-2">{childrenDiv}</Wrapper>}
       />

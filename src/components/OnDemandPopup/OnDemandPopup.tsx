@@ -80,7 +80,7 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
             <a
               href={onDemandLink}
               target="_blank"
-              className="cursor-pointer flex items-center justify-center text-white bg-[#634699] hover:bg-[#2a0c63] hover:no-underline focus:ring-4 focus:outline-none font-medium rounded-[4px] text-base px-2 md:px-12 py-8 text-center dark:bg-[#634699] dark:hover:bg-[#2a0c63]"
+              className="cursor-pointer flex items-center justify-center text-white bg-[#634699] hover:bg-[#2a0c63] hover:no-underline hover:text-white focus:ring-4 focus:outline-none font-medium rounded-[4px] text-base px-2 md:px-12 py-8 text-center dark:bg-[#634699] dark:hover:bg-[#2a0c63]"
               rel="noreferrer">
               <div>
                 <span className="open-sans-c uppercase font-bold text-white text-[1rem] md:text-[1.2rem] mr-2">

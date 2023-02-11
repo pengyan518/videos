@@ -1,14 +1,21 @@
 import React, {ReactNode} from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export type VideoBackgroundProps = {
   src?: string
+  srcMobile?: string
   poster?: string
   childrenContent: ReactNode
   breadcrumb?: ReactNode
 }
 
-export default function VideoBackground({src, poster, childrenContent, breadcrumb}: VideoBackgroundProps) {
+export default function VideoBackground({src, srcMobile, poster, childrenContent, breadcrumb}: VideoBackgroundProps) {
   if (!src && !poster) return null
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const matches = useMediaQuery('(min-width:768px)')
+  const videoLink = matches ? src : srcMobile
+
   return (
     <div className="video-background relative w-screen">
       <div className="relative">
@@ -21,7 +28,7 @@ export default function VideoBackground({src, poster, childrenContent, breadcrum
             muted
             disablePictureInPicture
             playsInline>
-            <source src={src} type="video/mp4" />
+            <source src={videoLink} type="video/mp4" />
           </video>
         ) : (
           <div className="relative aspect-w-16 aspect-h-10 md:aspect-h-5">
@@ -31,7 +38,7 @@ export default function VideoBackground({src, poster, childrenContent, breadcrum
         )}
 
         <div className="absolute top-0 left-0 w-full h-full bg-white/[.06] z-10" />
-        <div className="w-screen h-[18rem] bottom-0 absolute pb-4 grid items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] text-white z-10">
+        <div className="w-screen h-full md:h-[18rem] bottom-0 absolute pb-4 grid items-end bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] text-white z-10">
           {childrenContent}
         </div>
       </div>
