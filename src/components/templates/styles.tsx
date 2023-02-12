@@ -19,9 +19,11 @@ export const Gradient = styled.div`
   transition-duration: 450ms;
 `
 export const HeroDescription = styled.div`
-  display: none;
   @media (min-width:768px) {
     display: -webkit-box;
+  }
+  @media (max-width:767px) {
+    display: none !important;
   }
   
 `

@@ -88,7 +88,6 @@ export default function Category({data}: CategoryProps) {
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
         <Section xPadding="px-0">
           <div className="innerPaddingAlignHeader">{categoryViews}</div>
-          {/* <Link to={`/${config.controller}`}>Back</Link> */}
         </Section>
       </div>
       <Footer data={data} />

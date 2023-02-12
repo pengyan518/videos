@@ -18,10 +18,10 @@ export default function EditorsPick({data}: FeaturedProps) {
   } = data
   if (itemsEditorsPick.length === 0) return null
   return (
-    <Section className="bg-[#524941] mb-[4.5rem]" width="md:w-full" xPadding="px-0" yPadding="py-14 md:py-14">
+    <Section className="bg-[#524941]" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
       <Wrapper className="innerPaddingAlignHeader">
         <div className="uppercase text-white py-4">{translation.Featured}</div>
-        <div className="overflow-x-scroll">
+        <div className="overflow-x-scroll md:overflow-x-auto">
           <div className="flex md:grid md:grid-cols-3 gap-4 w-[900px] md:w-full">
             {itemsEditorsPick.map(item => {
               const {descriptionLong, title: itemTitle} = item

@@ -27,12 +27,12 @@ export default function CreationsBanner() {
           <a
             target="_blank"
             href="https://www.shenyuncreations.com/"
-            className="aspect-w-8 aspect-h-11 md:aspect-w-16 md:aspect-h-6 mb-8 md:mb-0 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] block">
+            className="aspect-w-8 aspect-h-11 md:aspect-w-16 md:aspect-h-6 mb-8 md:mb-0 shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] block overflow-hidden rounded-xl">
             <Figure
               ref={ref}
               dataLowSrc={bg_sm}
               dataSrc={src}
-              className={`grid items-end md:grid-cols-[1.4fr_1fr] shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] bg-center bg-cover ${
+              className={`grid items-end md:grid-cols-[1.4fr_1fr] shadow-[0_35px_60px_-15px_rgba(135,117,100,0.2)] bg-center bg-cover overflow-hidden rounded-xl ${
                 isVisible && !blur ? 'progressive--is-loaded' : 'progressive--not-loaded'
               }`}>
               <div className="pb-[2rem] md:pb-16">
