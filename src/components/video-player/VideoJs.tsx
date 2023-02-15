@@ -50,7 +50,7 @@ export const VideoJS = (props: {options: any; onReady: any}, ref: any) => {
   }, [playerRef])
 
   return (
-    <div className={ratio < 1 ? 'w-80 mx-auto' : ''}>
+    <div className={ratio < 1 ? 'md:w-4/12 mx-auto' : ''}>
       <div data-vjs-player>
         <video ref={videoRef} className="video-js vjs-big-play-centered" />
       </div>
