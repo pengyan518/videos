@@ -1,6 +1,7 @@
-import React, {useEffect, useState, memo, useCallback, useRef, useMemo} from 'react'
+import React, {useEffect, useState, memo, useCallback, useRef, useMemo, forwardRef} from 'react'
 import videojs from 'video.js'
 import Video from './VideoJs'
+import useVideoDimensions from '../../hooks/useVideoDimensions'
 
 interface VideoFrameProps {
   poster?: string
@@ -8,7 +9,7 @@ interface VideoFrameProps {
   options?: any
 }
 
-const VideoFrame = ({videoSrc, poster, options = {}}: VideoFrameProps) => {
+const VideoFrameDiv = ({videoSrc, poster, options = {}}: VideoFrameProps, ref: React.Ref<unknown> | undefined) => {
   const playerRef = useRef(null)
 
   const videoJsOptions = useMemo(
@@ -47,13 +48,19 @@ const VideoFrame = ({videoSrc, poster, options = {}}: VideoFrameProps) => {
     })
   }
 
-  // @ts-ignore
+  // const videoRef = useRef(null)
+
+  // const ratio = useVideoDimensions(videoRef)
 
   return (
     <React.Fragment key={videoSrc}>
-      <Video options={videoJsOptions} onReady={handlePlayerReady} />
+      <div>
+        <Video options={videoJsOptions} onReady={handlePlayerReady} />
+      </div>
     </React.Fragment>
   )
 }
+
+const VideoFrame = forwardRef(VideoFrameDiv)
 
 export default VideoFrame

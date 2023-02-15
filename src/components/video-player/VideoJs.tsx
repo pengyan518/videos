@@ -1,11 +1,14 @@
-import React, {useEffect, useRef} from 'react'
+import React, {forwardRef, useEffect, useRef} from 'react'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
+import useVideoDimensions from '../../hooks/useVideoDimensions'
 
-export const VideoJS = (props: {options: any; onReady: any}) => {
+export const VideoJS = (props: {options: any; onReady: any}, ref: any) => {
   const videoRef = useRef(null)
   const playerRef = useRef(null)
   const {options, onReady} = props
+
+  const ratio = useVideoDimensions(videoRef)
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
@@ -15,7 +18,7 @@ export const VideoJS = (props: {options: any; onReady: any}) => {
       if (!videoElement) return
 
       const player: {dispose: () => void} = videojs(videoElement, options, () => {
-        videojs.log('player is ready')
+        // videojs.log('player is ready')
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         onReady && onReady(player)
       })
@@ -47,10 +50,12 @@ export const VideoJS = (props: {options: any; onReady: any}) => {
   }, [playerRef])
 
   return (
-    <div data-vjs-player>
-      <video ref={videoRef} className="video-js vjs-big-play-centered" />
+    <div className={ratio < 1 ? 'w-80 mx-auto' : ''}>
+      <div data-vjs-player>
+        <video ref={videoRef} className="video-js vjs-big-play-centered" />
+      </div>
     </div>
   )
 }
-
-export default VideoJS
+const Video = forwardRef(VideoJS)
+export default Video

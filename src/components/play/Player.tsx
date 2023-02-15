@@ -1,11 +1,12 @@
-import React, {forwardRef} from 'react'
+import React, {forwardRef, useEffect, useRef} from 'react'
 import {Link} from 'react-router-dom'
 import Vimeo from '@u-wave/react-vimeo'
 
 import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import Wrapper from '../templates/Wrapper'
-import {PlayerWrapper} from "./styles";
+import {PlayerWrapper} from './styles'
+import useVideoDimensions from '../../hooks/useVideoDimensions'
 
 export type PlayProps = {
   item: any
@@ -14,10 +15,9 @@ export type PlayProps = {
 function Player({item}: PlayProps, ref: React.Ref<any> | null) {
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo} = item
 
-  //
   return (
     <div className="">
-      <div className="" ref={ref}>
+      <div>
         {/* eslint-disable-next-line no-nested-ternary */}
         {embeddedVideoVimeo !== '' ? (
           <div className="w-full">
@@ -26,7 +26,9 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
         ) : embeddedVideoYT !== '' ? (
           <YoutubeEmbed embedId={embeddedVideoYT} />
         ) : (
-          <VideoFrame poster={imageForVideo?.medium ?? ''} videoSrc={videoLink} />
+          <div ref={ref}>
+            <VideoFrame poster={imageForVideo?.medium ?? ''} videoSrc={videoLink} />
+          </div>
         )}
       </div>
     </div>
