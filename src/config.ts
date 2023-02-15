@@ -11,7 +11,7 @@ export const crossdomain = `.shenyun.com`
 const subDomain = loginLangCode === 'en-us' ? 'www' : loginLangCode
 export const prefix = process.env.NODE_ENV === 'development' ? `//${subDomain}.sydev.org` : ``
 // export const prefix: string = process.env.NODE_ENV === 'development' ? `//${subDomain}.shenyun.org` : ``
-export const controller = `videos2`
+export const controller = `videos`
 export default Object.freeze({
   wisyAPI: `${prefix}/api-home/what-is-shen-yun`,
   artistAPI: `${prefix}/artists/view/api/e/`,
