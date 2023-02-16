@@ -153,13 +153,21 @@ h6,
         line-height: 1;
         white-space: nowrap;
         //text-shadow: 0 0 5px rgba(#000, 0.8);
+        color: #fff;
+        .videosPlay__Breadcrumbs & {
+          color: #877564;
+        }
+
         .videosCategory__artists & {
           color: #c9b08a;
         }
         &:hover,
         &:focus {
           text-decoration: none;
-
+          color: #fff;
+          .videosPlay__Breadcrumbs & {
+            color: #877564;
+          }
           .videosCategory__artists & {
             color: #fff;
           }

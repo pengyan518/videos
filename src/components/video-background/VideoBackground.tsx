@@ -31,7 +31,7 @@ export default function VideoBackground({src, srcMobile, poster, childrenContent
             <source src={videoLink} type="video/mp4" />
           </video>
         ) : (
-          <div className="relative aspect-w-16 aspect-h-10 md:aspect-h-5">
+          <div className="relative aspect-w-16 aspect-h-10 md:aspect-w-17 md:aspect-h-4">
             <img src={poster} alt="" className="top-0 left-0 w-full object-cover z-1" />
             {breadcrumb}
           </div>

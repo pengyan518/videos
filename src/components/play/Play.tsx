@@ -59,7 +59,9 @@ export default function Play({data}: PlayProps) {
 
   return (
     <>
-      <TopBreadcrumbs showCurrent={itemObject.current.content.title} ref={player} />
+      <div className="videosPlay__Breadcrumbs">
+        <TopBreadcrumbs showCurrent={itemObject.current.content.title} ref={player} />
+      </div>
       <PlayTemplate item={itemObject.current.content}>
         {/* @ts-ignore */}
         <RelatedContent data={category[itemObject.current.key]} section={section} categoryName={itemObject.current.key} />
