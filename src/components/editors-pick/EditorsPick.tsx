@@ -27,7 +27,7 @@ export default function EditorsPick({data}: FeaturedProps) {
               const {descriptionLong, title: itemTitle} = item
               return (
                 <div className="w-96 md:w-auto" key={item.id}>
-                  <ThumbItem item={item} sectionName="editors-pick" />
+                  <ThumbItem item={item} sectionName="featured" />
                 </div>
               )
             })}

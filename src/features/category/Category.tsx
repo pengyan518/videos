@@ -59,7 +59,7 @@ export default function Category({data}: CategoryProps) {
             category[item].map(element => {
               const {eid, descriptionLong, title} = element
               return (
-                <div key={eid} className="pb-4">
+                <div key={eid} className="pb-4 md:pb-8">
                   {/* @ts-ignore */}
                   <ThumbItemWithCaption item={element} sectionName={section} />
                 </div>
@@ -84,7 +84,7 @@ export default function Category({data}: CategoryProps) {
   // @ts-ignore
   return (
     <div className="overflow-x-hidden">
-      <TopInfo poster={sectionMap[section].poster} childrenDiv={<Inner />} breadcrumb={<BreadcrumbsWrapper />} />
+      <TopInfo poster={sectionMap[section].poster} childrenDiv={<Inner />} breadcrumb={<BreadcrumbsWrapper />} className={`videosCategory__${section}`} />
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
         <Section xPadding="px-0">
           <div className="innerPaddingAlignHeader">{categoryViews}</div>

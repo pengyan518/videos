@@ -30,8 +30,9 @@
   transform: translate(0, calc(var(--y, 0) * 1%));
 }
 .dir-control:hover {
-  --y: -5;
+  --y: 0;
   --scale: 1.05;
+  text-decoration: none;
 }
 .dir-control:active {
   --y: 0;

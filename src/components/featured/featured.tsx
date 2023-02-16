@@ -25,7 +25,7 @@ export default function Featured({data}: FeaturedProps) {
   } = data
   return (
     <div className="featured innerPaddingAlignHeader">
-      {Object.entries(sectionMap).filter(item=>item[0]!=='editors-pick').map(section => {
+      {Object.entries(sectionMap).filter(item=>item[0]!=='featured').map(section => {
         const [sectionUrl, sectionContent] = section
         return (
           <div key={sectionUrl}>

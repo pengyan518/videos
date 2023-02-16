@@ -7,12 +7,13 @@ interface IProps {
   videoLink?: string
   videoLinkMobile?: string
   poster?: string
+  className?: string
   breadcrumb?: ReactNode
 }
 
-const TopInfo: React.FC<IProps> = ({videoLink, videoLinkMobile, poster, breadcrumb, childrenDiv}) => {
+const TopInfo: React.FC<IProps> = ({videoLink, videoLinkMobile, poster, className,breadcrumb, childrenDiv}) => {
   return (
-    <div className="">
+    <div className={className}>
       <VideoBackground
         poster={poster}
         src={videoLink}

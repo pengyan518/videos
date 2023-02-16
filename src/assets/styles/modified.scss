@@ -150,9 +150,16 @@ h6,
       a {
         display: flex;
         align-items: center;
+        .videosCategory__artists & {
+          color: #c9b08a;
+        }
         &:hover,
         &:focus {
           text-decoration: none;
+
+          .videosCategory__artists & {
+            color: #fff;
+          }
         }
       }
       p {
@@ -162,6 +169,11 @@ h6,
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+      }
+    }
+    .MuiBreadcrumbs-separator {
+      .videosCategory__artists & {
+        color: #c9b08a;
       }
     }
   }
