@@ -3,6 +3,7 @@ import {forwardRef} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
 // import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
@@ -29,19 +30,21 @@ const BreadcrumbsDiv = ({showCurrent, textColor}: BreadCrumbsProps, ref: any) =>
   const {content, status} = useAppSelector<ContentProps>((state: RootState) => state.intro)
   const {translation} = content
 
+  const matches = useMediaQuery('(min-width:768px)')
   const style = {
     color: textColor || '#877564',
+    fontSize: matches ? 16 : 13,
   }
 
   // @ts-ignore
   const breadcrumbs = [
     <Link key="1" to={`/${controller}/`}>
-      <span className="inline-flex items-center justify-center w-full pr-[0.45rem] md:pl-3 md:pr-5 py-1 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-2 md:mr-6 capitalize">
-        <div className="w-8 h-8">
+      <span className="mt-[-1px] inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 py-1 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
+        <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
           {/* @ts-ignore */}
           <Triangle className="" />
         </div>
-        <span className="ml-[-6px]">{translation.Back}</span>
+        <span className="ml-[-2px] md:ml-[-6px] text-[12px] md:text-[1rem]">{translation.Back}</span>
       </span>
       <span>{translation.Videos}</span>
     </Link>,

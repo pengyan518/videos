@@ -9,6 +9,7 @@ import useHover from '../../hooks/useHover'
 import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
 import {Gradient, HeroDescription} from './styles'
+import {ChevronRight} from "../icons";
 
 export type FeaturedProps = {
   // items: any[]
@@ -41,10 +42,13 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
     navigate(`${sectionName}`)
   }, [dispatch, keyName, navigate, sectionName])
 
+
   return (
     <Section title={sectionTitle} xPadding="px-0" yPadding="pt-5 pb-10 md:pt-8 md:pb-[4.5rem]">
-      <a className="cursor-pointer uppercase py-4 block hover:no-underline" onClick={handleClick}>
+      <a className="cursor-pointer uppercase py-4 flex items-center gap-2 hover:no-underline" onClick={handleClick}>
         {translation[keyName]}
+        {/* @ts-ignore */}
+        <ChevronRight className="w4 h-4" />
       </a>
       <div className="grid grid-cols-1 lg:grid-cols-[1.53fr_1fr] gap-6">
         <div className="w-full">

@@ -150,6 +150,9 @@ h6,
       a {
         display: flex;
         align-items: center;
+        line-height: 1;
+        white-space: nowrap;
+        //text-shadow: 0 0 5px rgba(#000, 0.8);
         .videosCategory__artists & {
           color: #c9b08a;
         }
