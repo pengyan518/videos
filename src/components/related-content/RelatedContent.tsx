@@ -15,13 +15,16 @@ export type RelatedContentProps = {
 
 export default function RelatedContent({data, section, categoryName}: RelatedContentProps) {
   const {
-    content: {translation},
+    content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
+
+  const ilLanguage = langCode === 'il'
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: 'start',
     slidesToScroll: 'auto',
+    direction: ilLanguage ? 'rtl' : 'ltr',
   })
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
@@ -48,7 +51,7 @@ export default function RelatedContent({data, section, categoryName}: RelatedCon
     emblaApi.on('reInit', onSelect)
   }, [emblaApi, setScrollSnaps, onSelect])
 
-  if(!data) return null
+  if (!data) return null
 
   return (
     <div className="related-content relative md:px-6 md:mx-[-1.5rem]">

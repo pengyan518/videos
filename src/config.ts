@@ -76,7 +76,7 @@ export const sectionMap: {[index: string]: any} = {
     title: 'The Artists',
     banner: '',
     poster: artistPosterBg,
-    content: ['itemsPersecution', 'itemsStartsOfShenyun', 'itemsMorefromArtists'],
+    content: ['itemsStartsOfShenyun', 'itemsPersecution', 'itemsMorefromArtists'],
   },
   reviews: {
     title: 'Reviews',

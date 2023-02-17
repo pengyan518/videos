@@ -63,9 +63,9 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                         isHover ? 'opacity-100' : 'opacity-90'
                       }`}
                     />
-                    <div className="flex items-center divide-x text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10">
+                    <div className="flex items-center divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10">
                       <div className="font-bold md:whitespace-nowrap">{hero.title}</div>
-                      <HeroDescription className="pl-4 line-clamp-1" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                      <HeroDescription className="pl-4 rtl:pl-0 rtl:pr-4 line-clamp-1" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
                     </div>
                   </div>
                 </>

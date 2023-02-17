@@ -11,7 +11,9 @@ interface ContainerProps {
   dataMinHeight: number
 }
 
-export const ContentWrapper = styled.div``
+export const FigureWrapper = styled.a`
+  direction: ltr;
+`
 
 export const Header = styled.div<LangProps>`
   br {
