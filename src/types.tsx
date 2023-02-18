@@ -26,6 +26,8 @@ export type VideoItemProps = {
   eid: string
   onDemandLink: string
   videoLink: string
+  embeddedVideoVimeo: string
+  embeddedVideoYT: string
   imageForVideo: {
     medium: string
     original: string

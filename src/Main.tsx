@@ -12,7 +12,7 @@ import Loading from './components/loading'
 import Featured from './components/featured/featured'
 
 import TopArea from './components/top-area'
-import MyRoutes from "./routes/MyRoutes";
+import MyRoutes from './routes/MyRoutes'
 
 function Main() {
   const {content} = useAppSelector((state: RootState) => state.intro)
@@ -51,11 +51,7 @@ function Main() {
         ) : status === 'error' ? ( // @ts-ignore
           <span>Error: {error.message}</span>
         ) : (
-          <>
-            {data && (
-              <MyRoutes data={data} />
-            )}
-          </>
+          <>{data && <MyRoutes data={data} />}</>
         )}
       </div>
     </>

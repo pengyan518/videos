@@ -1,7 +1,7 @@
 import React, {useEffect, useState, memo, useCallback, useRef, useMemo, forwardRef} from 'react'
 import videojs from 'video.js'
 import Video from './VideoJs'
-import useVideoDimensions from '../../hooks/useVideoDimensions'
+
 
 interface VideoFrameProps {
   poster?: string

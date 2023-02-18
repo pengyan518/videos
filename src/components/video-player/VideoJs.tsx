@@ -1,6 +1,7 @@
 import React, {forwardRef, useEffect, useRef} from 'react'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
+// import './vim.css'
 import useVideoDimensions from '../../hooks/useVideoDimensions'
 
 export const VideoJS = (props: {options: any; onReady: any}, ref: any) => {
@@ -51,7 +52,7 @@ export const VideoJS = (props: {options: any; onReady: any}, ref: any) => {
 
   return (
     <div className={ratio < 1 ? 'md:w-4/12 mx-auto' : ''}>
-      <div data-vjs-player>
+      <div className="" data-vjs-player>
         <video ref={videoRef} className="video-js vjs-big-play-centered" />
       </div>
     </div>

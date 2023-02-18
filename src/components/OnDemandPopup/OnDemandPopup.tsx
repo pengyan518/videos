@@ -8,8 +8,8 @@ import BootstrapDialogTitle from '../BootstrapDialogTitle/BootstrapDialogTitle'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import VideoFrame from '../video-player/VideoFrame'
-import isValidHttpUrl from "../../utils/isValidHttpUrl";
-
+import isValidHttpUrl from '../../utils/isValidHttpUrl'
+import Player from "../play/Player";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
   '& .MuiDialogContent-root': {
@@ -28,6 +28,8 @@ export type OndemandpopupProps = {
     eid: string
     onDemandLink: string
     videoLink: string
+    embeddedVideoVimeo: string
+    embeddedVideoYT: string
     imageForVideo: {
       medium: string
     }
@@ -39,11 +41,7 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
     content: {category, translation},
   } = useAppSelector((state: RootState) => state.intro)
 
-  const {
-    onDemandLink,
-    videoLink,
-    imageForVideo,
-  } = item
+  const {onDemandLink, videoLink, imageForVideo, embeddedVideoVimeo, embeddedVideoYT} = item
 
   const matches = useMediaQuery('(min-width:768px)')
   const videoUrl = isValidHttpUrl(videoLink)
@@ -66,15 +64,25 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
     // p: '0 !important',
   }
 
+  const hasPreview = embeddedVideoVimeo || embeddedVideoYT || videoUrl
+
   return (
-    <BootstrapDialog className="onDemandPopup__root" maxWidth={videoUrl?'lg':'sm'} onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+    <BootstrapDialog
+      className="onDemandPopup__root"
+      maxWidth={hasPreview ? 'lg' : 'sm'}
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={open}>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} margin={2} />
       <DialogContent sx={style}>
-        <div className={`${videoUrl?'xl:px-20 py-8':'px-4 xl:px-16 pb-8 pt-0'}`}>
-          {videoUrl && <VideoFrame poster={imageForVideo?.medium} videoSrc={videoLink} />}
-          <div className={`grid ${videoUrl?'md:grid-cols-[1.5fr_1fr] xl:gap-24':'xl:gap-8'} px-4 md:px-0 gap-4 mt-6`}>
+        <div className={`${hasPreview ? 'xl:px-20 py-8' : 'px-4 xl:px-16 pb-8 pt-0'}`}>
+          {/* {videoUrl && <VideoFrame poster={imageForVideo?.medium} videoSrc={videoLink} />} */}
+          {hasPreview && <Player item={item} />}
+          <div className={`grid ${hasPreview ? 'md:grid-cols-[1.5fr_1fr] xl:gap-24' : 'xl:gap-8'} px-4 md:px-0 gap-4 mt-6`}>
             <div
-              className={`open-sans-c text-center leading-snug ${videoUrl?'text-[1.25rem] xl:text-[2.25rem] md:text-left':'text-[1.5rem] xl:text-[1.8rem]'}`}
+              className={`open-sans-c text-center leading-snug ${
+                hasPreview ? 'text-[1.25rem] xl:text-[2.25rem] md:text-left' : 'text-[1.5rem] xl:text-[1.8rem]'
+              }`}
               dangerouslySetInnerHTML={{__html: translation.watch_this_video_on_demand}}
             />
             <a
@@ -86,7 +94,7 @@ export default function OnDemandPopup({setOpen, open, item}: OndemandpopupProps)
                 <span className="open-sans-c uppercase font-bold text-white text-[1rem] md:text-[1.2rem] mr-2">
                   {translation['Access exclusive content']}
                 </span>
-                <OpenInNewIcon sx={{ fontSize: 18 }} className="mt-[-5px]" />
+                <OpenInNewIcon sx={{fontSize: 18}} className="mt-[-5px]" />
               </div>
             </a>
           </div>

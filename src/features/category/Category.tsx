@@ -48,7 +48,7 @@ export default function Category({data}: CategoryProps) {
       <>
         {/* @ts-ignore */}
         {category[item].length > 0 && (
-          <div id={item} className="text-[#524941] uppercase py-4 block">
+          <div id={item} className="text-[#524941] uppercase pt-8 pb-4 block">
             {translation[item]}
           </div>
         )}
