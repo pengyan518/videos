@@ -10,6 +10,7 @@ import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import OnDemandPopup from '../OnDemandPopup/OnDemandPopup'
 import {VideoItemProps} from '../../types'
+import getFriendlyUrl from '../../utils/getFriendlyUrl'
 
 export type ItemProps = {
   item: VideoItemProps
@@ -36,11 +37,15 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
   const {
     onDemandLink,
     eid,
+    title,
+    urlFriendlyName,
     imageForVideo: {medium},
   } = item
   const handleClickOpen = () => {
     setOpen(true)
   }
+  const seoUrl = urlFriendlyName || getFriendlyUrl(title)
+
   return (
     <>
       {onDemandLink ? (
@@ -51,7 +56,7 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
           <OnDemandPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
       ) : (
-        <Link className={className} to={`/${config.controller}/${sectionName}/play/${eid}`}>
+        <Link className={className} to={`/${config.controller}/${sectionName}/play/${eid}/${seoUrl}.html`}>
           {children(item)}
         </Link>
       )}

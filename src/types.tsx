@@ -24,10 +24,12 @@ export interface MainProps {
 
 export type VideoItemProps = {
   eid: string
+  title: string
   onDemandLink: string
   videoLink: string
   embeddedVideoVimeo: string
   embeddedVideoYT: string
+  urlFriendlyName: string
   imageForVideo: {
     medium: string
     original: string
