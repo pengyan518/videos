@@ -64,7 +64,7 @@ export default function Play({data}: PlayProps) {
       </div>
       <PlayTemplate item={itemObject.current.content}>
         {/* @ts-ignore */}
-        <RelatedContent data={category[itemObject.current.key]} section={section} categoryName={itemObject.current.key} />
+        <RelatedContent data={category[itemObject.current.key].filter(item=>item.eid!==eid)} section={section} categoryName={itemObject.current.key} />
       </PlayTemplate>
       <Footer data={data} />
     </>
