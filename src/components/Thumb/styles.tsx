@@ -19,20 +19,3 @@ export const Gradient = styled.div`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 450ms;
 `
-
-// export const Header = styled.div<LangProps>`
-//    br {
-//     display: none;
-//     @media (min-width: ${({langCode}) => `${config.cnLang.includes(langCode) ? '1600' : '1400'}`}px) {
-//       display: block;
-//     }
-//   }
-// `
-// export const Figure = styled.div<FigureProps>`
-//   &.progressive--not-loaded {
-//     background-image: ${({dataLowSrc}) => `url(${dataLowSrc})`};
-//   }
-//   &.progressive--is-loaded {
-//     background-image: ${({dataSrc}) => `url(${dataSrc})`};
-//   }
-// `

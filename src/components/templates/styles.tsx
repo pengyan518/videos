@@ -25,7 +25,6 @@ export const HeroDescription = styled.div`
   @media (max-width:767px) {
     display: none !important;
   }
-  
 `
 // export const Header = styled.div<LangProps>`
 //    br {
