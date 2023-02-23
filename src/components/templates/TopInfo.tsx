@@ -19,7 +19,7 @@ const TopInfo: React.FC<IProps> = ({videoLink, videoLinkMobile, poster, classNam
         src={videoLink}
         srcMobile={videoLinkMobile}
         breadcrumb={breadcrumb}
-        childrenContent={<Wrapper className="p-2">{childrenDiv}</Wrapper>}
+        childrenContent={<Wrapper className="p-2 relative">{childrenDiv}</Wrapper>}
       />
     </div>
   )

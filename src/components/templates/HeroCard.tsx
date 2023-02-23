@@ -9,7 +9,7 @@ import useHover from '../../hooks/useHover'
 import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
 import {Gradient, HeroDescription} from './styles'
-import {ChevronRight} from "../icons";
+import {ChevronRight} from '../icons'
 
 export type FeaturedProps = {
   // items: any[]
@@ -42,7 +42,6 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
     navigate(`${sectionName}`)
   }, [dispatch, keyName, navigate, sectionName])
 
-
   return (
     <Section title={sectionTitle} xPadding="px-0" yPadding="pt-5 pb-10 md:pt-8 md:pb-[4.5rem]">
       <a className="cursor-pointer uppercase py-4 flex items-center gap-2 hover:no-underline" onClick={handleClick}>
@@ -50,8 +49,8 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
         {/* @ts-ignore */}
         <ChevronRight className="w4 h-4" />
       </a>
-      <div className="grid grid-cols-1 lg:grid-cols-[1.53fr_1fr] gap-6">
-        <div className="w-full">
+      <div className="grid lg:grid-cols-[1.53fr_1fr] lg:gap-6">
+        <div className="w-full pb-4 lg:pb-0">
           <figure className="relative" ref={hoverRef}>
             <ThumbWrapper item={hero} sectionName={sectionName}>
               {(myItem: any) => (
@@ -65,7 +64,10 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                     />
                     <div className="flex items-center divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10">
                       <div className="font-bold md:whitespace-nowrap">{hero.title}</div>
-                      <HeroDescription className="pl-4 rtl:pl-0 rtl:pr-4 line-clamp-1" dangerouslySetInnerHTML={{__html: hero.descriptionLong}} />
+                      <HeroDescription
+                        className="pl-4 rtl:pl-0 rtl:pr-4 line-clamp-1"
+                        dangerouslySetInnerHTML={{__html: hero.descriptionLong}}
+                      />
                     </div>
                   </div>
                 </>
@@ -89,7 +91,10 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                         <ThumbView item={myItem} showIcon />
                         <div>
                           <div className="text-[0.8rem] md:text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{itemTitle}</div>
-                          <div className="text-[0.8rem] line-clamp-3 md:text-[1rem] leading-[1.3]" dangerouslySetInnerHTML={{__html: descriptionLong}} />
+                          <div
+                            className="text-[0.8rem] line-clamp-3 md:text-[1rem] leading-[1.3]"
+                            dangerouslySetInnerHTML={{__html: descriptionLong}}
+                          />
                         </div>
                       </>
                     )}
@@ -97,6 +102,12 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                 </div>
               )
             })}
+        </div>
+        <div />
+        <div className="cursor-pointer font-bold py-4 flex items-center gap-2 hover:no-underline justify-end lg:justify-start" onClick={handleClick}>
+          <span className="mt-[-2px]">{translation.More}</span>
+          {/* @ts-ignore */}
+          <ChevronRight className="w4 h-4" />
         </div>
       </div>
     </Section>

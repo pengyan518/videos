@@ -28,7 +28,7 @@ const TopArea: React.FC<IProps> = () => {
   const Inner = () => (
     <div className="innerPaddingAlignHeader">
       <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
-        <HeaderText className="divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.2rem] mb-[61vw] md:mb-0">
+        <HeaderText className="divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.2rem] mb-[61vw] sm:mb-[40vw] md:mb-0">
           <span className="pr-4 rtl:pr-0 rtl:pl-4 font-bold">{translation['Shen Yun—Who We Are']}</span>
           <span className="pl-4 rtl:pr-4 rtl:pl-0">{translation.video_index_shenyun_intro_text}</span>
         </HeaderText>
