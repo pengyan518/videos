@@ -29,7 +29,7 @@ export default function Play({data}: PlayProps) {
   const player = useRef(null)
 
   const breakForOfLoop = (arrayToBreak: {[s: string]: unknown} | ArrayLike<unknown>) => {
-    for (const [key, categoryContent] of Object.entries(arrayToBreak)) {
+    for (const [key, categoryContent] of Object.entries(arrayToBreak).filter(([k]) => k !== 'itemsEditorsPick')) {
       // @ts-ignore
       for (const element of categoryContent) {
         if (element.eid === eid) {
@@ -64,7 +64,7 @@ export default function Play({data}: PlayProps) {
       </div>
       <PlayTemplate item={itemObject.current.content}>
         {/* @ts-ignore */}
-        <RelatedContent data={category[itemObject.current.key].filter(item=>item.eid!==eid)} section={section} categoryName={itemObject.current.key} />
+        <RelatedContent data={category[itemObject.current.key].filter(item=>item.eid!==eid)} section={section} />
       </PlayTemplate>
       <Footer data={data} />
     </>

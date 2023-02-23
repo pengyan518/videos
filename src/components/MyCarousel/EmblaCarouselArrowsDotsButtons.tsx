@@ -30,7 +30,7 @@ export const PrevButton: React.FC<PrevNextButtonPropType> = (props) => {
 
   return (
     <button
-      className={`rounded-full p-3 bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white absolute flex items-center justify-center top-1/2 translate-y-[-50%] cursor-pointer z-10 w-12 h-12  left-[-0.6rem] ${!enabled?'disabled:opacity-30 cursor-default':''}`}
+      className={`rounded-full p-3 bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white absolute flex items-center justify-center top-1/2 translate-y-[-50%] cursor-pointer z-10 w-12 h-12  left-[-0.6rem] ${!enabled?'disabled:opacity-0 cursor-default':''}`}
       onClick={onClick}
       disabled={!enabled}
     >
@@ -46,7 +46,7 @@ export const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
   // @ts-ignore
   return (
     <button
-      className={`rounded-full p-3 bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white absolute flex items-center justify-center top-1/2 translate-y-[-50%] cursor-pointer z-10 w-12 h-12 right-[0] ${!enabled?'disabled:opacity-30 cursor-default':''}`}
+      className={`rounded-full p-3 bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white absolute flex items-center justify-center top-1/2 translate-y-[-50%] cursor-pointer z-10 w-12 h-12 right-[0] ${!enabled?'disabled:opacity-0 cursor-default':''}`}
       onClick={onClick}
       disabled={!enabled}
     >
