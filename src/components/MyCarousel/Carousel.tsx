@@ -10,9 +10,10 @@ export type RelatedContentProps = {
   className: string
   children: React.ReactNode
   header?: React.ReactNode
+  buttonClass?: string
 }
 
-export default function Carousel({className, children, header}: RelatedContentProps) {
+export default function Carousel({className, children, header, buttonClass}: RelatedContentProps) {
   const {
     content: {langCode},
   } = useAppSelector((state: RootState) => state.intro)
@@ -70,8 +71,8 @@ export default function Carousel({className, children, header}: RelatedContentPr
         </div>
         {matches && (
           <>
-            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} buttonClass={buttonClass} />
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} buttonClass={buttonClass} />
           </>
         )}
       </div>

@@ -10,6 +10,7 @@ import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
 import {Gradient, HeroDescription} from './styles'
 import {ChevronRight} from '../icons'
+import TimeStamp from "./TimeStamp";
 
 export type FeaturedProps = {
   // items: any[]
@@ -62,13 +63,14 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                         isHover ? 'opacity-100' : 'opacity-90'
                       }`}
                     />
-                    <div className="flex items-center divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10">
+                    <div className="flex items-center divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10 w-[86%]">
                       <div className="font-bold md:whitespace-nowrap">{hero.title}</div>
                       <HeroDescription
                         className="pl-4 rtl:pl-0 rtl:pr-4 line-clamp-1"
                         dangerouslySetInnerHTML={{__html: hero.descriptionLong}}
                       />
                     </div>
+                    <TimeStamp onDemandLink={myItem.onDemandLink} length={myItem.length} className='m-[1.2rem]' />
                   </div>
                 </>
               )}
@@ -104,7 +106,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
             })}
         </div>
         <div />
-        <div className="cursor-pointer font-bold py-4 flex items-center gap-2 hover:no-underline justify-end lg:justify-start" onClick={handleClick}>
+        <div className="cursor-pointer font-bold py-4 flex items-center gap-2 hover:no-underline" onClick={handleClick}>
           <span className="mt-[-2px]">{translation.More}</span>
           {/* @ts-ignore */}
           <ChevronRight className="w4 h-4" />

@@ -7,6 +7,7 @@ import ThumbItem from '../Thumb/ThumbItem'
 import Wrapper from '../templates/Wrapper'
 import {ScrollWrapper} from './styles'
 import Carousel from '../MyCarousel/Carousel'
+import TimeStamp from '../templates/TimeStamp'
 
 export type FeaturedProps = {
   data: MainProps
@@ -23,18 +24,20 @@ export default function EditorsPick({data}: FeaturedProps) {
       <Wrapper className="innerPaddingAlignHeader">
         <div className="uppercase text-white py-4">{translation.Featured}</div>
         {/* <ScrollWrapper className="overflow-x-scroll"> */}
-          {/* <div className="flex md:grid md:grid-flow-col md:auto-cols-max gap-4 w-[900px] md:w-auto"> */}
-            <Carousel className="flex-[0_0_70%] md:flex-[0_0_32.5%] last:mr-4">
-              {itemsEditorsPick.map(item => {
-                const {descriptionLong, title: itemTitle} = item
-                return (
-                  <div key={item.id}>
-                    <ThumbItem item={item} sectionName="featured" showTitle />
-                  </div>
-                )
-              })}
-            </Carousel>
-          {/* </div> */}
+        {/* <div className="flex md:grid md:grid-flow-col md:auto-cols-max gap-4 w-[900px] md:w-auto"> */}
+        <Carousel
+          className="flex-[0_0_70%] md:flex-[0_0_32.5%] last:mr-4"
+          buttonClass="bg-[#3f362f] hover:bg-[#a59b92] text-[#6c635c] hover:text-[#745c36]">
+          {itemsEditorsPick.map(item => {
+            const {descriptionLong, title: itemTitle} = item
+            return (
+              <div className="relative" key={item.id}>
+                <ThumbItem item={item} sectionName="featured" showTitle />
+              </div>
+            )
+          })}
+        </Carousel>
+        {/* </div> */}
         {/* </ScrollWrapper> */}
       </Wrapper>
     </Section>

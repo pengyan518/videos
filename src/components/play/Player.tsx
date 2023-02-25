@@ -27,7 +27,7 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
           <YoutubeEmbed embedId={embeddedVideoYT} />
         ) : (
           <div ref={ref}>
-            <VideoFrame poster={imageForVideo?.big ?? ''} videoSrc={videoLink} />
+            <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} />
           </div>
         )}
       </div>

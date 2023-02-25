@@ -30,6 +30,7 @@ export type VideoItemProps = {
   embeddedVideoVimeo: string
   embeddedVideoYT: string
   urlFriendlyName: string
+  length: string
   imageForVideo: {
     medium: string
     original: string

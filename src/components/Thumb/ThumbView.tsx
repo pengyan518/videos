@@ -6,6 +6,9 @@ import {VideoItemProps} from '../../types'
 import useHover from '../../hooks/useHover'
 import Play from '../icons/Play'
 import {ImgWrapper, Gradient} from './styles'
+import {useAppSelector} from '../../app/hooks'
+import {RootState} from '../../app/store'
+import TimeStamp from '../templates/TimeStamp'
 
 export type ItemProps = {
   item: VideoItemProps
@@ -15,6 +18,9 @@ export type ItemProps = {
 }
 
 export default function ThumbView({item, showIcon, showLargeThumb, showTitle}: ItemProps) {
+  const {
+    content: {langCode, translation},
+  } = useAppSelector((state: RootState) => state.intro)
   const hoverRef = useRef<HTMLDivElement>(null)
   const ref = useRef<HTMLDivElement>(null)
   const backdrop = useRef<HTMLDivElement>(null)
@@ -52,18 +58,26 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle}: I
         </Lazy>
       </ImgWrapper>
       <div className="absolute rounded-xl w-full h-full top-0 left-0 opacity-0 bg-slate-900/50 animate__animated" ref={backdrop} />
-      {showTitle && (
-        <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:px-4 md:py-3 items-end text-white`}>
-          <Gradient
-            className={`absolute rounded-b-xl w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] ${
-              isHover ? 'opacity-100' : 'opacity-90'
-            }`}
-          />
-          <div className="flex items-center text-[1rem] md:text-[1rem] text-white relative z-10">
-            <div className="font-bold">{item.title}</div>
-          </div>
-        </div>
+      {!showLargeThumb && (
+        <>
+          {showTitle ? (
+            <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:px-4 md:py-3 items-end text-white`}>
+              <Gradient
+                className={`absolute rounded-b-xl w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] ${
+                  isHover ? 'opacity-100' : 'opacity-90'
+                }`}
+              />
+              <div className="flex items-center text-[1rem] md:text-[1rem] text-white relative z-10 w-[89%] line-clamp-1">
+                <div className="font-bold">{item.title}</div>
+              </div>
+              <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />
+            </div>
+          ) : (
+            <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />
+          )}
+        </>
       )}
+
       <div
         ref={ref}
         className="absolute text-white w-12 h-12 top-1/2 left-1/2 opacity-0 translate-x-[-50%] translate-y-[-50%] animate__animated">
