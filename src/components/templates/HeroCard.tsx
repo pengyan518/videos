@@ -10,7 +10,7 @@ import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
 import {Gradient, HeroDescription, HeroTitle} from './styles'
 import {ChevronRight} from '../icons'
-import TimeStamp from "./TimeStamp";
+import TimeStamp from './TimeStamp'
 
 export type FeaturedProps = {
   // items: any[]
@@ -66,11 +66,12 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                     <div className="flex items-center divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10 w-[86%] transition-all">
                       <HeroTitle className="font-bold md:whitespace-nowrap">{hero.title}</HeroTitle>
                       <HeroDescription
-                        className={`pl-4 rtl:pl-0 rtl:pr-4 ${isHover?'':'line-clamp-1'}`}
+                        isHover={isHover}
+                        className={`pl-4 rtl:pl-0 rtl:pr-4 ${isHover ? 'max-h-[40em]' : 'max-h-[30em]'}`}
                         dangerouslySetInnerHTML={{__html: hero.descriptionLong}}
                       />
                     </div>
-                    <TimeStamp onDemandLink={myItem.onDemandLink} length={myItem.length} className='m-[0.6rem] md:m-[1.2rem]' />
+                    <TimeStamp onDemandLink={myItem.onDemandLink} length={myItem.length} className="m-[0.6rem] md:m-[1.2rem]" />
                   </div>
                 </>
               )}

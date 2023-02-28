@@ -1,14 +1,11 @@
-import styled from 'styled-components'
-import bg_sm from '../../assets/images/topArea__bg_sm.jpg'
-import {LangProps} from '../../types'
-import config from '../../config'
+import styled, {css} from 'styled-components'
 
 interface FigureProps {
   dataSrc: any
   dataLowSrc: any
 }
-interface ContainerProps {
-  dataMinHeight: number
+interface DescriptionProps {
+  isHover: boolean
 }
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div``
@@ -17,8 +14,22 @@ export const Gradient = styled.div`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 450ms;
 `
-export const HeroDescription = styled.div`
+export const HeroDescription = styled.div<DescriptionProps>`
   line-height: 1.2em;
+  transition: -webkit-line-clamp 0.3s cubic-bezier(.08,.82,.17,1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: ${({isHover}) => (isHover ? 40 : 1)};
+  
+      ${({isHover}) =>
+      isHover
+        ? css`
+            
+          `
+        : css`
+            
+          `}
   
   @media (min-width: 768px) {
     display: -webkit-box;
