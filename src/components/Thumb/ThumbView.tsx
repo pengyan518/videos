@@ -15,9 +15,10 @@ export type ItemProps = {
   showIcon?: boolean
   showLargeThumb?: boolean
   showTitle?: boolean
+  parentHover?: boolean
 }
 
-export default function ThumbView({item, showIcon, showLargeThumb, showTitle}: ItemProps) {
+export default function ThumbView({item, showIcon, showLargeThumb, showTitle, parentHover}: ItemProps) {
   const {
     content: {langCode, translation},
   } = useAppSelector((state: RootState) => state.intro)
@@ -26,9 +27,11 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle}: I
   const backdrop = useRef<HTMLDivElement>(null)
   const isHover = useHover(hoverRef)
 
+  const hoverEffect = showLargeThumb ? parentHover : isHover
+
   useEffect(() => {
     if (showIcon) {
-      if (isHover) {
+      if (hoverEffect) {
         requestTimeout(() => ref.current && ref.current.classList.add('animate__fadeIn'), 0)
         requestTimeout(() => backdrop.current && backdrop.current.classList.add('animate__fadeIn'), 0)
       } else {
@@ -44,7 +47,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle}: I
         if (ref.current && ref.current.classList.contains('animate__fadeOut')) ref.current.classList.remove('animate__fadeOut')
       }, 0)
     }
-  }, [isHover, showIcon])
+  }, [hoverEffect, showIcon])
 
   return (
     <div className="relative" ref={hoverRef}>
@@ -67,10 +70,13 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle}: I
                   isHover ? 'opacity-100' : 'opacity-90'
                 }`}
               />
-              <div className="flex items-center text-[1rem] md:text-[1rem] text-white relative z-10 w-[89%] line-clamp-1">
+              <div
+                className={`flex items-center text-[0.75rem] md:text-[1rem] text-white relative z-10 ${
+                  item.onDemandLink ? 'w-[70%] md:w-[89%]' : 'w-[80%] md:w-[89%]'
+                }  line-clamp-1`}>
                 <div className="font-bold">{item.title}</div>
               </div>
-              <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />
+              <TimeStamp onDemandLink={item.onDemandLink} length={item.length} className="m-[0.5rem] md:m-[0.75rem]" />
             </div>
           ) : (
             <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />

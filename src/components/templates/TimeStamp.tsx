@@ -9,7 +9,7 @@ export type ItemProps = {
   className?: string
 }
 
-export default function TimeStamp({onDemandLink, length, className = 'm-[0.75rem]'}: ItemProps) {
+export default function TimeStamp({onDemandLink, length, className = 'm-[0.5rem] md:m-[0.75rem]'}: ItemProps) {
   const {
     content: {langCode, translation},
   } = useAppSelector((state: RootState) => state.intro)

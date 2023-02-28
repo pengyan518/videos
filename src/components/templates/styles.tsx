@@ -11,29 +11,32 @@ interface ContainerProps {
   dataMinHeight: number
 }
 // eslint-disable-next-line import/prefer-default-export
-export const Container = styled.div`
-`
+export const Container = styled.div``
 export const Gradient = styled.div`
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 450ms;
 `
 export const HeroDescription = styled.div`
-  @media (min-width:768px) {
+  line-height: 1.2em;
+  
+  @media (min-width: 768px) {
     display: -webkit-box;
+    //display: block;
   }
-  @media (max-width:767px) {
+  @media (max-width: 767px) {
     display: none !important;
   }
 `
-// export const Header = styled.div<LangProps>`
-//    br {
-//     display: none;
-//     @media (min-width: ${({langCode}) => `${config.cnLang.includes(langCode) ? '1600' : '1400'}`}px) {
-//       display: block;
-//     }
-//   }
-// `
+export const HeroTitle = styled.div`
+  @media (max-width: 767px) {
+    width: 85%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+`
 // export const Figure = styled.div<FigureProps>`
 //   &.progressive--not-loaded {
 //     background-image: ${({dataLowSrc}) => `url(${dataLowSrc})`};
