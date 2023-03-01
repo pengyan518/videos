@@ -1,27 +1,40 @@
-import React, {forwardRef, useEffect, useRef} from 'react'
+import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import {Link} from 'react-router-dom'
 import Vimeo from '@u-wave/react-vimeo'
+import {Skeleton} from '@mui/material'
 
 import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
-import Wrapper from '../templates/Wrapper'
 import {PlayerWrapper} from './styles'
-import useVideoDimensions from '../../hooks/useVideoDimensions'
+import Loading from '../loading'
 
 export type PlayProps = {
   item: any
 }
 
 function Player({item}: PlayProps, ref: React.Ref<any> | null) {
+  const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo} = item
+  // const loading = useRef<HTMLDivElement | null>(null)
+  const hideLoading = useCallback(() => {
+    // if (loading.current) loading.current.style.display = 'none'
+    setIsLoading(false)
+  }, [])
 
   return (
     <div className="">
       <div>
         {/* eslint-disable-next-line no-nested-ternary */}
         {embeddedVideoVimeo !== '' ? (
-          <div className="w-full">
-            <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" autoplay />
+          <div className="w-full relative">
+            {isLoading && (
+              <div className="aspect-w-16 aspect-h-9">
+                <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
+              </div>
+            )}
+
+            <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={hideLoading} autoplay />
+            {/*  <Loading height="770px" width="100%" color="#1976d2" background="#000" /> */}
           </div>
         ) : embeddedVideoYT !== '' ? (
           <YoutubeEmbed embedId={embeddedVideoYT} />
