@@ -32,7 +32,6 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
                 <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
               </div>
             )}
-
             <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={hideLoading} autoplay />
             {/*  <Loading height="770px" width="100%" color="#1976d2" background="#000" /> */}
           </div>

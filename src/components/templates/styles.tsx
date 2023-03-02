@@ -5,7 +5,7 @@ interface FigureProps {
   dataLowSrc: any
 }
 interface DescriptionProps {
-  isHover: boolean
+  isHover?: boolean
 }
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div``
@@ -21,15 +21,6 @@ export const HeroDescription = styled.div<DescriptionProps>`
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: ${({isHover}) => (isHover ? 40 : 1)};
-  
-      ${({isHover}) =>
-      isHover
-        ? css`
-            
-          `
-        : css`
-            
-          `}
   
   @media (min-width: 768px) {
     display: -webkit-box;
