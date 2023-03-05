@@ -17,6 +17,7 @@ export default Object.freeze({
   artistAPI: `${prefix}/artists/view/api/e/`,
   videosAPI: `${prefix}/${controller}/api`,
   oneVideo: `${prefix}/${controller}/fetch-one-video/eid/`,
+  updateCounter: `${prefix}/${controller}/update-counter/eid/`,
   loginLangCode,
   cnLang: ['zh-tw', 'zh-cn'],
   xlmns: 'http://www.w3.org/2000/svg',

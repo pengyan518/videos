@@ -10,7 +10,8 @@ import TopInfo from '../../components/templates/TopInfo'
 import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
 import TopBreadcrumbs from '../../components/TopBreadcrumbs'
 import Footer from '../../components/footer/Footer'
-import Wrapper from "../../components/templates/Wrapper";
+import {setShowPopular} from './categorySlice'
+import sortPopular from '../../utils/sortPopular'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -23,7 +24,7 @@ export default function Category({data}: CategoryProps) {
   const {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
-  const {currentCategory, status} = useAppSelector((state: RootState) => state.category)
+  const {currentCategory, showPopular} = useAppSelector((state: RootState) => state.category)
   const dispatch = useAppDispatch()
   const {section} = useParams()
   const myCurrentSection = useRef(null)
@@ -44,20 +45,27 @@ export default function Category({data}: CategoryProps) {
 
   // @ts-ignore
   const categoryViews = sectionMap[section].content.map((item: string) => {
+    // @ts-ignore
+    const cContent: any[] = [...category[item]]
+    const categoryContent: any[] = showPopular ? cContent.sort(sortPopular) : cContent
+
     return (
       <>
         {/* @ts-ignore */}
-        {category[item].length > 0 && (
-          <div id={item} className="text-[#524941] uppercase pt-8 pb-4 block">
-            {translation[item]}
+        {categoryContent.length > 0 && (
+          <div className="grid">
+            <div id={item} className="text-[#524941] uppercase pt-8 pb-4">
+              {translation[item]}
+            </div>
+            <div onClick={() => dispatch(setShowPopular(true))}>Popular</div>
           </div>
         )}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2" key={item}>
           {
             // @ts-ignore
-            category[item].map(element => {
-              const {eid, descriptionLong, title} = element
+            categoryContent.map(element => {
+              const {eid} = element
               return (
                 <div key={eid} className="pb-4 md:pb-8">
                   {/* @ts-ignore */}
@@ -84,7 +92,12 @@ export default function Category({data}: CategoryProps) {
   // @ts-ignore
   return (
     <div className="overflow-x-hidden">
-      <TopInfo poster={sectionMap[section].poster} childrenDiv={<Inner />} breadcrumb={<BreadcrumbsWrapper />} className={`videosCategory__${section}`} />
+      <TopInfo
+        poster={sectionMap[section].poster}
+        childrenDiv={<Inner />}
+        breadcrumb={<BreadcrumbsWrapper />}
+        className={`videosCategory__${section}`}
+      />
       <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto">
         <Section xPadding="px-0">
           <div className="innerPaddingAlignHeader">{categoryViews}</div>

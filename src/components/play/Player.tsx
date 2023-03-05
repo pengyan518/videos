@@ -1,12 +1,13 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
-import {Link} from 'react-router-dom'
+// import axios from 'axios'
 import Vimeo from '@u-wave/react-vimeo'
 import {Skeleton} from '@mui/material'
 
 import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
-import {PlayerWrapper} from './styles'
-import Loading from '../loading'
+// import {PlayerWrapper} from './styles'
+// import Loading from '../loading'
+// import config from "../../config";
 
 export type PlayProps = {
   item: any
@@ -14,12 +15,17 @@ export type PlayProps = {
 
 function Player({item}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
-  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo} = item
+  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const loading = useRef<HTMLDivElement | null>(null)
   const hideLoading = useCallback(() => {
     // if (loading.current) loading.current.style.display = 'none'
     setIsLoading(false)
   }, [])
+
+  // useEffect(() => {
+  //   axios.get(`${config.updateCounter}${eid}`)
+  //   console.debug(eid)
+  // }, [eid])
 
   return (
     <div className="">

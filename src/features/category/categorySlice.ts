@@ -5,11 +5,13 @@ import config from '../../config'
 
 export interface CategoryState {
   currentCategory: any[] | null
+  showPopular: boolean
   status: 'idle' | 'loading' | 'failed' | 'initial'
 }
 
 const initialState: CategoryState = {
   currentCategory: null,
+  showPopular: false,
   status: 'initial',
 }
 
@@ -31,6 +33,9 @@ export const categorySlice = createSlice({
   reducers: {
     setCurrentCategory: (state, action) => {
       state.currentCategory = action.payload
+    },
+    setShowPopular: (state, action) => {
+      state.showPopular = action.payload
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     // incrementByAmount: (state, action: PayloadAction<number>) => {
@@ -54,7 +59,7 @@ export const categorySlice = createSlice({
   // },
 })
 
-export const {setCurrentCategory} = categorySlice.actions
+export const {setCurrentCategory, setShowPopular} = categorySlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

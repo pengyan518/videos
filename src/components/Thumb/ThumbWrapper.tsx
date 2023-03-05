@@ -1,5 +1,5 @@
-import React, {ReactNode, useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, {ReactNode, useCallback, useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import {styled} from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
@@ -11,6 +11,7 @@ import {RootState} from '../../app/store'
 import OnDemandPopup from '../OnDemandPopup/OnDemandPopup'
 import {VideoItemProps} from '../../types'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
+import axios from 'axios'
 
 export type ItemProps = {
   item: VideoItemProps
@@ -33,6 +34,7 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
     content: {category, translation},
   } = useAppSelector((state: RootState) => state.intro)
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
 
   const {
     onDemandLink,
@@ -43,8 +45,14 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
   } = item
   const handleClickOpen = () => {
     setOpen(true)
+    axios.get(`${config.updateCounter}${eid}`)
   }
   const seoUrl = urlFriendlyName || getFriendlyUrl(title)
+
+  const handleClickVideo = useCallback(() => {
+    navigate(`/${config.controller}/${sectionName}/play/${eid}/${seoUrl}.html`)
+    axios.get(`${config.updateCounter}${eid}`)
+  }, [eid, navigate, sectionName, seoUrl])
 
   return (
     <>
@@ -56,9 +64,9 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
           <OnDemandPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
       ) : (
-        <Link className={className} to={`/${config.controller}/${sectionName}/play/${eid}/${seoUrl}.html`}>
+        <a className={className} onClick={handleClickVideo}>
           {children(item)}
-        </Link>
+        </a>
       )}
     </>
   )
