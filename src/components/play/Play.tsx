@@ -28,7 +28,7 @@ export default function Play({data}: PlayProps) {
 
   const player = useRef(null)
 
-  const breakForOfLoop = (arrayToBreak: {[s: string]: unknown} | ArrayLike<unknown>) => {
+  const breakForOfLoop = (arrayToBreak: {[s: string]: any}) => {
     for (const [key, categoryContent] of Object.entries(arrayToBreak).filter(([k]) => k !== 'itemsEditorsPick')) {
       // @ts-ignore
       for (const element of categoryContent) {

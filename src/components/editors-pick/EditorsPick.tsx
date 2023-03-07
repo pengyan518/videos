@@ -15,7 +15,7 @@ export type FeaturedProps = {
 export default function EditorsPick({data}: FeaturedProps) {
   const {
     translation,
-    category: {itemsFeatured, itemsShenyunIntroduction, itemsShenyunTrailers, itemsReviews, itemsEditorsPick},
+    category: {itemsEditorsPick},
   } = data
   if (itemsEditorsPick.length === 0) return null
   return (

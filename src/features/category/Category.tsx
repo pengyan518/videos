@@ -12,6 +12,7 @@ import TopBreadcrumbs from '../../components/TopBreadcrumbs'
 import Footer from '../../components/footer/Footer'
 import {setShowPopular} from './categorySlice'
 import sortPopular from '../../utils/sortPopular'
+import CategorySection from './CategorySection'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
@@ -43,41 +44,8 @@ export default function Category({data}: CategoryProps) {
     }
   }, [currentCategory])
 
-  // @ts-ignore
-  const categoryViews = sectionMap[section].content.map((item: string) => {
-    // @ts-ignore
-    const cContent: any[] = [...category[item]]
-    const categoryContent: any[] = showPopular ? cContent.sort(sortPopular) : cContent
 
-    return (
-      <>
-        {/* @ts-ignore */}
-        {categoryContent.length > 0 && (
-          <div className="grid">
-            <div id={item} className="text-[#524941] uppercase pt-8 pb-4">
-              {translation[item]}
-            </div>
-            <div onClick={() => dispatch(setShowPopular(true))}>Popular</div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2" key={item}>
-          {
-            // @ts-ignore
-            categoryContent.map(element => {
-              const {eid} = element
-              return (
-                <div key={eid} className="pb-4 md:pb-8">
-                  {/* @ts-ignore */}
-                  <ThumbItemWithCaption item={element} sectionName={section} />
-                </div>
-              )
-            })
-          }
-        </div>
-      </>
-    )
-  })
+  const categoryViews = sectionMap[section].content.map((item: string) => <CategorySection item={item} category={category} key={item} />)
 
   const Inner = () => (
     <div className="innerPaddingAlignHeader">

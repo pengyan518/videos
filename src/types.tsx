@@ -4,20 +4,22 @@ interface ImageProps {
   original: string
 }
 
+export interface CategoryProps {
+  itemsFeatured: any[]
+  itemsLatest: any[]
+  itemsShenyunIntroduction: any[]
+  itemsShenyunTrailers: any[]
+  itemsArtists: any[]
+  itemsPersecution: any[]
+  itemsStartsOfShenyun: any[]
+  itemsMorefromArtists: any[]
+  itemsEditorsPick: any[]
+  itemsReviews: any[]
+  itemsSyso: any[]
+}
+
 export interface MainProps {
-  category: {
-    itemsFeatured: any[]
-    itemsLatest: any[]
-    itemsShenyunIntroduction: any[]
-    itemsShenyunTrailers: any[]
-    itemsArtists: any[]
-    itemsPersecution: any[]
-    itemsStartsOfShenyun: any[]
-    itemsMorefromArtists: any[]
-    itemsEditorsPick: any[]
-    itemsReviews: any[]
-    itemsSyso: any[]
-  }
+  category: CategoryProps
   translation: any
   langCode: string
 }
