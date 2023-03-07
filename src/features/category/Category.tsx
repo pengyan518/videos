@@ -45,7 +45,7 @@ export default function Category({data}: CategoryProps) {
   }, [currentCategory])
 
 
-  const categoryViews = sectionMap[section].content.map((item: string) => <CategorySection item={item} category={category} key={item} />)
+  const categoryViews = sectionMap[section].content.map((item: any) => <CategorySection item={item} category={category} key={item} />)
 
   const Inner = () => (
     <div className="innerPaddingAlignHeader">

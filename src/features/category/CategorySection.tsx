@@ -1,42 +1,27 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 
-import {MainProps} from '../../types'
+import {MainProps, CategoryProps} from '../../types'
 import config, {sectionMap} from '../../config'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
-import sortPopular from '../../utils/sortPopular'
+// import sortPopular from '../../utils/sortPopular'
+import useSortPopular from '../../hooks/useSortPopular'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
-export type CategoryProps = {
-  item: string
-  category: any
+export type CategoryProp = {
+  item: keyof CategoryProps
+  category: CategoryProps
 }
 
-export default function CategorySection({item, category}: CategoryProps) {
+export default function CategorySection({item, category}: CategoryProp) {
   const {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
-  const cContent: any[] = useMemo(()=>([...category[item]]), [category, item])
-  const popularContent: any[] = useMemo(()=>([...[...cContent].sort(sortPopular)]), [cContent])
-  const [popularView, setShowPopularView] = useState<boolean>(false)
-  const [content, setContent] = useState(cContent)
 
   const {section} = useParams()
-
-  const handleClick = useCallback((show: boolean | ((prevState: boolean) => boolean)) =>()=> {
-    return setShowPopularView(show)
-  }, [])
-
-  useEffect(()=>{
-    if(popularView) {
-      // setContent([...cContent].sort(sortPopular))
-      setContent(popularContent)
-    } else {
-      setContent(cContent)
-    }
-  }, [cContent, popularContent, popularView])
+  const {handleClick, content} = useSortPopular({categoryData: category[item]})
 
   return (
     <>
