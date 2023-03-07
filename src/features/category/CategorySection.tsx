@@ -31,8 +31,8 @@ export default function CategorySection({item, category}: CategoryProp) {
           <div id={item} className="text-[#524941] uppercase pt-8 pb-4">
             {translation[item]}
           </div>
-          <div onClick={handleClick(false)}>Recently uploaded</div>
-          <div onClick={handleClick(true)}>Popular</div>
+          <div onClick={handleClick(false)}>{translation['Recently uploaded']}</div>
+          <div onClick={handleClick(true)}>{translation.Popular}</div>
         </div>
       )}
 

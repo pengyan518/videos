@@ -26,19 +26,14 @@ const TopArea: React.FC<IProps> = () => {
   }
 
   const Inner = () => (
-    <div className="innerPaddingAlignHeader">
-      <div className="flex flex-col md:flex-row gap-4 md:gap-16 items-center">
-        <HeaderText className="divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.2rem] mb-[61vw] sm:mb-[40vw] md:mb-0">
-          <span className="pr-4 rtl:pr-0 rtl:pl-4 font-bold">{translation['Shen Yun—Who We Are']}</span>
-          <span className="pl-4 rtl:pr-4 rtl:pl-0">{translation.video_index_shenyun_intro_text}</span>
-        </HeaderText>
-        <div className="flex justify-center">
-          {/* @ts-ignore */}
-          <Button as="a" onClick={handleTaget} filled>
-            <ArrowRightIcon sx={{fontSize: 40}} />
-            {translation['Watch the Full Video']}
-          </Button>
-        </div>
+    <div className="innerPaddingAlignHeader text-center w-full">
+      <div className="inline-block text-center mx-auto pb-10">
+        <div className="font-bold text-[1.3rem] md:text-[1.6rem] mb-6">{translation['Shen Yun—Who We Are']}</div>
+        {/* @ts-ignore */}
+        <Button as="a" onClick={handleTaget} filled>
+          <ArrowRightIcon sx={{fontSize: 40}} />
+          {translation['Watch the Full Video']}
+        </Button>
       </div>
     </div>
   )
@@ -46,7 +41,12 @@ const TopArea: React.FC<IProps> = () => {
   return (
     <Container className="w-full md:px-0 grid">
       {/* http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 */}
-      <TopInfo videoLink={sectionMap['about-shen-yun'].banner} videoLinkMobile={sectionMap['about-shen-yun'].bannerMobile} poster={home_bg} childrenDiv={<Inner />} />
+      <TopInfo
+        videoLink={sectionMap['about-shen-yun'].banner}
+        videoLinkMobile={sectionMap['about-shen-yun'].bannerMobile}
+        poster={home_bg}
+        childrenDiv={<Inner />}
+      />
     </Container>
   )
 }

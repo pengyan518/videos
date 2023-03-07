@@ -20,15 +20,30 @@ export default function EditorsPick({data}: FeaturedProps) {
   } = data
   if (itemsEditorsPick.length === 0) return null
 
+  const activeClass = "text-white bg-gray-900 hover:bg-gray-800 focus:shadow-outline focus:outline-none"
+  const inActiveClass = "text-gray-600 bg-white border border-gray-200 hover:bg-gray-200 focus:outline-none focus:shadow-none"
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {handleClick, content} = useSortPopular({categoryData: itemsEditorsPick})
+  const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsEditorsPick})
   return (
     <Section className="bg-[#524941]" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
       <Wrapper className="innerPaddingAlignHeader">
-        <div className="uppercase text-white py-4">
-          {translation.Featured}
-          <div onClick={handleClick(false)}>Recently uploaded</div>
-          <div onClick={handleClick(true)}>Popular</div>
+        <div className="py-4 flex justify-between">
+          <span className="uppercase text-white">{translation.Featured}</span>
+          <div className="flex gap-4">
+            <div
+              className={`inline-flex cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition duration-200 shadow-sm rounded-md ${activeTab==='latest'?activeClass:inActiveClass}`}
+              data-label="latest"
+              onClick={handleClick(false)}>
+              {translation['Recently uploaded']}
+            </div>
+            <div
+              className={`inline-flex cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition duration-200 shadow-sm rounded-md ${activeTab==='popular'?activeClass:inActiveClass}`}
+              data-label="popular"
+              onClick={handleClick(true)}>
+              {translation.Popular}
+            </div>
+          </div>
         </div>
         {/* <ScrollWrapper className="overflow-x-scroll"> */}
         {/* <div className="flex md:grid md:grid-flow-col md:auto-cols-max gap-4 w-[900px] md:w-auto"> */}
