@@ -28,7 +28,7 @@ function useSortPopular({categoryData}: SortPopularProps): SortPopularResultProp
   const handleClick = useCallback(
     (show: boolean | ((prevState: boolean) => boolean)) =>
       ({target}: {target: {getAttribute: (arg: string) => any}}) => {
-        const label = target.getAttribute('data-label')
+        const label = target.getAttribute('label')
         setShowPopularView(show)
         setActiveTab(label)
       },

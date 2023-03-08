@@ -1,11 +1,11 @@
 import React, {ReactNode, useCallback} from 'react'
-import useSortPopular from '../../hooks/useSortPopular'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 
-type FilterbuttonProps = {
+type ButtonContainerProps = {
   children?: ReactNode
-  itemsEditorsPick: any[]
+  handleClick: any
+  activeTab: any
 }
 type IProps = {
   text: string
@@ -13,14 +13,12 @@ type IProps = {
   myClassName?: any
   label: string
 }
-const ButtonContainer = ({itemsEditorsPick, children}: FilterbuttonProps) => {
+
+const ButtonContainer = ({handleClick, activeTab, children}: ButtonContainerProps) => {
   const activeClass = 'text-white bg-gray-900 hover:bg-gray-800 focus:shadow-outline focus:outline-none'
   const inActiveClass = 'text-gray-600 bg-white border border-gray-200 hover:bg-gray-200 focus:outline-none focus:shadow-none'
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsEditorsPick})
-
-  const myClassName = (child: {props: {label: any}}) => {
+  const getClassName = (child: {props: {label: any}}) => {
     return `inline-flex cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition duration-200 shadow-sm rounded-md ${
       activeTab === child.props.label ? activeClass : inActiveClass
     }`
@@ -30,7 +28,7 @@ const ButtonContainer = ({itemsEditorsPick, children}: FilterbuttonProps) => {
     <div className="flex gap-4">
       {React.Children.map(children, (child: any) => {
         return React.cloneElement(child as React.ReactElement<any>, {
-          myClassName: myClassName(child),
+          className: getClassName(child),
           onClick: handleClick(child.props.showPopularView),
         })
       })}
@@ -40,19 +38,19 @@ const ButtonContainer = ({itemsEditorsPick, children}: FilterbuttonProps) => {
 
 const TabItem = ({text, ...props}: IProps) => {
   return (
-    <a {...props} className={props.myClassName}>
+    <a {...props}>
       {text}
     </a>
   )
 }
 
-const FilterButton = ({itemsEditorsPick}: {itemsEditorsPick: any[]}) => {
+const FilterButton = ({handleClick, activeTab}: ButtonContainerProps) => {
   const {
-    content: {translation, langCode},
+    content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
 
   return (
-    <ButtonContainer itemsEditorsPick={itemsEditorsPick}>
+    <ButtonContainer handleClick={handleClick} activeTab={activeTab}>
       <TabItem label="latest" showPopularView={false} text={translation['Recently uploaded']} />
       <TabItem label="popular" showPopularView={true} text={translation.Popular} />
     </ButtonContainer>

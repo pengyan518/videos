@@ -8,6 +8,7 @@ import {RootState} from '../../app/store'
 import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
 // import sortPopular from '../../utils/sortPopular'
 import useSortPopular from '../../hooks/useSortPopular'
+import FilterButton from "../../components/FilterButton/FilterButton";
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProp = {
@@ -21,18 +22,17 @@ export default function CategorySection({item, category}: CategoryProp) {
   } = useAppSelector((state: RootState) => state.intro)
 
   const {section} = useParams()
-  const {handleClick, content} = useSortPopular({categoryData: category[item]})
+  const {handleClick, content, activeTab} = useSortPopular({categoryData: category[item]})
 
   return (
     <>
       {/* @ts-ignore */}
       {content.length > 0 && (
-        <div className="grid">
+        <div className="flex justify-between">
           <div id={item} className="text-[#524941] uppercase pt-8 pb-4">
             {translation[item]}
           </div>
-          <div onClick={handleClick(false)}>{translation['Recently uploaded']}</div>
-          <div onClick={handleClick(true)}>{translation.Popular}</div>
+          <FilterButton handleClick={handleClick} activeTab={activeTab} />
         </div>
       )}
 

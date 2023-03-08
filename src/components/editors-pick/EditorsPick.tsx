@@ -8,6 +8,7 @@ import Wrapper from '../templates/Wrapper'
 import {ScrollWrapper} from './styles'
 import Carousel from '../MyCarousel/Carousel'
 import useSortPopular from '../../hooks/useSortPopular'
+import FilterButton from "../FilterButton/FilterButton";
 
 export type FeaturedProps = {
   data: MainProps
@@ -30,24 +31,7 @@ export default function EditorsPick({data}: FeaturedProps) {
       <Wrapper className="innerPaddingAlignHeader">
         <div className="py-4 flex justify-between">
           <span className="uppercase text-white">{translation.Featured}</span>
-          <div className="flex gap-4">
-            <div
-              className={`inline-flex cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition duration-200 shadow-sm rounded-md ${
-                activeTab === 'latest' ? activeClass : inActiveClass
-              }`}
-              data-label="latest"
-              onClick={handleClick(false)}>
-              {translation['Recently uploaded']}
-            </div>
-            <div
-              className={`inline-flex cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition duration-200 shadow-sm rounded-md ${
-                activeTab === 'popular' ? activeClass : inActiveClass
-              }`}
-              data-label="popular"
-              onClick={handleClick(true)}>
-              {translation.Popular}
-            </div>
-          </div>
+          <FilterButton handleClick={handleClick} activeTab={activeTab} />
         </div>
 
         <Carousel
