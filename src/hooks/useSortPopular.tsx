@@ -1,8 +1,6 @@
 import {useCallback, useEffect, useMemo, useState} from 'react'
-import useEventListener from './useEventListener'
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect'
 import sortPopular from '../utils/sortPopular'
-import {CategoryProps} from '../types'
+// import {CategoryProps} from '../types'
 
 // import { useEventListener, useIsomorphicLayoutEffect } from 'usehooks-ts'
 
@@ -23,23 +21,18 @@ function useSortPopular({categoryData}: SortPopularProps): SortPopularResultProp
   const cContent: any[] = useMemo(() => [...categoryData], [categoryData])
   const popularContent: any[] = useMemo(() => [...[...cContent].sort(sortPopular)], [cContent])
   const [popularView, setShowPopularView] = useState<boolean>(false)
-  const [content, setContent] = useState(cContent)
-  const [activeTab, setActiveTab] = useState('latest')
-  const [active, setActive] = useState(false)
+  const [content, setContent] = useState<any[]>(cContent)
+  const [activeTab, setActiveTab] = useState<string>('latest')
+  // const [active, setActive] = useState(false)
 
   const handleClick = useCallback(
     (show: boolean | ((prevState: boolean) => boolean)) =>
-      ({target}:{target:any}) => {
+      ({target}: {target: {getAttribute: (arg: string) => any}}) => {
         const label = target.getAttribute('data-label')
         setShowPopularView(show)
         setActiveTab(label)
-        // if (activeTab === label) {
-        //   setActive(true)
-        // } else {
-        //   setActive(false)
-        // }
       },
-    [activeTab]
+    []
   )
 
   useEffect(() => {
