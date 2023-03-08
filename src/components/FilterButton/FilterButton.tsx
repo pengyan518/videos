@@ -15,17 +15,17 @@ type IProps = {
 }
 
 const ButtonContainer = ({handleClick, activeTab, children}: ButtonContainerProps) => {
-  const activeClass = 'text-white bg-gray-900 hover:bg-gray-800 focus:shadow-outline focus:outline-none'
-  const inActiveClass = 'text-gray-600 bg-white border border-gray-200 hover:bg-gray-200 focus:outline-none focus:shadow-none'
+  const activeClass = 'text-white hover:text-white hover:no-underline bg-gray-900 hover:bg-gray-800 focus:shadow-outline focus:outline-none'
+  const inActiveClass = 'text-gray-600 bg-white hover:bg-gray-200 hover:no-underline focus:outline-none focus:shadow-none'
 
   const getClassName = (child: {props: {label: any}}) => {
-    return `inline-flex cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition duration-200 shadow-sm rounded-md ${
+    return `inline-flex cursor-pointer items-center justify-center whitespace-nowrap px-4 py-[0.45rem] text-[0.85rem] font-medium transition duration-200 z-depth-1 rounded-md ${
       activeTab === child.props.label ? activeClass : inActiveClass
     }`
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3 items-center mr-4">
       {React.Children.map(children, (child: any) => {
         return React.cloneElement(child as React.ReactElement<any>, {
           className: getClassName(child),

@@ -28,7 +28,7 @@ const TopArea: React.FC<IProps> = () => {
   const Inner = () => (
     <div className="innerPaddingAlignHeader text-center w-full">
       <div className="inline-block text-center mx-auto pb-10">
-        <div className="font-bold text-[1.3rem] md:text-[1.6rem] mb-6">{translation['Shen Yun—Who We Are']}</div>
+        <div className="font-bold text-[1.3rem] md:text-[1.6rem] mb-6 text-shadow-white">{translation['Shen Yun—Who We Are']}</div>
         {/* @ts-ignore */}
         <Button as="a" onClick={handleTaget} filled>
           <ArrowRightIcon sx={{fontSize: 40}} />

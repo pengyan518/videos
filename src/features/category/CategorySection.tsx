@@ -28,8 +28,8 @@ export default function CategorySection({item, category}: CategoryProp) {
     <>
       {/* @ts-ignore */}
       {content.length > 0 && (
-        <div className="flex justify-between">
-          <div id={item} className="text-[#524941] uppercase pt-8 pb-4">
+        <div className="block md:flex justify-between pt-8 pb-4">
+          <div id={item} className="text-[#524941] uppercase pb-2 md:pb-0">
             {translation[item]}
           </div>
           <FilterButton handleClick={handleClick} activeTab={activeTab} />

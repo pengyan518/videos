@@ -21,16 +21,14 @@ export default function EditorsPick({data}: FeaturedProps) {
   } = data
   if (itemsEditorsPick.length === 0) return null
 
-  const activeClass = 'text-white bg-gray-900 hover:bg-gray-800 focus:shadow-outline focus:outline-none'
-  const inActiveClass = 'text-gray-600 bg-white border border-gray-200 hover:bg-gray-200 focus:outline-none focus:shadow-none'
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsEditorsPick})
   return (
     <Section className="bg-[#524941]" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
       <Wrapper className="innerPaddingAlignHeader">
-        <div className="py-4 flex justify-between">
-          <span className="uppercase text-white">{translation.Featured}</span>
+        <div className="py-3 block md:flex justify-between items-center">
+          <div className="uppercase text-white mb-2 md:mb-0">{translation.Featured}</div>
           <FilterButton handleClick={handleClick} activeTab={activeTab} />
         </div>
 
