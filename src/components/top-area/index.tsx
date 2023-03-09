@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback, useState, ChangeEvent, useRef} from 'react'
 import {useNavigate} from 'react-router-dom'
-import ArrowRightIcon from '@mui/icons-material/ArrowRight'
+// import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import {Container, HeaderText} from './styles'
@@ -9,6 +9,7 @@ import home_bg from '../../assets/images/home_bg.jpg'
 import {ContentProps, MainProps} from '../../types'
 import TopInfo from '../templates/TopInfo'
 import config, {sectionMap} from '../../config'
+import ArrowRightIcon from "../icons/ArrowRightIcon";
 
 interface IProps {
   data?: MainProps
@@ -31,7 +32,9 @@ const TopArea: React.FC<IProps> = () => {
         <div className="font-bold text-[1.3rem] md:text-[1.6rem] mb-6 text-shadow-white">{translation['Shen Yun—Who We Are']}</div>
         {/* @ts-ignore */}
         <Button as="a" onClick={handleTaget} filled>
-          <ArrowRightIcon sx={{fontSize: 40}} />
+          {/* <ArrowRightIcon sx={{fontSize: 40}} /> */}
+          {/* @ts-ignore */}
+          <ArrowRightIcon className="w-8 h-8 mt-[-2px]" />
           {translation['Watch the Full Video']}
         </Button>
       </div>
