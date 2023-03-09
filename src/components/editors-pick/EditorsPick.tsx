@@ -25,7 +25,7 @@ export default function EditorsPick({data}: FeaturedProps) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsEditorsPick})
   return (
-    <Section className="bg-[#524941]" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
+    <Section className="bg-[#706459]" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
       <Wrapper className="innerPaddingAlignHeader">
         <div className="py-3 block md:flex justify-between items-center">
           <div className="uppercase text-white mb-2 md:mb-0">{translation.Featured}</div>

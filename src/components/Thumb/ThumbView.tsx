@@ -64,14 +64,14 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
       {!showLargeThumb && (
         <>
           {showTitle ? (
-            <div className={`w-full flex absolute bottom-0 h-[8rem] md:h-[15rem] px-3 py-2 md:px-4 md:py-3 items-end text-white`}>
+            <div className={`w-full flex absolute bottom-0 h-[7rem] px-3 py-2 md:px-4 md:py-3 items-end text-white`}>
               <Gradient
-                className={`absolute rounded-b-xl w-full h-full left-0 bottom-0 h-[8rem] md:h-[15rem] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] ${
+                className={`absolute rounded-b-xl w-full h-full left-0 bottom-0 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.85)] ${
                   isHover ? 'opacity-100' : 'opacity-90'
                 }`}
               />
               <div
-                className={`flex items-center text-[0.75rem] md:text-[1rem] text-white relative z-10 ${
+                className={`flex items-center text-[0.75rem] md:text-[0.875rem] text-white relative z-10 ${
                   item.onDemandLink ? 'w-[70%] md:w-[89%]' : 'w-[80%] md:w-[89%]'
                 }  line-clamp-1`}>
                 <div className="font-bold">{item.title}</div>
