@@ -49,7 +49,7 @@ export default function Category({data}: CategoryProps) {
 
   const Inner = () => (
     <div className="innerPaddingAlignHeader">
-      <h2 className="text-4xl">{sectionMap[section].title}</h2>
+      <h2 className="text-4xl">{translation[sectionMap[section].title]}</h2>
     </div>
   )
   const BreadcrumbsWrapper = () => (

@@ -19,7 +19,7 @@ const ButtonContainer = ({handleClick, activeTab, children}: ButtonContainerProp
   const inActiveClass = 'text-gray-600 bg-white hover:bg-gray-200 hover:no-underline focus:outline-none focus:shadow-none'
 
   const getClassName = (child: {props: {label: any}}) => {
-    return `inline-flex cursor-pointer items-center justify-center whitespace-nowrap px-4 py-[0.45rem] text-[0.85rem] font-medium transition duration-200 z-depth-1 rounded-md ${
+    return `inline-flex cursor-pointer items-center justify-center whitespace-nowrap px-4 py-[0.45rem] text-[0.85rem] min-w-[82px] font-medium transition duration-200 z-depth-1 rounded-md ${
       activeTab === child.props.label ? activeClass : inActiveClass
     }`
   }
@@ -51,7 +51,7 @@ const FilterButton = ({handleClick, activeTab}: ButtonContainerProps) => {
 
   return (
     <ButtonContainer handleClick={handleClick} activeTab={activeTab}>
-      <TabItem label="latest" showPopularView={false} text={translation['Recently uploaded']} />
+      <TabItem label="latest" showPopularView={false} text={translation.Latest} />
       <TabItem label="popular" showPopularView={true} text={translation.Popular} />
     </ButtonContainer>
   )
