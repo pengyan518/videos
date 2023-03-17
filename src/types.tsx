@@ -16,6 +16,7 @@ export interface CategoryProps {
   itemsEditorsPick: any[]
   itemsReviews: any[]
   itemsSyso: any[]
+  itemsShorts: any[]
 }
 
 export interface MainProps {

@@ -2,18 +2,14 @@ import React, {useEffect, useRef} from 'react'
 import {Link, useParams} from 'react-router-dom'
 
 import {MainProps} from '../../types'
-import useUrlParameter from '../../hooks/useUrlParameter'
-import Player from './Player'
-import config from '../../config'
-import Section from '../templates/Section'
-import ThumbItem from '../Thumb/ThumbItem'
+
 import RelatedContent from '../related-content/RelatedContent'
-import ShareButton from '../ShareButton/ShareButton'
+
 import PlayTemplate from './PlayTemplate'
 import NoEidResult from './NoEidResult'
 import TopBreadcrumbs from '../TopBreadcrumbs'
 import Footer from '../footer/Footer'
-import Wrapper from '../templates/Wrapper'
+import ShortVideoPage from "../ShortVideoPage/ShortVideoPage";
 
 export type PlayProps = {
   data: MainProps
@@ -44,9 +40,13 @@ export default function Play({data}: PlayProps) {
   }
 
   useEffect(() => {
-    // @ts-ignore
-    player.current && player.current.scrollIntoView({block: 'start', inline: 'nearest'})
-  })
+    if(section !== 'shorts') {
+          // @ts-ignore
+      player.current && player.current.scrollIntoView({block: 'start', inline: 'nearest'})
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [section])
 
   if (breakForOfLoop(category))
     return (
@@ -57,6 +57,8 @@ export default function Play({data}: PlayProps) {
       </>
     )
 
+  if(section==='shorts') return <ShortVideoPage item={itemObject.current.content} />
+
   return (
     <>
       <div className="videosPlay__Breadcrumbs">
@@ -64,7 +66,7 @@ export default function Play({data}: PlayProps) {
       </div>
       <PlayTemplate item={itemObject.current.content}>
         {/* @ts-ignore */}
-        <RelatedContent data={category[itemObject.current.key].filter(item=>item.eid!==eid)} section={section} />
+        <RelatedContent data={category[itemObject.current.key].filter(item => item.eid !== eid)} section={section} />
       </PlayTemplate>
       <Footer data={data} />
     </>

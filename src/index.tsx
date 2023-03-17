@@ -6,6 +6,10 @@ import {store} from './app/store'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import './index.scss'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+
 
 const container = document.getElementById('root')!
 const root = createRoot(container)

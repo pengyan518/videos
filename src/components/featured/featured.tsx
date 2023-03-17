@@ -19,7 +19,7 @@ export default function Featured({data}: FeaturedProps) {
   return (
     <div className="featured innerPaddingAlignHeader">
       {Object.entries(sectionMap)
-        .filter(item => item[0] !== 'featured')
+        .filter(item => item[0] !== 'featured' && item[0] !== 'shorts')
         .map(section => {
           const [sectionUrl, sectionContent] = section
           return (

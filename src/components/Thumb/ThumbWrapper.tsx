@@ -64,7 +64,7 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
           <OnDemandPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
       ) : (
-        <a className={className} onClick={handleClickVideo}>
+        <a className={`cursor-pointer ${className || ''}`} onClick={handleClickVideo}>
           {children(item)}
         </a>
       )}

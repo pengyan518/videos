@@ -91,10 +91,16 @@ export const sectionMap: {[index: string]: any} = {
     poster: musicPosterBg,
     content: ['itemsSyso'],
   },
-  'featured': {
+  featured: {
     title: 'Featured',
     banner: '',
     poster: posterBg,
     content: ['itemsEditorsPick'],
+  },
+  shorts: {
+    title: 'Shorts',
+    banner: '',
+    poster: posterBg,
+    content: ['itemsShorts'],
   },
 }
