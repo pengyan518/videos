@@ -3,12 +3,10 @@ import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react
 import Vimeo from '@u-wave/react-vimeo'
 import {Skeleton, useScrollTrigger} from '@mui/material'
 
-
 import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
-import useScrollEvent from "../../hooks/useScrollEvent";
-import VimeoPlayer from "./VimeoPlayer";
-
+import useScrollEvent from '../../hooks/useScrollEvent'
+import VimeoPlayer from './VimeoPlayer'
 
 export type PlayProps = {
   item: any
@@ -23,8 +21,7 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
     setIsLoading(false)
   }, [])
 
-
- const {downScrollDirection} = useScrollEvent()
+  const {downScrollDirection} = useScrollEvent()
 
   return (
     <div className="">
@@ -32,12 +29,7 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
         {/* eslint-disable-next-line no-nested-ternary */}
         {embeddedVideoVimeo !== '' ? (
           <div className="w-full relative">
-            {isLoading && (
-              <div className="aspect-w-16 aspect-h-9">
-                <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
-              </div>
-            )}
-              <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} hideLoading={hideLoading} />
+            <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
           </div>
         ) : embeddedVideoYT !== '' ? (
           <YoutubeEmbed embedId={embeddedVideoYT} />

@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import {Link, useParams} from 'react-router-dom'
 // Import Swiper React components
-import {Swiper, SwiperSlide, useSwiperSlide} from 'swiper/react'
+import {Swiper, SwiperSlide, useSwiperSlide, useSwiper} from 'swiper/react'
 import {Mousewheel, Pagination} from 'swiper'
 import config, {controller, sectionMap} from '../../config'
-import Player from '../play/Player'
+
 import ShortPlayer from './ShortPlayer'
 import {VideoItemProps} from '../../types'
 // Import Swiper styles
@@ -42,6 +42,10 @@ export type ShortVideoSlideProps = {
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const [currentItem, setCurrentItem] = useState(item)
   const matches = useMediaQuery('(min-width:768px)')
+  // const swiper = useSwiper()
+  const currentSlide = data.indexOf(item)
+
+  // useEffect(() => {}, [])
 
   return (
     <div className="ShortVideoPage">
@@ -52,17 +56,20 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         direction={'vertical'}
         threshold={25}
         slidesPerView={1}
-        mousewheel={true}
+        mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
         autoHeight={true}
-        loop={true}
+        loop={false}
         spaceBetween={0}
         modules={[Mousewheel, Pagination]}
         onSwiper={swiper => {
-          window.swiper = swiper
+          // window.swiper = swiper
         }}
         onTouchStart={(swiper, e) => {
           console.debug(`swiper: ${e}`)
+        }}
+        onAfterInit={swiper => {
+          swiper.slideTo(currentSlide)
         }}
         onSlideChange={e => {
           console.debug(e.activeIndex)
@@ -72,7 +79,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           window.vimeoPlayer
             .getPaused()
             .then((paused: boolean) => {
-              // paused = whether or not the player is paused
               if (paused) {
                 window.vimeoPlayer.play()
               } else {
@@ -86,9 +92,11 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         className="mySwiper">
         {data.map(el => (
           <SwiperSlide key={el.eid}>
-            <div className="h-screen w-full opacity-[10%]">
-              <img src={el.imageForVideo.original} />
-            </div>
+            {({isActive}) => (
+              <div className={`h-screen w-full ${isActive?'opacity-0':''}`}>
+                <img src={el.imageForVideo.original} />
+              </div>
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

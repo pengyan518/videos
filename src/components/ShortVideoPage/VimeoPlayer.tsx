@@ -6,12 +6,12 @@ import Vimeo from '../VimeoPlayer'
 
 export type PlayProps = {
   embeddedVideoVimeo: string
-  hideLoading: () => void
+  hideLoading?: () => void
 }
 
-function VideoPlayer({embeddedVideoVimeo, hideLoading}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null) {
 
-  return <Vimeo video={embeddedVideoVimeo} className="w-full" height={1300} onReady={hideLoading} autoplay />
+  return <Vimeo video={embeddedVideoVimeo} className="w-screen flex justify-center" height={window.innerHeight} autoplay loop />
 }
 
 const VimeoPlayer = forwardRef(VideoPlayer)
