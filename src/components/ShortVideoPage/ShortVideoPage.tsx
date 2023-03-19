@@ -7,12 +7,14 @@ import {Swiper, SwiperSlide} from 'swiper/react'
 
 import config, {controller, sectionMap} from '../../config'
 import ShortVideoSlide from "./ShortVideoSlide";
+import ShortPlayer from "./ShortPlayer";
 
 export type ShortvideopageProps = {
   item: any
+  data: any[]
 }
 
-export default function ShortVideoPage({item}: ShortvideopageProps) {
+export default function ShortVideoPage({item, data}: ShortvideopageProps) {
   const matches = useMediaQuery('(min-width:768px)')
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function ShortVideoPage({item}: ShortvideopageProps) {
     <div className="ShortVideoPage">
       <Link to={`/${controller}`}>Back</Link>
 
-      <ShortVideoSlide item={item} />
+      <ShortVideoSlide item={item} data={data} />
     </div>
   )
 }

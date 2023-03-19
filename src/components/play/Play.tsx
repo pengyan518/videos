@@ -56,8 +56,8 @@ export default function Play({data}: PlayProps) {
         <Footer data={data} />
       </>
     )
-
-  if(section==='shorts') return <ShortVideoPage item={itemObject.current.content} />
+  {/* @ts-ignore */}
+  if(section==='shorts') return <ShortVideoPage item={itemObject.current.content} data={category[itemObject.current.key]} />
 
   return (
     <>
