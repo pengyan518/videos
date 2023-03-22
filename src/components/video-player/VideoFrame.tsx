@@ -1,7 +1,6 @@
-import React, {useEffect, useState, memo, useCallback, useRef, useMemo, forwardRef} from 'react'
+import React, {useEffect, useState, memo, useCallback, useRef, useMemo, forwardRef, useImperativeHandle} from 'react'
 import videojs from 'video.js'
 import Video from './VideoJs'
-
 
 interface VideoFrameProps {
   poster?: string
@@ -37,6 +36,7 @@ const VideoFrameDiv = ({videoSrc, poster, options = {}}: VideoFrameProps, ref: R
   const handlePlayerReady = (player: {on: (arg0: string, arg1: {(): void; (): void}) => void} | null) => {
     // @ts-ignore
     playerRef.current = player
+    window.videoJsPlayer = player
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     player &&
       player.on('waiting', () => {
@@ -47,6 +47,14 @@ const VideoFrameDiv = ({videoSrc, poster, options = {}}: VideoFrameProps, ref: R
       videojs.log('player will dispose')
     })
   }
+
+  // useImperativeHandle(
+  //   ref,
+  //   () => ({
+  //     player: playerRef.current ? playerRef.current : window.videoJsPlayer,
+  //   }),
+  //   []
+  // )
 
   // const videoRef = useRef(null)
 

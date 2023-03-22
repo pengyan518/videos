@@ -62,6 +62,12 @@ export default Object.freeze({
       theme: 'dark',
       mute: 0,
     },
+    youtubeOpts: {
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: 1,
+      },
+    },
   },
 })
 

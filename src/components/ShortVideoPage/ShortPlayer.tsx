@@ -24,21 +24,19 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
   const {downScrollDirection} = useScrollEvent()
 
   return (
-    <div className="">
-      <div>
-        {/* eslint-disable-next-line no-nested-ternary */}
-        {embeddedVideoVimeo !== '' ? (
-          <div className="w-full relative">
-            <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
-          </div>
-        ) : embeddedVideoYT !== '' ? (
-          <YoutubeEmbed embedId={embeddedVideoYT} />
-        ) : (
-          <div ref={ref}>
-            <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} options={{autoplay: false}} />
-          </div>
-        )}
-      </div>
+    <div className="w-screen relative">
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {embeddedVideoVimeo !== '' ? (
+        <div>
+          <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
+        </div>
+      ) : embeddedVideoYT !== '' ? (
+        <YoutubeEmbed embedId={embeddedVideoYT} />
+      ) : (
+        <div>
+          <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} options={{autoplay: true}} ref={ref} />
+        </div>
+      )}
     </div>
   )
 }

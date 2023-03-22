@@ -5,5 +5,7 @@ declare global {
     useTargetTicketParam: any
     swiper: any
     vimeoPlayer: any
+    videoJsPlayer: any
+    youTubePlayer: any
   }
 }

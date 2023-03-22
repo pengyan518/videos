@@ -7,12 +7,12 @@ import TopArea from '../../components/top-area'
 import {RootState} from '../../app/store'
 import Featured from '../../components/featured/featured'
 import {MainProps} from '../../types'
-import EditorsPick from "../../components/editors-pick/EditorsPick";
-import Section from "../../components/templates/Section";
-import CreationsBanner from "../../components/CreationsBanner/CreationsBanner";
-import Footer from "../../components/footer/Footer";
-import Shorts from "../../components/Shorts/Shorts";
-import isHidden from "../../utils/isHidden";
+import EditorsPick from '../../components/editors-pick/EditorsPick'
+import Section from '../../components/templates/Section'
+import CreationsBanner from '../../components/CreationsBanner/CreationsBanner'
+import Footer from '../../components/footer/Footer'
+import Shorts from '../../components/Shorts/Shorts'
+import isHidden from '../../utils/isHidden'
 
 interface IProps {
   data: MainProps
