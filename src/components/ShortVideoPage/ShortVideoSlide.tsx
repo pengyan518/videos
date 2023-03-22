@@ -8,7 +8,7 @@ import config, {controller, sectionMap} from '../../config'
 
 import ShortPlayer from './ShortPlayer'
 import {VideoItemProps} from '../../types'
-import swiperOnClick from "./swiperOnClick";
+import swiperOnClick, {onSlideChange} from "./swiperOnClick";
 // Import Swiper styles
 // import 'swiper/css'
 // import 'swiper/css/pagination'
@@ -81,20 +81,14 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         onAfterInit={swiper => {
           swiper.slideTo(currentSlide)
         }}
-        onSlideChange={e => {
-          console.debug(e.activeIndex)
-          window.vimeoPlayer = null
-          window.videoJsPlayer = null
-          window.youTubePlayer = null
-          setCurrentItem(data[e.activeIndex])
-        }}
-        onClick={swiperOnClick}
+        onSlideChange={onSlideChange(setCurrentItem, data)}
+        // onClick={swiperOnClick}
         className="mySwiper">
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
               <div className={`h-screen w-full ${isActive ? 'opacity-0' : ''}`}>
-                <img src={el.imageForVideo.original} />
+                <img src={el.imageForVideo.original} onClick={swiperOnClick} />
               </div>
             )}
           </SwiperSlide>

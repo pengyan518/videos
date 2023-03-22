@@ -24,7 +24,6 @@ function swiperOnClick(swiper: any) {
 
   if (window.youTubePlayer) {
     window.youTubePlayer.getPlayerState().then((value: number) => {
-        console.debug(`getPlayerState: ${value}`)
       if (value < 1 || value === 2) {
         window.youTubePlayer.playVideo()
       } else {
@@ -37,6 +36,14 @@ function swiperOnClick(swiper: any) {
     //   window.youTubePlayer.pauseVideo()
     // }
   }
+}
+
+export const onSlideChange = (setCurrentItem: (arg0: any) => void, data: {[x: string]: any}) => (e: {activeIndex: string | number}) => {
+  console.debug(e.activeIndex)
+  window.vimeoPlayer = null
+  window.videoJsPlayer = null
+  window.youTubePlayer = null
+  setCurrentItem(data[e.activeIndex])
 }
 
 export default swiperOnClick
