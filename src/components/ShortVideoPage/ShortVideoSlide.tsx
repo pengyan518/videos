@@ -8,7 +8,7 @@ import config, {controller, sectionMap} from '../../config'
 
 import ShortPlayer from './ShortPlayer'
 import {VideoItemProps} from '../../types'
-import swiperOnClick, {onSlideChange} from "./swiperOnClick";
+import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd} from './swiperOnClick'
 // Import Swiper styles
 // import 'swiper/css'
 // import 'swiper/css/pagination'
@@ -41,11 +41,11 @@ export type ShortVideoSlideProps = {
 // }
 
 interface PlayerProps {
-   player: {
-       play: any
-       paused: any
-       pause: any
-   }
+  player: {
+    play: any
+    paused: any
+    pause: any
+  }
 }
 
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
@@ -66,6 +66,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         direction={'vertical'}
         threshold={25}
         slidesPerView={1}
+        speed={700}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
         autoHeight={true}
@@ -75,20 +76,29 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         onSwiper={swiper => {
           // window.swiper = swiper
         }}
-        onTouchStart={(swiper, e) => {
-          // console.debug(`swiper: ${e}`)
-        }}
+        // onTouchStart={swiperOnClick}
         onAfterInit={swiper => {
           swiper.slideTo(currentSlide)
         }}
+        onSlideChangeTransitionStart={() => {
+          // window.vimeoPlayer = null
+          window.videoJsPlayer = null
+          window.youTubePlayer = null
+        }}
         onSlideChange={onSlideChange(setCurrentItem, data)}
+        // onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
         // onClick={swiperOnClick}
         className="mySwiper">
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
-              <div className={`h-screen w-full ${isActive ? 'opacity-0' : ''}`}>
-                <img src={el.imageForVideo.original} onClick={swiperOnClick} />
+              <div
+                className={`cursor-pointer h-screen w-full ${isActive ? 'opacity-10' : ''}`}
+                // onTouchStart={swiperOnClick}
+                // onTouchMove={swiperOnClick}
+                // onTouchEnd={swiperOnClick}
+                onClick={swiperOnClick}>
+                <img src={el.imageForVideo.original} />
               </div>
             )}
           </SwiperSlide>

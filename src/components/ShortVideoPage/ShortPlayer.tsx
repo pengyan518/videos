@@ -34,7 +34,7 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
         <YoutubeEmbed embedId={embeddedVideoYT} />
       ) : (
         <div>
-          <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} options={{autoplay: true}} ref={ref} />
+          <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} options={{autoplay: true, playsinline: true}} ref={ref} />
         </div>
       )}
     </div>
