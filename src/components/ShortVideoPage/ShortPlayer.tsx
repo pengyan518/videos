@@ -24,18 +24,20 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
   const {downScrollDirection} = useScrollEvent()
 
   return (
-    <div className="w-screen relative">
+    <div className="h-screen">
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
-        <div>
-          <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
-        </div>
+        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
       ) : embeddedVideoYT !== '' ? (
         <YoutubeEmbed embedId={embeddedVideoYT} />
       ) : (
-        <div>
-          <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} options={{autoplay: true, playsinline: true}} ref={ref} />
-        </div>
+        <VideoFrame
+          poster={imageForVideo?.original ?? ''}
+          videoSrc={videoLink}
+          isShortVideo
+          options={{autoplay: true, playsinline: true, controls: false, height: window.innerHeight, loop: true}}
+          ref={ref}
+        />
       )}
     </div>
   )

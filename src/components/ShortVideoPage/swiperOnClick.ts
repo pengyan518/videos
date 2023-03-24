@@ -1,4 +1,4 @@
-function swiperOnClick(swiper: any) {
+function swiperOnClick() {
   if (window.vimeoPlayer) {
     window.vimeoPlayer
       .getPaused()
@@ -33,12 +33,26 @@ function swiperOnClick(swiper: any) {
   }
 }
 
-export const onSlideChange = (setCurrentItem: (arg0: any) => void, data: {[x: string]: any}) => (e: {activeIndex: string | number}) => {
+export const onSlideChange = (e: {activeIndex: string | number}) => {
+  // console.debug(e.activeIndex)
+  // window.vimeoPlayer = null
+  window.videoJsPlayer = null
+  window.youTubePlayer = null
+  console.debug('onSlideChange')
+  // return setCurrentItem(data[e.activeIndex])
+
+  // if (!window.vimeoPlayer && !window.videoJsPlayer && !window.youTubePlayer) {
+  //   return setCurrentItem(data[e.activeIndex])
+  // }
+  // return onSlideChange(setCurrentItem, data)
+}
+
+export const onSlideChangeTransitionStart = (setCurrentItem: (arg0: any) => void, data: {[x: string]: any}) => (e: {activeIndex: string | number}) => {
   // console.debug(e.activeIndex)
   // window.vimeoPlayer = null
   // window.videoJsPlayer = null
   // window.youTubePlayer = null
-
+  console.debug('onSlideChangeTransitionStart')
   return setCurrentItem(data[e.activeIndex])
 
   // if (!window.vimeoPlayer && !window.videoJsPlayer && !window.youTubePlayer) {
@@ -46,6 +60,7 @@ export const onSlideChange = (setCurrentItem: (arg0: any) => void, data: {[x: st
   // }
   // return onSlideChange(setCurrentItem, data)
 }
+
 
 export const onSlideChangeTransitionEnd = () => {
   if (window.vimeoPlayer) {

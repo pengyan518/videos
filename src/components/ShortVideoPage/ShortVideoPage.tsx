@@ -28,8 +28,6 @@ export default function ShortVideoPage({item, data}: ShortvideopageProps) {
   }, [])
   return (
     <div className="ShortVideoPage">
-      <Link to={`/${controller}`}>Back</Link>
-
       <ShortVideoSlide item={item} data={data} />
     </div>
   )

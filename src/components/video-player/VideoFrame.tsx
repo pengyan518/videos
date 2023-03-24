@@ -5,10 +5,11 @@ import Video from './VideoJs'
 interface VideoFrameProps {
   poster?: string
   videoSrc: string
+  isShortVideo?: boolean
   options?: any
 }
 
-const VideoFrameDiv = ({videoSrc, poster, options = {}}: VideoFrameProps, ref: React.Ref<unknown> | undefined) => {
+const VideoFrameDiv = ({videoSrc, poster, isShortVideo = false, options = {}}: VideoFrameProps, ref: React.Ref<unknown> | undefined) => {
   const playerRef = useRef(null)
 
   const videoJsOptions = useMemo(
@@ -56,14 +57,10 @@ const VideoFrameDiv = ({videoSrc, poster, options = {}}: VideoFrameProps, ref: R
   //   []
   // )
 
-  // const videoRef = useRef(null)
-
-  // const ratio = useVideoDimensions(videoRef)
-
   return (
     <React.Fragment key={videoSrc}>
-      <div>
-        <Video options={videoJsOptions} onReady={handlePlayerReady} />
+      <div className="w-full">
+        <Video options={videoJsOptions} onReady={handlePlayerReady} isShortVideo={isShortVideo} />
       </div>
     </React.Fragment>
   )
