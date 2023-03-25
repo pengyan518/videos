@@ -24,7 +24,7 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
   const {downScrollDirection} = useScrollEvent()
 
   return (
-    <div className="h-screen">
+    <div className="h-screen grid items-center">
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
         <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />

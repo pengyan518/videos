@@ -11,7 +11,7 @@ export type PlayProps = {
 
 function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null) {
 
-  return <Vimeo video={embeddedVideoVimeo} className="justify-center" height={window.innerHeight} controls={false} autoplay loop />
+  return <Vimeo video={embeddedVideoVimeo} className="justify-center" height={window.innerHeight} controls={false} autoplay loop responsive />
 }
 
 const VimeoPlayer = forwardRef(VideoPlayer)

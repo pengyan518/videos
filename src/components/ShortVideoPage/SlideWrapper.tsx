@@ -7,22 +7,16 @@ import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd, onSlideChangeT
 
 export type SlideWrapperProps = {
   isActive: boolean
+  gridClass: string
   children: ReactNode
 }
 
-const SlideWrapper = ({isActive, children}: SlideWrapperProps) => {
+const SlideWrapper = ({isActive, gridClass, children}: SlideWrapperProps) => {
   const matches = useMediaQuery('(min-width:768px)')
 
   const getClassName = (child: {props: {label: any}}) => {
-    return `cursor-pointer h-screen w-full grid grid-cols-[1fr_1.6fr_1fr] justify-center items-center ${isActive ? 'opacity-0' : ''}`
+    return `cursor-pointer h-screen w-full grid ${gridClass} justify-center items-center ${isActive ? 'opacity-0' : ''}`
   }
-  // const handleTouch = useCallback(() => {
-  //   if (!matches) swiperOnClick()
-  // }, [matches])
-  //
-  // const handleClick = useCallback(() => {
-  //   if (matches) swiperOnClick()
-  // }, [matches])
 
   return (
     <div className="">

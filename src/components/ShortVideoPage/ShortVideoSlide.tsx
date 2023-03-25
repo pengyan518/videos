@@ -33,6 +33,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
   const shortPlayerRef = useRef<PlayerProps>(null)
+  const gridClass = matches?'md:grid-cols-[1fr_1.6fr_1fr]':'grid-cols-[0fr_1.6fr_0fr]'
 
   // useEffect(() => {}, [])
 
@@ -47,7 +48,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   return (
     <div className="ShortVideoPage">
       <div className="absolute left-0 top-0">
-        <div className="w-screen relative grid grid-cols-[1fr_1.6fr_1fr] justify-center">
+        <div className={`w-screen relative grid ${gridClass} justify-center`}>
           <div />
           <div className="w-full overflow-hidden">
             <ShortPlayer item={currentItem} ref={shortPlayerRef} />
@@ -81,10 +82,12 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
-              <SlideWrapper isActive={isActive}>
+              <SlideWrapper isActive={isActive} gridClass={gridClass}>
                 <div>
                   <div />
-                  <img onTouchStart={handleTouch} onClick={handleClick} src={el.imageForVideo.original} />
+                  <div className="relative h-full">
+                    <img className="absolute left-0 top-0 object-cover" onTouchStart={handleTouch} onClick={handleClick} src={el.imageForVideo.original} />
+                  </div>
                   <div />
                 </div>
               </SlideWrapper>
@@ -92,13 +95,13 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute w-screen h-screen left-0 top-0">
-        <div className="w-screen h-screen relative grid grid-cols-[1fr_1.6fr_1fr] justify-center items-center">
+      <div className="absolute w-screen h-screen left-0 top-0 ">
+        <div className={`w-screen h-screen relative grid ${gridClass} justify-center items-center`}>
           <Link className="z-10" to={`/${controller}`}>
             Back
           </Link>
           <div />
-          <div className="text-center bg-white h-screen">Follow us!</div>
+          <div className="text-center bg-white h-screen display-none md:block">Follow us!</div>
         </div>
       </div>
     </div>
