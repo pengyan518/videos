@@ -33,7 +33,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
   const shortPlayerRef = useRef<PlayerProps>(null)
-  const gridClass = matches?'md:grid-cols-[1fr_1.6fr_1fr]':'grid-cols-[0fr_1.6fr_0fr]'
+  const gridClass = matches?'md:grid-cols-[1fr_1.6fr_1fr_1fr] gap-2':'grid-cols-[0fr_1.6fr_0fr]'
 
   // useEffect(() => {}, [])
 
@@ -58,7 +58,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       </div>
       <Swiper
         direction={'vertical'}
-        threshold={0}
+        threshold={matches?25:0}
         slidesPerView={1}
         speed={700}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
@@ -85,8 +85,8 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
               <SlideWrapper isActive={isActive} gridClass={gridClass}>
                 <div>
                   <div />
-                  <div className="relative h-full">
-                    <img className="absolute left-0 top-0 object-cover" onTouchStart={handleTouch} onClick={handleClick} src={el.imageForVideo.original} />
+                  <div className="relative h-[calc(100vh-120px)] overflow-hidden">
+                    <img className="absolute left-0 top-0 object-cover" onTouchEnd={handleTouch} onClick={handleClick} src={el.imageForVideo.original} />
                   </div>
                   <div />
                 </div>
@@ -101,7 +101,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             Back
           </Link>
           <div />
-          <div className="text-center bg-white h-screen display-none md:block">Follow us!</div>
+          <div className="text-center h-screen display-none md:flex items-center">
+            <div className="bg-white w-full h-[calc(100vh-120px)] rounded-xl">Follow us!</div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,30 +1,35 @@
 import {useRef, useEffect, useState} from 'react'
+import useResize from './useResize'
 
 const useRect = <T extends HTMLElement>(deps: React.DependencyList = []) => {
   const [size, setSize] = useState({
     width: 0,
     height: 0,
-    top: 0,
+    // top: 0,
   })
-  const root = useRef<T>(null)
+  const element = useRef<T>(null)
 
   const changeSize = () => {
-    const rect = root.current?.getBoundingClientRect()
+
+    const rect = element.current?.getBoundingClientRect()
+    // const rect = element.current?.clientHeight
     if (rect) {
       setSize({
         width: rect.width,
         height: rect.height,
-        top: rect.top,
+        // top: rect.top,
       })
     }
   }
 
   useEffect(() => {
-    changeSize()
+    setTimeout(changeSize, 1000)
   }, deps)
 
+  useResize(changeSize)
+
   return {
-    root,
+    element,
     size,
     changeSize,
   }
