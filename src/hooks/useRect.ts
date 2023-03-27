@@ -23,7 +23,8 @@ const useRect = <T extends HTMLElement>(deps: React.DependencyList = []) => {
   }
 
   useEffect(() => {
-    setTimeout(changeSize, 1000)
+    // setTimeout(changeSize, 1000)
+    changeSize()
   }, deps)
 
   useResize(changeSize)

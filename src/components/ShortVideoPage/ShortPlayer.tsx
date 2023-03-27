@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
 // import axios from 'axios'
 import Vimeo from '@u-wave/react-vimeo'
 import {Skeleton, useScrollTrigger} from '@mui/material'
@@ -16,22 +16,25 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const loading = useRef<HTMLDivElement | null>(null)
-  const vimeoPlayerRef = useRef<any>(null)
+
 
   const {downScrollDirection} = useScrollEvent()
 
-  useEffect(()=>{
-    console.debug(vimeoPlayerRef.current?vimeoPlayerRef.current.videoHeight:'no height')
-  })
+  const element = useRef<HTMLDivElement>(null)
 
-  // @ts-ignore
+  const getPlayerSize = useCallback(() => {
+    // @ts-ignore
+    // eslint-disable-next-line no-unsafe-optional-chaining
+    return element.current ? element.current?.getBoundingClientRect().width * 1.777 : 0
+  }, [])
 
+  useImperativeHandle(ref, () => ({videoHeight: getPlayerSize()}), [getPlayerSize])
 
   return (
-    <div className="h-screen grid items-start md:items-center">
+    <div className="h-screen grid items-start md:items-center w-full" ref={element}>
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
-        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} ref={vimeoPlayerRef} />
+        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
       ) : embeddedVideoYT !== '' ? (
         <YoutubeEmbed embedId={embeddedVideoYT} />
       ) : (
