@@ -8,12 +8,10 @@ import config, {controller, sectionMap} from '../../config'
 
 import ShortPlayer from './ShortPlayer'
 import {VideoItemProps} from '../../types'
-import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd, onSlideChangeTransitionStart} from './swiperOnClick'
+import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd, onSlideChangeTransitionStart, handlePause, handleMute} from './swiperOnClick'
 import SlideWrapper from './SlideWrapper'
 import useRect from '../../hooks/useRect'
-// Import Swiper styles
-// import 'swiper/css'
-// import 'swiper/css/pagination'
+
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -51,6 +49,23 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     if (matches) swiperOnClick()
   }, [matches])
 
+  const handlePauseTouch = useCallback(() => {
+    if (!matches) handlePause()
+  }, [matches])
+
+  const handlePauseClick = useCallback(() => {
+    if (matches) handlePause()
+  }, [matches])
+
+  const handleMuteTouch = useCallback(() => {
+    if (!matches) handleMute()
+  }, [matches])
+
+  const handleMuteClick = useCallback(() => {
+    if (matches) handleMute()
+  }, [matches])
+
+
   // if (!shareAreaStyle.height) return <>loading...</>
   return (
     <div className="ShortVideoPage">
@@ -70,7 +85,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         speed={700}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
-        autoHeight={true}
+        autoHeight={false}
         loop={false}
         spaceBetween={0}
         modules={[Mousewheel, Pagination]}
@@ -92,13 +107,15 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
               <SlideWrapper isActive={isActive} gridClass={gridClass}>
                 <div>
                   <div />
-                  <div className="relative overflow-hidden" style={shareAreaStyle}>
+                  <div className="relative rounded-xl" style={shareAreaStyle}>
                     <img
-                      className="absolute left-0 top-0 object-cover"
+                      className={`absolute left-0 top-0 object-cover ${isActive ? 'opacity-0' : ''}`}
                       onTouchEnd={handleTouch}
                       onClick={handleClick}
                       src={el.imageForVideo.original}
                     />
+                    <div className="absolute left-0 top-0 z-10" onClick={handlePauseClick} onTouchEnd={handlePauseTouch}>pause</div>
+                    <div className="absolute right-0 top-0 z-[11]" onClick={handleMuteClick} onTouchEnd={handleMuteTouch}>mute</div>
                   </div>
                   <div />
                 </div>
@@ -107,8 +124,8 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute w-screen h-screen left-0 top-0 ">
-        <div className={`w-screen h-screen relative grid ${gridClass} justify-center items-center`}>
+      <div className="absolute w-screen left-0 top-0 ">
+        <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
           <Link className="z-10" to={`/${controller}`}>
             Back
           </Link>

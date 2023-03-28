@@ -41,7 +41,14 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
           poster={imageForVideo?.original ?? ''}
           videoSrc={videoLink}
           isShortVideo
-          options={{autoplay: true, playsinline: true, controls: false, height: window.innerHeight, loop: true}}
+          options={{
+            autoplay: true,
+            playsinline: true,
+            controls: false,
+            height: window.innerHeight,
+            // muted: true,
+            loop: true
+          }}
           ref={ref}
         />
       )}

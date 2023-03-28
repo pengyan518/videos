@@ -15,7 +15,7 @@ const SlideWrapper = ({isActive, gridClass, children}: SlideWrapperProps) => {
   const matches = useMediaQuery('(min-width:768px)')
 
   const getClassName = (child: {props: {label: any}}) => {
-    return `cursor-pointer h-screen w-full grid ${gridClass} justify-center items-center ${isActive ? 'opacity-0' : ''}`
+    return `cursor-pointer w-full h-screen grid ${gridClass} justify-center items-center`
   }
 
   return (
