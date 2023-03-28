@@ -10,7 +10,7 @@ import ShortPlayer from './ShortPlayer'
 import {VideoItemProps} from '../../types'
 import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd, onSlideChangeTransitionStart} from './swiperOnClick'
 import SlideWrapper from './SlideWrapper'
-import useRect from "../../hooks/useRect";
+import useRect from '../../hooks/useRect'
 // Import Swiper styles
 // import 'swiper/css'
 // import 'swiper/css/pagination'
@@ -20,27 +20,28 @@ export type ShortVideoSlideProps = {
   data: VideoItemProps[]
 }
 
-
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
-  const {size, element, changeSize} = useRect<HTMLDivElement>([window.innerWidth])
+  const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   const [currentItem, setCurrentItem] = useState(item)
   const [shareAreaStyle, setShareAreaHeight] = useState({
     height: 0,
+    overflow: 'hidden',
   })
   const matches = useMediaQuery('(min-width:768px)')
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
-  const shortPlayerRef = useRef<any>(null)
+  // const shortPlayerRef = useRef<any>(null)
   const gridClass = matches ? 'md:grid-cols-[1fr_1.6fr_1fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
 
   // const vimeoPlayerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (element.current) {
-      // eslint-disable-next-line no-unsafe-optional-chaining
-      setShareAreaHeight({height: element.current ? size.width * 1.777 : 0})
+      // eslint-disable-next-line no-nested-ternary
+      const height = (): any | number => (matches ? (element.current ? size.width * 1.777 : 0) : window.innerHeight - 120)
+      setShareAreaHeight({...shareAreaStyle, height: height()})
     }
-  }, [element, size.width])
+  }, [element, matches, size.width])
 
   const handleTouch = useCallback(() => {
     if (!matches) swiperOnClick()
@@ -57,7 +58,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         <div className={`w-screen relative grid ${gridClass} justify-center`}>
           <div />
           <div className="w-full overflow-hidden" ref={element}>
-            <ShortPlayer item={currentItem} ref={shortPlayerRef} />
+            <ShortPlayer item={currentItem} />
           </div>
           <div />
         </div>
@@ -91,7 +92,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
               <SlideWrapper isActive={isActive} gridClass={gridClass}>
                 <div>
                   <div />
-                  <div className="relative h-[calc(100vh-120px)] overflow-hidden">
+                  <div className="relative overflow-hidden" style={shareAreaStyle}>
                     <img
                       className="absolute left-0 top-0 object-cover"
                       onTouchEnd={handleTouch}
@@ -112,8 +113,10 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             Back
           </Link>
           <div />
-          <div className="text-center h-screen display-none md:flex items-center" >
-            <div className="bg-white w-full rounded-xl" style={shareAreaStyle}>Follow us!</div>
+          <div className="text-center h-screen display-none md:flex items-center">
+            <div className="bg-white w-full rounded-xl" style={shareAreaStyle}>
+              Follow us!
+            </div>
           </div>
         </div>
       </div>

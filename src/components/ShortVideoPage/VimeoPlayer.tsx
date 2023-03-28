@@ -11,34 +11,9 @@ export type PlayProps = {
 }
 
 function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null) {
-  // const {size, element, changeSize} = useRect<HTMLDivElement>([window.innerWidth])
-
-  // console.debug(size)
-  // const element = useRef<HTMLDivElement>(null)
-  //
-  // const getPlayerSize = useCallback(()=>{
-  //   // @ts-ignore
-  //   // eslint-disable-next-line no-unsafe-optional-chaining
-  //   return element.current?element.current?.getBoundingClientRect().width*1.777:0
-  // },[])
-  //
-  // useImperativeHandle(ref, () => ({videoHeight: getPlayerSize()}), [])
-
-  // useEffect(() => {
-  //   if (window.vimeoPlayer) {
-  //     window.vimeoPlayer
-  //       .getVideoHeight()
-  //       .then((height: number) => {
-  //         console.debug(`height: ${height}`)
-  //       })
-  //       .catch((error: string) => {
-  //         // an error occurred
-  //       })
-  //   }
-  // }, [window.innerWidth])
 
   return (
-    <div className="w-full">
+    <div className="w-full rounded-xl overflow-hidden">
       <Vimeo video={embeddedVideoVimeo} className="justify-center" controls={false} autoplay loop responsive />
     </div>
   )
