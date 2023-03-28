@@ -88,7 +88,7 @@ export const handleMute = () => {
   if (window.vimeoPlayer) {
     window.vimeoPlayer.getMuted().then((muted: boolean) => {
       // muted = whether muted is turned on or not
-      console.debug(muted)
+      // console.debug(muted)
       if (muted) {
         window.vimeoPlayer.setMuted(false)
       } else {
@@ -97,10 +97,10 @@ export const handleMute = () => {
     })
   }
   if (window.videoJsPlayer) {
-    if (window.videoJsPlayer.volume() === 0) {
-      window.videoJsPlayer.volume(0.5)
+    if (window.videoJsPlayer.muted()) {
+      window.videoJsPlayer.muted(false)
     } else {
-      window.videoJsPlayer.volume(0)
+      window.videoJsPlayer.muted(true)
     }
   }
 }
