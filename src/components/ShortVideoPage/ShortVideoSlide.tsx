@@ -20,13 +20,6 @@ export type ShortVideoSlideProps = {
   data: VideoItemProps[]
 }
 
-interface PlayerProps {
-  player: {
-    play: any
-    paused: any
-    pause: any
-  }
-}
 
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const {size, element, changeSize} = useRect<HTMLDivElement>([window.innerWidth])
@@ -40,13 +33,10 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const shortPlayerRef = useRef<any>(null)
   const gridClass = matches ? 'md:grid-cols-[1fr_1.6fr_1fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
 
-  // useEffect(() => {}, [])
-  const vimeoPlayerRef = useRef<HTMLDivElement | null>(null)
+  // const vimeoPlayerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (element.current) {
-      // eslint-disable-next-line no-unsafe-optional-chaining
-      console.debug(shortPlayerRef.current ? `videoHeight: ${element.current ? element.current?.getBoundingClientRect().width * 1.777 : 0}` : 'no height')
       // eslint-disable-next-line no-unsafe-optional-chaining
       setShareAreaHeight({height: element.current ? size.width * 1.777 : 0})
     }

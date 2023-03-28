@@ -16,10 +16,7 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const loading = useRef<HTMLDivElement | null>(null)
-
-
-  const {downScrollDirection} = useScrollEvent()
-
+  
   const element = useRef<HTMLDivElement>(null)
 
   const getPlayerSize = useCallback(() => {
