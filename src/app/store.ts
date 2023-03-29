@@ -3,12 +3,14 @@ import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
 import counterReducer from '../features/counter/counterSlice'
 import introReducer from '../features/intro/introSlice'
 import categoryReducer from '../features/category/categorySlice'
+import shortsReducer from '../components/ShortVideoPage/shortsSlice'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     intro: introReducer,
     category: categoryReducer,
+    shorts: shortsReducer,
   },
 })
 

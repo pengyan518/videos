@@ -2,8 +2,6 @@ import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
 // Import Swiper React components
 
-import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd, onSlideChangeTransitionStart} from './swiperOnClick'
-
 
 export type SlideWrapperProps = {
   isActive: boolean

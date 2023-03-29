@@ -7,11 +7,13 @@ import {Mousewheel, Pagination} from 'swiper'
 import config, {controller, sectionMap} from '../../config'
 
 import ShortPlayer from './ShortPlayer'
-import {VideoItemProps} from '../../types'
-import swiperOnClick, {onSlideChange, onSlideChangeTransitionEnd, onSlideChangeTransitionStart, handlePause, handleMute} from './swiperOnClick'
+import {ShortsProps, VideoItemProps} from '../../types'
+import swiperOnClick, {onSlideChange, handlePause} from './swiperOnClick'
 import SlideWrapper from './SlideWrapper'
 import useRect from '../../hooks/useRect'
-
+import ToggleMute from './ToggleMute'
+import {useAppSelector} from '../../app/hooks'
+import {RootState} from '../../app/store'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -20,6 +22,7 @@ export type ShortVideoSlideProps = {
 
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
+  const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   const [currentItem, setCurrentItem] = useState(item)
   const [shareAreaStyle, setShareAreaHeight] = useState({
     height: 0,
@@ -49,22 +52,52 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     if (matches) swiperOnClick()
   }, [matches])
 
-  const handlePauseTouch = useCallback(() => {
-    if (!matches) handlePause()
-  }, [matches])
+  const onSlideChangeTransitionStart = useCallback(
+    (e: {activeIndex: number}) => {
+      // console.debug(e.activeIndex)
+      // window.vimeoPlayer = null
+      // window.videoJsPlayer = null
+      // window.youTubePlayer = null
+      console.debug('onSlideChangeTransitionStart')
+      setCurrentItem(data[e.activeIndex])
+    },
 
-  const handlePauseClick = useCallback(() => {
-    if (matches) handlePause()
-  }, [matches])
+    [data]
+  )
 
-  const handleMuteTouch = useCallback(() => {
-    if (!matches) handleMute()
-  }, [matches])
+  const onTransitionEnd = useCallback(() => {
+    console.debug('onTransitionEnd')
+    if (window.vimeoPlayer) {
+      if (isMuted) {
+        window.vimeoPlayer.setMuted(true)
+      } else {
+        window.vimeoPlayer.setMuted(false)
+      }
+    }
+    if (window.videoJsPlayer) {
+      if (isMuted) {
+        window.videoJsPlayer.muted(true)
+      } else {
+        window.videoJsPlayer.muted(false)
+      }
+    }
+  }, [isMuted])
 
-  const handleMuteClick = useCallback(() => {
-    if (matches) handleMute()
-  }, [matches])
-
+  const onSlideChangeTransitionEnd = useCallback(() => {
+    console.debug('onSlideChangeTransitionEnd')
+    if (window.vimeoPlayer) {
+      window.vimeoPlayer.getPaused().then((paused: boolean) => {
+        if (paused) {
+          window.vimeoPlayer.play()
+        }
+      })
+    }
+    if (window.videoJsPlayer) {
+    }
+    // if (window.youTubePlayer) {
+    //   // window.youTubePlayer.playVideo()
+    // }
+  }, [])
 
   // if (!shareAreaStyle.height) return <>loading...</>
   return (
@@ -97,8 +130,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           swiper.slideTo(currentSlide)
         }}
         onSlideChange={onSlideChange}
-        onSlideChangeTransitionStart={onSlideChangeTransitionStart(setCurrentItem, data)}
-        // onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
+        onSlideChangeTransitionStart={onSlideChangeTransitionStart}
+        onTransitionEnd={onTransitionEnd}
+        onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
         // onClick={swiperOnClick}
         className="mySwiper">
         {data.map(el => (
@@ -114,8 +148,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
                       onClick={handleClick}
                       src={el.imageForVideo.original}
                     />
-                    <div className="absolute left-0 top-0 z-10" onClick={handlePauseClick} onTouchEnd={handlePauseTouch}>pause</div>
-                    <div className="absolute right-0 top-0 z-[11]" onClick={handleMuteClick} onTouchEnd={handleMuteTouch}>mute</div>
+                    {/* <div className="absolute left-0 top-0 z-10" onClick={handlePauseClick} onTouchEnd={handlePauseTouch}> */}
+                    {/*  pause */}
+                    {/* </div> */}
                   </div>
                   <div />
                 </div>
@@ -126,10 +161,12 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       </Swiper>
       <div className="absolute w-screen left-0 top-0 ">
         <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
-          <Link className="z-10" to={`/${controller}`}>
+          <Link className="z-10 flex items-start" to={`/${controller}`} style={shareAreaStyle}>
             Back
           </Link>
-          <div />
+          <div className="relative flex items-start" style={shareAreaStyle}>
+            <ToggleMute />
+          </div>
           <div className="text-center h-screen display-none md:flex items-center">
             <div className="bg-white w-full rounded-xl" style={shareAreaStyle}>
               Follow us!

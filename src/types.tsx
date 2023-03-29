@@ -44,6 +44,10 @@ export interface ContentProps {
   content: MainProps
   status: string
 }
+export interface ShortsProps {
+  isMuted: boolean
+  status: string
+}
 
 export interface LangProps {
   readonly langCode: string

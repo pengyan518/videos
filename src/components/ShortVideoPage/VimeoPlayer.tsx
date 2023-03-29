@@ -1,9 +1,9 @@
 import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
-// import axios from 'axios'
-import Player from '@vimeo/player'
+// import Player from '@vimeo/player'
 import Vimeo from '../VimeoPlayer'
-import useRect from '../../hooks/useRect'
-// import useResize from '../../hooks/useResize'
+// import {ShortsProps} from '../../types'
+// import {useAppSelector} from '../../app/hooks'
+// import {RootState} from '../../app/store'
 
 export type PlayProps = {
   embeddedVideoVimeo: string
@@ -11,10 +11,17 @@ export type PlayProps = {
 }
 
 function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null) {
+  // const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
+  // const [muted, setMuted] = useState(false)
+  //
+  // useEffect(()=>{
+  //   if(isMuted) return setMuted(true)
+  //   return setMuted(false)
+  // }, [isMuted])
 
   return (
     <div className="w-full rounded-xl overflow-hidden">
-      <Vimeo video={embeddedVideoVimeo} className="justify-center" controls={false} autoplay loop responsive />
+      <Vimeo video={embeddedVideoVimeo} className="justify-center" controls={true} autoplay loop responsive />
     </div>
   )
 }
