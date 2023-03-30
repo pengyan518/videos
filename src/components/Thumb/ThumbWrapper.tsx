@@ -1,17 +1,13 @@
 import React, {ReactNode, useCallback, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {styled} from '@mui/material/styles'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew'
-import BootstrapDialogTitle from '../BootstrapDialogTitle/BootstrapDialogTitle'
+import axios from 'axios'
 import config from '../../config'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import OnDemandPopup from '../OnDemandPopup/OnDemandPopup'
 import {VideoItemProps} from '../../types'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
-import axios from 'axios'
+
 
 export type ItemProps = {
   item: VideoItemProps
@@ -20,14 +16,6 @@ export type ItemProps = {
   children: any
 }
 
-const BootstrapDialog = styled(Dialog)(({theme}) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(5),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-}))
 
 export default function ThumbWrapper({item, sectionName, className, children}: ItemProps) {
   const {

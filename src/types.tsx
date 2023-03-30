@@ -28,6 +28,8 @@ export interface MainProps {
 export type VideoItemProps = {
   eid: string
   title: string
+  descriptionLong: string
+  description: string
   onDemandLink: string
   videoLink: string
   embeddedVideoVimeo: string

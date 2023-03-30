@@ -14,6 +14,8 @@ import useRect from '../../hooks/useRect'
 import ToggleMute from './ToggleMute'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
+import getFriendlyUrl from '../../utils/getFriendlyUrl'
+import axios from 'axios'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -51,6 +53,17 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const handleClick = useCallback(() => {
     if (matches) swiperOnClick()
   }, [matches])
+
+  const onTransitionStart = useCallback(
+    (e: {activeIndex: number}) => {
+      const {eid, title, urlFriendlyName} = data[e.activeIndex]
+      const seoUrl = urlFriendlyName || getFriendlyUrl(title)
+      window.history.pushState({}, '', `/${config.controller}/shorts/play/${eid}/${seoUrl}.html`)
+      axios.get(`${config.updateCounter}${eid}`)
+    },
+
+    [data]
+  )
 
   const onSlideChangeTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
@@ -130,6 +143,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           swiper.slideTo(currentSlide)
         }}
         onSlideChange={onSlideChange}
+        onTransitionStart={onTransitionStart}
         onSlideChangeTransitionStart={onSlideChangeTransitionStart}
         onTransitionEnd={onTransitionEnd}
         onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
@@ -166,10 +180,12 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           </Link>
           <div className="relative flex items-start" style={shareAreaStyle}>
             <ToggleMute />
+            <div className="absolute text-white left-0 bottom-10">{currentItem.title}</div>
           </div>
           <div className="text-center h-screen display-none md:flex items-center">
             <div className="bg-white w-full rounded-xl" style={shareAreaStyle}>
-              Follow us!
+              {currentItem.descriptionLong}
+              <div>Follow us!</div>
             </div>
           </div>
         </div>
