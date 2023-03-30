@@ -1,13 +1,10 @@
 import React, {useEffect, useRef, forwardRef, ReactNode} from 'react'
 
-import {MainProps, VideoItemProps} from '../../types'
-import useUrlParameter from '../../hooks/useUrlParameter'
 import Player from './Player'
 import config from '../../config'
 import Section from '../templates/Section'
 import ShareButton from '../ShareButton/ShareButton'
 import Wrapper from '../templates/Wrapper'
-import {PlayerWrapper} from './styles'
 
 export type PlayProps = {
   item: any

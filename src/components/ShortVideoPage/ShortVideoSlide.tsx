@@ -1,6 +1,7 @@
 import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import {Link, useParams} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios'
 // Import Swiper React components
 import {Swiper, SwiperSlide, useSwiperSlide, useSwiper} from 'swiper/react'
 import {Mousewheel, Pagination} from 'swiper'
@@ -15,7 +16,7 @@ import ToggleMute from './ToggleMute'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
-import axios from 'axios'
+import ShareButton from '../ShareButton/ShareButton'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -31,6 +32,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     overflow: 'hidden',
   })
   const matches = useMediaQuery('(min-width:768px)')
+  const navigate = useNavigate()
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
   // const shortPlayerRef = useRef<any>(null)
@@ -44,7 +46,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       const height = (): any | number => (matches ? (element.current ? size.width * 1.777 : 0) : window.innerHeight - 120)
       setShareAreaHeight({...shareAreaStyle, height: height()})
     }
-  }, [element, matches, size.width])
+  }, [element, matches, size.width]) // don't update dependence by Eslint
 
   const handleTouch = useCallback(() => {
     if (!matches) swiperOnClick()
@@ -96,23 +98,40 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     }
   }, [isMuted])
 
-  const onSlideChangeTransitionEnd = useCallback(() => {
-    console.debug('onSlideChangeTransitionEnd')
-    if (window.vimeoPlayer) {
-      window.vimeoPlayer.getPaused().then((paused: boolean) => {
-        if (paused) {
-          window.vimeoPlayer.play()
-        }
-      })
-    }
-    if (window.videoJsPlayer) {
-    }
-    // if (window.youTubePlayer) {
-    //   // window.youTubePlayer.playVideo()
-    // }
-  }, [])
+  // const onSlideChangeTransitionEnd = useCallback(() => {
+  //   console.debug('onSlideChangeTransitionEnd')
+  //   if (window.vimeoPlayer) {
+  //     window.vimeoPlayer.getPaused().then((paused: boolean) => {
+  //       if (paused) {
+  //         window.vimeoPlayer.play()
+  //       }
+  //     })
+  //   }
+  // }, [])
 
-  // if (!shareAreaStyle.height) return <>loading...</>
+  const handleShare = useCallback(async () => {
+    const shareData = {
+      title: 'MDN',
+      text: 'Learn web development on MDN!',
+      url: window.location.href,
+      // url: "https://developer.mozilla.org",
+    }
+    if (!matches) {
+      try {
+        await navigator.share(shareData)
+        console.debug('MDN shared successfully')
+      } catch (err) {
+        console.debug(err)
+      }
+    }
+  }, [matches])
+
+  useEffect(() => {
+    window.addEventListener('popstate', event => {
+      navigate(`/${config.controller}`)
+    })
+  }, [navigate])
+
   return (
     <div className="ShortVideoPage">
       <div className="absolute left-0 top-0">
@@ -131,7 +150,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         speed={700}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
-        autoHeight={false}
+        autoHeight={true}
         loop={false}
         spaceBetween={0}
         modules={[Mousewheel, Pagination]}
@@ -146,7 +165,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         onTransitionStart={onTransitionStart}
         onSlideChangeTransitionStart={onSlideChangeTransitionStart}
         onTransitionEnd={onTransitionEnd}
-        onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
+        // onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
         // onClick={swiperOnClick}
         className="mySwiper">
         {data.map(el => (
@@ -162,9 +181,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
                       onClick={handleClick}
                       src={el.imageForVideo.original}
                     />
-                    {/* <div className="absolute left-0 top-0 z-10" onClick={handlePauseClick} onTouchEnd={handlePauseTouch}> */}
-                    {/*  pause */}
-                    {/* </div> */}
+                     <button className="absolute left-0 top-0 z-10" onClick={handleShare}>
+                      share
+                     </button>
                   </div>
                   <div />
                 </div>
@@ -173,7 +192,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute w-screen left-0 top-0 ">
+      <div className="absolute w-screen left-0 top-0">
         <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
           <Link className="z-10 flex items-start" to={`/${controller}`} style={shareAreaStyle}>
             Back
@@ -183,9 +202,10 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             <div className="absolute text-white left-0 bottom-10">{currentItem.title}</div>
           </div>
           <div className="text-center h-screen display-none md:flex items-center">
-            <div className="bg-white w-full rounded-xl" style={shareAreaStyle}>
+            <div className="bg-white w-full rounded-xl z-10" style={shareAreaStyle}>
               {currentItem.descriptionLong}
               <div>Follow us!</div>
+              <ShareButton />
             </div>
           </div>
         </div>
