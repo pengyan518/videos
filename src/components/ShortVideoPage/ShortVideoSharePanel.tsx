@@ -1,22 +1,20 @@
-import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import Button from '@mui/material/Button'
+import React, {ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import {Link, useNavigate} from 'react-router-dom'
-import axios from 'axios'
-// Import Swiper React components
-import {Swiper, SwiperSlide, useSwiperSlide, useSwiper} from 'swiper/react'
 import {Mousewheel, Pagination} from 'swiper'
 import config, {controller, sectionMap} from '../../config'
 
-import ShortPlayer from './ShortPlayer'
 import {ShortsProps, VideoItemProps} from '../../types'
 
 import ToggleMute from './ToggleMute'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
-import getFriendlyUrl from '../../utils/getFriendlyUrl'
 import ShareButton from '../ShareButton/ShareButton'
 import ShareIcon from '../icons/Share'
+import {Item} from './styles'
+import IconsStore from '../icons/IconsStore'
+import ShareButtonsPanel from "./ShareButtonsPanel";
+
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
@@ -26,10 +24,32 @@ export type ShortVideoSharePanelProps = {
 
 export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaStyle}: ShortVideoSharePanelProps) {
   const {
-    content: {translation},
+    content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
 
+  const getTargetLink = useMemo(() => {
+    switch (langCode) {
+      case 'en-us':
+      case 'da':
+        return {
+          fb: 'https://www.facebook.com/ShenYunPerformingArts',
+          contactUs: 'https://www.shenyun.org/contact-us?lang=en-us',
+        }
+      case 'il':
+        return {
+          fb: 'https://www.facebook.com/ShenYunIL/',
+          contactUs: `/contact-us`,
+        }
+      default:
+        return {
+          fb: 'https://www.facebook.com/ShenYunPerformingArts',
+          contactUs: `/contact-us`,
+        }
+    }
+  }, [langCode])
+
   // @ts-ignore
+
   return (
     <div className="absolute w-screen left-0 top-0">
       <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
@@ -43,12 +63,12 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
         <div className="text-center h-screen display-none md:flex items-center">
           <div className="bg-white w-full rounded-xl z-10" style={shareAreaStyle}>
             {currentItem.descriptionLong}
-            <div>Follow us!</div>
+            <ShareButtonsPanel />
             <ShareButton>
               <div>
-                <div className="p-4 bg-[#c5bfb3] hover:bg-[#9e9685] rounded inline-block cursor-pointer">
+                <div className="p-2 bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer">
                   {/* @ts-ignore */}
-                  <ShareIcon className="w-6 h-6 text-white" />
+                  <ShareIcon className="w-8 h-8 text-white" />
                 </div>
                 <div>{translation.Share}</div>
               </div>

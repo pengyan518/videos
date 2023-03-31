@@ -25,17 +25,6 @@ export type ShortVideoSlideProps = {
   data: VideoItemProps[]
 }
 
-const style = {
-  // position: 'absolute' as const,
-  bgcolor: '#c7ae62',
-  boxShadow: 0,
-  // width: matches ? 425 : '100%',
-  fontFamily: 'open-sans-condensed',
-  fontSize: 16,
-  py: 2,
-  px: 8,
-}
-
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const {
     content: {translation},
