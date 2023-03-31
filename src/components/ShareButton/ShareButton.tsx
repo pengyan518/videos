@@ -1,12 +1,10 @@
-import * as React from 'react'
+import React, {createElement, Children, ReactNode} from 'react'
 import Popover from '@mui/material/Popover'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
+
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import {purple} from '@mui/material/colors'
 import ShareArea from './ShareArea'
-import {useAppSelector} from '../../app/hooks'
-import {RootState} from '../../app/store'
 
 const theme = createTheme({
   palette: {
@@ -21,10 +19,22 @@ const theme = createTheme({
   },
 })
 
-export default function ShareButton() {
-  const {
-    content: {translation},
-  } = useAppSelector((state: RootState) => state.intro)
+interface ShareButtonProps {
+  children: ReactNode
+}
+
+const style = {
+  // position: 'absolute' as const,
+  bgcolor: '#c7ae62',
+  boxShadow: 0,
+  // width: matches ? 425 : '100%',
+  fontFamily: 'open-sans-condensed',
+  fontSize: 16,
+  py: 2,
+  px: 8,
+}
+
+export default function ShareButton({children}: ShareButtonProps) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,9 +62,10 @@ export default function ShareButton() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Button aria-describedby={id} variant="contained" onClick={handleClick} sx={style} color="secondary">
-          {translation.Share}
-        </Button>
+        <ButtonDom onClick={handleClick}>{children}</ButtonDom>
+        {/* <Button aria-describedby={id} variant="contained" onClick={handleClick} sx={style} color="secondary"> */}
+        {/*  {translation.Share} */}
+        {/* </Button> */}
       </ThemeProvider>
       <Popover
         id={id}
@@ -74,5 +85,21 @@ export default function ShareButton() {
         </Typography>
       </Popover>
     </div>
+  )
+}
+
+interface Args {
+  children: ReactNode
+  onClick: any
+  elementType?: string
+}
+
+const ButtonDom = ({children, onClick, elementType = 'div'}: Args) => {
+  return createElement(
+    elementType,
+    {
+      onClick,
+    },
+    Children.only(children)
   )
 }

@@ -1,5 +1,6 @@
 import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import Button from '@mui/material/Button'
 import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 // Import Swiper React components
@@ -23,12 +24,28 @@ export type ShortVideoSlideProps = {
   data: VideoItemProps[]
 }
 
+const style = {
+  // position: 'absolute' as const,
+  bgcolor: '#c7ae62',
+  boxShadow: 0,
+  // width: matches ? 425 : '100%',
+  fontFamily: 'open-sans-condensed',
+  fontSize: 16,
+  py: 2,
+  px: 8,
+}
+
 export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
+  const {
+    content: {translation},
+  } = useAppSelector((state: RootState) => state.intro)
+
   const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   const [currentItem, setCurrentItem] = useState(item)
   const [shareAreaStyle, setShareAreaHeight] = useState({
     height: 0,
+    maxHeight: '100vh',
     overflow: 'hidden',
   })
   const matches = useMediaQuery('(min-width:768px)')
@@ -36,14 +53,14 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
   // const shortPlayerRef = useRef<any>(null)
-  const gridClass = matches ? 'md:grid-cols-[1fr_1.6fr_1fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
+  const gridClass = matches ? 'md:grid-cols-[1fr_1.5fr_1.3fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
 
   // const vimeoPlayerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (element.current) {
       // eslint-disable-next-line no-nested-ternary
-      const height = (): any | number => (matches ? (element.current ? size.width * 1.777 : 0) : window.innerHeight - 120)
+      const height = (): any | number => (matches ? (element.current ? size.width * 1.7778 : 0) : window.innerHeight - 120)
       setShareAreaHeight({...shareAreaStyle, height: height()})
     }
   }, [element, matches, size.width]) // don't update dependence by Eslint
@@ -150,7 +167,8 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         speed={700}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
-        autoHeight={true}
+        autoHeight={false}
+        height={window.innerHeight}
         loop={false}
         spaceBetween={0}
         modules={[Mousewheel, Pagination]}
@@ -181,9 +199,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
                       onClick={handleClick}
                       src={el.imageForVideo.original}
                     />
-                     <button className="absolute left-0 top-0 z-10" onClick={handleShare}>
+                    <button className="absolute left-0 top-0 z-10" onClick={handleShare}>
                       share
-                     </button>
+                    </button>
                   </div>
                   <div />
                 </div>
@@ -205,7 +223,11 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             <div className="bg-white w-full rounded-xl z-10" style={shareAreaStyle}>
               {currentItem.descriptionLong}
               <div>Follow us!</div>
-              <ShareButton />
+              <ShareButton>
+                <Button variant="contained" sx={style} color="secondary">
+                  {translation.Share}
+                </Button>
+              </ShareButton>
             </div>
           </div>
         </div>

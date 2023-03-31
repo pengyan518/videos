@@ -20,7 +20,7 @@ function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null
   // }, [isMuted])
 
   return (
-    <div className="w-full rounded-xl overflow-hidden">
+    <div className="w-full rounded-xl overflow-hidden bg-black">
       <Vimeo video={embeddedVideoVimeo} className="justify-center" controls={false} autoplay loop responsive />
     </div>
   )

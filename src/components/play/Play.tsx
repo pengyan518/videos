@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {ReactNode, useEffect, useRef} from 'react'
 import {Link, useParams} from 'react-router-dom'
 
 import {MainProps} from '../../types'
@@ -22,7 +22,7 @@ export default function Play({data}: PlayProps) {
 
   const itemObject = useRef({content: {title: '', description: ''}, key: ''})
 
-  const player = useRef(null)
+  const player = useRef<HTMLDivElement | null>(null)
 
   const breakForOfLoop = (arrayToBreak: {[s: string]: any}) => {
     for (const [key, categoryContent] of Object.entries(arrayToBreak).filter(([k]) => k !== 'itemsEditorsPick')) {
@@ -41,12 +41,11 @@ export default function Play({data}: PlayProps) {
 
   useEffect(() => {
     if(section !== 'shorts') {
-          // @ts-ignore
       player.current && player.current.scrollIntoView({block: 'start', inline: 'nearest'})
     } else {
       window.scrollTo(0, 0)
     }
-  }, [section])
+  }, [section, eid])
 
   if (breakForOfLoop(category))
     return (

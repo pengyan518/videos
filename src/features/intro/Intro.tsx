@@ -1,14 +1,14 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {Skeleton} from '@mui/material'
+// import {Skeleton} from '@mui/material'
 
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
-import {setContent} from './introSlice'
+// import {setContent} from './introSlice'
 import TopArea from '../../components/top-area'
 import {RootState} from '../../app/store'
 import Featured from '../../components/featured/featured'
 import {MainProps} from '../../types'
 import EditorsPick from '../../components/editors-pick/EditorsPick'
-import Section from '../../components/templates/Section'
+// import Section from '../../components/templates/Section'
 import CreationsBanner from '../../components/CreationsBanner/CreationsBanner'
 import Footer from '../../components/footer/Footer'
 import Shorts from '../../components/Shorts/Shorts'
@@ -38,7 +38,7 @@ function Intro({data}: IProps) {
       <div className="overflow-x-hidden">
         <TopArea />
         <EditorsPick data={data} />
-         <Shorts data={data} />
+          <Shorts data={data} />
         <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto pb-16 mt-[4.5rem]">
           <Featured data={data} />
         </div>
