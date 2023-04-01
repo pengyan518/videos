@@ -1,7 +1,7 @@
 import React, {ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {Link, useNavigate} from 'react-router-dom'
-import {Mousewheel, Pagination} from 'swiper'
+import {useMediaQuery} from '@mui/material'
 import config, {controller, sectionMap} from '../../config'
 
 import {ShortsProps, VideoItemProps} from '../../types'
@@ -13,8 +13,8 @@ import ShareButton from '../ShareButton/ShareButton'
 import ShareIcon from '../icons/Share'
 import {Item} from './styles'
 import IconsStore from '../icons/IconsStore'
-import ShareButtonsPanel from "./ShareButtonsPanel";
-
+import Triangle from '../icons/Triangle'
+import ShareButtonsPanel from './ShareButtonsPanel'
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
@@ -27,52 +27,62 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
 
-  const getTargetLink = useMemo(() => {
-    switch (langCode) {
-      case 'en-us':
-      case 'da':
-        return {
-          fb: 'https://www.facebook.com/ShenYunPerformingArts',
-          contactUs: 'https://www.shenyun.org/contact-us?lang=en-us',
-        }
-      case 'il':
-        return {
-          fb: 'https://www.facebook.com/ShenYunIL/',
-          contactUs: `/contact-us`,
-        }
-      default:
-        return {
-          fb: 'https://www.facebook.com/ShenYunPerformingArts',
-          contactUs: `/contact-us`,
-        }
+  const matches = useMediaQuery('(min-width:768px)')
+
+  const handleShare = useCallback(async () => {
+    const shareData = {
+      title: currentItem.title,
+      text: currentItem.description,
+      url: window.location.href,
     }
-  }, [langCode])
+    if (!matches) {
+      try {
+        await navigator.share(shareData)
+      } catch (err) {
+        console.debug(err)
+      }
+    }
+  }, [currentItem.description, currentItem.title, matches])
 
   // @ts-ignore
 
   return (
     <div className="absolute w-screen left-0 top-0">
       <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
-        <Link className="z-10 flex items-start" to={`/${controller}`} style={shareAreaStyle}>
-          Back
+        <Link className="z-10 flex items-start w-full justify-center" to={`/${controller}`} style={shareAreaStyle}>
+          <span className="rounded inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
+            <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
+              {/* @ts-ignore */}
+              <Triangle className="" />
+            </div>
+            <span className="ml-[-2px] md:ml-[-6px] text-[12px] md:text-[1rem]">{translation.Back}</span>
+          </span>
         </Link>
         <div className="relative flex items-start" style={shareAreaStyle}>
           <ToggleMute />
-          <div className="absolute text-white left-0 bottom-10">{currentItem.title}</div>
+          <div className="absolute text-white left-4 bottom-4">{currentItem.title}</div>
+          <button className="absolute right-4 bottom-4 z-10 md:hidden" onClick={handleShare}>
+            <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
+              {/* @ts-ignore */}
+              <IconsStore className="w-6 h-6 fill-black -scale-x-100" name="ShareIcon" />
+            </div>
+          </button>
         </div>
         <div className="text-center h-screen display-none md:flex items-center">
-          <div className="bg-white w-full rounded-xl z-10" style={shareAreaStyle}>
-            {currentItem.descriptionLong}
-            <ShareButtonsPanel />
-            <ShareButton>
-              <div>
-                <div className="p-2 bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer">
-                  {/* @ts-ignore */}
-                  <ShareIcon className="w-8 h-8 text-white" />
+          <div className="bg-white w-full rounded-xl z-10 px-20 py-10 grid items-center text-left" style={shareAreaStyle}>
+            <div>{currentItem.descriptionLong}</div>
+            <div>
+              <ShareButtonsPanel />
+              <ShareButton>
+                <div>
+                  <div className="p-2 bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white">
+                    {/* @ts-ignore */}
+                    <IconsStore className="w-8 h-8 -scale-x-100 fill-white" name="ShareIcon" />
+                  </div>
+                  <div>{translation.Share}</div>
                 </div>
-                <div>{translation.Share}</div>
-              </div>
-            </ShareButton>
+              </ShareButton>
+            </div>
           </div>
         </div>
       </div>

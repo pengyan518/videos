@@ -6,6 +6,7 @@ import {ShortsProps, VideoItemProps} from '../../types'
 import {setToggleMuted} from './shortsSlice'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from "../../app/store";
+import IconsStore from "../icons/IconsStore";
 
 export type ToggleMuteProps = {
   item?: VideoItemProps
@@ -50,9 +51,13 @@ export default function ToggleMute({}: ToggleMuteProps) {
   }, [handleMute, matches])
 
   // if (!shareAreaStyle.height) return <>loading...</>
+
   return (
-    <div className="absolute right-0 top-0 z-[11]" onClick={handleMuteClick} onTouchEnd={handleMuteTouch}>
-      {isMuted ? <>muted</> : <>X</>}
+    <div className="absolute right-4 top-4 z-[11]" onClick={handleMuteClick} onTouchEnd={handleMuteTouch}>
+      <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
+      {/* @ts-ignore */}
+      {isMuted ? <IconsStore className="w-6 h-6 fill-black" name="VolumeMute" /> : <IconsStore className="w-6 h-6 fill-black" name="VolumeUp" />}
+      </div>
     </div>
   )
 }

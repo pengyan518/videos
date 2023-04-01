@@ -46,19 +46,20 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
     ['FacebookIcon', getTargetLink.fb],
     ['TwitterIcon', 'https://twitter.com/shenyun'],
     ['InstagramIcon', 'https://www.instagram.com/shenyunperformingarts/'],
-    ['LinkedinIcon', 'https://www.linkedin.com/company/shen-yun-performing-arts'],
     ['YoutubeIcon', 'https://www.youtube.com/c/shenyun'],
+    ['LinkedinIcon', 'https://www.linkedin.com/company/shen-yun-performing-arts'],
+    ['PinterestIcon', 'https://www.pinterest.com/shenyun/'],
   ]
 
   return (
     <>
-      <div>Follow us!</div>
-      <div>
+      <div className="font-bold text-[1.5rem] pb-6">Follow us!</div>
+      <div className="pb-6">
         <div className="grid grid-cols-4 gap-4 items-center">
           {icons.map(item => (
             <div key={item[0]}>
               <Item
-                className="p-2 bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer"
+                className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer"
                 langCode={langCode}
                 target="_blank"
                 href={item[1]}>

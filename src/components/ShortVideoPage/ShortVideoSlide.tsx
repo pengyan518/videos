@@ -1,6 +1,5 @@
 import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import Button from '@mui/material/Button'
 import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 // Import Swiper React components
@@ -116,21 +115,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   //   }
   // }, [])
 
-  const handleShare = useCallback(async () => {
-    const shareData = {
-      title: currentItem.title,
-      text: currentItem.description,
-      url: window.location.href,
-    }
-    if (!matches) {
-      try {
-        await navigator.share(shareData)
-      } catch (err) {
-        console.debug(err)
-      }
-    }
-  }, [currentItem.description, currentItem.title, matches])
-
   useEffect(() => {
     window.addEventListener('popstate', event => {
       navigate(`/${config.controller}`)
@@ -156,7 +140,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
         autoHeight={false}
-        height={window.innerHeight}
+        height={matches?window.innerHeight:window.innerHeight+30}
         loop={false}
         spaceBetween={0}
         modules={[Mousewheel, Pagination]}
@@ -180,16 +164,13 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
               <SlideWrapper isActive={isActive} gridClass={gridClass}>
                 <div>
                   <div />
-                  <div className="relative rounded-xl" style={shareAreaStyle}>
+                  <div className="relative md:rounded-xl" style={shareAreaStyle}>
                     <img
                       className={`absolute left-0 top-0 object-cover ${isActive ? 'opacity-0' : ''}`}
                       onTouchEnd={handleTouch}
                       onClick={handleClick}
                       src={el.imageForVideo.original}
                     />
-                    <button className="absolute left-0 top-0 z-10" onClick={handleShare}>
-                      share
-                    </button>
                   </div>
                   <div />
                 </div>
