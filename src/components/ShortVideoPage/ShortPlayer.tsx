@@ -11,9 +11,10 @@ import useRect from "../../hooks/useRect";
 
 export type PlayProps = {
   item: any
+  shareAreaStyle: any
 }
 
-function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
@@ -33,7 +34,7 @@ function VideoPlayer({item}: PlayProps, ref: React.Ref<any> | null) {
     <div className="h-screen grid items-start md:items-center w-full">
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
-        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} />
+        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} />
       ) : embeddedVideoYT !== '' ? (
         <YoutubeEmbed embedId={embeddedVideoYT} />
       ) : (

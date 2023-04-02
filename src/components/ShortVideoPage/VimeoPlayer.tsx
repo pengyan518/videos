@@ -2,6 +2,7 @@ import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, 
 import useMediaQuery from '@mui/material/useMediaQuery'
 // import Player from '@vimeo/player'
 import Vimeo from '../VimeoPlayer'
+import useMobileDetect from "../../hooks/useMobileDetect";
 
 // import {ShortsProps} from '../../types'
 // import {useAppSelector} from '../../app/hooks'
@@ -10,10 +11,12 @@ import Vimeo from '../VimeoPlayer'
 export type PlayProps = {
   embeddedVideoVimeo: string
   hideLoading?: () => void
+  shareAreaStyle?: any
 }
 
-function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({embeddedVideoVimeo, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
   const matches = useMediaQuery('(min-width:768px)')
+  const {isMobile} = useMobileDetect()
   // const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   // const [muted, setMuted] = useState(false)
   //
@@ -26,9 +29,14 @@ function VideoPlayer({embeddedVideoVimeo}: PlayProps, ref: React.Ref<any> | null
     responsive: matches,
   }
 
+
+
+  const myClass = isMobile()? '' : 'w-full'
+  const class_warpper = matches ? '' : `flex justify-center h-screen ${!isMobile()?'items-center':''}`
+
   return (
-    <div className="w-full md:rounded-xl overflow-hidden bg-black">
-      <Vimeo video={embeddedVideoVimeo} className="justify-center" controls={false} autoplay loop {...props} />
+    <div className={`w-full md:rounded-xl overflow-hidden bg-black ${class_warpper}`}>
+      <Vimeo video={embeddedVideoVimeo} className={`justify-center ${myClass}`} controls={false} autoplay loop {...props} />
     </div>
   )
 }

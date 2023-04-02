@@ -47,7 +47,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
   // @ts-ignore
 
   return (
-    <div className="absolute w-screen left-0 top-0">
+    <div className="absolute w-screen left-0 top-0 proxima-nova">
       <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
         <Link className="z-10 flex items-start w-full justify-center" to={`/${controller}`} style={shareAreaStyle}>
           <span className="rounded inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
@@ -60,8 +60,8 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
         </Link>
         <div className="relative flex items-start" style={shareAreaStyle}>
           <ToggleMute />
-          <div className="absolute text-white left-4 bottom-4">{currentItem.title}</div>
-          <button className="absolute right-4 bottom-4 z-10 md:hidden" onClick={handleShare}>
+          <div className="absolute text-white left-4 bottom-0">{currentItem.title}</div>
+          <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}
               <IconsStore className="w-6 h-6 fill-black -scale-x-100" name="ShareIcon" />
@@ -69,15 +69,15 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
           </button>
         </div>
         <div className="text-center h-screen display-none md:flex items-center">
-          <div className="bg-white w-full rounded-xl z-10 px-20 py-10 grid items-center text-left" style={shareAreaStyle}>
-            <div>{currentItem.descriptionLong}</div>
+          <div className="bg-white w-full rounded-xl z-10 px-[4vw] py-10 grid items-center text-left" style={shareAreaStyle}>
+            <div className="text-lg">{currentItem.descriptionLong}</div>
             <div>
               <ShareButtonsPanel />
               <ShareButton>
                 <div>
-                  <div className="p-2 bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white">
+                  <div className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white">
                     {/* @ts-ignore */}
-                    <IconsStore className="w-8 h-8 -scale-x-100 fill-white" name="ShareIcon" />
+                    <IconsStore className="w-[2.5vw] h-[2.5vw] -scale-x-100 fill-white" name="ShareIcon" />
                   </div>
                   <div>{translation.Share}</div>
                 </div>

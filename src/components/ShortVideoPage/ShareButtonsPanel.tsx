@@ -55,7 +55,7 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
     <>
       <div className="font-bold text-[1.5rem] pb-6">Follow us!</div>
       <div className="pb-6">
-        <div className="grid grid-cols-4 gap-4 items-center">
+        <div className="flex flex-wrap gap-3 items-center">
           {icons.map(item => (
             <div key={item[0]}>
               <Item
@@ -64,7 +64,7 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
                 target="_blank"
                 href={item[1]}>
                 {/* @ts-ignore */}
-                <IconsStore className="w-8 h-8 text-white" name={item[0]} />
+                <IconsStore className="w-[2.5vw] h-[2.5vw] text-white" name={item[0]} />
               </Item>
             </div>
           ))}
