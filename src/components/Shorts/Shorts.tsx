@@ -6,8 +6,10 @@ import Section from '../templates/Section'
 import ThumbItem from '../Thumb/ThumbItem'
 import Wrapper from '../templates/Wrapper'
 import Carousel from '../MyCarousel/Carousel'
-import useSortPopular from '../../hooks/useSortPopular'
-import FilterButton from "../FilterButton/FilterButton";
+// import useSortPopular from '../../hooks/useSortPopular'
+// import FilterButton from "../FilterButton/FilterButton";
+// import ThumbItemWithCaption from "../Thumb/ThumbItemWithCaption";
+import ShortsThumbItem from "../Thumb/ShortsThumbItem";
 
 export type FeaturedProps = {
   data: MainProps
@@ -22,29 +24,30 @@ export default function Shorts({data}: FeaturedProps) {
 
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsShorts})
+  // const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsShorts})
   return (
-    <Section className="bg-[#706459]" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
+    <Section className="bg-white" width="md:w-full" xPadding="px-0" yPadding="pt-8 pb-14">
       <Wrapper className="innerPaddingAlignHeader">
         <div className="py-3 block md:flex justify-between items-center">
-          <div className="uppercase text-white mb-2 md:mb-0">{translation.Shorts}</div>
-          <FilterButton handleClick={handleClick} activeTab={activeTab} />
+          <div className="uppercase mb-2 md:mb-0">{translation.Shorts}</div>
         </div>
 
         <Carousel
-          className="flex-[0_0_70%] md:flex-[0_0_32.5%] last:mr-4"
-          buttonClass="bg-[#3f362f] hover:bg-[#ede4dc] text-[#6c635c] hover:text-[#745c36]">
-          {content.map(item => {
+          className="flex-[0_0_30%] md:flex-[0_0_16.4%] last:mr-4"
+          gap="gap-1"
+          buttonClass="bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white top-[40%] translate-y-[-50%]"
+          leftPosition="left-0"
+          rightPosition="right-0"
+        >
+          {itemsShorts.map(item => {
             const {id} = item
             return (
               <div className="relative" key={id}>
-                <ThumbItem item={item} sectionName="shorts" showTitle />
+                <ShortsThumbItem item={item} sectionName="shorts" />
               </div>
             )
           })}
         </Carousel>
-        {/* </div> */}
-        {/* </ScrollWrapper> */}
       </Wrapper>
     </Section>
   )

@@ -16,9 +16,10 @@ export type ItemProps = {
   showLargeThumb?: boolean
   showTitle?: boolean
   parentHover?: boolean
+  vertical?: boolean
 }
 
-export default function ThumbView({item, showIcon, showLargeThumb, showTitle, parentHover}: ItemProps) {
+export default function ThumbView({item, showIcon, showLargeThumb, showTitle, parentHover, vertical}: ItemProps) {
   const {
     content: {langCode, translation},
   } = useAppSelector((state: RootState) => state.intro)
@@ -51,7 +52,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
 
   return (
     <div className="relative" ref={hoverRef}>
-      <ImgWrapper className="aspect-w-16 aspect-h-9 overflow-hidden rounded-xl">
+      <ImgWrapper className={`${vertical?'aspect-w-10 aspect-h-16':'aspect-w-16 aspect-h-9'} overflow-hidden rounded-xl`}>
         <Lazy>
           <img
             src={showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium}

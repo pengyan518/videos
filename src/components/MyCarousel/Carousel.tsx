@@ -6,14 +6,17 @@ import {DotButton, PrevButton, NextButton} from './EmblaCarouselArrowsDotsButton
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 
-export type RelatedContentProps = {
+export type CarouselProps = {
   className: string
   children: React.ReactNode
   header?: React.ReactNode
   buttonClass?: string
+  gap?: string
+  leftPosition?: string
+  rightPosition?: string
 }
 
-export default function Carousel({className, children, header, buttonClass}: RelatedContentProps) {
+export default function Carousel({className, children, header, buttonClass, gap='gap-4', rightPosition, leftPosition}: CarouselProps) {
   const {
     content: {langCode},
   } = useAppSelector((state: RootState) => state.intro)
@@ -58,7 +61,7 @@ export default function Carousel({className, children, header, buttonClass}: Rel
       <div className="">
         {header && header}
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-4">
+          <div className={`flex ${gap}`}>
             {React.Children.map(children, (child, index) => {
               if (!React.isValidElement(child)) return null
 
@@ -71,8 +74,8 @@ export default function Carousel({className, children, header, buttonClass}: Rel
         </div>
         {matches && (
           <>
-            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} buttonClass={buttonClass} />
-            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} buttonClass={buttonClass} />
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} buttonClass={buttonClass} leftPosition={leftPosition} />
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} buttonClass={buttonClass} rightPosition={rightPosition} />
           </>
         )}
       </div>

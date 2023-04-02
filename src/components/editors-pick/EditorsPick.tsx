@@ -34,7 +34,7 @@ export default function EditorsPick({data}: FeaturedProps) {
 
         <Carousel
           className="flex-[0_0_70%] md:flex-[0_0_32.5%] last:mr-4"
-          buttonClass="bg-[#3f362f] hover:bg-[#ede4dc] text-[#6c635c] hover:text-[#745c36]">
+          buttonClass="bg-[#3f362f] hover:bg-[#ede4dc] text-[#6c635c] hover:text-[#745c36] top-1/2 translate-y-[-50%]">
           {content.map(item => {
             const {id} = item
             return (
