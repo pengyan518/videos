@@ -17,19 +17,11 @@ export type PlayProps = {
 function VideoPlayer({embeddedVideoVimeo, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
   const matches = useMediaQuery('(min-width:768px)')
   const {isMobile} = useMobileDetect()
-  // const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
-  // const [muted, setMuted] = useState(false)
-  //
-  // useEffect(()=>{
-  //   if(isMuted) return setMuted(true)
-  //   return setMuted(false)
-  // }, [isMuted])
+
   const props = {
     height: matches ? 'none' : window.innerHeight,
     responsive: matches,
   }
-
-
 
   const myClass = isMobile()? '' : 'w-full'
   const class_warpper = matches ? '' : `flex justify-center h-screen ${!isMobile()?'items-center':''}`

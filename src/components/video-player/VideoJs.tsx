@@ -51,9 +51,9 @@ export const VideoJS = (props: {options: any; onReady: any, isShortVideo?: boole
   }, [playerRef])
 
   return (
-    <div className={!isShortVideo && ratio < 1 ? 'md:w-4/12 mx-auto' : ''}>
+    <div className={`${!isShortVideo && ratio < 1 ? 'md:w-4/12 mx-auto' : ''} ${isShortVideo?'':''}`}>
       <div data-vjs-player>
-        <video ref={videoRef} className={`rounded-xl overflow-hidden video-js  ${isShortVideo?'vjs-9-16':'vjs-big-play-centered'}`} />
+        <video ref={videoRef} className={`rounded-xl overflow-hidden video-js bg-black ${isShortVideo?'vjs-9-16':'vjs-big-play-centered'}`} />
       </div>
     </div>
   )

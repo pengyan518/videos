@@ -50,7 +50,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
     <div className="absolute w-screen left-0 top-0 proxima-nova">
       <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
         <Link className="z-10 flex items-start w-full justify-center" to={`/${controller}`} style={shareAreaStyle}>
-          <span className="rounded inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
+          <span className="rounded display-none lg:inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
             <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
               {/* @ts-ignore */}
               <Triangle className="" />
@@ -59,8 +59,15 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
           </span>
         </Link>
         <div className="relative flex items-start" style={shareAreaStyle}>
+          <Link className="absolute left-4 top-4 z-10 lg:hidden" to={`/${controller}`}>
+            <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
+              {/* @ts-ignore */}
+              <IconsStore className="w-6 h-6 fill-black" name="ChevronLeft" />
+            </div>
+          </Link>
+
           <ToggleMute />
-          <div className="absolute text-white left-4 bottom-0">{currentItem.title}</div>
+          <div className="absolute text-white left-4 bottom-0 md:bottom-4">{currentItem.title}</div>
           <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}

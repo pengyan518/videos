@@ -7,7 +7,8 @@ import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import useScrollEvent from '../../hooks/useScrollEvent'
 import VimeoPlayer from './VimeoPlayer'
-import useRect from "../../hooks/useRect";
+import useRect from '../../hooks/useRect'
+import useMobileDetect from '../../hooks/useMobileDetect'
 
 export type PlayProps = {
   item: any
@@ -20,18 +21,10 @@ function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | nu
   // const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   // const loading = useRef<HTMLDivElement | null>(null)
 
-
-
-  // const getPlayerSize = useCallback(() => {
-  //   // @ts-ignore
-  //   // eslint-disable-next-line no-unsafe-optional-chaining
-  //   return element.current ? size.width * 1.777 : 0
-  // }, [element, size.width])
-  //
-  // useImperativeHandle(ref, () => ({videoHeight: getPlayerSize()}), [getPlayerSize])
+  const {isMobile} = useMobileDetect()
 
   return (
-    <div className="h-screen grid items-start md:items-center w-full">
+    <div className={`h-screen grid bg-black md:bg-transparent ${isMobile()?'items-start':'items-center'} w-full`}>
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
         <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} />
@@ -48,7 +41,7 @@ function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | nu
             controls: false,
             height: window.innerHeight,
             // muted: true,
-            loop: true
+            loop: true,
           }}
           ref={ref}
         />
