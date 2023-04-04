@@ -19,6 +19,7 @@ import getFriendlyUrl from '../../utils/getFriendlyUrl'
 import ShareButton from '../ShareButton/ShareButton'
 import ShortVideoSharePanel from './ShortVideoSharePanel'
 import {requestTimeout} from '../../utils/RAFTimeout'
+import SlideItem from './SlideItem'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -78,10 +79,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const onSlideChangeTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
       // console.debug(e.activeIndex)
-      // window.vimeoPlayer = null
-      // window.videoJsPlayer = null
-      // window.youTubePlayer = null
-      console.debug('onSlideChangeTransitionStart')
+      // console.debug('onSlideChangeTransitionStart')
       setCurrentItem(data[e.activeIndex])
     },
 
@@ -89,7 +87,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   )
 
   const onTransitionEnd = useCallback(() => {
-    console.debug('onTransitionEnd')
+    // console.debug('onTransitionEnd')
     if (window.vimeoPlayer) {
       if (isMuted) {
         window.vimeoPlayer.setMuted(true)
@@ -153,20 +151,14 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
-              <SlideWrapper isActive={isActive} gridClass={gridClass}>
-                <div>
-                  <div />
-                  <div className="relative md:rounded-xl" style={shareAreaStyle}>
-                    <img
-                      className={`absolute left-0 top-0 object-cover ${isActive ? 'opacity-0' : ''}`}
-                      onTouchEnd={handleTouch}
-                      onClick={handleClick}
-                      src={el.imageForVideo.original}
-                    />
-                  </div>
-                  <div />
-                </div>
-              </SlideWrapper>
+              <SlideItem
+                el={el}
+                isActive={isActive}
+                handleTouch={handleTouch}
+                handleClick={handleClick}
+                shareAreaStyle={shareAreaStyle}
+                gridClass={gridClass}
+              />
             )}
           </SwiperSlide>
         ))}
