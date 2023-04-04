@@ -59,7 +59,7 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
           {icons.map(item => (
             <div key={item[0]}>
               <Item
-                className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer"
+                className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer relative z-10"
                 langCode={langCode}
                 target="_blank"
                 href={item[1]}>

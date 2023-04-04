@@ -17,7 +17,8 @@ import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
 import ShareButton from '../ShareButton/ShareButton'
-import ShortVideoSharePanel from "./ShortVideoSharePanel";
+import ShortVideoSharePanel from './ShortVideoSharePanel'
+import {requestTimeout} from '../../utils/RAFTimeout'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -41,7 +42,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const navigate = useNavigate()
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
-  // const shortPlayerRef = useRef<any>(null)
+  const swiperRef = useRef<any>(null)
   const gridClass = matches ? 'md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
   // const gridClass = 'grid-cols-[0fr_1.6fr_0fr] md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] md:gap-2'
 
@@ -105,16 +106,13 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     }
   }, [isMuted])
 
-  // const onSlideChangeTransitionEnd = useCallback(() => {
-  //   console.debug('onSlideChangeTransitionEnd')
-  //   if (window.vimeoPlayer) {
-  //     window.vimeoPlayer.getPaused().then((paused: boolean) => {
-  //       if (paused) {
-  //         window.vimeoPlayer.play()
-  //       }
-  //     })
-  //   }
-  // }, [])
+  const onAfterInit = useCallback(
+    (swiper: {slideTo: (arg0: number) => void}) => {
+      swiper.slideTo(currentSlide)
+      requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 300)
+    },
+    [currentSlide]
+  )
 
   useEffect(() => {
     window.addEventListener('popstate', event => {
@@ -123,7 +121,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   }, [navigate])
 
   return (
-    <div className="ShortVideoPage">
+    <div className="ShortVideoPage opacity-0 animate__animated" ref={swiperRef}>
       <div className="absolute left-0 top-0">
         <div className={`w-screen relative grid ${gridClass} justify-center`}>
           <div />
@@ -133,32 +131,25 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           <div />
         </div>
       </div>
+
       <Swiper
         direction={'vertical'}
         threshold={matches ? 25 : 0}
         slidesPerView={1}
-        speed={700}
+        speed={300}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
         autoHeight={false}
-        height={matches?window.innerHeight:window.innerHeight+30}
+        height={matches ? window.innerHeight : window.innerHeight + 30}
         loop={false}
         spaceBetween={0}
         modules={[Mousewheel, Pagination]}
-        onSwiper={swiper => {
-          // window.swiper = swiper
-        }}
-        // onTouchStart={swiperOnClick}
-        onAfterInit={swiper => {
-          swiper.slideTo(currentSlide)
-        }}
+        onSwiper={swiper => {}}
+        onAfterInit={onAfterInit}
         onSlideChange={onSlideChange}
         onTransitionStart={onTransitionStart}
         onSlideChangeTransitionStart={onSlideChangeTransitionStart}
-        onTransitionEnd={onTransitionEnd}
-        // onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
-        // onClick={swiperOnClick}
-        className="mySwiper">
+        onTransitionEnd={onTransitionEnd}>
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (

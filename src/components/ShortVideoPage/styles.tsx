@@ -25,10 +25,10 @@ export const Item = styled.a<LangProps>`
   svg {
     transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 
-    &:hover,
-    &:focus {
-      fill: #ffe4a7;
-    }
+    //&:hover,
+    //&:focus {
+    //  fill: #ffe4a7;
+    //}
   }
 `
 

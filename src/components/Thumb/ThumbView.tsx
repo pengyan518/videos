@@ -29,6 +29,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
   const isHover = useHover(hoverRef)
 
   const hoverEffect = showLargeThumb ? parentHover : isHover
+  const roundedSize = vertical?'lg':'xl'
 
   useEffect(() => {
     if (showIcon) {
@@ -52,7 +53,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
 
   return (
     <div className="relative" ref={hoverRef}>
-      <ImgWrapper className={`${vertical?'aspect-w-10 aspect-h-16':'aspect-w-16 aspect-h-9'} overflow-hidden rounded-xl`}>
+      <ImgWrapper className={`${vertical?'aspect-w-10 aspect-h-16':'aspect-w-16 aspect-h-9'} overflow-hidden rounded-${roundedSize}`}>
         <Lazy>
           <img
             src={showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium}
@@ -61,13 +62,13 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
           />
         </Lazy>
       </ImgWrapper>
-      <div className="absolute rounded-xl w-full h-full top-0 left-0 opacity-0 bg-slate-900/50 animate__animated" ref={backdrop} />
+      <div className={`absolute rounded-${roundedSize} w-full h-full top-0 left-0 opacity-0 bg-slate-900/50 animate__animated`} ref={backdrop} />
       {!showLargeThumb && (
         <>
           {showTitle ? (
             <div className={`w-full flex absolute bottom-0 h-[7rem] px-3 py-2 md:px-4 md:py-3 items-end text-white`}>
               <Gradient
-                className={`absolute rounded-b-xl w-full h-full left-0 bottom-0 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.85)] ${
+                className={`absolute rounded-b-${roundedSize} w-full h-full left-0 bottom-0 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.85)] ${
                   isHover ? 'opacity-100' : 'opacity-90'
                 }`}
               />

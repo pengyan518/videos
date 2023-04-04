@@ -49,15 +49,17 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
   return (
     <div className="absolute w-screen left-0 top-0 proxima-nova">
       <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
-        <Link className="z-10 flex items-start w-full justify-center" to={`/${controller}`} style={shareAreaStyle}>
-          <span className="rounded display-none lg:inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
-            <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
-              {/* @ts-ignore */}
-              <Triangle className="" />
-            </div>
-            <span className="ml-[-2px] md:ml-[-6px] text-[12px] md:text-[1rem]">{translation.Back}</span>
-          </span>
-        </Link>
+        <div className="flex items-start w-full justify-center relative" style={shareAreaStyle}>
+          <Link className="z-[1]" to={`/${controller}`}>
+            <span className="rounded display-none lg:inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
+              <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
+                {/* @ts-ignore */}
+                <Triangle className="" />
+              </div>
+              <span className="ml-[-2px] md:ml-[-6px] text-[12px] md:text-[1rem]">{translation.Back}</span>
+            </span>
+          </Link>
+        </div>
         <div className="relative flex items-start" style={shareAreaStyle}>
           <Link className="absolute left-4 top-4 z-10 lg:hidden" to={`/${controller}`}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
@@ -76,17 +78,17 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
           </button>
         </div>
         <div className="text-center h-screen display-none md:flex items-center">
-          <div className="bg-white w-full rounded-xl z-10 px-[4vw] py-10 grid items-center text-left" style={shareAreaStyle}>
+          <div className="bg-white w-full rounded-xl px-[4vw] py-10 grid items-center text-left" style={shareAreaStyle}>
             <div className="text-lg">{currentItem.descriptionLong}</div>
-            <div>
+            <div className="">
               <ShareButtonsPanel />
               <ShareButton>
                 <div>
-                  <div className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white">
+                  <div className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white relative z-10">
                     {/* @ts-ignore */}
                     <IconsStore className="w-[2.5vw] h-[2.5vw] -scale-x-100 fill-white" name="ShareIcon" />
                   </div>
-                  <div>{translation.Share}</div>
+                  <div className="mt-2">{translation.Share}</div>
                 </div>
               </ShareButton>
             </div>

@@ -23,7 +23,7 @@ const Lazy = ({threshold = 0, rootMargin = '0%', freezeOnceVisible = true, class
   // console.log(`Render Section ${props.title}`, {isVisible})
 
   // const elStyles = {height, width}
-  const elClasses = `overflow-hidden rounded-xl LazyLoad${isVisible ? ' is-visible' : ''}${className ? ` ${className}` : ''}`
+  const elClasses = `overflow-hidden LazyLoad${isVisible ? ' is-visible' : ''}${className ? ` ${className}` : ''}`
 
   return createElement(
     elementType,
