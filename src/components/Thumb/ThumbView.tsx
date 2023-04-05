@@ -29,7 +29,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
   const isHover = useHover(hoverRef)
 
   const hoverEffect = showLargeThumb ? parentHover : isHover
-  const roundedSize = vertical?'lg':'xl'
+  const roundedSize = vertical ? 'lg' : 'xl'
 
   useEffect(() => {
     if (showIcon) {
@@ -53,7 +53,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
 
   return (
     <div className="relative" ref={hoverRef}>
-      <ImgWrapper className={`${vertical?'aspect-w-10 aspect-h-16':'aspect-w-16 aspect-h-9'} overflow-hidden rounded-${roundedSize}`}>
+      <ImgWrapper className={`${vertical ? 'aspect-w-10 aspect-h-16' : 'aspect-w-16 aspect-h-9'} overflow-hidden rounded-${roundedSize}`}>
         <Lazy>
           <img
             src={showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium}
@@ -62,7 +62,10 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
           />
         </Lazy>
       </ImgWrapper>
-      <div className={`absolute rounded-${roundedSize} w-full h-full top-0 left-0 opacity-0 bg-slate-900/50 animate__animated`} ref={backdrop} />
+      <div
+        className={`absolute rounded-${roundedSize} w-full h-full top-0 left-0 opacity-0 bg-slate-900/50 animate__animated`}
+        ref={backdrop}
+      />
       {!showLargeThumb && (
         <>
           {showTitle ? (
@@ -81,7 +84,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
               <TimeStamp onDemandLink={item.onDemandLink} length={item.length} className="m-[0.5rem] md:m-[0.75rem]" />
             </div>
           ) : (
-            <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />
+            <>{!vertical && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />}</>
           )}
         </>
       )}

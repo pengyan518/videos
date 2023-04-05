@@ -15,19 +15,39 @@ import {Item} from './styles'
 import IconsStore from '../icons/IconsStore'
 import Triangle from '../icons/Triangle'
 import ShareButtonsPanel from './ShareButtonsPanel'
+import Play from '../icons/Play'
+import {requestTimeout} from '../../utils/RAFTimeout'
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
   gridClass: string
   shareAreaStyle: object
+  isPaused: boolean | null
 }
 
-export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaStyle}: ShortVideoSharePanelProps) {
+export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaStyle, isPaused}: ShortVideoSharePanelProps) {
   const {
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
 
   const matches = useMediaQuery('(min-width:768px)')
+
+  const ref = useRef<HTMLDivElement>(null)
+  // const isHover = useHover(hoverRef)
+
+  useEffect(() => {
+    if (isPaused) {
+      requestTimeout(() => ref.current && ref.current.classList.add('animate__fadeIn'), 0)
+    } else {
+      requestTimeout(() => ref.current && ref.current.classList.replace('animate__fadeIn', 'animate__fadeOut'), 0)
+      requestTimeout(() => ref.current && ref.current.classList.remove('animate__fadeOut'), 20)
+    }
+    return () => {
+      requestTimeout(() => {
+        if (ref.current && ref.current.classList.contains('animate__fadeOut')) ref.current.classList.remove('animate__fadeOut')
+      }, 0)
+    }
+  }, [isPaused])
 
   const handleShare = useCallback(async () => {
     const shareData = {
@@ -76,6 +96,11 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
               <IconsStore className="w-6 h-6 fill-black -scale-x-100" name="ShareIcon" />
             </div>
           </button>
+          <div
+            ref={ref}
+            className="absolute text-white w-12 h-12 top-1/2 left-1/2 opacity-0 translate-x-[-50%] translate-y-[-50%] animate__animated">
+            <Play className={`drop-shadow-lg`} />
+          </div>
         </div>
         <div className="text-center h-screen display-none md:flex items-center">
           <div className="bg-white w-full rounded-xl px-[4vw] py-10 grid items-center text-left" style={shareAreaStyle}>

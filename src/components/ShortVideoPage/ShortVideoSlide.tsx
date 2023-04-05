@@ -1,4 +1,4 @@
-import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
+import React, {ReactNode, SetStateAction, useCallback, useEffect, useRef, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
@@ -9,14 +9,13 @@ import config, {controller, sectionMap} from '../../config'
 
 import ShortPlayer from './ShortPlayer'
 import {ShortsProps, VideoItemProps} from '../../types'
-import swiperOnClick, {onSlideChange, handlePause} from './swiperOnClick'
-import SlideWrapper from './SlideWrapper'
+import onSlideChange from './swiperOnClick'
 import useRect from '../../hooks/useRect'
-import ToggleMute from './ToggleMute'
+
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
-import ShareButton from '../ShareButton/ShareButton'
+
 import ShortVideoSharePanel from './ShortVideoSharePanel'
 import {requestTimeout} from '../../utils/RAFTimeout'
 import SlideItem from './SlideItem'
@@ -31,9 +30,12 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
 
+  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
+
   const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   const [currentItem, setCurrentItem] = useState(item)
+  const [isPaused, setPaused] = useState<boolean | null>(null)
   const [shareAreaStyle, setShareAreaHeight] = useState({
     height: 0,
     maxHeight: '100vh',
@@ -44,6 +46,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   // const swiper = useSwiper()
   const currentSlide = data.indexOf(item)
   const swiperRef = useRef<any>(null)
+  const mySwiperRef = useRef<any>(null)
   const gridClass = matches ? 'md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
   // const gridClass = 'grid-cols-[0fr_1.6fr_0fr] md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] md:gap-2'
 
@@ -57,29 +60,61 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     }
   }, [element, matches, size.width]) // don't update dependence by Eslint
 
+  const swiperOnClick = useCallback(() => {
+    if (vimeoPlayer) {
+      vimeoPlayer.getPaused().then((paused: boolean) => {
+        if (paused) {
+          vimeoPlayer.play()
+          setPaused(false)
+        } else {
+          vimeoPlayer.pause()
+          setPaused(true)
+        }
+      })
+    }
+    if (window.videoJsPlayer) {
+      if (window.videoJsPlayer.paused()) {
+        window.videoJsPlayer.play()
+        setPaused(false)
+      } else {
+        window.videoJsPlayer.pause()
+        setPaused(true)
+      }
+    }
+
+    if (window.youTubePlayer) {
+      window.youTubePlayer.getPlayerState().then((value: number) => {
+        if (value < 1 || value === 2) {
+          window.youTubePlayer.playVideo()
+        } else {
+          window.youTubePlayer.pauseVideo()
+        }
+      })
+    }
+  }, [vimeoPlayer])
+
   const handleTouch = useCallback(() => {
     if (!matches) swiperOnClick()
-  }, [matches])
+  }, [matches, swiperOnClick])
 
   const handleClick = useCallback(() => {
     if (matches) swiperOnClick()
-  }, [matches])
+  }, [matches, swiperOnClick])
 
   const onTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
+      mySwiperRef.current && mySwiperRef.current.classList.remove('opacity-0')
       const {eid, title, urlFriendlyName} = data[e.activeIndex]
       const seoUrl = urlFriendlyName || getFriendlyUrl(title)
       window.history.pushState({}, '', `/${config.controller}/shorts/play/${eid}/${seoUrl}.html`)
       axios.get(`${config.updateCounter}${eid}`)
+      element.current && element.current.classList.add('opacity-0')
     },
-
-    [data]
+    [data, element]
   )
 
   const onSlideChangeTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
-      // console.debug(e.activeIndex)
-      // console.debug('onSlideChangeTransitionStart')
       setCurrentItem(data[e.activeIndex])
     },
 
@@ -87,13 +122,19 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   )
 
   const onTransitionEnd = useCallback(() => {
-    // console.debug('onTransitionEnd')
-    if (window.vimeoPlayer) {
+    console.debug('onTransitionEnd')
+    // console.debug(vimeoPlayer)
+    if (vimeoPlayer) {
       if (isMuted) {
-        window.vimeoPlayer.setMuted(true)
+        vimeoPlayer.setMuted(true)
       } else {
-        window.vimeoPlayer.setMuted(false)
+        vimeoPlayer.setMuted(false)
       }
+      // vimeoPlayer.getPaused().then((paused: boolean) => {
+      //   console.debug(`paused: ${paused}`)
+      //   setPaused(paused)
+      // })
+      setPaused(false)
     }
     if (window.videoJsPlayer) {
       if (isMuted) {
@@ -101,13 +142,17 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       } else {
         window.videoJsPlayer.muted(false)
       }
+      setPaused(window.videoJsPlayer.paused())
     }
-  }, [isMuted])
+    element.current && element.current.classList.remove('opacity-0')
+    mySwiperRef.current && mySwiperRef.current.classList.add('opacity-0')
+  }, [element, isMuted, vimeoPlayer])
 
   const onAfterInit = useCallback(
     (swiper: {slideTo: (arg0: number) => void}) => {
+      console.debug('onAfterInit')
       swiper.slideTo(currentSlide)
-      requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 300)
+      requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 500)
     },
     [currentSlide]
   )
@@ -134,7 +179,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         direction={'vertical'}
         threshold={matches ? 25 : 0}
         slidesPerView={1}
-        speed={300}
+        speed={700}
         mousewheel={{forceToAxis: !0, invert: !1, sensitivity: 0.1}}
         touchStartPreventDefault={false}
         autoHeight={false}
@@ -147,7 +192,8 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         onSlideChange={onSlideChange}
         onTransitionStart={onTransitionStart}
         onSlideChangeTransitionStart={onSlideChangeTransitionStart}
-        onTransitionEnd={onTransitionEnd}>
+        onTransitionEnd={onTransitionEnd}
+        ref={mySwiperRef}>
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
@@ -158,12 +204,13 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
                 handleClick={handleClick}
                 shareAreaStyle={shareAreaStyle}
                 gridClass={gridClass}
+                isPaused={isPaused}
               />
             )}
           </SwiperSlide>
         ))}
       </Swiper>
-      <ShortVideoSharePanel currentItem={currentItem} gridClass={gridClass} shareAreaStyle={shareAreaStyle} />
+      <ShortVideoSharePanel currentItem={currentItem} gridClass={gridClass} shareAreaStyle={shareAreaStyle} isPaused={isPaused} />
     </div>
   )
 }

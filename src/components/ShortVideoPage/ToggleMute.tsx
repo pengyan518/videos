@@ -14,19 +14,20 @@ export type ToggleMuteProps = {
 }
 
 export default function ToggleMute({}: ToggleMuteProps) {
+  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   const matches = useMediaQuery('(min-width:768px)')
 
   const dispatch = useAppDispatch()
 
   const handleMute = () => {
-    if (window.vimeoPlayer) {
-      window.vimeoPlayer.getMuted().then((isMute: boolean) => {
+    if (vimeoPlayer) {
+      vimeoPlayer.getMuted().then((isMute: boolean) => {
         if (isMute) {
-          window.vimeoPlayer.setMuted(false)
+          vimeoPlayer.setMuted(false)
           dispatch(setToggleMuted(false))
         } else {
-          window.vimeoPlayer.setMuted(true)
+          vimeoPlayer.setMuted(true)
           dispatch(setToggleMuted(true))
         }
       })
