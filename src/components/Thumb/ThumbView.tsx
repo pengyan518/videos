@@ -54,7 +54,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
   return (
     <div className="relative" ref={hoverRef}>
       <ImgWrapper className={`${vertical ? 'aspect-w-10 aspect-h-16' : 'aspect-w-16 aspect-h-9'} overflow-hidden rounded-${roundedSize}`}>
-        <Lazy>
+        <Lazy className={`rounded-${roundedSize}`}>
           <img
             src={showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium}
             alt=""
