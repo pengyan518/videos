@@ -20,7 +20,7 @@ export default function Shorts({data}: FeaturedProps) {
     translation,
     category: {itemsShorts},
   } = data
-  if (itemsShorts.length === 0) return null
+  if (itemsShorts.length < 2) return null
 
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -36,8 +36,8 @@ export default function Shorts({data}: FeaturedProps) {
           className="flex-[0_0_30%] md:flex-[0_0_16.4%] last:mr-4"
           gap="gap-1"
           buttonClass="bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white top-[45%] translate-y-[-50%] shadow-lg"
-          leftPosition="left-0"
-          rightPosition="right-0"
+          // leftPosition="left-0"
+          // rightPosition="right-0"
         >
           {itemsShorts.map(item => {
             const {id} = item

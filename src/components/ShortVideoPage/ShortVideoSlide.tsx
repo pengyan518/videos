@@ -130,10 +130,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       } else {
         vimeoPlayer.setMuted(false)
       }
-      // vimeoPlayer.getPaused().then((paused: boolean) => {
-      //   console.debug(`paused: ${paused}`)
-      //   setPaused(paused)
-      // })
       setPaused(false)
     }
     if (window.videoJsPlayer) {
@@ -193,7 +189,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         onTransitionStart={onTransitionStart}
         onSlideChangeTransitionStart={onSlideChangeTransitionStart}
         onTransitionEnd={onTransitionEnd}
-        ref={mySwiperRef}>
+        ref={mySwiperRef}
+        className="opacity-0"
+      >
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
