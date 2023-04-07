@@ -26,15 +26,15 @@ export default function Shorts({data}: FeaturedProps) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsShorts})
   return (
-    <Section className="bg-white" width="md:w-full" xPadding="px-0" yPadding="pt-20 pb-24" title={'Live From Tour'}>
+    <Section className="bg-white" width="md:w-full" xPadding="px-0" yPadding="pt-20 pb-24" title={translation['Live From Tour']}>
       <Wrapper className="innerPaddingAlignHeader">
         <div className="py-3 block md:flex justify-between items-center">
           <div className="uppercase mb-2 md:mb-0">{translation.Shorts}</div>
         </div>
 
         <Carousel
-          className="flex-[0_0_30%] md:flex-[0_0_16.4%] last:mr-4"
-          gap="gap-1"
+          className="flex-[0_0_30%] md:flex-[0_0_16.32%] last:mr-4"
+          gap="gap-[0.35vw]"
           buttonClass="bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white top-[45%] translate-y-[-50%] shadow-lg"
           // leftPosition="left-0"
           // rightPosition="right-0"

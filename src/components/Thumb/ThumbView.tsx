@@ -7,6 +7,7 @@ import useHover from '../../hooks/useHover'
 import Play from '../icons/Play'
 import {ImgWrapper, Gradient} from './styles'
 import {useAppSelector} from '../../app/hooks'
+import generalImage from '../../assets/images/whats-new-general.jpg'
 import {RootState} from '../../app/store'
 import TimeStamp from '../templates/TimeStamp'
 
@@ -30,6 +31,8 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
 
   const hoverEffect = showLargeThumb ? parentHover : isHover
   const roundedSize = vertical ? 'lg' : 'xl'
+  // eslint-disable-next-line no-nested-ternary
+  const imageSrc = item.imageForVideo ? showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium : generalImage
 
   useEffect(() => {
     if (showIcon) {
@@ -56,7 +59,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
       <ImgWrapper className={`${vertical ? 'aspect-w-10 aspect-h-16' : 'aspect-w-16 aspect-h-9'} overflow-hidden rounded-${roundedSize}`}>
         <Lazy className={`rounded-${roundedSize}`}>
           <img
-            src={showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium}
+            src={imageSrc}
             alt=""
             className="w-full h-full object-center object-cover lg:w-full lg:h-full"
           />

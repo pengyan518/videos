@@ -17,6 +17,7 @@ import Triangle from '../icons/Triangle'
 import ShareButtonsPanel from './ShareButtonsPanel'
 import Play from '../icons/Play'
 import {requestTimeout} from '../../utils/RAFTimeout'
+import LinearDeterminate from "../LinearDeterminate/LinearDeterminate";
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
@@ -29,6 +30,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
   const {
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
+  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
 
   const matches = useMediaQuery('(min-width:768px)')
 
@@ -87,9 +89,9 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
               <IconsStore className="w-6 h-6 fill-black" name="ChevronLeft" />
             </div>
           </Link>
-
           <ToggleMute />
           <div className="absolute text-white left-4 bottom-0 md:bottom-4">{currentItem.title}</div>
+          {/* <LinearDeterminate isPaused={isPaused} /> */}
           <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}

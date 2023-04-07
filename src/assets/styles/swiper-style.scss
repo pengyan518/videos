@@ -24,3 +24,21 @@
   height: 100%;
   object-fit: cover;
 }
+
+.swiper-vertical {
+  .swiper-button-next,
+  .swiper-button-prev {
+    left: 50%;
+    transform: rotate(90deg);
+    transform-origin: left center;
+  }
+
+  .swiper-button-prev {
+    top: 10px;
+  }
+
+  .swiper-button-next {
+    top: auto;
+    bottom: 10px;
+  }
+}

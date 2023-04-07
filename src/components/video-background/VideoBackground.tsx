@@ -9,12 +9,12 @@ export type VideoBackgroundProps = {
   breadcrumb?: ReactNode
 }
 
-export default function VideoBackground({src, srcMobile, poster, childrenContent, breadcrumb}: VideoBackgroundProps) {
+export default function VideoBackground({src, poster, childrenContent, breadcrumb}: VideoBackgroundProps) {
   if (!src && !poster) return null
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const matches = useMediaQuery('(min-width:768px)')
-  const videoLink = matches ? src : srcMobile
+  // const matches = useMediaQuery('(min-width:768px)')
+  // const videoLink = matches ? src : srcMobile
 
   return (
     <div className="video-background relative w-screen">
@@ -28,7 +28,7 @@ export default function VideoBackground({src, srcMobile, poster, childrenContent
             muted
             disablePictureInPicture
             playsInline>
-            <source src={videoLink} type="video/mp4" />
+            <source src={src} type="video/mp4" />
           </video>
         ) : (
           <div className="relative aspect-w-16 aspect-h-10 md:aspect-w-17 md:aspect-h-4">

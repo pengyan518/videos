@@ -1,13 +1,12 @@
 import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
-import useMediaQuery from '@mui/material/useMediaQuery'
+
 
 import {ShortsProps, VideoItemProps} from '../../types'
-
+import generalImage from '../../assets/images/whats-new-general.jpg'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import SlideWrapper from './SlideWrapper'
 // import Play from '../icons/Play'
-import { requestTimeout } from '../../utils/RAFTimeout'
 
 export type SlideItemProps = {
   el: VideoItemProps
@@ -25,22 +24,9 @@ export default function SlideItem({isActive, el, handleTouch, handleClick, share
   } = useAppSelector((state: RootState) => state.intro)
 
   const hoverRef = useRef<HTMLDivElement>(null)
-  const ref = useRef<HTMLDivElement>(null)
+  // const ref = useRef<HTMLDivElement>(null)
   // const isHover = useHover(hoverRef)
-
-  // useEffect(() => {
-  //   if (isPaused) {
-  //     requestTimeout(() => ref.current && ref.current.classList.add('animate__fadeIn'), 0)
-  //   } else {
-  //     requestTimeout(() => ref.current && ref.current.classList.replace('animate__fadeIn', 'animate__fadeOut'), 0)
-  //     requestTimeout(() => ref.current && ref.current.classList.remove('animate__fadeOut'), 20)
-  //   }
-  //   return () => {
-  //     requestTimeout(() => {
-  //       if (ref.current && ref.current.classList.contains('animate__fadeOut')) ref.current.classList.remove('animate__fadeOut')
-  //     }, 0)
-  //   }
-  // }, [isPaused])
+const imageSrc = el.imageForVideo ? el.imageForVideo?.original : generalImage
 
   return (
     <SlideWrapper isActive={isActive} gridClass={gridClass}>
@@ -51,7 +37,7 @@ export default function SlideItem({isActive, el, handleTouch, handleClick, share
             className={`absolute left-0 top-0 object-cover `}
             onTouchEnd={handleTouch}
             onClick={handleClick}
-            src={el.imageForVideo.original}
+            src={imageSrc}
           />
         </div>
         <div />

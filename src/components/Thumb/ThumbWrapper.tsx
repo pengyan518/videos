@@ -29,7 +29,6 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
     eid,
     title,
     urlFriendlyName,
-    imageForVideo: {medium},
   } = item
   const handleClickOpen = () => {
     setOpen(true)
