@@ -10,7 +10,7 @@ export default function SlidePrevButton({data}: SlidePrevButtonProps) {
   const isFirst = window.swiper.activeIndex === 0
   return (
     <button
-      className={`rounded-full p-3 absolute flex items-center justify-center cursor-pointer z-10 w-12 h-12 right-4 top-4 z-10 bg-[#beb1a0] hover:bg-[#fff] text-white hover:text-[#beb1a0] ${
+      className={`display-none md:block rounded-full p-3 absolute flex items-center justify-center cursor-pointer z-10 w-12 h-12 right-4 top-4 z-10 bg-[#beb1a0] hover:bg-[#fff] text-white hover:text-[#beb1a0] ${
         isFirst ? 'opacity-0 cursor-default' : ''
       }`}
       onClick={() => window.swiper.slidePrev()}>

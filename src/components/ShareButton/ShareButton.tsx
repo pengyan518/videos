@@ -74,11 +74,11 @@ export default function ShareButton({children}: ShareButtonProps) {
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'left',
         }}
         transformOrigin={{
           vertical: 'bottom',
-          horizontal: 'right',
+          horizontal: 'left',
         }}>
         <Typography sx={{p: 2}}>
           <ShareArea />

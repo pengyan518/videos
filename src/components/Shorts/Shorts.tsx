@@ -33,9 +33,9 @@ export default function Shorts({data}: FeaturedProps) {
         </div>
 
         <Carousel
-          className="flex-[0_0_30%] md:flex-[0_0_16.32%] last:mr-4"
+          className="flex-[0_0_30%] md:flex-[0_0_16.32%] last:mr-2"
           gap="gap-[0.35vw]"
-          buttonClass="bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white top-[45%] translate-y-[-50%] shadow-lg"
+          buttonClass="bg-[#fff] hover:bg-[#c7ae62] text-[#9c7a14] hover:text-white top-[45%] translate-y-[-50%] shadow-[0_5px_5px_-1px_rgba(0,0,0,0.25)]"
           // leftPosition="left-0"
           // rightPosition="right-0"
         >

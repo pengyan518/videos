@@ -53,7 +53,7 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
 
   return (
     <>
-      <div className="font-bold text-[1.5rem] pb-6">{translation['Follow us']}!</div>
+      <div className="font-bold text-[1.5rem] pb-6">{translation['Follow Shen Yun']}!</div>
       <div className="pb-6">
         <div className="flex flex-wrap gap-3 items-center">
           {icons.map(item => (

@@ -17,7 +17,7 @@ import Triangle from '../icons/Triangle'
 import ShareButtonsPanel from './ShareButtonsPanel'
 import Play from '../icons/Play'
 import {requestTimeout} from '../../utils/RAFTimeout'
-import LinearDeterminate from "../LinearDeterminate/LinearDeterminate";
+import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
@@ -90,7 +90,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
             </div>
           </Link>
           <ToggleMute />
-          <div className="absolute text-white left-4 bottom-0 md:bottom-4">{currentItem.title}</div>
+          <div className="absolute text-white left-4 bottom-0 md:hidden">{currentItem.title}</div>
           {/* <LinearDeterminate isPaused={isPaused} /> */}
           <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
@@ -106,7 +106,11 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
         </div>
         <div className="text-center h-screen display-none md:flex items-center">
           <div className="bg-white w-full rounded-xl px-[4vw] py-10 grid items-center text-left" style={shareAreaStyle}>
-            <div className="text-lg">{currentItem.descriptionLong}</div>
+            <div>
+              <div className="text-lg font-bold mb-2">{currentItem.title}</div>
+              <div className="text-lg">{currentItem.descriptionLong}</div>
+            </div>
+
             <div className="">
               <ShareButtonsPanel />
               <ShareButton>
