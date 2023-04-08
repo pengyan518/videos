@@ -29,7 +29,7 @@ function VideoPlayer({embeddedVideoVimeo, shareAreaStyle}: PlayProps, ref: React
   }
 
   const myClass = isMobile() ? '' : 'w-full'
-  const class_warpper = matches ? '' : `flex justify-center h-screen ${!isMobile() ? 'items-center' : ''}`
+  const class_wrapper = matches ? '' : `flex justify-center h-screen ${!isMobile() ? 'items-center' : ''}`
 
   // console.debug(Vimeo.vimeoPlayer())
 
@@ -56,7 +56,7 @@ function VideoPlayer({embeddedVideoVimeo, shareAreaStyle}: PlayProps, ref: React
 
   // @ts-ignore
   return (
-    <div className={`w-full md:rounded-xl overflow-hidden bg-black ${class_warpper}`}>
+    <div className={`w-full md:rounded-xl overflow-hidden bg-black ${class_wrapper}`}>
       {/* @ts-ignore */}
       <Vimeo
         video={embeddedVideoVimeo}

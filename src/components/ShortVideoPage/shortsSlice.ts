@@ -7,12 +7,14 @@ export interface ShortsState {
   isMuted: boolean
   status: 'idle' | 'loading' | 'failed' | 'initial'
   vimeoPlayer: any
+  progress: number
 }
 
 const initialState: ShortsState = {
   isMuted: false,
   status: 'initial',
   vimeoPlayer: null,
+  progress: 0,
 }
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -37,6 +39,9 @@ export const shortsSlice = createSlice({
     setVimeoInstance: (state, action) => {
       state.vimeoPlayer = action.payload
     },
+    setProgress: (state, action) => {
+      state.progress = action.payload
+    },
     // Use the PayloadAction type to declare the contents of `action.payload`
     // incrementByAmount: (state, action: PayloadAction<number>) => {
     //   state.value += action.payload
@@ -59,6 +64,6 @@ export const shortsSlice = createSlice({
   // },
 })
 
-export const {setToggleMuted, setVimeoInstance} = shortsSlice.actions
+export const {setToggleMuted, setVimeoInstance, setProgress} = shortsSlice.actions
 
 export default shortsSlice.reducer

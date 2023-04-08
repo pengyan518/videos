@@ -1,4 +1,4 @@
-import React, {ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import React, {forwardRef, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {Link, useNavigate} from 'react-router-dom'
 import {useMediaQuery} from '@mui/material'
@@ -10,14 +10,13 @@ import ToggleMute from './ToggleMute'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import ShareButton from '../ShareButton/ShareButton'
-import ShareIcon from '../icons/Share'
-import {Item} from './styles'
+
 import IconsStore from '../icons/IconsStore'
 import Triangle from '../icons/Triangle'
 import ShareButtonsPanel from './ShareButtonsPanel'
 import Play from '../icons/Play'
 import {requestTimeout} from '../../utils/RAFTimeout'
-import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
+import LinearDeterminate from "../LinearDeterminate/LinearDeterminate";
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
@@ -26,7 +25,7 @@ export type ShortVideoSharePanelProps = {
   isPaused: boolean | null
 }
 
-export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaStyle, isPaused}: ShortVideoSharePanelProps) {
+function MyShortVideoSharePanel({currentItem, gridClass, shareAreaStyle, isPaused}: ShortVideoSharePanelProps, ref: React.Ref<unknown> | undefined) {
   const {
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
@@ -34,19 +33,19 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
 
   const matches = useMediaQuery('(min-width:768px)')
 
-  const ref = useRef<HTMLDivElement>(null)
+  const playerRef = useRef<HTMLDivElement>(null)
   // const isHover = useHover(hoverRef)
 
   useEffect(() => {
     if (isPaused) {
-      requestTimeout(() => ref.current && ref.current.classList.add('animate__fadeIn'), 0)
+      requestTimeout(() => playerRef.current && playerRef.current.classList.add('animate__fadeIn'), 0)
     } else {
-      requestTimeout(() => ref.current && ref.current.classList.replace('animate__fadeIn', 'animate__fadeOut'), 0)
-      requestTimeout(() => ref.current && ref.current.classList.remove('animate__fadeOut'), 20)
+      requestTimeout(() => playerRef.current && playerRef.current.classList.replace('animate__fadeIn', 'animate__fadeOut'), 0)
+      requestTimeout(() => playerRef.current && playerRef.current.classList.remove('animate__fadeOut'), 20)
     }
     return () => {
       requestTimeout(() => {
-        if (ref.current && ref.current.classList.contains('animate__fadeOut')) ref.current.classList.remove('animate__fadeOut')
+        if (playerRef.current && playerRef.current.classList.contains('animate__fadeOut')) playerRef.current.classList.remove('animate__fadeOut')
       }, 0)
     }
   }, [isPaused])
@@ -91,7 +90,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
           </Link>
           <ToggleMute />
           <div className="absolute text-white left-4 bottom-0 md:hidden">{currentItem.title}</div>
-          {/* <LinearDeterminate isPaused={isPaused} /> */}
+          {currentItem.length && <LinearDeterminate isPaused={isPaused} ref={ref} duration={currentItem.length}  />}
           <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}
@@ -99,7 +98,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
             </div>
           </button>
           <div
-            ref={ref}
+            ref={playerRef}
             className="absolute text-white w-12 h-12 top-1/2 left-1/2 opacity-0 translate-x-[-50%] translate-y-[-50%] animate__animated">
             <Play className={`drop-shadow-lg`} />
           </div>
@@ -129,3 +128,7 @@ export default function ShortVideoSharePanel({currentItem, gridClass, shareAreaS
     </div>
   )
 }
+
+const ShortVideoSharePanel = forwardRef(MyShortVideoSharePanel)
+
+export default ShortVideoSharePanel

@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import React, {forwardRef, ReactNode, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
 // import axios from 'axios'
 import Vimeo from '@u-wave/react-vimeo'
 import {Skeleton, useScrollTrigger} from '@mui/material'
@@ -13,9 +13,10 @@ import useMobileDetect from '../../hooks/useMobileDetect'
 export type PlayProps = {
   item: any
   shareAreaStyle: any
+  child: ReactNode
 }
 
-function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({item, shareAreaStyle, child}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
@@ -25,6 +26,7 @@ function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | nu
 
   return (
     <div className={`h-screen grid bg-black md:bg-transparent ${isMobile()?'items-start':'items-center'} w-full`}>
+      {child}
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
         <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} />

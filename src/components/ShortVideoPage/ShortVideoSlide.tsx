@@ -10,7 +10,7 @@ import config, {controller, sectionMap} from '../../config'
 
 import ShortPlayer from './ShortPlayer'
 import {ShortsProps, VideoItemProps} from '../../types'
-import onSlideChange from './swiperOnClick'
+
 import useRect from '../../hooks/useRect'
 
 import {useAppSelector} from '../../app/hooks'
@@ -22,6 +22,7 @@ import {requestTimeout} from '../../utils/RAFTimeout'
 import SlideItem from './SlideItem'
 import SlideNextButton from './SlideNextButton'
 import SlidePrevButton from './SlidePrevButton'
+import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -50,6 +51,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const currentSlide = data.indexOf(item)
   const swiperRef = useRef<any>(null)
   const mySwiperRef = useRef<any>(null)
+  const progressBarRef = useRef<any>(null)
   const gridClass = matches ? 'md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
   // const gridClass = 'grid-cols-[0fr_1.6fr_0fr] md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] md:gap-2'
 
@@ -62,6 +64,17 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       setShareAreaHeight({...shareAreaStyle, height: height()})
     }
   }, [element, matches, size.width]) // don't update dependence by Eslint
+
+  const onSlideChange = (e: {activeIndex: string | number}) => {
+    // console.debug(e.activeIndex)
+    // window.vimeoPlayer = null
+    window.videoJsPlayer = null
+    window.youTubePlayer = null
+
+    if(progressBarRef.current) {
+      progressBarRef.current.setProgress(0)
+    }
+  }
 
   const swiperOnClick = useCallback(() => {
     if (vimeoPlayer) {
@@ -169,7 +182,11 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         <div className={`w-screen relative grid ${gridClass} justify-center`}>
           <div />
           <div className="w-full overflow-hidden" ref={element}>
-            <ShortPlayer item={currentItem} shareAreaStyle={shareAreaStyle} />
+            <ShortPlayer
+              item={currentItem}
+              shareAreaStyle={shareAreaStyle}
+              child={<></>}
+            />
           </div>
           <div />
         </div>
@@ -212,7 +229,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <ShortVideoSharePanel currentItem={currentItem} gridClass={gridClass} shareAreaStyle={shareAreaStyle} isPaused={isPaused} />
+      <ShortVideoSharePanel currentItem={currentItem} gridClass={gridClass} shareAreaStyle={shareAreaStyle} isPaused={isPaused} ref={progressBarRef} />
       {window.swiper && (
         <>
           <SlidePrevButton data={data} />
