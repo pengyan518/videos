@@ -13,10 +13,9 @@ import useMobileDetect from '../../hooks/useMobileDetect'
 export type PlayProps = {
   item: any
   shareAreaStyle: any
-  child: ReactNode
 }
 
-function VideoPlayer({item, shareAreaStyle, child}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
@@ -26,7 +25,6 @@ function VideoPlayer({item, shareAreaStyle, child}: PlayProps, ref: React.Ref<an
 
   return (
     <div className={`h-screen grid bg-black md:bg-transparent ${isMobile()?'items-start':'items-center'} w-full`}>
-      {child}
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
         <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} />

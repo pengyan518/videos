@@ -163,7 +163,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   const onAfterInit = useCallback((swiper: {slideTo: (arg0: number) => void}) => {
     // console.debug('onAfterInit')
-    // swiper.slideTo(currentSlide)
     window.swiper = swiper
     const swiperDom = document.querySelector('.swiper-wrapper')
     swiperDom && swiperDom.classList.add('opacity-0')
@@ -185,7 +184,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             <ShortPlayer
               item={currentItem}
               shareAreaStyle={shareAreaStyle}
-              child={<></>}
             />
           </div>
           <div />
