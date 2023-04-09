@@ -13,10 +13,11 @@ import useMobileDetect from '../../hooks/useMobileDetect'
 export type PlayProps = {
   item: any
   shareAreaStyle: any
+  setPaused: any
+  clearProgress: any
 }
 
-function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
-  const [isLoading, setIsLoading] = useState(true)
+function VideoPlayer({item, shareAreaStyle, setPaused, clearProgress}: PlayProps, ref: React.Ref<any> | null) {
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
   // const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   // const loading = useRef<HTMLDivElement | null>(null)
@@ -27,7 +28,7 @@ function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | nu
     <div className={`h-screen grid bg-black md:bg-transparent ${isMobile()?'items-start':'items-center'} w-full`}>
       {/* eslint-disable-next-line no-nested-ternary */}
       {embeddedVideoVimeo !== '' ? (
-        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} />
+        <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} setPaused={setPaused} clearProgress={clearProgress} />
       ) : embeddedVideoYT !== '' ? (
         <YoutubeEmbed embedId={embeddedVideoYT} />
       ) : (
@@ -40,9 +41,9 @@ function VideoPlayer({item, shareAreaStyle}: PlayProps, ref: React.Ref<any> | nu
             playsinline: true,
             controls: false,
             height: window.innerHeight,
-            // muted: true,
             loop: true,
           }}
+          setPaused={setPaused}
           ref={ref}
         />
       )}

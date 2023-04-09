@@ -15,9 +15,11 @@ export type PlayProps = {
   embeddedVideoVimeo: string
   hideLoading?: () => void
   shareAreaStyle?: any
+  setPaused?: any
+  clearProgress?: any
 }
 
-function VideoPlayer({embeddedVideoVimeo, shareAreaStyle}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress}: PlayProps, ref: React.Ref<any> | null) {
   const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const matches = useMediaQuery('(min-width:768px)')
   const {isMobile} = useMobileDetect()
@@ -36,8 +38,14 @@ function VideoPlayer({embeddedVideoVimeo, shareAreaStyle}: PlayProps, ref: React
   const onReady = useCallback(
     (player: any) => {
       dispatch(setVimeoInstance(player))
+      setTimeout(() => {
+        player.getPaused().then((paused: boolean) => {
+          clearProgress()
+          setPaused(paused)
+        })
+      }, 500)
     },
-    [dispatch]
+    [clearProgress, dispatch, setPaused]
   )
 
   // const onEnd = useCallback(() => {

@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 // Import Swiper React components
 import {Swiper, SwiperSlide, useSwiperSlide, useSwiper} from 'swiper/react'
-import {Mousewheel, Pagination, Navigation} from 'swiper'
+import {Mousewheel} from 'swiper'
 import 'swiper/scss/navigation'
 import config, {controller, sectionMap} from '../../config'
 
@@ -22,7 +22,6 @@ import {requestTimeout} from '../../utils/RAFTimeout'
 import SlideItem from './SlideItem'
 import SlideNextButton from './SlideNextButton'
 import SlidePrevButton from './SlidePrevButton'
-import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -65,15 +64,19 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     }
   }, [element, matches, size.width]) // don't update dependence by Eslint
 
+  const clearProgress = useCallback(() => {
+    if (progressBarRef.current) {
+      progressBarRef.current.setProgress(0)
+    }
+  }, [])
+
   const onSlideChange = (e: {activeIndex: string | number}) => {
+    console.debug('onSlideChange')
     // console.debug(e.activeIndex)
-    // window.vimeoPlayer = null
     window.videoJsPlayer = null
     window.youTubePlayer = null
 
-    if(progressBarRef.current) {
-      progressBarRef.current.setProgress(0)
-    }
+    clearProgress()
   }
 
   const swiperOnClick = useCallback(() => {
@@ -138,8 +141,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   )
 
   const onTransitionEnd = useCallback(() => {
-    // console.debug('onTransitionEnd')
+    console.debug('onTransitionEnd')
     // console.debug(vimeoPlayer)
+    // clearProgress()
     const swiperDom = document.querySelector('.swiper-wrapper')
     if (vimeoPlayer) {
       if (isMuted) {
@@ -147,7 +151,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       } else {
         vimeoPlayer.setMuted(false)
       }
-      setPaused(false)
     }
     if (window.videoJsPlayer) {
       if (isMuted) {
@@ -155,14 +158,39 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       } else {
         window.videoJsPlayer.muted(false)
       }
-      setPaused(window.videoJsPlayer.paused())
     }
     element.current && element.current.classList.remove('opacity-0')
     swiperDom && swiperDom.classList.add('opacity-0')
   }, [element, isMuted, vimeoPlayer])
 
+  const onSlideChangeTransitionEnd = useCallback(
+    (e: {activeIndex: number}) => {
+      console.debug('onSlideChangeTransitionEnd')
+      // clearProgress()
+      if (vimeoPlayer) {
+        // setPaused(false)
+        setTimeout(() => {
+          vimeoPlayer.getPaused().then((paused: boolean) => {
+            setPaused(paused)
+            console.debug(paused)
+          })
+        }, 700)
+      }
+      if (window.videoJsPlayer) {
+        // setTimeout(() => {
+          const p = window.videoJsPlayer.paused()
+          setPaused(p)
+          // console.debug(p)
+        // }, 700)
+      }
+
+      // clearProgress()
+    },
+    [vimeoPlayer]
+  )
+
   const onAfterInit = useCallback((swiper: {slideTo: (arg0: number) => void}) => {
-    // console.debug('onAfterInit')
+    console.debug('onAfterInit')
     window.swiper = swiper
     const swiperDom = document.querySelector('.swiper-wrapper')
     swiperDom && swiperDom.classList.add('opacity-0')
@@ -181,10 +209,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         <div className={`w-screen relative grid ${gridClass} justify-center`}>
           <div />
           <div className="w-full overflow-hidden" ref={element}>
-            <ShortPlayer
-              item={currentItem}
-              shareAreaStyle={shareAreaStyle}
-            />
+            <ShortPlayer item={currentItem} shareAreaStyle={shareAreaStyle} setPaused={setPaused} clearProgress={clearProgress} />
           </div>
           <div />
         </div>
@@ -201,13 +226,14 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         height={matches ? window.innerHeight : window.innerHeight + 30}
         loop={false}
         spaceBetween={0}
-        modules={[Mousewheel, Navigation]}
-        onSwiper={swiper => {}}
+        modules={[Mousewheel]}
+        // onSwiper={swiper => {}}
         onAfterInit={onAfterInit}
         onSlideChange={onSlideChange}
         onTransitionStart={onTransitionStart}
         onSlideChangeTransitionStart={onSlideChangeTransitionStart}
         onTransitionEnd={onTransitionEnd}
+        onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
         initialSlide={currentSlide}
         ref={mySwiperRef}
         className="mySwiper">
@@ -227,7 +253,13 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <ShortVideoSharePanel currentItem={currentItem} gridClass={gridClass} shareAreaStyle={shareAreaStyle} isPaused={isPaused} ref={progressBarRef} />
+      <ShortVideoSharePanel
+        currentItem={currentItem}
+        gridClass={gridClass}
+        shareAreaStyle={shareAreaStyle}
+        isPaused={isPaused}
+        ref={progressBarRef}
+      />
       {window.swiper && (
         <>
           <SlidePrevButton data={data} />

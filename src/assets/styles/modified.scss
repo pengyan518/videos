@@ -192,3 +192,15 @@ h6,
     }
   }
 }
+//.MuiLinearProgress-root[aria-valuenow='100'],
+//.MuiLinearProgress-root[aria-valuenow='0']{
+//  .MuiLinearProgress-bar {
+//    transition: transform 0s linear !important;
+//  }
+//}
+.MuiLinearProgress-root {
+  height: 3px !important;
+   .MuiLinearProgress-bar {
+    transition: transform 0s linear !important;
+  }
+}

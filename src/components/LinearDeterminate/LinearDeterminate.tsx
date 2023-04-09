@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import LinearProgress from '@mui/material/LinearProgress'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
-import toSeconds from "../../utils/toSeconds";
+import toSeconds from '../../utils/toSeconds'
 
 interface LinearDeterminateProps {
   isPaused: boolean | null
@@ -14,36 +14,20 @@ function MyLinearDeterminate({isPaused, duration}: LinearDeterminateProps, ref: 
   const [progress, setProgress] = useState(0)
   // const [dur, setDuration] = useState(0)
   // const [isPaused, setPaused] = useState<boolean | null>(null)
-  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
+  // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const maxSteps = 100
+  const diff = 0.5
   const dur = toSeconds(duration)
   // const normalise = (value: number) => ((value - MIN) * 100) / (MAX - MIN)
 
-  useImperativeHandle(ref,()=>({
-    progress,
-    setProgress
-  }),[progress])
-
-  useEffect(() => {
-    if (vimeoPlayer) {
-      vimeoPlayer.getEnded().then((ended: boolean) => {
-        // ended = whether or not the video has ended
-        if (ended) setProgress(maxSteps)
-      })
-    }
-  }, [vimeoPlayer])
-
-  // useEffect(() => {
-  //   if (vimeoPlayer) {
-  //     vimeoPlayer.getDuration().then((length: number) => {
-  //       setDuration(length)
-  //     })
-  //   }
-  //
-  //   return () => {
-  //     // clearInterval(timer)
-  //   }
-  // }, [vimeoPlayer])
+  useImperativeHandle(
+    ref,
+    () => ({
+      progress,
+      setProgress,
+    }),
+    [progress]
+  )
 
   // let timer: string | number | NodeJS.Timer | undefined
   const timer = useRef<any>(null)
@@ -55,10 +39,10 @@ function MyLinearDeterminate({isPaused, duration}: LinearDeterminateProps, ref: 
           if (oldProgress === maxSteps) {
             return 0
           }
-          const diff = 1
+
           return Math.min(oldProgress + diff, maxSteps)
         })
-      }, (dur * 1000) / maxSteps)
+      }, ((dur * 1000) / maxSteps) * diff)
     } else {
       clearInterval(timer.current)
       setProgress(progress)
@@ -76,11 +60,18 @@ function MyLinearDeterminate({isPaused, duration}: LinearDeterminateProps, ref: 
   //     setProgress(0)
   //   }
   // }, [])
-
+  const styles = {
+    width: '100%',
+  }
+  const styles2 = {
+    borderRadius: 1
+  }
   return (
-    <Box sx={{width: '100%'}} className="absolute left-0 top-0">
-      <LinearProgress variant="determinate" value={progress} />
-    </Box>
+    <div className="absolute left-[0.5rem] right-[0.5rem] top-0">
+      <Box sx={styles}>
+        <LinearProgress variant="determinate" value={progress} sx={styles2} />
+      </Box>
+    </div>
   )
 }
 

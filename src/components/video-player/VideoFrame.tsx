@@ -7,9 +7,13 @@ interface VideoFrameProps {
   videoSrc: string
   isShortVideo?: boolean
   options?: any
+  setPaused?: any
 }
 
-const VideoFrameDiv = ({videoSrc, poster, isShortVideo = false, options = {}}: VideoFrameProps, ref: React.Ref<unknown> | undefined) => {
+const VideoFrameDiv = (
+  {videoSrc, poster, isShortVideo = false, setPaused = null, options = {}}: VideoFrameProps,
+  ref: React.Ref<unknown> | undefined
+) => {
   const playerRef = useRef(null)
 
   const videoJsOptions = useMemo(
@@ -47,6 +51,10 @@ const VideoFrameDiv = ({videoSrc, poster, isShortVideo = false, options = {}}: V
     player.on('dispose', () => {
       videojs.log('player will dispose')
     })
+
+    console.debug('handlePlayerReady')
+    // @ts-ignore
+    player && setPaused && setTimeout(()=>setPaused(player.paused()), 500)
   }
 
   // useImperativeHandle(
