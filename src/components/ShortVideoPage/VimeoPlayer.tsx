@@ -42,8 +42,9 @@ function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress}: PlayProps, 
         player.getPaused().then((paused: boolean) => {
           clearProgress()
           setPaused(paused)
+          console.debug(paused)
         })
-      }, 500)
+      }, 1000)
     },
     [clearProgress, dispatch, setPaused]
   )

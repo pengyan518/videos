@@ -174,7 +174,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             setPaused(paused)
             console.debug(paused)
           })
-        }, 700)
+        }, 900)
       }
       if (window.videoJsPlayer) {
         // setTimeout(() => {

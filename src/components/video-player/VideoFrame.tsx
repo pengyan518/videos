@@ -53,8 +53,13 @@ const VideoFrameDiv = (
     })
 
     console.debug('handlePlayerReady')
-    // @ts-ignore
-    player && setPaused && setTimeout(()=>setPaused(player.paused()), 500)
+
+    player &&
+      setPaused &&
+      setTimeout(() => {
+        // @ts-ignore
+        setPaused(player.paused())
+      }, 600)
   }
 
   // useImperativeHandle(
