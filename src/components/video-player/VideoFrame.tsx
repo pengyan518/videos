@@ -11,7 +11,7 @@ interface VideoFrameProps {
 }
 
 const VideoFrameDiv = (
-  {videoSrc, poster, isShortVideo = false, setPaused = null, options = {}}: VideoFrameProps,
+  {videoSrc, poster, isShortVideo = false, options = {}}: VideoFrameProps,
   ref: React.Ref<unknown> | undefined
 ) => {
   const playerRef = useRef(null)
@@ -48,18 +48,25 @@ const VideoFrameDiv = (
         videojs.log('player is waiting')
       })
     // @ts-ignore
-    player.on('dispose', () => {
-      videojs.log('player will dispose')
+    // player.on('dispose', () => {
+    //   videojs.log('player will dispose')
+    // })
+    // @ts-ignore
+    player.on('timeupdate', (result) => {
+      // console.debug('timeupdate')
+      // console.debug(result.target.player.cache_.duration)
+      if (options.onTimeupdate) options.onTimeupdate(result.target.player.cache_)
+      // console.debug(result.target.player.cache_.currentTime)
     })
 
     console.debug('handlePlayerReady')
 
-    player &&
-      setPaused &&
-      setTimeout(() => {
-        // @ts-ignore
-        setPaused(player.paused())
-      }, 600)
+    // player &&
+    //   setPaused &&
+    //   setTimeout(() => {
+    //     // @ts-ignore
+    //     setPaused(player.paused())
+    //   }, 600)
   }
 
   // useImperativeHandle(

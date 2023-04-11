@@ -6,59 +6,67 @@ import {RootState} from '../../app/store'
 import toSeconds from '../../utils/toSeconds'
 
 interface LinearDeterminateProps {
-  isPaused: boolean | null
-  duration: string
+  // isPaused: boolean | null
+  duration?: number
 }
 
-function MyLinearDeterminate({isPaused, duration}: LinearDeterminateProps, ref: React.Ref<unknown> | undefined) {
+function MyLinearDeterminate({}: LinearDeterminateProps, ref: React.Ref<unknown> | undefined) {
   const [progress, setProgress] = useState(0)
-  // const [dur, setDuration] = useState(0)
+  // const [dur, setDuration] = useState(toSeconds(duration))
   // const [isPaused, setPaused] = useState<boolean | null>(null)
   // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const maxSteps = 100
   const diff = 0.5
-  const dur = toSeconds(duration)
+  // const dur = toSeconds(duration)
   // const normalise = (value: number) => ((value - MIN) * 100) / (MAX - MIN)
 
-  const convertCurrentTime = useCallback((currentTime:number)=> {
-    setProgress((currentTime) / ((dur) / maxSteps) * diff)
-    console.debug(`Progress: ${(currentTime) / ((dur) / maxSteps) * diff}`)
-  },[dur])
+  // const convertCurrentTime = useCallback(
+  //   (currentTime: number) => {
+  //     setProgress((currentTime / (duration / maxSteps)) * diff)
+  //     // console.debug(`Progress: ${(currentTime) / ((dur) / maxSteps) * diff}`)
+  //   },
+  //   [duration]
+  // )
+
+  // useEffect(()=>{
+  //   setDuration(toSeconds(duration))
+  // },[duration])
 
   useImperativeHandle(
     ref,
     () => ({
       progress,
       setProgress,
-      convertCurrentTime,
+      // convertCurrentTime,
+      // setDuration,
     }),
-    [convertCurrentTime, progress]
+    [progress]
   )
 
   // let timer: string | number | NodeJS.Timer | undefined
-  const timer = useRef<any>(null)
+  // const timer = useRef<any>(null)
 
-  useEffect(() => {
-    if (!isPaused) {
-      timer.current = setInterval(() => {
-        setProgress(oldProgress => {
-          if (oldProgress === maxSteps) {
-            return 0
-          }
-
-          return Math.min(oldProgress + diff, maxSteps)
-        })
-      }, ((dur * 1000) / maxSteps) * diff)
-    } else {
-      clearInterval(timer.current)
-      setProgress(progress)
-    }
-
-    return () => {
-      clearInterval(timer.current)
-      // setProgress(0)
-    }
-  }, [dur, isPaused])
+  // useEffect(() => {
+  //   if (!isPaused) {
+  //     timer.current = setInterval(() => {
+  //       setProgress(oldProgress => {
+  //         if (oldProgress === maxSteps) {
+  //           return 0
+  //         }
+  //
+  //         return Math.min(oldProgress + diff, maxSteps)
+  //       })
+  //     }, ((duration * 1000) / maxSteps) * diff)
+  //   } else {
+  //     clearInterval(timer.current)
+  //     setProgress(progress)
+  //   }
+  //
+  //   return () => {
+  //     clearInterval(timer.current)
+  //     // setProgress(0)
+  //   }
+  // }, [duration, isPaused, progress])
 
   // useEffect(() => {
   //   return () => {
@@ -70,7 +78,7 @@ function MyLinearDeterminate({isPaused, duration}: LinearDeterminateProps, ref: 
     width: '100%',
   }
   const styles2 = {
-    borderRadius: 1
+    borderRadius: 1,
   }
   return (
     <div className="absolute left-[0.5rem] right-[0.5rem] top-0">

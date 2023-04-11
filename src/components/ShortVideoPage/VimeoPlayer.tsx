@@ -1,7 +1,7 @@
 import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
-// import Player from '@vimeo/player'
 import Vimeo from '../VimeoPlayer'
+// import Vimeo from '@u-wave/react-vimeo'
 import useMobileDetect from '../../hooks/useMobileDetect'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {setVimeoInstance} from './shortsSlice'
@@ -17,9 +17,10 @@ export type PlayProps = {
   shareAreaStyle?: any
   setPaused?: any
   clearProgress?: any
+  setProgress?: any
 }
 
-function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress}: PlayProps, ref: React.Ref<any> | null) {
+function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress, setProgress}: PlayProps, ref: React.Ref<any> | null) {
   const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const matches = useMediaQuery('(min-width:768px)')
   const {isMobile} = useMobileDetect()
@@ -38,30 +39,37 @@ function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress}: PlayProps, 
   const onReady = useCallback(
     (player: any) => {
       dispatch(setVimeoInstance(player))
-      setTimeout(() => {
-        player.getPaused().then((paused: boolean) => {
-          clearProgress()
-          setPaused(paused)
-          console.debug(paused)
-        })
-      }, 1000)
+      // setTimeout(() => {
+      //   player.getPaused().then((paused: boolean) => {
+      //     // clearProgress()
+      //     setPaused(paused)
+      //     // console.debug(`onReady: ${paused}`)
+      //   })
+      // }, 1000)
     },
-    [clearProgress, dispatch, setPaused]
+    [dispatch]
   )
 
-  // const onEnd = useCallback(() => {
-  //   dispatch(setVimeoInstance(null))
-  // }, [dispatch])
+  const onTimeUpdate = useCallback((currentTime: { percent: number }) => {
+    // clearProgress()
+    setProgress(currentTime.percent*100)
+    // console.debug(currentTime)
+  }, [setProgress])
 
-  useEffect(() => {
-    return () => {
-      if (vimeoPlayer) {
-        // @ts-ignore
-        vimeoPlayer.destroy()
-        dispatch(setVimeoInstance(null))
-      }
-    }
-  }, [dispatch, vimeoPlayer])
+  // const onEnd = useCallback(() => {
+  //   // clearProgress()
+  //   console.debug('onEnded')
+  // }, [])
+
+  // useEffect(() => {
+  //   return () => {
+  //     if (vimeoPlayer) {
+  //       // @ts-ignore
+  //       vimeoPlayer.destroy()
+  //       dispatch(setVimeoInstance(null))
+  //     }
+  //   }
+  // }, [dispatch, vimeoPlayer])
 
   // @ts-ignore
   return (
@@ -76,6 +84,7 @@ function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress}: PlayProps, 
         {...props}
         // @ts-ignore
         onReady={onReady}
+        onTimeUpdate={onTimeUpdate}
         // onEnd={onEnd}
       />
     </div>

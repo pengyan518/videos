@@ -5,235 +5,234 @@ import eventNames from './eventNames'
 // import {setVimeoInstance} from "../ShortVideoPage/shortsSlice";
 
 interface VimeoProps {
-    /**
-     * A Vimeo video ID or URL.
-     */
-    video: number | string
-    /**
-     * DOM ID for the player element.
-     */
-    id: string
-    /**
-     * CSS className for the player element.
-     */
-    className: string
-    /**
-     * Inline style for container element.
-     */
-    style: object // eslint-disable-line react/forbid-prop-types
-    /**
-     * Width of the player element.
-     */
-    width: number | string
-    /**
-     * Height of the player element.
-     */
-    height: number | string
+  /**
+   * A Vimeo video ID or URL.
+   */
+  video: number | string
+  /**
+   * DOM ID for the player element.
+   */
+  id: string
+  /**
+   * CSS className for the player element.
+   */
+  className: string
+  /**
+   * Inline style for container element.
+   */
+  style: object // eslint-disable-line react/forbid-prop-types
+  /**
+   * Width of the player element.
+   */
+  width: number | string
+  /**
+   * Height of the player element.
+   */
+  height: number | string
 
-    /**
-     * Pause the video.
-     */
-    paused: boolean // eslint-disable-line react/no-unused-prop-types
+  /**
+   * Pause the video.
+   */
+  paused: boolean // eslint-disable-line react/no-unused-prop-types
 
-    /**
-     * The playback volume as a number between 0 and 1.
-     */
-    volume: number
+  /**
+   * The playback volume as a number between 0 and 1.
+   */
+  volume: number
 
-    /**
-     * The time in seconds at which to start playing the video.
-     */
-    start: number
+  /**
+   * The time in seconds at which to start playing the video.
+   */
+  start: number
 
-    // Player parameters
-    /**
-     * Pause this video automatically when another one plays.
-     */
-    autopause: boolean
+  // Player parameters
+  /**
+   * Pause this video automatically when another one plays.
+   */
+  autopause: boolean
 
-    /**
-     * Automatically start playback of the video. Note that this won’t work on
-     * some devices.
-     */
-    autoplay: boolean
+  /**
+   * Automatically start playback of the video. Note that this won’t work on
+   * some devices.
+   */
+  autoplay: boolean
 
-    /**
-     * Show the byline on the video.
-     */
-    showByline: boolean
+  /**
+   * Show the byline on the video.
+   */
+  showByline: boolean
 
-    /**
-     * Specify the color of the video controls. Colors may be overridden by the
-     * embed settings of the video. _(Ex: "ef2f9f")_
-     */
-    color: string
+  /**
+   * Specify the color of the video controls. Colors may be overridden by the
+   * embed settings of the video. _(Ex: "ef2f9f")_
+   */
+  color: string
 
-    /**
-     * Blocks the player from tracking any session data, including all cookies and analytics.
-     */
-    dnt: boolean
+  /**
+   * Blocks the player from tracking any session data, including all cookies and analytics.
+   */
+  dnt: boolean
 
-    // Player controls
-    /**
-     * Hide all elements in the player, such as the progress bar, sharing buttons, etc.
-     * (requires Vimeo PRO / Business account)
-     */
-    controls: boolean
+  // Player controls
+  /**
+   * Hide all elements in the player, such as the progress bar, sharing buttons, etc.
+   * (requires Vimeo PRO / Business account)
+   */
+  controls: boolean
 
-    /**
-     * Play the video again when it reaches the end.
-     */
-    loop: boolean
+  /**
+   * Play the video again when it reaches the end.
+   */
+  loop: boolean
 
-    /**
-     * Show the portrait on the video.
-     */
-    showPortrait: boolean
+  /**
+   * Show the portrait on the video.
+   */
+  showPortrait: boolean
 
-    /**
-     * Show the title on the video.
-     */
-    showTitle: boolean
+  /**
+   * Show the title on the video.
+   */
+  showTitle: boolean
 
-    /**
-     * Starts in a muted state to help with autoplay
-     */
-    muted: boolean
+  /**
+   * Starts in a muted state to help with autoplay
+   */
+  muted: boolean
 
-    /**
-     * Starts in a background state with no controls to help with autoplay
-     */
-    background: boolean
+  /**
+   * Starts in a background state with no controls to help with autoplay
+   */
+  background: boolean
 
-    /**
-     * Enable responsive mode and resize according to parent element (experimental)
-     */
-    responsive: boolean
+  /**
+   * Enable responsive mode and resize according to parent element (experimental)
+   */
+  responsive: boolean
 
-    /**
-     * Specify playback rate (requires Vimeo PRO / Business account)
-     */
-    playbackRate: number
+  /**
+   * Specify playback rate (requires Vimeo PRO / Business account)
+   */
+  playbackRate: number
 
-    /**
-     * Enable playback rate controls (requires Vimeo PRO / Business account)
-     */
-    speed: boolean
+  /**
+   * Enable playback rate controls (requires Vimeo PRO / Business account)
+   */
+  speed: boolean
 
-    /**
-     * Allows for keyboard input to trigger player events.
-     */
-    keyboard: boolean
+  /**
+   * Allows for keyboard input to trigger player events.
+   */
+  keyboard: boolean
 
-    /**
-     * Show the picture-in-picture button in the controlbar
-     * and enable the picture-in-picture API.
-     */
-    pip: boolean
+  /**
+   * Show the picture-in-picture button in the controlbar
+   * and enable the picture-in-picture API.
+   */
+  pip: boolean
 
-    /**
-     * Play video inline on mobile devices, to automatically
-     * go fullscreen on playback set this parameter to false.
-     */
-    playsInline: boolean
+  /**
+   * Play video inline on mobile devices, to automatically
+   * go fullscreen on playback set this parameter to false.
+   */
+  playsInline: boolean
 
-    /**
-     * Vimeo Plus, PRO, and Business members can default
-     * an embedded video to a specific quality on desktop.
-     */
-    quality: string
+  /**
+   * Vimeo Plus, PRO, and Business members can default
+   * an embedded video to a specific quality on desktop.
+   */
+  quality: string
 
-    /**
-     * Turn captions/subtitles on for a specific language by default.
-     */
-    textTrack: string
+  /**
+   * Turn captions/subtitles on for a specific language by default.
+   */
+  textTrack: string
 
-    /**
-     * The responsive player and transparent background are enabled
-     * by default, to disable set this parameter to false.
-     */
-    transparent: boolean
+  /**
+   * The responsive player and transparent background are enabled
+   * by default, to disable set this parameter to false.
+   */
+  transparent: boolean
 
-    // Events
-    /* eslint-disable react/no-unused-prop-types */
+  // Events
+  /* eslint-disable react/no-unused-prop-types */
 
-    /**
-     * Sent when the Vimeo player API has loaded.
-     * Receives the Vimeo player object in the first parameter.
-     */
-    onReady: (player:any)=> void
-    /**
-     * Sent when the player triggers an error.
-     */
-    onError: ()=> void
-    /**
-     * Triggered when video playback is initiated.
-     */
-    onPlay: ()=> void
-    /**
-     * Triggered when the video starts playing.
-     */
-    onPlaying: ()=> void
-    /**
-     * Triggered when the video pauses.
-     */
-    onPause: ()=> void
-    /**
-     * Triggered any time the video playback reaches the end.
-     * Note: when `loop` is turned on, the ended event will not fire.
-     */
-    onEnd: ()=> void
-    /**
-     * Triggered as the `currentTime` of the video updates. It generally fires
-     * every 250ms, but it may vary depending on the browser.
-     */
-    onTimeUpdate: ()=> void
-    /**
-     * Triggered as the video is loaded. Reports back the amount of the video
-     * that has been buffered.
-     */
-    onProgress: ()=> void
-    /**
-     * Triggered when the player seeks to a specific time. An `onTimeUpdate`
-     * event will also be fired at the same time.
-     */
-    onSeeked: ()=> void
-    /**
-     * Triggered when the active text track (captions/subtitles) changes. The
-     * values will be `null` if text tracks are turned off.
-     */
-    onTextTrackChange: ()=> void
-    /**
-     * Triggered when the active cue for the current text track changes. It also
-     * fires when the active text track changes. There may be multiple cues
-     * active.
-     */
-    onCueChange: ()=> void
-    /**
-     * Triggered when the current time hits a registered cue point.
-     */
-    onCuePoint: ()=> void
-    /**
-     * Triggered when the volume in the player changes. Some devices do not
-     * support setting the volume of the video independently from the system
-     * volume, so this event will never fire on those devices.
-     */
-    onVolumeChange: ()=> void
-    /**
-     * Triggered when the playback rate changes.
-     */
-    onPlaybackRateChange: ()=> void
-    /**
-     * Triggered when a new video is loaded in the player.
-     */
-    onLoaded: ()=> void
+  /**
+   * Sent when the Vimeo player API has loaded.
+   * Receives the Vimeo player object in the first parameter.
+   */
+  onReady: (player: any) => void
+  /**
+   * Sent when the player triggers an error.
+   */
+  onError: () => void
+  /**
+   * Triggered when video playback is initiated.
+   */
+  onPlay: () => void
+  /**
+   * Triggered when the video starts playing.
+   */
+  onPlaying: () => void
+  /**
+   * Triggered when the video pauses.
+   */
+  onPause: () => void
+  /**
+   * Triggered any time the video playback reaches the end.
+   * Note: when `loop` is turned on, the ended event will not fire.
+   */
+  onEnd: () => void
+  /**
+   * Triggered as the `currentTime` of the video updates. It generally fires
+   * every 250ms, but it may vary depending on the browser.
+   */
+  onTimeUpdate: () => void
+  /**
+   * Triggered as the video is loaded. Reports back the amount of the video
+   * that has been buffered.
+   */
+  onProgress: () => void
+  /**
+   * Triggered when the player seeks to a specific time. An `onTimeUpdate`
+   * event will also be fired at the same time.
+   */
+  onSeeked: () => void
+  /**
+   * Triggered when the active text track (captions/subtitles) changes. The
+   * values will be `null` if text tracks are turned off.
+   */
+  onTextTrackChange: () => void
+  /**
+   * Triggered when the active cue for the current text track changes. It also
+   * fires when the active text track changes. There may be multiple cues
+   * active.
+   */
+  onCueChange: () => void
+  /**
+   * Triggered when the current time hits a registered cue point.
+   */
+  onCuePoint: () => void
+  /**
+   * Triggered when the volume in the player changes. Some devices do not
+   * support setting the volume of the video independently from the system
+   * volume, so this event will never fire on those devices.
+   */
+  onVolumeChange: () => void
+  /**
+   * Triggered when the playback rate changes.
+   */
+  onPlaybackRateChange: () => void
+  /**
+   * Triggered when a new video is loaded in the player.
+   */
+  onLoaded: () => void
 
-    /* eslint-enable react/no-unused-prop-types */
-
+  /* eslint-enable react/no-unused-prop-types */
 }
 
 class Vimeo extends React.Component {
-  private static player: any;
+  private static player: any
 
   constructor(props: VimeoProps) {
     super(props)
@@ -245,7 +244,7 @@ class Vimeo extends React.Component {
     this.createPlayer()
   }
 
-  componentDidUpdate(prevProps: { [x: string]: any }) {
+  componentDidUpdate(prevProps: {[x: string]: any}) {
     // @ts-ignore
     const changes = Object.keys(this.props).filter(name => this.props[name] !== prevProps[name])
 
@@ -268,9 +267,9 @@ class Vimeo extends React.Component {
 
     return {
       [videoType]: video,
-       // @ts-ignore
+      // @ts-ignore
       width: this.props.width,
-       // @ts-ignore
+      // @ts-ignore
       height: this.props.height,
       // @ts-ignore
       autopause: this.props.autopause,
@@ -392,7 +391,6 @@ class Vimeo extends React.Component {
     // @ts-ignore
     const {start, volume, playbackRate} = this.props
 
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
     // const dispatch = useAppDispatch()
 
@@ -400,20 +398,7 @@ class Vimeo extends React.Component {
     // eslint-disable-next-line no-multi-assign
     this.player = new Player(this.container, this.getInitialOptions())
     // @ts-ignore
-    window.vimeoPlayer = this.player
-
-    Object.keys(eventNames).forEach(dmName => {
-      // @ts-ignore
-      const reactName = eventNames[dmName]
-      // @ts-ignore
-      this.player.on(dmName, event => {
-        // @ts-ignore
-        const handler = this.props[reactName]
-        if (handler) {
-          handler(event)
-        }
-      })
-    })
+    // window.vimeoPlayer = this.player
     // @ts-ignore
     const {onError, onReady} = this.props
     // @ts-ignore
@@ -423,8 +408,21 @@ class Vimeo extends React.Component {
           // @ts-ignore
           onReady(this.player)
         }
+
+        Object.keys(eventNames).forEach(dmName => {
+          // @ts-ignore
+          const reactName = eventNames[dmName]
+          // @ts-ignore
+          this.player.on(dmName, event => {
+            // @ts-ignore
+            const handler = this.props[reactName]
+            if (handler) {
+              handler(event)
+            }
+          })
+        })
       },
-        // @ts-ignore
+      // @ts-ignore
       err => {
         if (onError) {
           onError(err)
@@ -433,7 +431,6 @@ class Vimeo extends React.Component {
         }
       }
     )
-
 
     if (typeof start === 'number') {
       // @ts-ignore
@@ -464,7 +461,6 @@ class Vimeo extends React.Component {
     return <div id={id} className={className} style={style} ref={this.refContainer} />
   }
 }
-
 
 // @ts-ignore
 Vimeo.defaultProps = {

@@ -16,16 +16,21 @@ import Triangle from '../icons/Triangle'
 import ShareButtonsPanel from './ShareButtonsPanel'
 import Play from '../icons/Play'
 import {requestTimeout} from '../../utils/RAFTimeout'
-import LinearDeterminate from "../LinearDeterminate/LinearDeterminate";
+import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
+import toSeconds from '../../utils/toSeconds'
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
   gridClass: string
   shareAreaStyle: object
   isPaused: boolean | null
+  // duration: number
 }
 
-function MyShortVideoSharePanel({currentItem, gridClass, shareAreaStyle, isPaused}: ShortVideoSharePanelProps, ref: React.Ref<unknown> | undefined) {
+function MyShortVideoSharePanel(
+  {currentItem, gridClass, shareAreaStyle, isPaused}: ShortVideoSharePanelProps,
+  ref: React.Ref<unknown> | undefined
+) {
   const {
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
@@ -45,7 +50,8 @@ function MyShortVideoSharePanel({currentItem, gridClass, shareAreaStyle, isPause
     }
     return () => {
       requestTimeout(() => {
-        if (playerRef.current && playerRef.current.classList.contains('animate__fadeOut')) playerRef.current.classList.remove('animate__fadeOut')
+        if (playerRef.current && playerRef.current.classList.contains('animate__fadeOut'))
+          playerRef.current.classList.remove('animate__fadeOut')
       }, 0)
     }
   }, [isPaused])
@@ -90,7 +96,7 @@ function MyShortVideoSharePanel({currentItem, gridClass, shareAreaStyle, isPause
           </Link>
           <ToggleMute />
           <div className="absolute text-white left-4 bottom-0 md:hidden">{currentItem.title}</div>
-          {currentItem.length && <LinearDeterminate isPaused={isPaused} ref={ref} duration={currentItem.length}  />}
+          <LinearDeterminate ref={ref} />
           <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}

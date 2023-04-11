@@ -22,6 +22,7 @@ import {requestTimeout} from '../../utils/RAFTimeout'
 import SlideItem from './SlideItem'
 import SlideNextButton from './SlideNextButton'
 import SlidePrevButton from './SlidePrevButton'
+import toSeconds from '../../utils/toSeconds'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -38,6 +39,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   const [currentItem, setCurrentItem] = useState(item)
+  const [currentDuration, setDuration] = useState(toSeconds(currentItem.length))
   const [isPaused, setPaused] = useState<boolean | null>(null)
   const [shareAreaStyle, setShareAreaHeight] = useState({
     height: 0,
@@ -64,9 +66,15 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     }
   }, [element, matches, size.width]) // don't update dependence by Eslint
 
-  const clearProgress = useCallback(() => {
+  // const clearProgress = useCallback(() => {
+  //   if (progressBarRef.current) {
+  //     progressBarRef.current.setProgress(0)
+  //   }
+  // }, [])
+
+  const setProgress = useCallback((percent: number) => {
     if (progressBarRef.current) {
-      progressBarRef.current.setProgress(0)
+      progressBarRef.current.setProgress(percent)
     }
   }, [])
 
@@ -76,7 +84,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     window.videoJsPlayer = null
     window.youTubePlayer = null
 
-    clearProgress()
+    // clearProgress()
   }
 
   const swiperOnClick = useCallback(() => {
@@ -135,7 +143,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   const onSlideChangeTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
+      console.debug('onSlideChangeTransitionStart')
       setCurrentItem(data[e.activeIndex])
+      //
     },
     [data]
   )
@@ -166,42 +176,35 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const onSlideChangeTransitionEnd = useCallback(
     (e: {activeIndex: number}) => {
       console.debug('onSlideChangeTransitionEnd')
+      setPaused(false)
       // clearProgress()
-      if (vimeoPlayer) {
-        // setPaused(false)
-        setTimeout(() => {
-          vimeoPlayer.getPaused().then((paused: boolean) => {
-            setPaused(paused)
-            console.debug(paused)
-          })
-          vimeoPlayer.getCurrentTime().then((seconds: number) => {
-            if (progressBarRef.current) {
-              progressBarRef.current.convertCurrentTime(seconds)
-            }
-            console.debug(seconds)
-          })
-        }, 1500)
-      }
-      if (window.videoJsPlayer) {
-        // setTimeout(() => {
-        const p = window.videoJsPlayer.paused()
-        setPaused(p)
-        // console.debug(p)
-        // }, 700)
-      }
+      // if (vimeoPlayer) {
+      //   setTimeout(() => {
+      //     vimeoPlayer.getPaused().then((paused: boolean) => {
+      //       setPaused(paused)
+      //     })
+      //   }, 1000)
+      // }
+      // if (window.videoJsPlayer) {
+      //   const p = window.videoJsPlayer.paused()
+      //   setPaused(p)
+      // }
 
       // clearProgress()
     },
-    [vimeoPlayer]
+    []
   )
 
-  const onAfterInit = useCallback((swiper: {slideTo: (arg0: number) => void}) => {
-    console.debug('onAfterInit')
-    window.swiper = swiper
-    const swiperDom = document.querySelector('.swiper-wrapper')
-    swiperDom && swiperDom.classList.add('opacity-0')
-    requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 200)
-  }, [])
+  const onAfterInit = useCallback(
+    (swiper: {slideTo: (arg0: number) => void}) => {
+      console.debug('onAfterInit')
+      window.swiper = swiper
+      const swiperDom = document.querySelector('.swiper-wrapper')
+      swiperDom && swiperDom.classList.add('opacity-0')
+      requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 200)
+    },
+    []
+  )
 
   useEffect(() => {
     window.addEventListener('popstate', event => {
@@ -215,7 +218,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         <div className={`w-screen relative grid ${gridClass} justify-center`}>
           <div />
           <div className="w-full overflow-hidden" ref={element}>
-            <ShortPlayer item={currentItem} shareAreaStyle={shareAreaStyle} setPaused={setPaused} clearProgress={clearProgress} />
+            <ShortPlayer item={currentItem} shareAreaStyle={shareAreaStyle} setPaused={setPaused} setProgress={setProgress} />
           </div>
           <div />
         </div>
