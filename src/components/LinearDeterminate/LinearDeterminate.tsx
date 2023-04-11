@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import Box from '@mui/material/Box'
 import LinearProgress from '@mui/material/LinearProgress'
 import {useAppSelector} from '../../app/hooks'
@@ -20,13 +20,19 @@ function MyLinearDeterminate({isPaused, duration}: LinearDeterminateProps, ref: 
   const dur = toSeconds(duration)
   // const normalise = (value: number) => ((value - MIN) * 100) / (MAX - MIN)
 
+  const convertCurrentTime = useCallback((currentTime:number)=> {
+    setProgress((currentTime) / ((dur) / maxSteps) * diff)
+    console.debug(`Progress: ${(currentTime) / ((dur) / maxSteps) * diff}`)
+  },[dur])
+
   useImperativeHandle(
     ref,
     () => ({
       progress,
       setProgress,
+      convertCurrentTime,
     }),
-    [progress]
+    [convertCurrentTime, progress]
   )
 
   // let timer: string | number | NodeJS.Timer | undefined

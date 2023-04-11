@@ -174,13 +174,19 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
             setPaused(paused)
             console.debug(paused)
           })
-        }, 900)
+          vimeoPlayer.getCurrentTime().then((seconds: number) => {
+            if (progressBarRef.current) {
+              progressBarRef.current.convertCurrentTime(seconds)
+            }
+            console.debug(seconds)
+          })
+        }, 1500)
       }
       if (window.videoJsPlayer) {
         // setTimeout(() => {
-          const p = window.videoJsPlayer.paused()
-          setPaused(p)
-          // console.debug(p)
+        const p = window.videoJsPlayer.paused()
+        setPaused(p)
+        // console.debug(p)
         // }, 700)
       }
 
