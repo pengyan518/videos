@@ -11,14 +11,14 @@ import SlideWrapper from './SlideWrapper'
 export type SlideItemProps = {
   el: VideoItemProps
   isActive: boolean
-  isPaused: boolean | null
+  // isPaused: boolean | null
   handleTouch: () => void
   handleClick: () => void
   shareAreaStyle: object
   gridClass: string
 }
 
-export default function SlideItem({isActive, el, handleTouch, handleClick, shareAreaStyle, gridClass, isPaused}: SlideItemProps) {
+export default function SlideItem({isActive, el, handleTouch, handleClick, shareAreaStyle, gridClass}: SlideItemProps) {
   const {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)

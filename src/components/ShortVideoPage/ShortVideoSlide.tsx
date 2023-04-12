@@ -130,8 +130,10 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   const onTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
-      const swiperDom = document.querySelector('.swiper-wrapper')
-      swiperDom && swiperDom.classList.remove('opacity-0')
+      // const swiperDom = document.querySelector('.swiper-wrapper')
+      // swiperDom && swiperDom.classList.remove('opacity-0')
+
+      mySwiperRef.current && mySwiperRef.current.classList.remove('opacity-0')
       const {eid, title, urlFriendlyName} = data[e.activeIndex]
       const seoUrl = urlFriendlyName || getFriendlyUrl(title)
       window.history.pushState({}, '', `/${config.controller}/shorts/play/${eid}/${seoUrl}.html`)
@@ -154,7 +156,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     console.debug('onTransitionEnd')
     // console.debug(vimeoPlayer)
     // clearProgress()
-    const swiperDom = document.querySelector('.swiper-wrapper')
+    // const swiperDom = document.querySelector('.swiper-wrapper')
     if (vimeoPlayer) {
       if (isMuted) {
         vimeoPlayer.setMuted(true)
@@ -170,7 +172,8 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
       }
     }
     element.current && element.current.classList.remove('opacity-0')
-    swiperDom && swiperDom.classList.add('opacity-0')
+    mySwiperRef.current && mySwiperRef.current.classList.add('opacity-0')
+    // swiperDom && swiperDom.classList.add('opacity-0')
   }, [element, isMuted, vimeoPlayer])
 
   const onSlideChangeTransitionEnd = useCallback(
@@ -199,8 +202,8 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     (swiper: {slideTo: (arg0: number) => void}) => {
       console.debug('onAfterInit')
       window.swiper = swiper
-      const swiperDom = document.querySelector('.swiper-wrapper')
-      swiperDom && swiperDom.classList.add('opacity-0')
+      // const swiperDom = document.querySelector('.swiper-wrapper')
+      // swiperDom && swiperDom.classList.add('opacity-0')
       requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 200)
     },
     []
@@ -245,7 +248,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         onSlideChangeTransitionEnd={onSlideChangeTransitionEnd}
         initialSlide={currentSlide}
         ref={mySwiperRef}
-        className="mySwiper">
+        className="mySwiper opacity-0">
         {data.map(el => (
           <SwiperSlide key={el.eid}>
             {({isActive}) => (
@@ -256,7 +259,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
                 handleClick={handleClick}
                 shareAreaStyle={shareAreaStyle}
                 gridClass={gridClass}
-                isPaused={isPaused}
               />
             )}
           </SwiperSlide>
