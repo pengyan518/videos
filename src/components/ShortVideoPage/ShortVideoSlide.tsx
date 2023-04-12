@@ -22,7 +22,6 @@ import {requestTimeout} from '../../utils/RAFTimeout'
 import SlideItem from './SlideItem'
 import SlideNextButton from './SlideNextButton'
 import SlidePrevButton from './SlidePrevButton'
-import toSeconds from '../../utils/toSeconds'
 
 export type ShortVideoSlideProps = {
   item: VideoItemProps
@@ -39,7 +38,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
   const [currentItem, setCurrentItem] = useState(item)
-  const [currentDuration, setDuration] = useState(toSeconds(currentItem.length))
   const [isPaused, setPaused] = useState<boolean | null>(null)
   const [shareAreaStyle, setShareAreaHeight] = useState({
     height: 0,
@@ -130,22 +128,20 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   const onTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
-      // const swiperDom = document.querySelector('.swiper-wrapper')
-      // swiperDom && swiperDom.classList.remove('opacity-0')
-
       mySwiperRef.current && mySwiperRef.current.classList.remove('opacity-0')
       const {eid, title, urlFriendlyName} = data[e.activeIndex]
       const seoUrl = urlFriendlyName || getFriendlyUrl(title)
       window.history.pushState({}, '', `/${config.controller}/shorts/play/${eid}/${seoUrl}.html`)
       axios.get(`${config.updateCounter}${eid}`)
       element.current && element.current.classList.add('opacity-0')
+      progressBarRef.current && progressBarRef.current.dom.classList.add('opacity-0')
     },
     [data, element]
   )
 
   const onSlideChangeTransitionStart = useCallback(
     (e: {activeIndex: number}) => {
-      console.debug('onSlideChangeTransitionStart')
+      // console.debug('onSlideChangeTransitionStart')
       setCurrentItem(data[e.activeIndex])
       //
     },
@@ -153,10 +149,9 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   )
 
   const onTransitionEnd = useCallback(() => {
-    console.debug('onTransitionEnd')
+    // console.debug('onTransitionEnd')
     // console.debug(vimeoPlayer)
-    // clearProgress()
-    // const swiperDom = document.querySelector('.swiper-wrapper')
+
     if (vimeoPlayer) {
       if (isMuted) {
         vimeoPlayer.setMuted(true)
@@ -173,41 +168,36 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     }
     element.current && element.current.classList.remove('opacity-0')
     mySwiperRef.current && mySwiperRef.current.classList.add('opacity-0')
-    // swiperDom && swiperDom.classList.add('opacity-0')
+    progressBarRef.current && progressBarRef.current.dom.classList.remove('opacity-0')
+
   }, [element, isMuted, vimeoPlayer])
 
-  const onSlideChangeTransitionEnd = useCallback(
-    (e: {activeIndex: number}) => {
-      console.debug('onSlideChangeTransitionEnd')
-      setPaused(false)
-      // clearProgress()
-      // if (vimeoPlayer) {
-      //   setTimeout(() => {
-      //     vimeoPlayer.getPaused().then((paused: boolean) => {
-      //       setPaused(paused)
-      //     })
-      //   }, 1000)
-      // }
-      // if (window.videoJsPlayer) {
-      //   const p = window.videoJsPlayer.paused()
-      //   setPaused(p)
-      // }
+  const onSlideChangeTransitionEnd = useCallback((e: {activeIndex: number}) => {
+    // console.debug('onSlideChangeTransitionEnd')
+    setPaused(false)
+    // clearProgress()
+    // if (vimeoPlayer) {
+    //   setTimeout(() => {
+    //     vimeoPlayer.getPaused().then((paused: boolean) => {
+    //       setPaused(paused)
+    //     })
+    //   }, 1000)
+    // }
+    // if (window.videoJsPlayer) {
+    //   const p = window.videoJsPlayer.paused()
+    //   setPaused(p)
+    // }
 
-      // clearProgress()
-    },
-    []
-  )
+    // clearProgress()
+  }, [])
 
-  const onAfterInit = useCallback(
-    (swiper: {slideTo: (arg0: number) => void}) => {
-      console.debug('onAfterInit')
-      window.swiper = swiper
-      // const swiperDom = document.querySelector('.swiper-wrapper')
-      // swiperDom && swiperDom.classList.add('opacity-0')
-      requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 200)
-    },
-    []
-  )
+  const onAfterInit = useCallback((swiper: {slideTo: (arg0: number) => void}) => {
+    // console.debug('onAfterInit')
+    window.swiper = swiper
+    // const swiperDom = document.querySelector('.swiper-wrapper')
+    // swiperDom && swiperDom.classList.add('opacity-0')
+    requestTimeout(() => swiperRef.current && swiperRef.current.classList.add('animate__fadeIn'), 200)
+  }, [])
 
   useEffect(() => {
     window.addEventListener('popstate', event => {

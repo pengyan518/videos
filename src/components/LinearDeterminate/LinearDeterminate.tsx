@@ -32,6 +32,8 @@ function MyLinearDeterminate({}: LinearDeterminateProps, ref: React.Ref<unknown>
   //   setDuration(toSeconds(duration))
   // },[duration])
 
+  const progressBarRef = useRef(null)
+
   useImperativeHandle(
     ref,
     () => ({
@@ -39,6 +41,7 @@ function MyLinearDeterminate({}: LinearDeterminateProps, ref: React.Ref<unknown>
       setProgress,
       // convertCurrentTime,
       // setDuration,
+      dom: progressBarRef.current,
     }),
     [progress]
   )
@@ -81,7 +84,7 @@ function MyLinearDeterminate({}: LinearDeterminateProps, ref: React.Ref<unknown>
     borderRadius: 1,
   }
   return (
-    <div className="absolute left-[0.5rem] right-[0.5rem] top-0">
+    <div className="absolute left-[0.5rem] right-[0.5rem] top-0" ref={progressBarRef}>
       <Box sx={styles}>
         <LinearProgress variant="determinate" value={progress} sx={styles2} />
       </Box>
