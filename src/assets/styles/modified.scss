@@ -200,7 +200,15 @@ h6,
 //}
 .MuiLinearProgress-root {
   height: 3px !important;
-   .MuiLinearProgress-bar {
+  .MuiLinearProgress-bar {
     transition: transform 0.1s linear !important;
+  }
+}
+.videosCategory__shorts {
+  background-color: #212a4f;
+  img {
+    @media (min-width: 768px) {
+      object-fit: contain;
+    }
   }
 }

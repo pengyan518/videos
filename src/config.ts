@@ -2,6 +2,7 @@ import posterBg from './assets/images/home_bg.jpg'
 import artistPosterBg from './assets/images/Artists-video-header.jpg'
 import musicPosterBg from './assets/images/Music-video-header.jpg'
 import reviewsPosterBg from './assets/images/Reviews-video-header.jpg'
+import shortsPosterBg from './assets/images/Shorts-video-header.jpg'
 
 const loginLangCode = 'en-us'
 // const loginLangCode = 'ko'
@@ -104,9 +105,9 @@ export const sectionMap: {[index: string]: any} = {
     content: ['itemsEditorsPick'],
   },
   shorts: {
-    title: 'Shorts',
+    title: 'Live From Tour',
     banner: '',
-    poster: posterBg,
+    poster: shortsPosterBg,
     content: ['itemsShorts'],
   },
 }

@@ -4,29 +4,9 @@ interface ImageProps {
   original: string
 }
 
-export interface CategoryProps {
-  itemsFeatured: any[]
-  itemsLatest: any[]
-  itemsShenyunIntroduction: any[]
-  itemsShenyunTrailers: any[]
-  itemsArtists: any[]
-  itemsPersecution: any[]
-  itemsStartsOfShenyun: any[]
-  itemsMorefromArtists: any[]
-  itemsEditorsPick: any[]
-  itemsReviews: any[]
-  itemsSyso: any[]
-  itemsShorts: any[]
-}
-
-export interface MainProps {
-  category: CategoryProps
-  translation: any
-  langCode: string
-}
-
 export type VideoItemProps = {
   eid: string
+  id: string
   title: string
   descriptionLong: string
   description: string
@@ -41,6 +21,29 @@ export type VideoItemProps = {
     original: string
   }
 }
+
+export interface CategoryProps {
+  itemsFeatured: VideoItemProps[]
+  itemsLatest: VideoItemProps[]
+  itemsShenyunIntroduction: VideoItemProps[]
+  itemsShenyunTrailers: VideoItemProps[]
+  itemsArtists: VideoItemProps[]
+  itemsPersecution: VideoItemProps[]
+  itemsStartsOfShenyun: VideoItemProps[]
+  itemsMorefromArtists: VideoItemProps[]
+  itemsEditorsPick: VideoItemProps[]
+  itemsReviews: VideoItemProps[]
+  itemsSyso: VideoItemProps[]
+  itemsShorts: VideoItemProps[]
+}
+
+export interface MainProps {
+  category: CategoryProps
+  translation: any
+  langCode: string
+}
+
+
 
 export interface ContentProps {
   content: MainProps

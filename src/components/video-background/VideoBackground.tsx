@@ -5,11 +5,12 @@ export type VideoBackgroundProps = {
   src?: string
   srcMobile?: string
   poster?: string
+  imageFitClass?: string
   childrenContent: ReactNode
   breadcrumb?: ReactNode
 }
 
-export default function VideoBackground({src, poster, childrenContent, breadcrumb}: VideoBackgroundProps) {
+export default function VideoBackground({src, poster, childrenContent, breadcrumb, imageFitClass='object-cover'}: VideoBackgroundProps) {
   if (!src && !poster) return null
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -32,7 +33,7 @@ export default function VideoBackground({src, poster, childrenContent, breadcrum
           </video>
         ) : (
           <div className="relative aspect-w-16 aspect-h-10 md:aspect-w-17 md:aspect-h-4">
-            <img src={poster} alt="" className="top-0 left-0 w-full object-cover z-1" />
+            <img src={poster} alt="" className={`top-0 left-0 w-full z-1 ${imageFitClass}`} />
             {breadcrumb}
           </div>
         )}

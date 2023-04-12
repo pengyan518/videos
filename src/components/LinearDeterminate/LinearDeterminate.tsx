@@ -1,14 +1,26 @@
 import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import Box from '@mui/material/Box'
 import LinearProgress from '@mui/material/LinearProgress'
-import {useAppSelector} from '../../app/hooks'
-import {RootState} from '../../app/store'
-import toSeconds from '../../utils/toSeconds'
+import {purple, orange} from '@mui/material/colors'
+import {createTheme, ThemeProvider} from '@mui/material/styles'
 
 interface LinearDeterminateProps {
   // isPaused: boolean | null
   duration?: number
 }
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: orange[500],
+    },
+    secondary: {
+      main: '#ff6e40',
+      contrastText: '#eedf83',
+    },
+  },
+})
 
 function MyLinearDeterminate({}: LinearDeterminateProps, ref: React.Ref<unknown> | undefined) {
   const [progress, setProgress] = useState(0)
@@ -84,9 +96,11 @@ function MyLinearDeterminate({}: LinearDeterminateProps, ref: React.Ref<unknown>
     borderRadius: 1,
   }
   return (
-    <div className="absolute left-[0.5rem] right-[0.5rem] top-0" ref={progressBarRef}>
+    <div className="fixed md:absolute left-[0.5rem] right-[0.5rem] bottom-0" ref={progressBarRef}>
       <Box sx={styles}>
-        <LinearProgress variant="determinate" value={progress} sx={styles2} />
+        <ThemeProvider theme={theme}>
+          <LinearProgress variant="determinate" value={progress} sx={styles2} color="secondary" />
+        </ThemeProvider>
       </Box>
     </div>
   )

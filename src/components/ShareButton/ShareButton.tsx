@@ -23,17 +23,6 @@ interface ShareButtonProps {
   children: ReactNode
 }
 
-const style = {
-  // position: 'absolute' as const,
-  bgcolor: '#c7ae62',
-  boxShadow: 0,
-  // width: matches ? 425 : '100%',
-  fontFamily: 'open-sans-condensed',
-  fontSize: 16,
-  py: 2,
-  px: 8,
-}
-
 export default function ShareButton({children}: ShareButtonProps) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
 
@@ -47,17 +36,6 @@ export default function ShareButton({children}: ShareButtonProps) {
 
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
-
-  const style = {
-    // position: 'absolute' as const,
-    bgcolor: '#c7ae62',
-    boxShadow: 0,
-    // width: matches ? 425 : '100%',
-    fontFamily: 'open-sans-condensed',
-    fontSize: 16,
-    py: 2,
-    px: 8,
-  }
 
   return (
     <div>

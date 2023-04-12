@@ -5,7 +5,7 @@ import {VideoItemProps} from "../../types";
 
 export type ItemProps = {
   item: VideoItemProps
-  sectionName: string
+  sectionName: any
 }
 
 export default function ThumbItemWithCaption({item, sectionName}: ItemProps) {

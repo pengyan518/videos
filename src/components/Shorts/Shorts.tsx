@@ -1,5 +1,5 @@
-import React from 'react'
-import useMediaQuery from '@mui/material/useMediaQuery'
+import React, {useCallback} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import Section from '../templates/Section'
@@ -9,7 +9,12 @@ import Carousel from '../MyCarousel/Carousel'
 // import useSortPopular from '../../hooks/useSortPopular'
 // import FilterButton from "../FilterButton/FilterButton";
 // import ThumbItemWithCaption from "../Thumb/ThumbItemWithCaption";
-import ShortsThumbItem from "../Thumb/ShortsThumbItem";
+import ShortsThumbItem from '../Thumb/ShortsThumbItem'
+import {useAppDispatch} from '../../app/hooks'
+
+import {setCurrentCategory} from '../../features/category/categorySlice'
+import {sectionMap} from '../../config'
+import {ChevronRight} from '../icons'
 
 export type FeaturedProps = {
   data: MainProps
@@ -20,18 +25,30 @@ export default function Shorts({data}: FeaturedProps) {
     translation,
     category: {itemsShorts},
   } = data
+
+  const dispatch = useAppDispatch()
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const navigate = useNavigate()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const handleClick = useCallback(() => {
+    dispatch(setCurrentCategory([sectionMap.shorts.content]))
+    navigate(`shorts`)
+  }, [dispatch, navigate])
+
   if (itemsShorts.length < 2) return null
-
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsShorts})
   return (
     <Section className="bg-white" width="md:w-full" xPadding="px-0" yPadding="pt-20 pb-24" title={translation['Live From Tour']}>
       <Wrapper className="innerPaddingAlignHeader">
         <div className="py-3 block md:flex justify-between items-center">
-          <div className="uppercase mb-2 md:mb-0">{translation.Shorts}</div>
+          <div onClick={handleClick} className="flex cursor-pointer items-center">
+            <div className="uppercase mb-0 pr-2">{translation.Shorts}</div>
+            {/* @ts-ignore */}
+            <ChevronRight className="w4 h-4" />
+          </div>
         </div>
-
         <Carousel
           className="flex-[0_0_30%] md:flex-[0_0_16.32%] last:mr-2"
           gap="gap-[0.35vw]"

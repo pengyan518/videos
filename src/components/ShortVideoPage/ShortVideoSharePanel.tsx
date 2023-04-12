@@ -95,9 +95,9 @@ function MyShortVideoSharePanel(
             </div>
           </Link>
           <ToggleMute />
-          <div className="absolute text-white left-4 bottom-0 md:hidden">{currentItem.title}</div>
+          <div className="fixed text-white left-4 bottom-4 md:hidden">{currentItem.title}</div>
           <LinearDeterminate ref={ref} />
-          <button className="absolute right-4 bottom-0 z-10 md:hidden" onClick={handleShare}>
+          <button className="fixed right-4 bottom-4 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}
               <IconsStore className="w-6 h-6 fill-black -scale-x-100" name="ShareIcon" />

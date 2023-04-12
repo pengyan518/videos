@@ -5,7 +5,7 @@ import {VideoItemProps} from "../../types";
 
 export type ItemProps = {
   item: VideoItemProps
-  sectionName: string
+  sectionName: any
 }
 
 export default function ShortsThumbItem({item, sectionName}: ItemProps) {
@@ -16,7 +16,6 @@ export default function ShortsThumbItem({item, sectionName}: ItemProps) {
           <ThumbView item={myItem} showIcon vertical />
           <div className="pt-4 pr-4">
             <div className="text-[0.875rem] leading-tight line-clamp-2 font-bold">{myItem.title}</div>
-            {/* <div className="text-sm line-clamp-3" dangerouslySetInnerHTML={{__html: myItem.descriptionLong}} /> */}
           </div>
         </>
       )}
