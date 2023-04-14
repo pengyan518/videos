@@ -4,7 +4,14 @@ import 'video.js/dist/video-js.css'
 // import './vim.css'
 import useVideoDimensions from '../../hooks/useVideoDimensions'
 
-export const VideoJS = (props: {options: any; onReady: any, isShortVideo?: boolean}, ref: any) => {
+interface VideoJSProps {
+  options: any
+  onReady: any
+  isShortVideo?: boolean
+  // onEnd?: any
+}
+
+export const VideoJS = (props: VideoJSProps, ref: any) => {
   const videoRef = useRef(null)
   const playerRef = useRef(null)
   const {options, onReady, isShortVideo} = props
@@ -22,6 +29,15 @@ export const VideoJS = (props: {options: any; onReady: any, isShortVideo?: boole
         // videojs.log('player is ready')
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         onReady && onReady(player)
+        // if (onReady) {
+        //   onReady(player)
+        //   // @ts-ignore
+        //   player.on('ended', (event: any) => {
+        //     if (onEnd) {
+        //       onEnd(event)
+        //     }
+        //   })
+        // }
       })
 
       playerRef.current = null
@@ -51,9 +67,12 @@ export const VideoJS = (props: {options: any; onReady: any, isShortVideo?: boole
   }, [playerRef])
 
   return (
-    <div className={`${!isShortVideo && ratio < 1 ? 'md:w-4/12 mx-auto' : ''} ${isShortVideo?'':''}`}>
+    <div className={`${!isShortVideo && ratio < 1 ? 'md:w-4/12 mx-auto' : ''} ${isShortVideo ? '' : ''}`}>
       <div data-vjs-player>
-        <video ref={videoRef} className={`rounded-xl overflow-hidden video-js bg-black ${isShortVideo?'vjs-9-16':'vjs-big-play-centered'}`} />
+        <video
+          ref={videoRef}
+          className={`rounded-xl overflow-hidden video-js bg-black ${isShortVideo ? 'vjs-9-16' : 'vjs-big-play-centered'}`}
+        />
       </div>
     </div>
   )

@@ -54,8 +54,13 @@ const VideoFrameDiv = (
     // @ts-ignore
     player.on('timeupdate', (result) => {
       // console.debug('timeupdate')
-      // console.debug(result.target.player.cache_.duration)
       if (options.onTimeupdate) options.onTimeupdate(result.target.player.cache_)
+      // console.debug(result.target.player.cache_.currentTime)
+    })
+
+    // @ts-ignore
+    player.on('ended', () => {
+      if (options.onEnd) options.onEnd()
       // console.debug(result.target.player.cache_.currentTime)
     })
 

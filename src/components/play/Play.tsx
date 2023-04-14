@@ -9,7 +9,7 @@ import PlayTemplate from './PlayTemplate'
 import NoEidResult from './NoEidResult'
 import TopBreadcrumbs from '../TopBreadcrumbs'
 import Footer from '../footer/Footer'
-import ShortVideoPage from "../ShortVideoPage/ShortVideoPage";
+import ShortVideoPage from '../ShortVideoPage/ShortVideoPage'
 
 export type PlayProps = {
   data: MainProps
@@ -20,17 +20,18 @@ export default function Play({data}: PlayProps) {
 
   const {section, eid} = useParams()
 
-  const itemObject = useRef({content: {title: '', description: ''}, key: ''})
+  const itemObject = useRef({content: {title: '', description: ''}, key: '', next: ''})
 
   const player = useRef<HTMLDivElement | null>(null)
 
   const breakForOfLoop = (arrayToBreak: {[s: string]: any}) => {
     for (const [key, categoryContent] of Object.entries(arrayToBreak).filter(([k]) => k !== 'itemsEditorsPick')) {
       // @ts-ignore
-      for (const element of categoryContent) {
+      for (const [i, element] of categoryContent.entries()) {
         if (element.eid === eid) {
           itemObject.current.content = element
           itemObject.current.key = key
+          itemObject.current.next = i === categoryContent.length - 1 ? categoryContent[0].eid : categoryContent[i + 1].eid
           // break
           return false
         }
@@ -40,7 +41,7 @@ export default function Play({data}: PlayProps) {
   }
 
   useEffect(() => {
-    if(section !== 'shorts') {
+    if (section !== 'shorts') {
       player.current && player.current.scrollIntoView({block: 'start', inline: 'nearest'})
     } else {
       window.scrollTo(0, 0)
@@ -55,15 +56,19 @@ export default function Play({data}: PlayProps) {
         <Footer data={data} />
       </>
     )
-  {/* @ts-ignore */}
-  if(section==='shorts') return <ShortVideoPage item={itemObject.current.content} data={category[itemObject.current.key]} />
+
+  if (section === 'shorts') {
+    // @ts-ignore
+    return <ShortVideoPage item={itemObject.current.content} data={category[itemObject.current.key]} />
+  }
 
   return (
     <>
       <div className="videosPlay__Breadcrumbs">
         <TopBreadcrumbs showCurrent={itemObject.current.content.title} ref={player} />
       </div>
-      <PlayTemplate item={itemObject.current.content}>
+      {/* @ts-ignore */}
+      <PlayTemplate item={itemObject.current.content} next={itemObject.current.next} section={section}>
         {/* @ts-ignore */}
         <RelatedContent data={category[itemObject.current.key].filter(item => item.eid !== eid)} section={section} />
       </PlayTemplate>

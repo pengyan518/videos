@@ -77,7 +77,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   }, [])
 
   const onSlideChange = (e: {activeIndex: string | number}) => {
-    console.debug('onSlideChange')
+    // console.debug('onSlideChange')
     // console.debug(e.activeIndex)
     window.videoJsPlayer = null
     window.youTubePlayer = null

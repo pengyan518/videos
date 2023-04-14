@@ -8,10 +8,14 @@ import Wrapper from '../templates/Wrapper'
 import {useAppSelector} from "../../app/hooks";
 import {RootState} from "../../app/store";
 
-export type PlayProps = {
+interface PlayProps {
   item: any
+  next?: string
+  section?: string | undefined
   children: ReactNode
 }
+
+
 const style = {
   // position: 'absolute' as const,
   bgcolor: '#c7ae62',
@@ -23,14 +27,16 @@ const style = {
   px: 8,
 }
 
-const PlayPageTemplate = ({item, children}: PlayProps, ref: React.Ref<any> | undefined) => {
+const PlayPageTemplate = ({item, next, section, children}: PlayProps, ref: React.Ref<any> | undefined) => {
   const {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
+
   return (
     <Wrapper className="pb-10 md:pb-48">
       <div className="innerPaddingAlignHeader">
-        <Player item={item} ref={ref} />
+        {/* @ts-ignore */}
+        <Player item={item} ref={ref} next={next} section={section} />
         <Section width="w-full" xPadding="px-0" yPadding="pb-7 pt-6 md:pt-16">
           <div className="pb-8">
             <div className="md:flex md:justify-between pb-4">

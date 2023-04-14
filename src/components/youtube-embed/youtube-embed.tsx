@@ -6,9 +6,10 @@ import YouTube from '../YouTube/YouTube'
 
 export type YoutubeEmbedProps = {
   embedId: string
+  onEnd?: () => void
 }
 
-const YoutubeEmbed = ({embedId}: YoutubeEmbedProps) => {
+const YoutubeEmbed = ({embedId, onEnd}: YoutubeEmbedProps) => {
   const query = getQueryString(config.videoOptions.youtube)
 
   const opts: YouTubeProps['opts'] = {
@@ -30,7 +31,7 @@ const YoutubeEmbed = ({embedId}: YoutubeEmbedProps) => {
       {/*  allowFullScreen */}
       {/*  title="Embedded youtube" */}
       {/* /> */}
-      <YouTube videoId={embedId} className="absolute w-full h-full top-0 left-0" opts={opts} />
+      <YouTube videoId={embedId} className="absolute w-full h-full top-0 left-0" opts={opts} onEnd={onEnd} />
     </div>
   )
 }

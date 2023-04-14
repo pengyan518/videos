@@ -1,26 +1,47 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 // import axios from 'axios'
-import Vimeo from '@u-wave/react-vimeo'
 import {Skeleton} from '@mui/material'
 
+import Vimeo from '../VimeoPlayer'
 import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
+import {useAppDispatch} from '../../app/hooks'
+import {setVimeoInstance} from '../ShortVideoPage/shortsSlice'
+import {controller} from '../../config'
 // import {PlayerWrapper} from './styles'
 // import Loading from '../loading'
 // import config from "../../config";
 
 export type PlayProps = {
   item: any
+  next?: string
+  section?: string | undefined
 }
 
-function Player({item}: PlayProps, ref: React.Ref<any> | null) {
+function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
   const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
+
+  const navigate = useNavigate()
+
+  const dispatch = useAppDispatch()
   // const loading = useRef<HTMLDivElement | null>(null)
-  const hideLoading = useCallback(() => {
-    // if (loading.current) loading.current.style.display = 'none'
-    setIsLoading(false)
-  }, [])
+  const onReady = useCallback(
+    (player: any) => {
+      dispatch(setVimeoInstance(player))
+      // if (loading.current) loading.current.style.display = 'none'
+      setIsLoading(false)
+    },
+    [dispatch]
+  )
+
+  const onEnd = useCallback(() => {
+    // console.debug('onEnded')
+    if (next) {
+      setTimeout(() => navigate(`/${controller}/${section}/play/${next}`), 3000)
+    }
+  }, [navigate, next, section])
 
   // useEffect(() => {
   //   axios.get(`${config.updateCounter}${eid}`)
@@ -38,14 +59,22 @@ function Player({item}: PlayProps, ref: React.Ref<any> | null) {
                 <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
               </div>
             )}
-            <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={hideLoading} autoplay />
-            {/*  <Loading height="770px" width="100%" color="#1976d2" background="#000" /> */}
+            {/* @ts-ignore */}
+            <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={onReady} onEnd={onEnd} autoplay />
           </div>
         ) : embeddedVideoYT !== '' ? (
-          <YoutubeEmbed embedId={embeddedVideoYT} />
+          <YoutubeEmbed embedId={embeddedVideoYT} onEnd={onEnd} />
         ) : (
           <div ref={ref}>
-            <VideoFrame poster={imageForVideo?.original ?? ''} videoSrc={videoLink} />
+            {/* @ts-ignore */}
+            <VideoFrame
+              poster={imageForVideo?.original ?? ''}
+              videoSrc={videoLink}
+              options={{
+                autoplay: true,
+                onEnd,
+              }}
+            />
           </div>
         )}
       </div>
