@@ -59,7 +59,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   useEffect(() => {
     if (element.current) {
       // eslint-disable-next-line no-nested-ternary
-      const height = (): any | number => (matches ? (element.current ? size.width * 1.7778 : 0) : window.innerHeight - 90)
+      const height = (): any | number => (matches ? (element.current ? size.width * 1.7778 : 0) : window.innerHeight)
       setShareAreaHeight({...shareAreaStyle, height: height()})
     }
   }, [element, matches, size.width]) // don't update dependence by Eslint
@@ -150,8 +150,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   const onTransitionEnd = useCallback(() => {
     // console.debug('onTransitionEnd')
-    // console.debug(vimeoPlayer)
-
     if (vimeoPlayer) {
       if (isMuted) {
         vimeoPlayer.setMuted(true)
