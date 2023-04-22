@@ -33,7 +33,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     content: {translation},
   } = useAppSelector((state: RootState) => state.intro)
 
-  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
+  // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
 
   const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   const {isMuted} = useAppSelector<ShortsProps>((state: RootState) => state.shorts)
@@ -86,13 +86,13 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   }
 
   const swiperOnClick = useCallback(() => {
-    if (vimeoPlayer) {
-      vimeoPlayer.getPaused().then((paused: boolean) => {
+    if (window.vimeoPlayer) {
+      window.vimeoPlayer.getPaused().then((paused: boolean) => {
         if (paused) {
-          vimeoPlayer.play()
+          window.vimeoPlayer.play()
           setPaused(false)
         } else {
-          vimeoPlayer.pause()
+          window.vimeoPlayer.pause()
           setPaused(true)
         }
       })
@@ -116,7 +116,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
         }
       })
     }
-  }, [vimeoPlayer])
+  }, [])
 
   const handleTouch = useCallback(() => {
     if (!matches) swiperOnClick()
@@ -150,11 +150,11 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   const onTransitionEnd = useCallback(() => {
     // console.debug('onTransitionEnd')
-    if (vimeoPlayer) {
+    if (window.vimeoPlayer) {
       if (isMuted) {
-        vimeoPlayer.setMuted(true)
+        window.vimeoPlayer.setMuted(true)
       } else {
-        vimeoPlayer.setMuted(false)
+        window.vimeoPlayer.setMuted(false)
       }
     }
     if (window.videoJsPlayer) {
@@ -168,7 +168,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
     mySwiperRef.current && mySwiperRef.current.classList.add('opacity-0')
     progressBarRef.current && progressBarRef.current.dom.classList.remove('opacity-0')
 
-  }, [element, isMuted, vimeoPlayer])
+  }, [element, isMuted])
 
   const onSlideChangeTransitionEnd = useCallback((e: {activeIndex: number}) => {
     // console.debug('onSlideChangeTransitionEnd')

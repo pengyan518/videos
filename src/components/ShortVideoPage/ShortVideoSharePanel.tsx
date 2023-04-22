@@ -34,7 +34,7 @@ function MyShortVideoSharePanel(
   const {
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
-  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
+  // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
 
   const matches = useMediaQuery('(min-width:768px)')
 
@@ -95,7 +95,7 @@ function MyShortVideoSharePanel(
             </div>
           </Link>
           <ToggleMute />
-          <div className="fixed text-white left-4 bottom-4 md:hidden">{currentItem.title}</div>
+          <div className="fixed text-white left-4 bottom-4 right-[3.5rem] md:hidden">{currentItem.title}</div>
           <LinearDeterminate ref={ref} />
           <button className="fixed right-4 bottom-4 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">

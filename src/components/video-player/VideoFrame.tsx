@@ -1,5 +1,5 @@
 import React, {useEffect, useState, memo, useCallback, useRef, useMemo, forwardRef, useImperativeHandle} from 'react'
-import videojs from 'video.js'
+
 import Video from './VideoJs'
 
 interface VideoFrameProps {
@@ -23,6 +23,7 @@ const VideoFrameDiv = (
         controls: true,
         responsive: true,
         fluid: true,
+        // muted: true,
         poster,
         // controlBar: {
         //   pictureInPictureToggle: false,
@@ -45,7 +46,7 @@ const VideoFrameDiv = (
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     player &&
       player.on('waiting', () => {
-        videojs.log('player is waiting')
+        // videojs.log('player is waiting')
       })
     // @ts-ignore
     // player.on('dispose', () => {
@@ -64,7 +65,7 @@ const VideoFrameDiv = (
       // console.debug(result.target.player.cache_.currentTime)
     })
 
-    console.debug('handlePlayerReady')
+    // console.debug('handlePlayerReady')
 
     // player &&
     //   setPaused &&

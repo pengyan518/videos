@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 // import axios from 'axios'
 
-import config from '../../config'
 
 export interface ShortsState {
   isMuted: boolean
@@ -11,7 +10,7 @@ export interface ShortsState {
 }
 
 const initialState: ShortsState = {
-  isMuted: false,
+  isMuted: true,
   status: 'initial',
   vimeoPlayer: null,
   progress: 0,

@@ -21,7 +21,7 @@ export type PlayProps = {
 }
 
 function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress, setProgress}: PlayProps, ref: React.Ref<any> | null) {
-  const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
+  // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const matches = useMediaQuery('(min-width:768px)')
   const {isMobile} = useMobileDetect()
   const dispatch = useAppDispatch()
@@ -38,7 +38,8 @@ function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress, setProgress}
 
   const onReady = useCallback(
     (player: any) => {
-      dispatch(setVimeoInstance(player))
+      // dispatch(setVimeoInstance(player))
+      window.vimeoPlayer = player
       // setTimeout(() => {
       //   player.getPaused().then((paused: boolean) => {
       //     // clearProgress()
@@ -47,7 +48,7 @@ function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress, setProgress}
       //   })
       // }, 1000)
     },
-    [dispatch]
+    []
   )
 
   const onTimeUpdate = useCallback((currentTime: { percent: number }) => {
@@ -81,6 +82,7 @@ function VideoPlayer({embeddedVideoVimeo, setPaused, clearProgress, setProgress}
         controls={false}
         autoplay
         loop
+        muted
         {...props}
         // @ts-ignore
         onReady={onReady}
