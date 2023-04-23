@@ -35,6 +35,7 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   const matches = useMediaQuery('(min-width:768px)')
 
   const textRef = useRef<HTMLDivElement>(null)
+  const descriptionRef = useRef<HTMLDivElement>(null)
   // const isHover = useHover(hoverRef)
 
   const handleClick = useCallback(() => {
@@ -49,9 +50,11 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   useEffect(() => {
     if (expanded) {
       requestTimeout(() => textRef.current && textRef.current.classList.add('animate__fadeInUp'), 0)
+      requestTimeout(() => descriptionRef.current && descriptionRef.current.classList.add('animate__fadeOut'), 0)
     } else {
       requestTimeout(() => textRef.current && textRef.current.classList.replace('animate__fadeInUp', 'animate__fadeOutDown'), 0)
-      requestTimeout(() => textRef.current && textRef.current.classList.remove('animate__fadeOutDown'), 400)
+      requestTimeout(() => textRef.current && textRef.current.classList.remove('animate__fadeOutDown'), 250)
+      requestTimeout(() => descriptionRef.current && descriptionRef.current.classList.remove('animate__fadeOut'), 200)
     }
     return () => {
       requestTimeout(() => {
@@ -69,19 +72,16 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   return (
     <div className="cursor-pointer z-[11] fixed text-white left-4 bottom-4 right-[4rem] md:hidden" onClick={handleClick}>
       <div className="">
-        {expanded ? (
-          <div className="animate__animated" ref={textRef}>
-            <span className="" dangerouslySetInnerHTML={{__html: description}} />
-            {/* @ts-ignore */}
-            <IconsStore className="w-4 h-4 fill-white -rotate-90 ml-2 inline" name="ChevronLeft" />
-          </div>
-        ) : (
-          <>
-            <span className="" dangerouslySetInnerHTML={{__html: title}} />
-            {/* @ts-ignore */}
-            <IconsStore className="w-4 h-4 fill-white rotate-90 ml-2 inline" name="ChevronLeft" />
-          </>
-        )}
+        <div className="absolute bottom-0 left-0 animate__animated opacity-0" ref={textRef}>
+          <span className="" dangerouslySetInnerHTML={{__html: description}} />
+          {/* @ts-ignore */}
+          <IconsStore className="w-4 h-4 fill-white -rotate-90 ml-2 inline" name="ChevronLeft" />
+        </div>
+        <div className="animate__animated" ref={descriptionRef}>
+          <span className="" dangerouslySetInnerHTML={{__html: title}} />
+          {/* @ts-ignore */}
+          <IconsStore className="w-4 h-4 fill-white rotate-90 ml-2 inline" name="ChevronLeft" />
+        </div>
       </div>
     </div>
   )
