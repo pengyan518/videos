@@ -18,6 +18,7 @@ import Play from '../icons/Play'
 import {requestTimeout} from '../../utils/RAFTimeout'
 import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
 import toSeconds from '../../utils/toSeconds'
+import TitleExpanded from "./TitleExpanded";
 
 export type ShortVideoSharePanelProps = {
   currentItem: VideoItemProps
@@ -91,11 +92,11 @@ function MyShortVideoSharePanel(
           <Link className="absolute left-4 top-4 z-10 lg:hidden" to={`/${controller}`}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}
-              <IconsStore className="w-6 h-6 fill-black" name="ChevronLeft" />
+              <IconsStore className="w-4 h-4 fill-black ml-[-2px]" name="ChevronLeft" />
             </div>
           </Link>
           <ToggleMute />
-          <div className="fixed text-white left-4 bottom-4 right-[3.5rem] md:hidden">{currentItem.title}</div>
+          <TitleExpanded title={currentItem.title} description={currentItem.descriptionLong} />
           <LinearDeterminate ref={ref} />
           <button className="fixed right-4 bottom-4 z-10 md:hidden" onClick={handleShare}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
