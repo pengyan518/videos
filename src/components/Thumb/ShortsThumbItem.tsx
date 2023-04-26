@@ -15,7 +15,7 @@ export default function ShortsThumbItem({item, sectionName}: ItemProps) {
         <>
           <ThumbView item={myItem} showIcon vertical />
           <div className="pt-4 pr-4">
-            <div className="text-[0.875rem] leading-tight line-clamp-2 font-bold">{myItem.title}</div>
+            <div className="text-[0.875rem] leading-[1.3] line-clamp-4 font-bold">{myItem.title}</div>
           </div>
         </>
       )}

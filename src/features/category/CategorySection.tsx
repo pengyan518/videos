@@ -2,15 +2,12 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 
 import {MainProps, CategoryProps, VideoItemProps} from '../../types'
-import config, {sectionMap} from '../../config'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
-// import sortPopular from '../../utils/sortPopular'
 import useSortPopular from '../../hooks/useSortPopular'
 import FilterButton from '../../components/FilterButton/FilterButton'
 import ShortsThumbItem from '../../components/Thumb/ShortsThumbItem'
-// import useUrlParameter from '../../hooks/useUrlParameter'
 
 type ValueOf<T> = T[keyof T]
 

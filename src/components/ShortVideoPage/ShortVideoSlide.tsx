@@ -173,20 +173,6 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const onSlideChangeTransitionEnd = useCallback((e: {activeIndex: number}) => {
     // console.debug('onSlideChangeTransitionEnd')
     setPaused(false)
-    // clearProgress()
-    // if (vimeoPlayer) {
-    //   setTimeout(() => {
-    //     vimeoPlayer.getPaused().then((paused: boolean) => {
-    //       setPaused(paused)
-    //     })
-    //   }, 1000)
-    // }
-    // if (window.videoJsPlayer) {
-    //   const p = window.videoJsPlayer.paused()
-    //   setPaused(p)
-    // }
-
-    // clearProgress()
   }, [])
 
   const onAfterInit = useCallback((swiper: {slideTo: (arg0: number) => void}) => {

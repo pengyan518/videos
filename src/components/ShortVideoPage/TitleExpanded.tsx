@@ -1,23 +1,10 @@
 import React, {forwardRef, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
-import {Link, useNavigate} from 'react-router-dom'
-import {useMediaQuery} from '@mui/material'
-import config, {controller, sectionMap} from '../../config'
-
-import {ShortsProps, VideoItemProps} from '../../types'
-
-import ToggleMute from './ToggleMute'
 import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
-import ShareButton from '../ShareButton/ShareButton'
-
 import IconsStore from '../icons/IconsStore'
-import Triangle from '../icons/Triangle'
-import ShareButtonsPanel from './ShareButtonsPanel'
-import Play from '../icons/Play'
 import {requestTimeout} from '../../utils/RAFTimeout'
-import LinearDeterminate from '../LinearDeterminate/LinearDeterminate'
-import toSeconds from '../../utils/toSeconds'
+import {Gradient} from '../templates/styles'
 
 export type ShortVideoSharePanelProps = {
   title: string
@@ -32,19 +19,12 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const [expanded, setExpanded] = useState<boolean>(false)
 
-  const matches = useMediaQuery('(min-width:768px)')
-
   const textRef = useRef<HTMLDivElement>(null)
   const descriptionRef = useRef<HTMLDivElement>(null)
   // const isHover = useHover(hoverRef)
 
   const handleClick = useCallback(() => {
     setExpanded(!expanded)
-    // if(expanded) {
-    //   requestTimeout(() => setExpanded(false), 400)
-    // } else {
-    //   requestTimeout(() => setExpanded(true), 0)
-    // }
   }, [expanded])
 
   useEffect(() => {
@@ -70,20 +50,23 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   }, [title])
 
   return (
-    <div className="cursor-pointer z-[11] fixed text-white left-4 bottom-4 right-[4rem] md:hidden" onClick={handleClick}>
-      <div className="">
-        <div className="absolute bottom-0 left-0 animate__animated opacity-0" ref={textRef}>
-          <span className="" dangerouslySetInnerHTML={{__html: description}} />
-          {/* @ts-ignore */}
-          <IconsStore className="w-4 h-4 fill-white -rotate-90 ml-2 inline" name="ChevronLeft" />
-        </div>
-        <div className="animate__animated" ref={descriptionRef}>
-          <span className="" dangerouslySetInnerHTML={{__html: title}} />
-          {/* @ts-ignore */}
-          <IconsStore className="w-4 h-4 fill-white rotate-90 ml-2 inline" name="ChevronLeft" />
+    <>
+      <div className="cursor-pointer z-[11] fixed text-white left-4 bottom-4 right-[4rem] md:hidden" onClick={handleClick}>
+        <div className="">
+          <div className="absolute bottom-0 left-0 animate__animated opacity-0" ref={textRef}>
+            <span className="" dangerouslySetInnerHTML={{__html: description}} />
+            {/* @ts-ignore */}
+            <IconsStore className="w-4 h-4 fill-white -rotate-90 ml-2 inline" name="ChevronLeft" />
+          </div>
+          <div className="animate__animated" ref={descriptionRef}>
+            <span className="" dangerouslySetInnerHTML={{__html: title}} />
+            {/* @ts-ignore */}
+            <IconsStore className="w-4 h-4 fill-white rotate-90 ml-2 inline" name="ChevronLeft" />
+          </div>
         </div>
       </div>
-    </div>
+      <Gradient className="" />
+    </>
   )
 }
 
