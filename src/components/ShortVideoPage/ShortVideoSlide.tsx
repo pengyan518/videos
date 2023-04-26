@@ -51,7 +51,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
   const swiperRef = useRef<any>(null)
   const mySwiperRef = useRef<any>(null)
   const progressBarRef = useRef<any>(null)
-  const gridClass = matches ? 'md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
+  const gridClass = matches ? 'md:grid-cols-[15px_1.5fr_1.3fr_15px] xl:grid-cols-[1fr_1.5fr_1.3fr_1fr] gap-2' : 'grid-cols-[0fr_1.6fr_0fr]'
   // const gridClass = 'grid-cols-[0fr_1.6fr_0fr] md:grid-cols-[15px_1.5fr_1.3fr_15px] lg:grid-cols-[1fr_1.5fr_1.3fr_1fr] md:gap-2'
 
   // const vimeoPlayerRef = useRef<HTMLDivElement | null>(null)
