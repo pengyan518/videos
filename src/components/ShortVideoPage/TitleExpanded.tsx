@@ -4,7 +4,7 @@ import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import IconsStore from '../icons/IconsStore'
 import {requestTimeout} from '../../utils/RAFTimeout'
-import {Gradient} from '../templates/styles'
+import {Gradient} from './styles'
 
 export type ShortVideoSharePanelProps = {
   title: string
@@ -18,6 +18,7 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   } = useAppSelector((state: RootState) => state.intro)
   // const {vimeoPlayer} = useAppSelector((state: RootState) => state.shorts)
   const [expanded, setExpanded] = useState<boolean>(false)
+  const [expandedHeight, setExpandedHeight] = useState<string>('150px')
 
   const textRef = useRef<HTMLDivElement>(null)
   const descriptionRef = useRef<HTMLDivElement>(null)
@@ -26,6 +27,12 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
   const handleClick = useCallback(() => {
     setExpanded(!expanded)
   }, [expanded])
+
+  useEffect(() => {
+    if (textRef.current) {
+      setExpandedHeight(window.getComputedStyle(textRef.current).height)
+    }
+  }, [title])
 
   useEffect(() => {
     if (expanded) {
@@ -65,7 +72,12 @@ function TitleExpanded({title, description}: ShortVideoSharePanelProps) {
           </div>
         </div>
       </div>
-      <Gradient className="" />
+      <Gradient
+        dataHeight={expandedHeight}
+        className={`absolute rounded-b-xl w-full left-0 bottom-0 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.95)] ${
+          expanded ? 'opacity-100' : 'opacity-10'
+        }`}
+      />
     </>
   )
 }

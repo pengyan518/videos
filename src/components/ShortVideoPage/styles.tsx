@@ -24,12 +24,19 @@ export const Item = styled.a<LangProps>`
 
   svg {
     transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
-
-    //&:hover,
-    //&:focus {
-    //  fill: #ffe4a7;
-    //}
   }
+`
+interface GradientProps {
+  dataHeight: string
+}
+export const Gradient = styled.div<GradientProps>`
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 450ms;
+  height: ${({dataHeight}) => {
+    console.debug(dataHeight)
+    return `calc(${dataHeight} + 180px)`
+  }};
 `
 
 //
