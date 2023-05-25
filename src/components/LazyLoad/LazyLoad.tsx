@@ -1,6 +1,6 @@
 import React, {Children, Component, createElement, ReactNode, RefObject} from 'react'
 // eslint-disable-next-line import/extensions
-// import scrollParent from './utils/index.js'
+import scrollParent from './utils/index'
 
 type Props = {
   children: ReactNode
@@ -41,11 +41,11 @@ export default class LazyLoad extends Component<Props, State> {
   }
 
   componentDidMount() {
-    // let eventNode = this.getEventNode()
-    //
-    // if (eventNode === window) {
-    //   eventNode = document.body
-    // }
+    let eventNode = this.getEventNode()
+
+    if (eventNode === window) {
+      eventNode = document.body
+    }
     const {offset, threshold} = this.props
 
     const options = {
@@ -74,9 +74,9 @@ export default class LazyLoad extends Component<Props, State> {
     }
   }
 
-  // getEventNode() {
-  //   return scrollParent(this.wrapper?.current)
-  // }
+  getEventNode() {
+    return scrollParent(this.wrapper?.current)
+  }
 
   lazyLoadHandler = (entries: IntersectionObserverEntry[]) => {
     const {onContentVisible} = this.props
