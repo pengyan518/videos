@@ -4,7 +4,7 @@ import {useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import ShareButton from '../ShareButton/ShareButton'
 import GJW from '../../assets/svg/gjw.svg'
-import {Item} from './styles'
+import {Item, GJW_Btn} from './styles'
 import IconsStore from '../icons/IconsStore'
 
 export type ShortVideoSharePanelProps = {}
@@ -49,12 +49,12 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
     <>
       <div className="font-bold text-[1.5rem] pb-6">{translation['Follow Shen Yun']}!</div>
       <div className="pb-8">
-        <div className="flex gap-2 items-center p-4 rounded-lg border-4 border-[#c5bfb3] justify-between">
-          <span className="text-[#a19e98] font-bold open-sans-c">{translation['Follow on Gan Jing World']}</span>
+        <GJW_Btn className="flex gap-1 items-center p-4 rounded-lg border-2 border-[#c5bfb3] justify-between relative z-10" target="_blank" href="https://www.ganjing.com/channel/1fgvsk19rtp1jHk2ve5WEeuzC10l0c?tab=shorts">
+          <span className="text-[#a19e98] font-bold open-sans-c text-[1.25rem] leading-[1.2]" dangerouslySetInnerHTML={{__html: translation['Follow on Gan Jing World']}} />
           <div className="w-[5rem] h-[2.5rem]">
             <img src={GJW} alt="" />
           </div>
-        </div>
+        </GJW_Btn>
       </div>
 
       <div className="pb-6">

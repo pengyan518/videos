@@ -34,12 +34,23 @@ export const Gradient = styled.div<GradientProps>`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 450ms;
   height: ${({dataHeight}) => {
-    console.debug(dataHeight)
+    // console.debug(dataHeight)
     return `calc(${dataHeight} + 180px)`
   }};
 `
 
 //
-// export const WidthBox = styled(Box)`
-//   width: ${({ratio}) => `${ratio * 100}%`};
-// `
+export const GJW_Btn = styled.a`
+    transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 250ms;
+  
+  &:hover,
+  &:focus {
+    border-color: #8b7955;
+
+    span {
+      color: #8b7955;
+    }
+  }
+`
