@@ -38,10 +38,11 @@ function Intro({data}: IProps) {
       <div className="overflow-x-hidden">
         <TopArea />
         <EditorsPick data={data} />
-          <Shorts data={data} />
-        <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto pb-16 mt-[4.5rem]">
+
+        <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto mt-[4.5rem]">
           <Featured data={data} />
         </div>
+        <Shorts data={data} />
         <CreationsBanner />
         <Footer data={data} />
       </div>

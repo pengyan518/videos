@@ -25,7 +25,7 @@ export default function Play({data}: PlayProps) {
   const player = useRef<HTMLDivElement | null>(null)
 
   const breakForOfLoop = (arrayToBreak: {[s: string]: any}) => {
-    for (const [key, categoryContent] of Object.entries(arrayToBreak).filter(([k]) => k !== 'itemsEditorsPick')) {
+    for (const [key, categoryContent] of Object.entries(arrayToBreak).filter(([k]) => k !== 'itemsEditorsPick' && k !== 'itemsLatest')) {
       // @ts-ignore
       for (const [i, element] of categoryContent.entries()) {
         if (element.eid === eid) {
@@ -58,6 +58,7 @@ export default function Play({data}: PlayProps) {
     )
 
   if (section === 'shorts') {
+    console.debug(itemObject.current.key)
     // @ts-ignore
     return <ShortVideoPage item={itemObject.current.content} data={category[itemObject.current.key]} />
   }

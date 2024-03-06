@@ -57,33 +57,33 @@ export default function ShareButtonsPanel({}: ShortVideoSharePanelProps) {
         </GJW_Btn>
       </div>
 
-      <div className="pb-6">
-        <div className="flex flex-wrap gap-3 items-center">
-          {icons.map((item, index, array) => (
-            <div key={item[0]}>
-              {index === array.length - 1 ? (
-                <ShareButton>
-                  <div>
-                    <div className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white relative z-10">
-                      {/* @ts-ignore */}
-                      <IconsStore className="w-[2.5vw] h-[2.5vw] -scale-x-100 fill-white" name="ShareIcon" />
-                    </div>
-                  </div>
-                </ShareButton>
-              ) : (
-                <Item
-                  className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer relative z-10"
-                  langCode={langCode}
-                  target="_blank"
-                  href={item[1]}>
-                  {/* @ts-ignore */}
-                  <IconsStore className="w-[2.5vw] h-[2.5vw] text-white" name={item[0]} />
-                </Item>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* <div className="pb-6"> */}
+      {/*  <div className="flex flex-wrap gap-3 items-center"> */}
+      {/*    {icons.map((item, index, array) => ( */}
+      {/*      <div key={item[0]}> */}
+      {/*        {index === array.length - 1 ? ( */}
+      {/*          <ShareButton> */}
+      {/*            <div> */}
+      {/*              <div className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer text-white relative z-10"> */}
+      {/*                /!* @ts-ignore *!/ */}
+      {/*                <IconsStore className="w-[2.5vw] h-[2.5vw] -scale-x-100 fill-white" name="ShareIcon" /> */}
+      {/*              </div> */}
+      {/*            </div> */}
+      {/*          </ShareButton> */}
+      {/*        ) : ( */}
+      {/*          <Item */}
+      {/*            className="p-[0.4rem] bg-[#c5bfb3] hover:bg-[#9e9685] rounded-lg inline-block cursor-pointer relative z-10" */}
+      {/*            langCode={langCode} */}
+      {/*            target="_blank" */}
+      {/*            href={item[1]}> */}
+      {/*            /!* @ts-ignore *!/ */}
+      {/*            <IconsStore className="w-[2.5vw] h-[2.5vw] text-white" name={item[0]} /> */}
+      {/*          </Item> */}
+      {/*        )} */}
+      {/*      </div> */}
+      {/*    ))} */}
+      {/*  </div> */}
+      {/* </div> */}
     </>
   )
 }

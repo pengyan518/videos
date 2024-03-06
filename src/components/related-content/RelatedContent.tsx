@@ -15,7 +15,7 @@ export default function RelatedContent({data, section}: RelatedContentProps) {
     content: {translation, langCode},
   } = useAppSelector((state: RootState) => state.intro)
 
-  if (!data) return null
+  if (!data || data.length<5) return null
 
   return (
     <Carousel className="flex-[0_0_40%] md:flex-[0_0_24%] last:mr-4" header={<div className={'text-[#524941] py-4 block'}>{translation.Playlist}</div>}>

@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react'
 import './button.scss'
 
-export type ButtonProps = {
+export type ButtonProps = React.ComponentProps<any> & {
   as?: any
   children?: ReactNode
   filled?: boolean

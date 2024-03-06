@@ -36,11 +36,12 @@ export default function Shorts({data}: FeaturedProps) {
     navigate(`shorts`)
   }, [dispatch, navigate])
 
+
   if (itemsShorts.length < 2) return null
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const {handleClick, content, activeTab} = useSortPopular({categoryData: itemsShorts})
   return (
-    <Section className="bg-white" width="md:w-full" xPadding="px-0" yPadding="pt-20 pb-24" title={translation['Live From Tour']}>
+    <Section className="" width="md:w-full" xPadding="px-0" yPadding="pt-6 pb-[12rem]" title={translation['Behind the Scenes']}>
       <Wrapper className="innerPaddingAlignHeader">
         <div className="py-3 block md:flex justify-between items-center">
           <div onClick={handleClick} className="flex cursor-pointer items-center">

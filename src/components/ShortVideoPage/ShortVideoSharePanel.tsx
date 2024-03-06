@@ -111,7 +111,7 @@ function MyShortVideoSharePanel(
           </div>
         </div>
         <div className="text-center h-screen display-none md:flex items-center">
-          <div className="bg-white w-full rounded-xl px-[4vw] py-10 grid items-center text-left" style={shareAreaStyle}>
+          <div className="bg-white w-full rounded-xl px-[4vw] py-10 grid items-center text-start" style={shareAreaStyle}>
             <div>
               <div className="text-lg font-bold mb-2">{currentItem.title}</div>
               <div className="text-lg">{currentItem.descriptionLong}</div>

@@ -5,7 +5,6 @@ import {MainProps} from '../../types'
 import Section from '../templates/Section'
 import ThumbItem from '../Thumb/ThumbItem'
 import Wrapper from '../templates/Wrapper'
-import {ScrollWrapper} from './styles'
 import Carousel from '../MyCarousel/Carousel'
 import useSortPopular from '../../hooks/useSortPopular'
 import FilterButton from "../FilterButton/FilterButton";
