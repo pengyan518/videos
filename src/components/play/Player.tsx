@@ -21,7 +21,7 @@ export type PlayProps = {
 
 function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
-  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
+  const {videoLink, imageForVideo, eid} = item
 
   const navigate = useNavigate()
 
@@ -51,32 +51,17 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   return (
     <div className="">
       <div>
-        {/* eslint-disable-next-line no-nested-ternary */}
-        {embeddedVideoVimeo !== '' ? (
-          <div className="w-full relative">
-            {isLoading && (
-              <div className="aspect-w-16 aspect-h-9">
-                <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
-              </div>
-            )}
-            {/* @ts-ignore */}
-            <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={onReady} onEnd={onEnd} autoplay />
-          </div>
-        ) : embeddedVideoYT !== '' ? (
-          <YoutubeEmbed embedId={embeddedVideoYT} onEnd={onEnd} />
-        ) : (
-          <div ref={ref}>
-            {/* @ts-ignore */}
-            <VideoFrame
-              poster={imageForVideo?.original ?? ''}
-              videoSrc={videoLink}
-              options={{
-                autoplay: true,
-                onEnd,
-              }}
-            />
-          </div>
-        )}
+        <div ref={ref}>
+          {/* @ts-ignore */}
+          <VideoFrame
+            poster={imageForVideo?.original ?? ''}
+            videoSrc={videoLink}
+            options={{
+              autoplay: true,
+              onEnd,
+            }}
+          />
+        </div>
       </div>
     </div>
   )

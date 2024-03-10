@@ -7,29 +7,24 @@ import {RootState} from '../../app/store'
 import OnDemandPopup from '../OnDemandPopup/OnDemandPopup'
 import {VideoItemProps} from '../../types'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
-
+import TestimonialPopup from "../TestimonialPopup/TestimonialPopup";
 
 export type ItemProps = {
   item: VideoItemProps
   sectionName: string
   className?: string
   children: any
+  categoryName?: string
 }
 
-
-export default function ThumbWrapper({item, sectionName, className, children}: ItemProps) {
+export default function ThumbWrapper({item, sectionName, className, children, categoryName}: ItemProps) {
   const {
     content: {category, translation},
   } = useAppSelector((state: RootState) => state.intro)
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
-  const {
-    onDemandLink,
-    eid,
-    title,
-    urlFriendlyName,
-  } = item
+  const {onDemandLink, eid, title, urlFriendlyName} = item
   const handleClickOpen = () => {
     setOpen(true)
     axios.get(`${config.updateCounter}${eid}`)
@@ -43,12 +38,20 @@ export default function ThumbWrapper({item, sectionName, className, children}: I
 
   return (
     <>
+      {/* eslint-disable-next-line no-nested-ternary */}
       {onDemandLink ? (
         <>
           <div onClick={handleClickOpen} className={`cursor-pointer ${className || ''}`}>
             {children(item)}
           </div>
           <OnDemandPopup setOpen={setOpen} className={className} open={open} item={item} />
+        </>
+      ) : categoryName === 'itemsReviewIndividuals' ? (
+        <>
+          <div onClick={handleClickOpen} className={`cursor-pointer ${className || ''}`}>
+            {children(item)}
+          </div>
+          <TestimonialPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
       ) : (
         <a className={`cursor-pointer ${className || ''}`} onClick={handleClickVideo}>

@@ -6,11 +6,12 @@ import {VideoItemProps} from "../../types";
 export type ItemProps = {
   item: VideoItemProps
   sectionName: any
+  categoryName: string
 }
 
-export default function ThumbItemWithCaption({item, sectionName}: ItemProps) {
+export default function ThumbItemWithCaption({item, sectionName, categoryName}: ItemProps) {
   return (
-    <ThumbWrapper item={item} sectionName={sectionName} className="block hover:no-underline">
+    <ThumbWrapper item={item} sectionName={sectionName} className="block hover:no-underline" categoryName={categoryName}>
       {(myItem: any) => (
         <>
           <ThumbView item={myItem} showIcon />

@@ -10,13 +10,17 @@ export type VideoItemProps = {
   title: string
   descriptionLong: string
   description: string
-  onDemandLink: string
+  onDemandLink?: strings
   videoLink: string
   embeddedVideoVimeo: string
   embeddedVideoYT: string
   urlFriendlyName: string
   length: string
   imageForVideo: {
+    medium: string
+    original: string
+  }
+  image?: {
     medium: string
     original: string
   }

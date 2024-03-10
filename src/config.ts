@@ -87,10 +87,10 @@ export const sectionMap: {[index: string]: any} = {
     content: ['itemsStartsOfShenyun', 'itemsPersecution', 'itemsMorefromArtists'],
   },
   reviews: {
-    title: 'Reviews',
+    title: 'Audience Reviews',
     banner: '',
     poster: reviewsPosterBg,
-    content: ['itemsReviews'],
+    content: ['itemsReviewCompilations', 'itemsReviewIndividuals'],
   },
   music: {
     title: 'Music',

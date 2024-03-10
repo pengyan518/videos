@@ -37,7 +37,7 @@ export default function CategorySection({item, data}: CategoryProp) {
         </div>
       )}
 
-      <div className={gridClass} key={item}>
+      <div className={gridClass}>
         {
           // @ts-ignore
           content.map(element => {
@@ -47,7 +47,7 @@ export default function CategorySection({item, data}: CategoryProp) {
                 {item === 'itemsShorts' ? (
                   <ShortsThumbItem item={element} sectionName={section} />
                 ) : (
-                  <ThumbItemWithCaption item={element} sectionName={section} />
+                  <ThumbItemWithCaption item={element} sectionName={section} categoryName={item} />
                 )}
               </div>
             )

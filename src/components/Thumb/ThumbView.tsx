@@ -32,7 +32,11 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
   const hoverEffect = showLargeThumb ? parentHover : isHover
   const roundedSize = vertical ? 'lg' : 'xl'
   // eslint-disable-next-line no-nested-ternary
-  const imageSrc = item.imageForVideo ? showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium : generalImage
+  const imageSrc = item.imageForVideo ?
+      (showLargeThumb ? item.imageForVideo?.original : item.imageForVideo?.medium) :
+      // eslint-disable-next-line no-nested-ternary
+      (item.image? (showLargeThumb ? item.image?.original : item.image?.medium) :
+      generalImage)
 
   useEffect(() => {
     if (showIcon) {
