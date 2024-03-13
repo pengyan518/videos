@@ -33,7 +33,7 @@ export default function CategorySection({item, data}: CategoryProp) {
           <div id={item} className="text-[#524941] uppercase pb-2 md:pb-0">
             {translation[item]}
           </div>
-          <FilterButton handleClick={handleClick} activeTab={activeTab} />
+          {!['itemsReviewCompilations', 'itemsReviewIndividuals'].includes(item) && <FilterButton handleClick={handleClick} activeTab={activeTab} />}
         </div>
       )}
 

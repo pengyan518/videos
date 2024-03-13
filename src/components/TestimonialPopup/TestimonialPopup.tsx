@@ -86,10 +86,10 @@ export default function TestimonialPopup({setOpen, open, item}: TestimonialProps
             <span dangerouslySetInnerHTML={{__html: title}} />{position && (<>, <span dangerouslySetInnerHTML={{__html: position}} /></>)}
           </div>
           {hasPreview && <Player item={item} />}
-          <div className={`grid px-4 md:px-0 gap-4 mt-6`}>
+          <div className={`grid px-4 md:px-0 gap-4 my-10`}>
             <div
-              className={`text-center ${
-                hasPreview ? 'text-[1.75rem] xl:text-[2rem] md:text-left' : 'text-[1.5rem] xl:text-[1.8rem]'
+              className={`text-center georgia ${
+                hasPreview ? 'text-[1.5rem] xl:text-[1.75rem] md:text-left' : 'text-[1.5rem] xl:text-[1.8rem]'
               }`}
               dangerouslySetInnerHTML={{__html: text}}
             />

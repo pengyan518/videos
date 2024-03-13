@@ -1,5 +1,5 @@
 import React, {ReactNode, useCallback, useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, Outlet, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import config from '../../config'
 import {useAppSelector} from '../../app/hooks'
@@ -51,7 +51,8 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
           <div onClick={handleClickOpen} className={`cursor-pointer ${className || ''}`}>
             {children(item)}
           </div>
-          <TestimonialPopup setOpen={setOpen} className={className} open={open} item={item} />
+          {/* <Outlet /> */}
+           <TestimonialPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
       ) : (
         <a className={`cursor-pointer ${className || ''}`} onClick={handleClickVideo}>

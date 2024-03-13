@@ -3,12 +3,8 @@ import {useNavigate} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import Section from '../templates/Section'
-import ThumbItem from '../Thumb/ThumbItem'
 import Wrapper from '../templates/Wrapper'
 import Carousel from '../MyCarousel/Carousel'
-// import useSortPopular from '../../hooks/useSortPopular'
-// import FilterButton from "../FilterButton/FilterButton";
-// import ThumbItemWithCaption from "../Thumb/ThumbItemWithCaption";
 import ShortsThumbItem from '../Thumb/ShortsThumbItem'
 import {useAppDispatch} from '../../app/hooks'
 
