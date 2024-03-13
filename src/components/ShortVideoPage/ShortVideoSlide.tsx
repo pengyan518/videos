@@ -185,7 +185,7 @@ export default function ShortVideoSlide({item, data}: ShortVideoSlideProps) {
 
   useEffect(() => {
     window.addEventListener('popstate', event => {
-      navigate(`/${config.controller}`)
+      navigate(`/`)
     })
   }, [navigate])
 

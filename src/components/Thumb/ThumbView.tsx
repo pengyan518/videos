@@ -62,11 +62,7 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
     <div className="relative" ref={hoverRef}>
       <ImgWrapper className={`${vertical ? 'aspect-w-10 aspect-h-16' : 'aspect-w-16 aspect-h-9'} overflow-hidden rounded-${roundedSize}`}>
         <Lazy className={`rounded-${roundedSize}`}>
-          <img
-            src={imageSrc}
-            alt=""
-            className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-          />
+          <img src={imageSrc} alt="" className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
         </Lazy>
       </ImgWrapper>
       <div
@@ -88,10 +84,10 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
                 }  line-clamp-1`}>
                 <div className="font-bold">{item.title}</div>
               </div>
-              <TimeStamp onDemandLink={item.onDemandLink} length={item.length} className="m-[0.5rem] md:m-[0.75rem]" />
+              {item.length && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} className="m-[0.5rem] md:m-[0.75rem]" />}
             </div>
           ) : (
-            <>{!vertical && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />}</>
+            <>{!vertical && item.length && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />}</>
           )}
         </>
       )}

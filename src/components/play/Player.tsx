@@ -39,7 +39,7 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   const onEnd = useCallback(() => {
     // console.debug('onEnded')
     if (next) {
-      setTimeout(() => navigate(`/${controller}/${section}/play/${next}`), 3000)
+      setTimeout(() => navigate(`/${section}/play/${next}`), 3000)
     }
   }, [navigate, next, section])
 

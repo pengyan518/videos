@@ -15,7 +15,7 @@ import Shorts from '../../components/Shorts/Shorts'
 import isHidden from '../../utils/isHidden'
 
 interface IProps {
-  data: MainProps
+  data?: MainProps
 }
 
 function Intro({data}: IProps) {
@@ -37,14 +37,14 @@ function Intro({data}: IProps) {
     <>
       <div className="overflow-x-hidden">
         <TopArea />
-        <EditorsPick data={data} />
+        <EditorsPick data={content} />
 
         <div className="overflow-x-hidden xl:w-10/12 2xl:w-[91%] mx-auto mt-[4.5rem]">
-          <Featured data={data} />
+          <Featured data={content} />
         </div>
-        <Shorts data={data} />
+        <Shorts data={content} />
         <CreationsBanner />
-        <Footer data={data} />
+        <Footer data={content} />
       </div>
     </>
   )

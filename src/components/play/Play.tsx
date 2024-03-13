@@ -10,13 +10,19 @@ import NoEidResult from './NoEidResult'
 import TopBreadcrumbs from '../TopBreadcrumbs'
 import Footer from '../footer/Footer'
 import ShortVideoPage from '../ShortVideoPage/ShortVideoPage'
+import {useAppSelector} from "../../app/hooks";
+import {RootState} from "../../app/store";
 
 export type PlayProps = {
-  data: MainProps
+  data?: MainProps
 }
 
 export default function Play({data}: PlayProps) {
-  const {category} = data
+    const {
+    content,
+    status,
+  } = useAppSelector((state: RootState) => state.intro)
+  const {category, translation} = content
 
   const {section, eid} = useParams()
 
@@ -53,7 +59,7 @@ export default function Play({data}: PlayProps) {
       <>
         {/* @ts-ignore */}
         <NoEidResult eid={eid} category={category} section={section} ref={player} />
-        <Footer data={data} />
+        <Footer data={content} />
       </>
     )
 
@@ -73,7 +79,7 @@ export default function Play({data}: PlayProps) {
         {/* @ts-ignore */}
         <RelatedContent data={category[itemObject.current.key].filter(item => item.eid !== eid)} section={section} />
       </PlayTemplate>
-      <Footer data={data} />
+      <Footer data={content} />
     </>
   )
 }

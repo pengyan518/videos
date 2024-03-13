@@ -82,14 +82,14 @@ export default function TestimonialPopup({setOpen, open, item}: TestimonialProps
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} margin={2} />
       <DialogContent sx={style}>
         <div className={`${hasPreview ? 'xl:px-20 py-8' : 'px-4 xl:px-16 pb-8 pt-0'}`}>
-          <div>
+          <div className="mb-4 font-bold text-[2.25rem] leading-snug">
             <span dangerouslySetInnerHTML={{__html: title}} />{position && (<>, <span dangerouslySetInnerHTML={{__html: position}} /></>)}
           </div>
           {hasPreview && <Player item={item} />}
           <div className={`grid px-4 md:px-0 gap-4 mt-6`}>
             <div
-              className={`open-sans-c text-center leading-snug ${
-                hasPreview ? 'text-[1.25rem] xl:text-[2.25rem] md:text-left' : 'text-[1.5rem] xl:text-[1.8rem]'
+              className={`text-center ${
+                hasPreview ? 'text-[1.75rem] xl:text-[2rem] md:text-left' : 'text-[1.5rem] xl:text-[1.8rem]'
               }`}
               dangerouslySetInnerHTML={{__html: text}}
             />

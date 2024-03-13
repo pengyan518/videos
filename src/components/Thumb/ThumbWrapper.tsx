@@ -32,7 +32,7 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
   const seoUrl = urlFriendlyName || getFriendlyUrl(title)
 
   const handleClickVideo = useCallback(() => {
-    navigate(`/${config.controller}/${sectionName}/play/${eid}/${seoUrl}.html`)
+    navigate(`/${sectionName}/play/${eid}/${seoUrl}.html`)
     axios.get(`${config.updateCounter}${eid}`)
   }, [eid, navigate, sectionName, seoUrl])
 

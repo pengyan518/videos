@@ -37,7 +37,7 @@ const BreadcrumbsDiv = ({showCurrent, textColor}: BreadCrumbsProps, ref: any) =>
 
   // @ts-ignore
   const breadcrumbs = [
-    <Link key="1" to={`/${controller}/`}>
+    <Link key="1" to={`/`}>
       <span className="mt-[-1px] rounded inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 py-1 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
         <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
           {/* @ts-ignore */}
@@ -47,7 +47,7 @@ const BreadcrumbsDiv = ({showCurrent, textColor}: BreadCrumbsProps, ref: any) =>
       </span>
       <span>{translation.Videos}</span>
     </Link>,
-    <Link key="2" to={`/${controller}/${section}`}>
+    <Link key="2" to={`/${section}`}>
       {/* @ts-ignore */}
       {translation[sectionMap[section].title]}
     </Link>,

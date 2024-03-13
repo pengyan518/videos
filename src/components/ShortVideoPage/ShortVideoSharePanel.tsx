@@ -78,7 +78,7 @@ function MyShortVideoSharePanel(
     <div className="absolute w-screen left-0 top-0 proxima-nova">
       <div className={`w-screen relative grid ${gridClass} justify-center items-center`}>
         <div className="flex items-start w-full justify-center relative" style={shareAreaStyle}>
-          <Link className="z-[1]" to={`/${controller}`}>
+          <Link className="z-[1]" to={`/`}>
             <span className="rounded display-none xl:inline-flex items-center justify-center w-full pl-1 pr-[1rem] md:pl-3 md:pr-5 pt-1 pb-2 text-lg text-white bg-[#8f7e64] rounded[1px] hover:bg-[#907042] sm:w-auto sm:mb-0 mr-4 md:mr-6 capitalize">
               <div className="w-6 h-6 md:w-8 md:w-8 md:mt-[-7px]">
                 {/* @ts-ignore */}
@@ -89,7 +89,7 @@ function MyShortVideoSharePanel(
           </Link>
         </div>
         <div className="relative flex items-start" style={shareAreaStyle}>
-          <Link className="absolute left-4 top-4 z-10 xl:hidden" to={`/${controller}`}>
+          <Link className="absolute left-4 top-4 z-10 xl:hidden" to={`/`}>
             <div className="cursor-pointer w-[40px] h-[40px] bg-[#d1d5db] bg-opacity-70 rounded-full flex justify-center items-center">
               {/* @ts-ignore */}
               <IconsStore className="w-4 h-4 fill-black ml-[-2px]" name="ChevronLeft" />

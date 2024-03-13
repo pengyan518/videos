@@ -16,20 +16,20 @@ import CategorySection from './CategorySection'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
 export type CategoryProps = {
-  data: MainProps
+  data?: MainProps
   title?: string
   section?: string
 }
 
 export default function Category({data}: CategoryProps) {
   const {
-    content: {translation},
+    content,
   } = useAppSelector((state: RootState) => state.intro)
   const {currentCategory, showPopular} = useAppSelector((state: RootState) => state.category)
   const dispatch = useAppDispatch()
   const {section} = useParams()
   const myCurrentSection = useRef(null)
-  const {category} = data
+  const {category, translation} = content
 
   // console.debug(data)
   // if (!currentCategory) return <>loading...</>
@@ -73,7 +73,7 @@ export default function Category({data}: CategoryProps) {
           <div className="innerPaddingAlignHeader">{categoryViews}</div>
         </Section>
       </div>
-      <Footer data={data} />
+      <Footer data={content} />
     </div>
   )
 }
