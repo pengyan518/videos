@@ -29,7 +29,8 @@ export default function Featured({data}: FeaturedProps) {
                   <h2 className="text-2xl md:text-4xl text-[#524941] OpenSans__font">{translation[sectionContent.title]}</h2>
                 </div>
               )}
-              {sectionContent.content.map((item: React.Key | null | undefined) => (
+              {sectionContent.content.filter((item:string)=>item!=='itemsReviewIndividuals')
+                  .map((item: React.Key | null | undefined) => (
                 <HeroCard key={item} keyName={item} sectionName={sectionUrl} />
               ))}
             </div>

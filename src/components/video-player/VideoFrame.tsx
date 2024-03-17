@@ -48,6 +48,7 @@ const VideoFrameDiv = (
       player.on('waiting', () => {
         // videojs.log('player is waiting')
       })
+
     // @ts-ignore
     // player.on('dispose', () => {
     //   videojs.log('player will dispose')

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, Outlet} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import config, {sectionMap} from '../../config'
@@ -51,7 +51,7 @@ export default function Category({data}: CategoryProps) {
 
   const Inner = () => (
     <div className="innerPaddingAlignHeader">
-      <h2 className="text-4xl">{translation[sectionMap[section].title]}</h2>
+      <h2 className="text-4xl">{translation[sectionMap[section].title==='Reviews'?'From the Audience':sectionMap[section].title]}</h2>
     </div>
   )
   const BreadcrumbsWrapper = () => (
@@ -74,6 +74,7 @@ export default function Category({data}: CategoryProps) {
         </Section>
       </div>
       <Footer data={content} />
+      <Outlet />
     </div>
   )
 }

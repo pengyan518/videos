@@ -8,7 +8,7 @@ import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import {useAppDispatch} from '../../app/hooks'
 import {setVimeoInstance} from '../ShortVideoPage/shortsSlice'
-import {controller} from '../../config'
+
 // import {PlayerWrapper} from './styles'
 // import Loading from '../loading'
 // import config from "../../config";
@@ -21,7 +21,7 @@ export type PlayProps = {
 
 function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
-  const {videoLink, imageForVideo, eid} = item
+  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
 
   const navigate = useNavigate()
 
@@ -35,6 +35,7 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
     },
     [dispatch]
   )
+
 
   const onEnd = useCallback(() => {
     // console.debug('onEnded')
@@ -51,17 +52,32 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   return (
     <div className="">
       <div>
-        <div ref={ref}>
-          {/* @ts-ignore */}
-          <VideoFrame
-            poster={imageForVideo?.original ?? ''}
-            videoSrc={videoLink}
-            options={{
-              autoplay: true,
-              onEnd,
-            }}
-          />
-        </div>
+        {/* eslint-disable-next-line no-nested-ternary */}
+        {embeddedVideoVimeo !== '' ? (
+          <div className="w-full relative">
+            {isLoading && (
+              <div className="aspect-w-16 aspect-h-9">
+                <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
+              </div>
+            )}
+            {/* @ts-ignore */}
+            <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={onReady} onEnd={onEnd} autoplay />
+          </div>
+        ) : embeddedVideoYT !== '' ? (
+          <YoutubeEmbed embedId={embeddedVideoYT} onEnd={onEnd} />
+        ) : (
+          <div ref={ref}>
+            {/* @ts-ignore */}
+            <VideoFrame
+              poster={imageForVideo?.original ?? ''}
+              videoSrc={videoLink}
+              options={{
+                autoplay: true,
+                onEnd,
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

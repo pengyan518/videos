@@ -29,6 +29,7 @@ function Main() {
     if (status !== 'loading' && status !== 'error') {
       // setMainData(JSON.parse(data))
       dispatch(setContent(data))
+      // console.debug(data)
     }
   }, [data, dispatch, status])
 

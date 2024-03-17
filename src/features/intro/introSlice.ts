@@ -9,7 +9,7 @@ export interface IntroState {
   content: any
   modalIsOpened: boolean
   showSticky: boolean
-  articles: string[] | null
+  article: any | null
   currentArticle: string | null
   status: 'idle' | 'loading' | 'failed' | 'initial'
 }
@@ -18,7 +18,7 @@ const initialState: IntroState = {
   content: null,
   modalIsOpened: false,
   showSticky: false,
-  articles: null,
+  article: null,
   currentArticle: null,
   status: 'initial',
 }
@@ -42,8 +42,8 @@ export const introSlice = createSlice({
     setModalStatus: (state, action) => {
       state.modalIsOpened = action.payload
     },
-    setArticles: (state, action) => {
-      state.articles = action.payload
+    setArticle: (state, action) => {
+      state.article = action.payload
     },
     setCurrentArticle: (state, action) => {
       state.currentArticle = action.payload
@@ -77,7 +77,7 @@ export const introSlice = createSlice({
   },
 })
 
-export const {setModalStatus, setContent, setShowSticky} = introSlice.actions
+export const {setModalStatus, setContent, setArticle, setShowSticky} = introSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

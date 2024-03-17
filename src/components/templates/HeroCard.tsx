@@ -8,7 +8,7 @@ import {setCurrentCategory} from '../../features/category/categorySlice'
 import useHover from '../../hooks/useHover'
 import ThumbWrapper from '../Thumb/ThumbWrapper'
 import ThumbView from '../Thumb/ThumbView'
-import {Gradient, HeroDescription, HeroTitle} from './styles'
+import {Gradient, HeroDescription, HeroTitle, HeroTitleWrapper} from './styles'
 import {ChevronRight} from '../icons'
 import TimeStamp from './TimeStamp'
 
@@ -47,7 +47,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
     <>
       <Section title={sectionTitle} xPadding="px-0" yPadding="pt-5 pb-10 md:pt-8 md:pb-[4.5rem]">
         <a className="cursor-pointer uppercase py-4 flex items-center gap-2 hover:no-underline" onClick={handleClick}>
-          {translation[keyName]}
+          {translation[keyName === 'itemsReviewCompilations' ? 'From the Audience' : keyName]}
           {/* @ts-ignore */}
           <ChevronRight className="w4 h-4" />
         </a>
@@ -64,15 +64,16 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                           isHover ? 'opacity-100' : 'opacity-90'
                         }`}
                       />
-                      <div className="flex items-center divide-x rtl:divide-x-reverse text-[1rem] md:text-[1.1rem] divide-white gap-4 text-white relative z-10 w-[86%] transition-all">
-                        <HeroTitle className="font-bold md:whitespace-nowrap">{hero.title}</HeroTitle>
+                      <HeroTitleWrapper
+                        className={`items-center text-[1rem] md:text-[1.1rem] ${hero.descriptionLong?'divide-x rtl:divide-x-reverse divide-white':''} gap-4 text-white relative z-10 w-[86%] transition-all`}>
+                        <HeroTitle className="font-bold pr-4 rtl:pr-0 rtl:pl-4">{hero.title}</HeroTitle>
                         <HeroDescription
                           // isHover={isHover}
                           // className={`pl-4 rtl:pl-0 rtl:pr-4 ${isHover ? 'max-h-[40em]' : 'max-h-[30em]'}`}
                           className={`pl-4 rtl:pl-0 rtl:pr-4 max-h-[30em]`}
                           dangerouslySetInnerHTML={{__html: hero.descriptionLong}}
                         />
-                      </div>
+                      </HeroTitleWrapper>
                       <TimeStamp onDemandLink={myItem.onDemandLink} length={myItem.length} className="m-[0.6rem] md:m-[1.2rem]" />
                     </div>
                   </>

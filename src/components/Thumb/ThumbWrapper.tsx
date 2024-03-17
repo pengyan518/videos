@@ -2,12 +2,13 @@ import React, {ReactNode, useCallback, useState} from 'react'
 import {Link, Outlet, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import config from '../../config'
-import {useAppSelector} from '../../app/hooks'
+import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import OnDemandPopup from '../OnDemandPopup/OnDemandPopup'
 import {VideoItemProps} from '../../types'
 import getFriendlyUrl from '../../utils/getFriendlyUrl'
-import TestimonialPopup from "../TestimonialPopup/TestimonialPopup";
+import TestimonialPopup from '../TestimonialPopup/TestimonialPopup'
+import {setArticle, setModalStatus} from '../../features/intro/introSlice'
 
 export type ItemProps = {
   item: VideoItemProps
@@ -23,10 +24,18 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
   } = useAppSelector((state: RootState) => state.intro)
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const {onDemandLink, eid, title, urlFriendlyName} = item
+
   const handleClickOpen = () => {
     setOpen(true)
+    axios.get(`${config.updateCounter}${eid}`)
+  }
+  const handleClickTarget = () => {
+    dispatch(setModalStatus(true))
+    dispatch(setArticle(item))
+    navigate(`/reviews/audience-reviews/${eid}`)
     axios.get(`${config.updateCounter}${eid}`)
   }
   const seoUrl = urlFriendlyName || getFriendlyUrl(title)
@@ -48,11 +57,10 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
         </>
       ) : categoryName === 'itemsReviewIndividuals' ? (
         <>
-          <div onClick={handleClickOpen} className={`cursor-pointer ${className || ''}`}>
+          <div onClick={handleClickTarget} className={`cursor-pointer ${className || ''}`}>
             {children(item)}
           </div>
-          {/* <Outlet /> */}
-           <TestimonialPopup setOpen={setOpen} className={className} open={open} item={item} />
+          {/* <TestimonialPopup setOpen={setOpen} className={className} open={open} item={item} /> */}
         </>
       ) : (
         <a className={`cursor-pointer ${className || ''}`} onClick={handleClickVideo}>

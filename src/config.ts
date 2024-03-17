@@ -87,22 +87,22 @@ export const sectionMap: {[index: string]: any} = {
     content: ['itemsStartsOfShenyun', 'itemsPersecution', 'itemsMorefromArtists'],
   },
   reviews: {
-    title: 'Audience Reviews',
+    title: 'Reviews',
     banner: '',
     poster: reviewsPosterBg,
     content: ['itemsReviewCompilations', 'itemsReviewIndividuals'],
-  },
-  music: {
-    title: 'Music',
-    banner: '',
-    poster: musicPosterBg,
-    content: ['itemsSyso'],
   },
   'in-the-media': {
     title: 'In the Media',
     banner: '',
     poster: posterBg,
     content: ['itemsInTheMedia'],
+  },
+  music: {
+    title: 'Music',
+    banner: '',
+    poster: musicPosterBg,
+    content: ['itemsSyso'],
   },
   featured: {
     title: 'Featured',

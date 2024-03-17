@@ -5,6 +5,7 @@ import Intro from '../features/intro/Intro'
 import Category from '../features/category/Category'
 import Play from '../components/play/Play'
 import config from '../config'
+import TestimonialPopup from "../components/TestimonialPopup/TestimonialPopup";
 
 // eslint-disable-next-line import/prefer-default-export
 export const router = createBrowserRouter(
@@ -12,44 +13,18 @@ export const router = createBrowserRouter(
     {
       path: `/`,
       element: <Intro />,
-      children: [
-        // {
-        //   index: true,
-        //   element: <Intro  />,
-        // },
-        // {
-        //   path: ':section',
-        //   element: <Category  />,
-        //   // children: [
-        //   //   {
-        //   //     path: 'play/:eid/*',
-        //   //     element: <Play  />,
-        //   //   },
-        //   //   {
-        //   //     path: `play/:eid`,
-        //   //     element: <Play  />,
-        //   //   },
-        //   // ],
-        // },
-        // {
-        //   path: ':section',
-        //   element: <Category  />,
-        // },
-      ],
+      // children: [
+      // ],
     },
     {
       path: `:section`,
       element: <Category />,
-      //   // children: [
-      //   //   {
-      //   //     path: 'play/:eid/*',
-      //   //     element: <Play  />,
-      //   //   },
-      //   //   {
-      //   //     path: `play/:eid`,
-      //   //     element: <Play  />,
-      //   //   },
-      //   // ],
+        children: [
+          {
+            path: 'audience-reviews/:eid',
+            element: <TestimonialPopup />,
+          },
+        ],
     },
 
     {
