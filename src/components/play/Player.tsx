@@ -48,12 +48,14 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   //   axios.get(`${config.updateCounter}${eid}`)
   //   console.debug(eid)
   // }, [eid])
+  // console.debug('embeddedVideoVimeo')
+  // console.debug(embeddedVideoVimeo)
 
   return (
     <div className="">
       <div>
         {/* eslint-disable-next-line no-nested-ternary */}
-        {embeddedVideoVimeo !== '' ? (
+        {embeddedVideoVimeo ? (
           <div className="w-full relative">
             {isLoading && (
               <div className="aspect-w-16 aspect-h-9">
@@ -63,7 +65,7 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
             {/* @ts-ignore */}
             <Vimeo video={embeddedVideoVimeo} className="w-full aspect-w-16 aspect-h-9" onReady={onReady} onEnd={onEnd} autoplay />
           </div>
-        ) : embeddedVideoYT !== '' ? (
+        ) : embeddedVideoYT ? (
           <YoutubeEmbed embedId={embeddedVideoYT} onEnd={onEnd} />
         ) : (
           <div ref={ref}>
