@@ -5,6 +5,7 @@ import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import VimeoPlayer from './VimeoPlayer'
 import useMobileDetect from '../../hooks/useMobileDetect'
+import GjwEmbed from '../GjwEmbed/GjwEmbed'
 
 export type PlayProps = {
   item: any
@@ -15,7 +16,7 @@ export type PlayProps = {
 }
 
 function VideoPlayer({item, shareAreaStyle, setProgress}: PlayProps, ref: React.Ref<any> | null) {
-  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo} = item
+  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, embeddedVideoGJW, imageForVideo} = item
   // const {size, element} = useRect<HTMLDivElement>([window.innerWidth])
   // const loading = useRef<HTMLDivElement | null>(null)
 
@@ -24,9 +25,9 @@ function VideoPlayer({item, shareAreaStyle, setProgress}: PlayProps, ref: React.
   return (
     <div className={`h-screen grid bg-black md:bg-transparent ${isMobile() ? 'items-start' : 'items-center'} w-full`}>
       {/* eslint-disable-next-line no-nested-ternary */}
-      {embeddedVideoVimeo !== '' ? (
+      {embeddedVideoVimeo ? (
         <VimeoPlayer embeddedVideoVimeo={embeddedVideoVimeo} shareAreaStyle={shareAreaStyle} setProgress={setProgress} />
-      ) : embeddedVideoYT !== '' ? (
+      ) : embeddedVideoYT ? (
         <YoutubeEmbed embedId={embeddedVideoYT} />
       ) : (
         <VideoFrame

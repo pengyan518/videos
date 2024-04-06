@@ -8,6 +8,7 @@ import VideoFrame from '../video-player/VideoFrame'
 import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import {useAppDispatch} from '../../app/hooks'
 import {setVimeoInstance} from '../ShortVideoPage/shortsSlice'
+import GjwEmbed from "../GjwEmbed/GjwEmbed";
 
 // import {PlayerWrapper} from './styles'
 // import Loading from '../loading'
@@ -21,7 +22,7 @@ export type PlayProps = {
 
 function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
-  const {videoLink, embeddedVideoYT, embeddedVideoVimeo, imageForVideo, eid} = item
+  const {videoLink, embeddedVideoYT, embeddedVideoGJW, embeddedVideoVimeo, imageForVideo, eid} = item
 
   const navigate = useNavigate()
 
@@ -51,14 +52,20 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   // console.debug('embeddedVideoVimeo')
   // console.debug(embeddedVideoVimeo)
 
+
   return (
     <div className="">
       <div>
         {/* eslint-disable-next-line no-nested-ternary */}
-        {embeddedVideoVimeo ? (
+          {embeddedVideoGJW ? (
+          <div className="w-full relative">
+            <GjwEmbed embedId={embeddedVideoGJW} />
+          </div>
+           // eslint-disable-next-line no-nested-ternary
+          ) : embeddedVideoVimeo ? (
           <div className="w-full relative">
             {isLoading && (
-              <div className="aspect-w-16 aspect-h-9">
+              <div className="aspect-w-16 aspect-h-9 absolute">
                 <Skeleton sx={{transform: 'none'}} height="100%" width="100%" />
               </div>
             )}

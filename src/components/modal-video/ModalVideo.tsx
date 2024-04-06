@@ -49,6 +49,11 @@ type MyProps = {
     height: null
   }
   youku: {show_related: number; autoplay: number}
+  gjw: {
+    autoplay: number
+    rel: number
+    hidebrand: number
+  }
   aria: {openMessage: string; dismissBtnMessage: string}
   channel: string
   classNames: {
@@ -172,7 +177,7 @@ export default class ModalVideo extends React.Component<MyProps, MyState> {
         }
       }
     }
-    return url.substr(0, url.length - 1)
+    return url.substring(0, url.length - 1)
   }
 
   static getYoutubeUrl(youtube: any, videoId: any) {
@@ -190,6 +195,11 @@ export default class ModalVideo extends React.Component<MyProps, MyState> {
     return `//player.youku.com/embed/${videoId}?${query}`
   }
 
+  static getGjwUrl(youku: any, videoId: any) {
+    const query = ModalVideo.getQueryString(youku)
+    return `//www.ganjingworld.com/embed/${videoId}?${query}`
+  }
+
   // eslint-disable-next-line consistent-return
   static getVideoUrl(opt: Readonly<MyProps>, videoId: any) {
     if (opt.channel === 'youtube') {
@@ -200,6 +210,9 @@ export default class ModalVideo extends React.Component<MyProps, MyState> {
     }
     if (opt.channel === 'youku') {
       return ModalVideo.getYoukuUrl(opt.youku, videoId)
+    }
+    if (opt.channel === 'gjw') {
+      return ModalVideo.getGjwUrl(opt.gjw, videoId)
     }
     if (opt.channel === 'custom') {
       return opt.url
@@ -360,6 +373,11 @@ ModalVideo.defaultProps = {
   youku: {
     autoplay: 1,
     show_related: 0,
+  },
+  gjw: {
+    autoplay: 1,
+    hidebrand: 0,
+    rel: 0,
   },
   allowFullScreen: true,
   animationSpeed: 300,

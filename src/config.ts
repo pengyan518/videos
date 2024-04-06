@@ -69,6 +69,12 @@ export default Object.freeze({
         autoplay: 1,
       },
     },
+    gjw: {
+      autoplay: 1,
+      hidebrand: 1,
+      rel: 0,
+      mute: 0,
+    },
   },
 })
 

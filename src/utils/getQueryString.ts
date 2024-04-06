@@ -6,5 +6,6 @@ export default function getQueryString(obj: {[x: string]: any; hasOwnProperty: (
       url += `${key}=${value}&`
     }
   }
-  return url.substr(0, url.length - 1)
+  return url.substring(0, url.length-1)
+  // return url
 }

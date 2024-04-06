@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import ThumbWrapper from './ThumbWrapper'
 import ThumbView from './ThumbView'
 import {VideoItemProps} from "../../types";
+import capitalized from "../../utils/capitalized";
 
 export type ItemProps = {
   item: VideoItemProps
@@ -16,8 +17,11 @@ export default function ThumbItemWithCaption({item, sectionName, categoryName}: 
         <>
           <ThumbView item={myItem} showIcon />
           <div className="pt-4 pr-4">
-            <div className="text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{myItem.title}</div>
-            {(myItem.descriptionLong || myItem.textShort) && <div className="text-sm line-clamp-3" dangerouslySetInnerHTML={{__html: myItem.descriptionLong || `“${myItem.textShort}”`}} />}
+            <div className={`text-[1rem] leading-tight line-clamp-2 font-bold ${myItem.position?'':'mb-2'}`}>{myItem.title}</div>
+            {myItem.position && <div className="text-sm leading-tight line-clamp-2 mb-2">{ capitalized(myItem.position) }</div>}
+            {(myItem.descriptionLong || myItem.textShort) && (
+              <div className="text-sm line-clamp-3" dangerouslySetInnerHTML={{__html: myItem.descriptionLong || `“${myItem.textShort}”`}} />
+            )}
           </div>
         </>
       )}

@@ -55,9 +55,7 @@ const VideoFrameDiv = (
     // })
     // @ts-ignore
     player.on('timeupdate', (result) => {
-      // console.debug('timeupdate')
       if (options.onTimeupdate) options.onTimeupdate(result.target.player.cache_)
-      // console.debug(result.target.player.cache_.currentTime)
     })
 
     // @ts-ignore
@@ -65,8 +63,6 @@ const VideoFrameDiv = (
       if (options.onEnd) options.onEnd()
       // console.debug(result.target.player.cache_.currentTime)
     })
-
-    // console.debug('handlePlayerReady')
 
     // player &&
     //   setPaused &&
