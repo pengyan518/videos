@@ -46,30 +46,15 @@ const VideoFrameDiv = (
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     player &&
       player.on('waiting', () => {
-        // videojs.log('player is waiting')
       })
-
-    // @ts-ignore
-    // player.on('dispose', () => {
-    //   videojs.log('player will dispose')
-    // })
     // @ts-ignore
     player.on('timeupdate', (result) => {
       if (options.onTimeupdate) options.onTimeupdate(result.target.player.cache_)
     })
-
     // @ts-ignore
     player.on('ended', () => {
       if (options.onEnd) options.onEnd()
-      // console.debug(result.target.player.cache_.currentTime)
     })
-
-    // player &&
-    //   setPaused &&
-    //   setTimeout(() => {
-    //     // @ts-ignore
-    //     setPaused(player.paused())
-    //   }, 600)
   }
 
   // useImperativeHandle(

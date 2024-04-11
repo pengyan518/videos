@@ -26,18 +26,7 @@ export const VideoJS = (props: VideoJSProps, ref: any) => {
       if (!videoElement) return
 
       const player: {dispose: () => void} = videojs(videoElement, options, () => {
-        // videojs.log('player is ready')
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         onReady && onReady(player)
-        // if (onReady) {
-        //   onReady(player)
-        //   // @ts-ignore
-        //   player.on('ended', (event: any) => {
-        //     if (onEnd) {
-        //       onEnd(event)
-        //     }
-        //   })
-        // }
       })
 
       playerRef.current = null

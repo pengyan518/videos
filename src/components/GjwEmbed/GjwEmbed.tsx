@@ -26,6 +26,7 @@ const GjwEmbed = ({embedId, onEnd, isShortVideo}: GjwEmbedProps) => {
         className="absolute w-full h-full top-0 left-0"
         src={`https://www.ganjingworld.com/embed/${embedId}?${query}`}
         frameBorder="0"
+        loading="eager"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Embedded GJW"
