@@ -85,7 +85,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
             {thumbs
               .filter(item => !!item)
               .map(item => {
-                const {descriptionLong, title: itemTitle, textShort} = item
+                const {descriptionLong, description, title: itemTitle, textShort} = item
                 return (
                   <div key={item.id}>
                     <ThumbWrapper
@@ -100,7 +100,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                             <div className="text-[0.8rem] md:text-[1rem] leading-tight line-clamp-2 font-bold mb-2">{itemTitle}</div>
                             <div
                               className="text-[0.8rem] line-clamp-3 md:text-[1rem] leading-[1.3]"
-                              dangerouslySetInnerHTML={{__html: descriptionLong || `“${myItem.textShort}”`}}
+                              dangerouslySetInnerHTML={{__html: descriptionLong || description || `“${textShort}”`}}
                             />
                           </div>
                         </>
