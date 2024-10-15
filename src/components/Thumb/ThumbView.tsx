@@ -84,10 +84,14 @@ export default function ThumbView({item, showIcon, showLargeThumb, showTitle, pa
                 }  line-clamp-1`}>
                 <div className="font-bold">{item.title}</div>
               </div>
+              {/* @ts-ignore */}
               {item.length && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} className="m-[0.5rem] md:m-[0.75rem]" />}
             </div>
           ) : (
-            <>{!vertical && item.length && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />}</>
+            <>
+              {/* @ts-ignore */}
+              {!vertical && item.length && <TimeStamp onDemandLink={item.onDemandLink} length={item.length} />}
+            </>
           )}
         </>
       )}

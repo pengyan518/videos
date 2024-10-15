@@ -4,7 +4,7 @@ import musicPosterBg from './assets/images/Music-video-header.jpg'
 import reviewsPosterBg from './assets/images/Reviews-video-header.jpg'
 import shortsPosterBg from './assets/images/Shorts-video-header.jpg'
 
-const loginLangCode = 'fr'
+const loginLangCode = 'my'
 // const loginLangCode = 'ko'
 export const crossdomainDev = `.sydev.info`
 export const crossdomain = `.shenyun.com`

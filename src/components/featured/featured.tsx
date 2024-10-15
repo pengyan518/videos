@@ -24,11 +24,11 @@ export default function Featured({data}: FeaturedProps) {
           const [sectionUrl, sectionContent] = section
           return (
             <div key={sectionUrl}>
-              {category[sectionContent.content[0]]?.length && (
+              {category[sectionContent.content[0]]?.length ? (
                 <div className="mt-0 mb-0 text-center">
                   <h2 className="text-2xl md:text-4xl text-[#524941] OpenSans__font">{translation[sectionContent.title]}</h2>
                 </div>
-              )}
+              ):null}
               {sectionContent.content.filter((item:string)=>item!=='itemsReviewIndividuals')
                   .map((item: React.Key | null | undefined) => (
                 <HeroCard key={item} keyName={item} sectionName={sectionUrl} />

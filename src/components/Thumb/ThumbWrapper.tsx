@@ -53,6 +53,7 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
           <div onClick={handleClickOpen} className={`cursor-pointer ${className || ''}`}>
             {children(item)}
           </div>
+          {/* @ts-ignore */}
           <OnDemandPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
       ) : categoryName === 'itemsReviewIndividuals' ? (
