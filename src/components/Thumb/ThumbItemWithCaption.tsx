@@ -19,7 +19,7 @@ export default function ThumbItemWithCaption({item, sectionName, categoryName}: 
           <div className="pt-4 pr-4">
             <div className={`text-[1rem] leading-tight line-clamp-2 font-bold ${myItem.position?'':'mb-2'}`}>{myItem.title}</div>
             {myItem.position && <div className="text-sm leading-tight line-clamp-2 mb-2">{ capitalized(myItem.position) }</div>}
-            {(myItem.descriptionLong || myItem.description || myItem.textShort) && (
+            {(myItem.description || myItem.descriptionLong || myItem.textShort) && (
               <div className="text-sm line-clamp-3" dangerouslySetInnerHTML={{__html: myItem.descriptionLong || myItem.description || `“${myItem.textShort}”` }} />
             )}
           </div>

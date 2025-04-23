@@ -4,10 +4,10 @@ import musicPosterBg from './assets/images/Music-video-header.jpg'
 import reviewsPosterBg from './assets/images/Reviews-video-header.jpg'
 import shortsPosterBg from './assets/images/Shorts-video-header.jpg'
 
-const loginLangCode = 'my'
+const loginLangCode = 'en-us'
 // const loginLangCode = 'ko'
 export const crossdomainDev = `.sydev.info`
-export const crossdomain = `.shenyun.com`
+export const crossdomain = `.shenyun.org`
 // @ts-ignore
 const subDomain = loginLangCode === 'en-us' ? 'www' : loginLangCode
 export const prefix = process.env.NODE_ENV === 'development' ? `//${subDomain}${crossdomain}` : ``

@@ -47,7 +47,7 @@ const PlayPageTemplate = ({item, next, section, children}: PlayProps, ref: React
                 </Button>
               </ShareButton>
             </div>
-            <div className="pb-4">{item.description}</div>
+            <div className="pb-4">{item.descriptionLong || item.description}</div>
           </div>
           {children}
         </Section>
