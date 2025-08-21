@@ -40,14 +40,14 @@ const PlayPageTemplate = ({item, next, section, children}: PlayProps, ref: React
         <Section width="w-full" xPadding="px-0" yPadding="pb-7 pt-6 md:pt-16">
           <div className="pb-8">
             <div className="md:flex md:justify-between pb-4">
-              <h2 className="text-[1.5rem] md:text-[2rem] font-bold pb-4 md:pb-0">{item.title}</h2>
+              <h2 className="text-[1.5rem] md:text-[2rem] font-bold pb-4 md:pb-0" dangerouslySetInnerHTML={{__html: item.title}} />
               <ShareButton>
                 <Button variant="contained" sx={style} color="secondary">
                   {translation.Share}
                 </Button>
               </ShareButton>
             </div>
-            <div className="pb-4">{item.descriptionLong || item.description}</div>
+            <div className="pb-4" dangerouslySetInnerHTML={{__html: item.descriptionLong || item.description}} />
           </div>
           {children}
         </Section>

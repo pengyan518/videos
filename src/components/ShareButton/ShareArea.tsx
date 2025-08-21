@@ -12,13 +12,17 @@ import {
   PinterestShareButton,
   TelegramShareButton,
   TumblrShareButton,
-  TwitterIcon,
+  XIcon,
   TwitterShareButton,
 } from 'react-share'
+import InstagramIcon from '../icons/InstagramIcon'
 
 export type SharebuttonProps = {}
 
 export default function ShareArea({}: SharebuttonProps) {
+  const handleInstagramShare = ()=>{
+    return window.open('https://www.instagram.com/shenyunperformingarts/', 'myWindow', 'width=630,height=520')
+  }
   return (
     <div className="ShareButton flex gap-4">
       <FacebookShareButton url={window.location.href}>
@@ -27,14 +31,12 @@ export default function ShareArea({}: SharebuttonProps) {
       {/* @ts-ignore */}
       <TwitterShareButton
         url={window.location.href}
-        // quote={'Dummy text!'}
-        // hashtag="#muo"
       >
-        <TwitterIcon size={32} round />
+        <XIcon size={32} round />
       </TwitterShareButton>
-      <PinterestShareButton url={window.location.href} media={''}>
-        <PinterestIcon size={32} round />
-      </PinterestShareButton>
+      <a className='cursor-pointer' onClick={handleInstagramShare}>
+        <InstagramIcon />
+      </a>
       <EmailShareButton url={window.location.href}>
         <EmailIcon size={32} round />
       </EmailShareButton>

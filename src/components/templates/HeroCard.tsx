@@ -92,7 +92,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
                       item={item}
                       sectionName={sectionName}
                       categoryName={keyName}
-                      className="grid grid-cols-[1fr_1fr] gap-3 md:gap-4 hover:no-underline">
+                      className="grid grid-cols-[1fr_1fr] gap-3 md:gap-[1.25rem] hover:no-underline">
                       {(myItem: any) => (
                         <>
                           <ThumbView item={myItem} showIcon />

@@ -69,3 +69,6 @@ export interface ListItemProps {
 export interface FigureProps {
   dataSrc: any
 }
+export interface MySvgProps extends React.SVGProps<SVGSVGElement> {
+  size?: number
+}
