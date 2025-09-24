@@ -47,7 +47,7 @@ const PlayPageTemplate = ({item, next, section, children}: PlayProps, ref: React
                 </Button>
               </ShareButton>
             </div>
-            <div className="pb-4" dangerouslySetInnerHTML={{__html: item.descriptionLong || item.description}} />
+            <div className="pb-4 link-a-bold" dangerouslySetInnerHTML={{__html: item.descriptionLong || item.description}} />
           </div>
           {children}
         </Section>
