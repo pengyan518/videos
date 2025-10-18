@@ -4,13 +4,13 @@ import musicPosterBg from './assets/images/Music-video-header.jpg'
 import reviewsPosterBg from './assets/images/Reviews-video-header.jpg'
 import shortsPosterBg from './assets/images/Shorts-video-header.jpg'
 
-const loginLangCode = 'en-us'
+const loginLangCode = 'il'
 // const loginLangCode = 'ko'
 export const crossdomainDev = `.sydev.info`
 export const crossdomain = `.shenyun.org`
 // @ts-ignore
 const subDomain = loginLangCode === 'en-us' ? 'www' : loginLangCode
-export const prefix = process.env.NODE_ENV === 'development' ? `//${subDomain}${crossdomain}` : ``
+export const prefix = process.env.NODE_ENV === 'development' ? `//${subDomain}${crossdomainDev}` : ``
 // export const prefix: string = process.env.NODE_ENV === 'development' ? `//${subDomain}.shenyun.org` : ``
 export const controller = `videos`
 export default Object.freeze({

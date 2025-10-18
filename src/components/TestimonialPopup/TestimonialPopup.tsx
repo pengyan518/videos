@@ -8,8 +8,6 @@ import DialogContent from '@mui/material/DialogContent'
 import BootstrapDialogTitle from '../BootstrapDialogTitle/BootstrapDialogTitle'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
-import VideoFrame from '../video-player/VideoFrame'
-import isValidHttpUrl from '../../utils/isValidHttpUrl'
 import Player from '../play/Player'
 import {setArticle, setModalStatus} from '../../features/intro/introSlice'
 
@@ -50,10 +48,13 @@ export default function TestimonialPopup() {
     content: {
       category: {itemsReviewIndividuals},
       translation,
+      langCode,
     },
     modalIsOpened,
     article: item,
   } = useAppSelector((state: RootState) => state.intro)
+
+  const ilLang = langCode === 'il'
 
   // const {videoLink, text, position, title} = item
   const navigate = useNavigate()
@@ -123,7 +124,7 @@ export default function TestimonialPopup() {
           {hasPreview && <Player item={itemObject.current.content} />}
           <div className={`grid px-4 md:px-0 gap-4 my-10`}>
             <div
-              className={`georgia ${hasPreview ? 'text-[1.25rem] xl:text-[1.75rem] text-left' : 'text-[1.5rem] xl:text-[1.8rem]'}`}
+              className={`georgia ${hasPreview ? 'text-[1.25rem] xl:text-[1.75rem]' : 'text-[1.5rem] xl:text-[1.8rem]'} ${ilLang ? 'text-right' : 'text-left'}`}
               dangerouslySetInnerHTML={{__html: `“${itemObject.current.content.text}”`}}
             />
           </div>
