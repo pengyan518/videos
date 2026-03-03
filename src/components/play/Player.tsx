@@ -9,6 +9,7 @@ import YoutubeEmbed from '../youtube-embed/youtube-embed'
 import {useAppDispatch} from '../../app/hooks'
 import {setVimeoInstance} from '../ShortVideoPage/shortsSlice'
 import GjwEmbed from "../GjwEmbed/GjwEmbed";
+import SycEmbed from "../SycEmbed/SycEmbed";
 
 // import {PlayerWrapper} from './styles'
 // import Loading from '../loading'
@@ -22,7 +23,7 @@ export type PlayProps = {
 
 function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
   const [isLoading, setIsLoading] = useState(true)
-  const {videoLink, embeddedVideoYT, embeddedVideoGJW, embeddedVideoVimeo, imageForVideo, eid} = item
+  const {videoLink, embeddedVideoYT, embeddedVideoGJW, embeddedVideoSYC, embeddedVideoVimeo, imageForVideo, eid} = item
 
   const navigate = useNavigate()
 
@@ -55,13 +56,15 @@ function Player({item, next, section}: PlayProps, ref: React.Ref<any> | null) {
 
   return (
     <div className="">
-      <div>
-        {/* eslint-disable-next-line no-nested-ternary */}
-          {embeddedVideoGJW ? (
+      <div>       
+        { embeddedVideoSYC ? (
+          <div className="w-full relative">
+            <SycEmbed embedId={embeddedVideoSYC} />
+          </div>
+        ) : embeddedVideoGJW ? (
           <div className="w-full relative">
             <GjwEmbed embedId={embeddedVideoGJW} />
           </div>
-           // eslint-disable-next-line no-nested-ternary
           ) : embeddedVideoVimeo ? (
           <div className="w-full relative">
             {isLoading && (

@@ -4,7 +4,7 @@ import musicPosterBg from './assets/images/Music-video-header.jpg'
 import reviewsPosterBg from './assets/images/Reviews-video-header.jpg'
 import shortsPosterBg from './assets/images/Shorts-video-header.jpg'
 
-const loginLangCode = 'il'
+const loginLangCode = 'en-us'
 // const loginLangCode = 'ko'
 export const crossdomainDev = `.sydev.info`
 export const crossdomain = `.shenyun.org`
@@ -74,6 +74,13 @@ export default Object.freeze({
       hidebrand: 1,
       rel: 0,
       mute: 0,
+    },
+    syc: {
+      autoplay: 1,
+      hidebrand: 1,
+      rel: 0,
+      mute: 0,
+      sy: 'sy',
     },
   },
 })
