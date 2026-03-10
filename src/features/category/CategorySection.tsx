@@ -33,7 +33,7 @@ export default function CategorySection({item, data}: CategoryProp) {
           <div id={item} className="text-[#524941] uppercase pb-2 md:pb-0">
             {translation[item]}
           </div>
-          {!['itemsReviewCompilations', 'itemsReviewIndividuals'].includes(item) && <FilterButton handleClick={handleClick} activeTab={activeTab} />}
+          {!['itemsTestimonialFeatured', 'itemsReviewCompilations', 'itemsReviewIndividuals'].includes(item) && <FilterButton handleClick={handleClick} activeTab={activeTab} />}
         </div>
       )}
 
@@ -54,6 +54,8 @@ export default function CategorySection({item, data}: CategoryProp) {
           })
         }
       </div>
+      {/* @ts-ignore */}
+      {item === 'itemsReviewIndividuals' && <div className="text-sm text-[#524941] italic mt-[100px]">{translation['All audience member quotes courtesy of The Epoch Times and New Tang Dynasty Television.']}</div>}
     </>
   )
 }

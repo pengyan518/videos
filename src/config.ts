@@ -99,11 +99,11 @@ export const sectionMap: {[index: string]: any} = {
     poster: artistPosterBg,
     content: ['itemsStartsOfShenyun', 'itemsPersecution', 'itemsMorefromArtists'],
   },
-  reviews: {
+  'reviews': {
     title: 'Reviews',
     banner: '',
     poster: reviewsPosterBg,
-    content: ['itemsReviewCompilations', 'itemsReviewIndividuals'],
+    content: ['itemsTestimonialFeatured', 'itemsReviewCompilations', 'itemsReviewIndividuals'],
   },
   'in-the-media': {
     title: 'In the Media',

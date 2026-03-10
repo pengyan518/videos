@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react'
-import {Link, useParams, Outlet} from 'react-router-dom'
+import {Link, useParams, Outlet, useSearchParams} from 'react-router-dom'
 
 import {MainProps} from '../../types'
 import config, {sectionMap} from '../../config'
@@ -7,11 +7,9 @@ import {useAppDispatch, useAppSelector} from '../../app/hooks'
 import {RootState} from '../../app/store'
 import Section from '../../components/templates/Section'
 import TopInfo from '../../components/templates/TopInfo'
-import ThumbItemWithCaption from '../../components/Thumb/ThumbItemWithCaption'
 import TopBreadcrumbs from '../../components/TopBreadcrumbs'
 import Footer from '../../components/footer/Footer'
-import {setShowPopular} from './categorySlice'
-import sortPopular from '../../utils/sortPopular'
+
 import CategorySection from './CategorySection'
 // import useUrlParameter from '../../hooks/useUrlParameter'
 
@@ -28,8 +26,11 @@ export default function Category({data}: CategoryProps) {
   const {currentCategory, showPopular} = useAppSelector((state: RootState) => state.category)
   const dispatch = useAppDispatch()
   const {section} = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const myCurrentSection = useRef(null)
   const {category, translation} = content
+
+  // console.log(section, searchParams.get('from'), searchParams.toString())
 
   // console.debug(data)
   // if (!currentCategory) return <>loading...</>
@@ -47,7 +48,9 @@ export default function Category({data}: CategoryProps) {
 
 
   // @ts-ignore
-  const categoryViews = sectionMap[section].content.map((item: any) => <CategorySection item={item} data={category[item]} key={item} />)
+  const categoryViews = sectionMap[section].content
+  .filter((item: string) => searchParams.get('from') !== 'videos'?item!=='itemsTestimonialFeatured':true)
+  .map((item: any) => <CategorySection item={item} data={category[item]} key={item} />)
 
   const Inner = () => (
     <div className="innerPaddingAlignHeader">

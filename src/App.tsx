@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
 })
 
 function App() {
-  const {modalIsOpened} = useAppSelector((state: RootState) => state.intro)
+  // const {modalIsOpened} = useAppSelector((state: RootState) => state.intro)
   return (
     <QueryClientProvider client={queryClient}>
       <Main />

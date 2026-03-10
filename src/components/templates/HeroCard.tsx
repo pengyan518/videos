@@ -40,7 +40,7 @@ export default function HeroCard({sectionTitle, sectionName, keyName}: FeaturedP
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const handleClick = useCallback(() => {
     dispatch(setCurrentCategory([keyName]))
-    navigate(`${sectionName}`)
+    navigate(`${sectionName}${sectionName==='reviews'?'?from=videos':''}`)
   }, [dispatch, keyName, navigate, sectionName])
 
   return (
