@@ -39,17 +39,19 @@ export default function Category({data}: CategoryProps) {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (currentCategory) {
+    if (currentCategory && searchParams.get('from') !== 'videos') {
       const element = document.getElementById(currentCategory[0])
       element && element.scrollIntoView({block: 'start', inline: 'nearest'})
+    } else {
+      window.scrollTo(0, 0)
     }
-  }, [currentCategory])
+  }, [currentCategory, searchParams])
 
 
 
   // @ts-ignore
   const categoryViews = sectionMap[section].content
-  .filter((item: string) => searchParams.get('from') !== 'videos'?item!=='itemsTestimonialFeatured':true)
+  .filter((item: string) => searchParams.get('from') === 'videos'?item!=='itemsTestimonialFeatured':true)
   .map((item: any) => <CategorySection item={item} data={category[item]} key={item} />)
 
   const Inner = () => (

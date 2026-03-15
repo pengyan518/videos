@@ -1,5 +1,5 @@
 import React, {ReactNode, useCallback, useState} from 'react'
-import {Link, Outlet, useNavigate} from 'react-router-dom'
+import {Link, Outlet, useNavigate, useSearchParams} from 'react-router-dom'
 import axios from 'axios'
 import config from '../../config'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
@@ -24,6 +24,8 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
   } = useAppSelector((state: RootState) => state.intro)
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const dispatch = useAppDispatch()
 
   const {onDemandLink, eid, title, urlFriendlyName} = item
@@ -35,7 +37,11 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
   const handleClickTarget = () => {
     dispatch(setModalStatus(true))
     dispatch(setArticle(item))
-    navigate(`/reviews/audience-reviews/${eid}`)
+    if(from === 'videos') {
+      navigate(`/reviews/audience-reviews/${eid}?from=videos`)
+    } else {
+      navigate(`/reviews/audience-reviews/${eid}`)
+    }
     axios.get(`${config.updateCounter}${eid}`)
   }
   const seoUrl = urlFriendlyName || getFriendlyUrl(title)
@@ -56,12 +62,11 @@ export default function ThumbWrapper({item, sectionName, className, children, ca
           {/* @ts-ignore */}
           <OnDemandPopup setOpen={setOpen} className={className} open={open} item={item} />
         </>
-      ) : categoryName === 'itemsReviewIndividuals' ? (
+      ) : categoryName === 'itemsReviewIndividuals' || categoryName === 'itemsTestimonialFeatured' ? (
         <>
           <div onClick={handleClickTarget} className={`cursor-pointer ${className || ''}`}>
             {children(item)}
           </div>
-          {/* <TestimonialPopup setOpen={setOpen} className={className} open={open} item={item} /> */}
         </>
       ) : (
         <a className={`cursor-pointer ${className || ''}`} onClick={handleClickVideo}>

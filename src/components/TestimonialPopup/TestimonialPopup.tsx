@@ -1,5 +1,5 @@
 import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import {useNavigate, useParams, useSearchParams} from 'react-router-dom'
 import {styled} from '@mui/material/styles'
 import {useMediaQuery} from '@mui/material'
 import Dialog from '@mui/material/Dialog'
@@ -58,6 +58,10 @@ export default function TestimonialPopup() {
 
   // const {videoLink, text, position, title} = item
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const from = searchParams.get('from')
+  const {eid} = useParams()
+  console.log(from, eid)
 
   const matches = useMediaQuery('(min-width:768px)')
   // const videoUrl = isValidHttpUrl(videoLink)
@@ -67,7 +71,7 @@ export default function TestimonialPopup() {
   const handleClose = () => {
     dispatch(setModalStatus(false))
     dispatch(setArticle(null))
-    navigate(`/reviews`)
+    navigate(`/reviews${from === 'videos' ? '?from=videos' : ''}`)
   }
 
   const style = {
@@ -77,7 +81,6 @@ export default function TestimonialPopup() {
 
   const hasPreview = true
 
-  const {section, eid} = useParams()
   const itemObject = useRef({content: item, next: null})
 
   const getCurrent = useCallback (() => {
